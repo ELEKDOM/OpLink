@@ -1,7 +1,7 @@
 # Build directories
 build/
 bin/
-lib/
+# lib/ never for bundles !
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
