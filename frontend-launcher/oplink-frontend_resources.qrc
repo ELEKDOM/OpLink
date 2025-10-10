@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/Elekdom-Noir-Logo.png</file>
+        <file>img/window_open.png</file>
+        <file>img/window_closed.png</file>
+        <file>img/stop.png</file>
+        <file>img/plus.png</file>
+        <file>img/plug_on.png</file>
+        <file>img/plug_off.png</file>
+        <file>img/nofreeze.png</file>
+        <file>img/minus.png</file>
+        <file>img/eco.png</file>
+        <file>img/comfort.png</file>
+        <file>img/comfort_2.png</file>
+        <file>img/comfort_1.png</file>
+        <file>img/ampoule-indéterminée.png</file>
+        <file>img/ampoule-éteinte.png</file>
+        <file>img/ampoule-allumée.png</file>
+    </qresource>
+</RCC>

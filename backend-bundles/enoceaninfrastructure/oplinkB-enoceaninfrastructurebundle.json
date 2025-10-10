@@ -1,0 +1,9 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "EnoceanInfrastructure",
+    "startlevel-beging" : "10",
+    "bundle-config-file-name" : "infrastructure-enocean.xml",
+    "service-required" : "ObservableBuilderServiceInterface,1.0.0",
+    "service-provided" : "InfrastructureControlServiceInterface,1.0.0"
+}

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Configuration file template. Do not use this file directly for deployment.
+Create a directory containing all the configuration files for a given deployment ! -->
+
+<infrastructure version="1.0" protocol="ENOCEAN">
+  <areas>
+    <area name="area name">
+        <gateway>
+          <usb-stick baudrate="57600" databits="8" stopbits="1" parity="0" dev="/dev/ttyUSB0"/>
+          ou
+          <tcp-stick address="a.b.c.d" port="x"/>
+        </gateway>
+        <observables>
+          <loads>
+            <load name="observable name" observable-model-name="model name" localisation="location name"/>
+            ...
+            ...
+          </loads>
+          <actuators>
+            <actuator name="observable name" observable-model-name="model name" id="device id" device-model="device model name" localisation="location name">
+              <channels>
+                <channel idx="channel number" name="associated property"/>
+                ...
+                ...
+              </channels>
+              <outputs>
+                <output actuator-property="actuator's property id" load="observable name"  actuated-property="load's property id"/>
+                ...
+                ...
+              </outputs>
+            </actuator>
+            ...
+            ...
+          </actuators>
+          <sensors>
+            <sensor name="observable name" observable-model-name="model name" id="device id" device-model="device model name" localisation="location name">
+            <channels>
+              <channel idx="channel number" name="associated property"/>
+              ...
+              ...
+            </channels>
+            </sensor>
+            ...
+            ...
+          </sensors>
+        </observables>
+    </area> 
+    ...
+    ...
+  </areas>
+</infrastructure>

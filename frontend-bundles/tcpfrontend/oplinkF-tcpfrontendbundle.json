@@ -1,0 +1,7 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "TcpFrontend",
+    "startlevel-beging" : "2",
+    "service-provided" : "FrontendControlServiceInterface,1.0.0"
+}

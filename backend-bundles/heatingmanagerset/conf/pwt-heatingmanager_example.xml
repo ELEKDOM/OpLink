@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<heating-manager version="1.0" conf-id="1" control="pwt" name="hm1" model-name="heating_manager_pilotwire_thermostat" localisation="chambre 1"  title="thermostat par fil pilote">
+ 
+    <!-- pwth: pilot wire thermostat hysteresis -->
+    <!-- threshold=<int>, hysteresis threshold -->
+    <!-- max-temp=<float>, max thermostat's value -->
+    <!--algorithm=<pwth|pwth_wod> wod:windox opening detection -->
+    <!-- mode=<off|manual|scheduled>    -->
+    <pwt-control threshold="0.2" max-temp="24" window-opening-detection="yes" presence-detection="no" mode="scheduled" >
+        <scheduler>
+            <daily-schedulers>
+                <daily-scheduler name="working_day">
+                    <!-- time format <hh:mm:ss> evt : any string -->
+                    <scheduled-event time="05:30" evt="20" />
+                    <scheduled-event time="08:30" evt="17" />
+                    <scheduled-event time="15:23" evt="22" />
+                    <scheduled-event time="16:50" evt="17" />
+                    <scheduled-event time="16:54" evt="22.5" />
+                    <scheduled-event time="21:00" evt="20" />
+                    <scheduled-event time="23:59:30" evt="17" />
+                </daily-scheduler>
+                <daily-scheduler name="weekend">
+                    <scheduled-event time="06:45" evt="20" />
+                    <scheduled-event time="09:00" evt="17" />
+                    <scheduled-event time="17:00" evt="22" />
+                    <scheduled-event time="17:02" evt="18.5" />
+                    <scheduled-event time="17:04" evt="22" />
+                    <scheduled-event time="21:00" evt="20" />
+                    <scheduled-event time="23:59:30" evt="17" />
+                </daily-scheduler>
+            </daily-schedulers>
+            <weekly-schedulers>
+                <weekly-scheduler name="week_example" assigned-weeks="1.53">
+                    <daily-sequence name="working_day" assigned-days="1.5"/>
+                    <daily-sequence name="weekend" assigned-days="6.7"/>
+                </weekly-scheduler>
+            </weekly-schedulers>
+        </scheduler>
+    </pwt-control>
+
+    <rooms>
+        <room name="chambre 1">
+            <heaters>
+                <heater-ref name="h1" property="heating_mode"/>
+            </heaters>
+            <window-sensors>
+                <window-sensor-ref name="wsensor1" property="closed"/>
+            </window-sensors>
+            <temp-sensors>
+                <temp-sensor-ref name="temperature1" property="temperature"/>
+            </temp-sensors>
+        </room>
+    </rooms>
+
+</heating-manager>

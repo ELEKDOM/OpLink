@@ -1,0 +1,286 @@
+/* stylesheet for OpLink Frontend GUI */
+/**************************************/
+
+#MainWindow {
+    background-color: white;
+    color: black;
+    margin: 1px;
+}
+
+/* Main stackedWidget */
+#stackedWidget {
+    background-color: white;
+    margin: 1px;
+}
+
+QLineEdit {
+    color : black;
+    border-width: 0px;
+    border-radius: 5;
+    border-style: outset;
+}
+
+QLineEdit:disabled {
+    background-color: #A8A8A8;
+    color: #7E7E7E;
+}
+
+QLineEdit:enabled {
+    background-color: white;
+    border-style: inset;
+    border-width: 1px;
+    border-color: #2575B9;
+}
+
+/*-----------*/
+/* Logs View */
+/*-----------*/
+
+/* Logs text area */
+#logsText {
+    border-style: none;
+    color : black;
+}
+
+/* Logs button area */
+#logsFooter{
+    background-color: white;
+    border-style: none;
+}
+
+/* push button setting */
+#logsView QPushButton {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    padding: 3px;
+    min-width: 9ex;
+    min-height: 2.5ex;
+    border-color: #2575B9;
+    background-color: white;
+    /*color : #7E7E7E;*/
+    color : black;
+}
+
+#logsView QPushButton:pressed {
+    background-color: #2575B9;
+    color: white;
+}
+
+/*--------------*/
+/* Console View */
+/*--------------*/
+
+/* Console button area */
+#consoleFooter {
+    background-color: white;
+    border-style: none;
+}
+
+/* push button setting */
+#consoleView QPushButton {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    padding: 3px;
+    min-width: 9ex;
+    min-height: 2.5ex;
+    border-color: #2575B9;
+    background-color: white;
+    color : black;
+}
+
+#consoleView QPushButton:pressed {
+    background-color: #2575B9;
+    color: white;
+}
+
+/*------------*/
+/* Login View */
+/*------------*/
+
+#loginView > QLabel {
+    background-color: white;
+    color: #2575B9;
+    border-style: none;
+}
+
+/* push button setting */
+#loginView QPushButton {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    padding: 3px;
+    min-width: 9ex;
+    min-height: 2.5ex;
+    border-color: #2575B9;
+    background-color: white;
+    color : black;
+}
+
+#loginView QPushButton:disabled {
+    background-color: #A8A8A8;
+    color: #7E7E7E;
+    border-color: #A8A8A8;
+}
+
+#loginView QPushButton:pressed {
+    background-color: #2575B9;
+    color: white;
+}
+
+/*----------------------------*/
+/* MonitoredObservables Views */
+/*----------------------------*/
+
+/* pageview */
+#pageWidgetList {
+    background-color: white;
+}
+
+#pageWidgetList > #pageTitle {
+    background-color: #7E7E7E;
+    color: #EFF0F1;
+}
+/* list view */
+
+/* header */
+#header {
+    background-color: #EFF0F1;
+}
+#header #title {
+    color: black;
+}
+
+#header #expandBp {
+    background-color: #A8A8A8;
+}
+
+#body {
+    background-color: #EFF0F1;
+    color: black;
+}
+
+/*-------------*/
+/* widget view */
+/*-------------*/
+
+/* heating6mWidgetView */
+/*---------------------*/
+
+#heating6mWidgetContent {
+    border-width: 1px;
+    border-style:outset;
+    border-radius: 5;
+    border-color: #7E7E7E;
+}
+
+#heating6mWidgetContent #state {
+    background-color: #A8A8A8;
+    border-radius : 5;
+}
+
+#heating6mWidgetContent #heatingName {
+    color: #7E7E7E;
+}
+
+#heating6mWidgetContent #v_meas {
+    background-color: #A8A8A8;
+    color: #EFF0F1;
+}
+
+#heating6mWidgetContent #u_meas {
+    background-color: #A8A8A8;
+    color: #EFF0F1;
+}
+
+/* lightingWidgetView */
+/*--------------------*/
+
+#lightingWidgetContent {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    border-color: #7E7E7E;
+}
+
+#lightingWidgetContent #state {
+    background-color: #A8A8A8;
+    border-radius : 5;
+}
+
+#lightingWidgetContent #lightName {
+    color: #7E7E7E;
+}
+
+/* smartPlugWidgetView */
+/*---------------------*/
+
+#smartPlugWidgetContent {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    border-color: #7E7E7E;
+}
+
+#smartPlugWidgetContent #state {
+   background-color: #A8A8A8;
+   border-radius : 5;
+}
+
+#smartPlugWidgetContent #plugName {
+    color: #7E7E7E;
+}
+
+#smartPlugWidgetContent #v_meas {
+    background-color: #A8A8A8;
+    color: #EFF0F1;
+}
+
+#smartPlugWidgetContent #u_meas {
+    background-color: #A8A8A8;
+    color: #EFF0F1;
+}
+
+/* temperatureHumidityWidgetView */
+/*-------------------------------*/
+
+#temperatureHumidityWidgetContent {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    border-color: #7E7E7E;
+}
+
+#temperatureHumidityWidgetContent #sensorName {
+    color: #7E7E7E;
+}
+
+#temperatureHumidityWidgetContent #v_temperature {
+    background-color: #A8A8A8;
+    color: #EFF0F1;
+}
+
+#temperatureHumidityWidgetContent #v_humidity {
+    background-color: #A8A8A8;
+    color: #EFF0F1;
+}
+
+/* windowSensorWidgetView */
+/*------------------------*/
+
+#windowSensorWidgetContent {
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 5;
+    border-color: #7E7E7E;
+}
+
+#windowSensorWidgetContent #state {
+    background-color: #A8A8A8;
+    border-radius : 5;
+}
+
+#windowSensorWidgetContent #sensorName {
+   color: #7E7E7E;
+}

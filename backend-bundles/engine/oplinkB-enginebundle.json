@@ -1,0 +1,10 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "ServerEngine",
+    "startlevel-beging" : "5",
+    "service-required" : "SystemServiceInterface,1.0.0",
+    "service-required1" : "BackendControlServiceInterface,1.0.0",
+    "service-required2" : "InfrastructureControlServiceInterface,1.0.0",
+    "service-provided" : "ObservableServiceInterface,1.0.0"
+}

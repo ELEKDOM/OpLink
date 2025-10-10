@@ -1,0 +1,8 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "ObservableModelLoader",
+    "startlevel-beging" : "7",
+    "bundle-config-file-name" : "observable-models.xml",
+    "service-required" : "ModelRegisterServiceInterface,1.0.0"
+}

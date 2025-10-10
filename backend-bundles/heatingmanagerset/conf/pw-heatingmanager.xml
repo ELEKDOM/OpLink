@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Configuration file template. Do not use this file directly for deployment.
+Create a directory containing all the configuration files for a given deployment ! -->
+
+<heating-manager version="" conf-id="" control="pw" name="" model-name="heating_manager_pilotwire" localisation=""  title="">
+ 
+    <!-- pw: pilot wire -->
+    <!--algorithm=<pw|pw_wod>, wod:windox opening detection -->
+    <!-- mode=<off|manual|scheduled>    -->
+    <pw-control window-opening-detection="yes" presence-detection="no" mode="scheduled" >
+        <scheduler>
+            <daily-schedulers>
+                <daily-scheduler name="">
+                    <!-- time format <hh:mm:ss> evt : any string -->
+                    <scheduled-event time="05:30" evt="comfort" />
+                    <scheduled-event time="08:30" evt="eco" />
+
+                </daily-scheduler>
+                <daily-scheduler name="">
+                    <scheduled-event time="06:45" evt="comfort" />
+                    <scheduled-event time="09:00" evt="eco" />
+                </daily-scheduler>
+            </daily-schedulers>
+            <weekly-schedulers>
+                <!-- assigned-weeks and assigned-days are defined by range -->
+                <!-- range = <int>|<int>.<int>*[,<int>|<int>.<int>] -->
+                <weekly-scheduler name="" assigned-weeks="">
+                    <daily-sequence name="" assigned-days=""/>
+                    <daily-sequence name="" assigned-days=""/>
+                </weekly-scheduler>
+            </weekly-schedulers>
+        </scheduler>
+    </pw-control>
+
+    <rooms>
+        <room name="">
+            <heaters>
+                <heater-ref name="" property=""/>
+            </heaters>
+            <window-sensors>
+                <window-sensor-ref name="" property=""/>
+            </window-sensors>
+            <temp-sensors>
+                <temp-sensor-ref name="" property=""/>
+            </temp-sensors>
+        </room>
+    </rooms>
+
+</heating-manager>

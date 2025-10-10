@@ -1,0 +1,81 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+
+<infrastructure version='1.0' protocol='ENOCEAN'>
+  <areas>
+    <area name='area1'>
+        <gateway>
+            <usb-stick baudrate='57600' databits='8' stopbits='1' parity='0' dev='/dev/ttyUSB0'/>
+        </gateway>
+        <observables>
+            <loads>
+                <load name='l1' model-name='onoff_lighting' localisation='chambre 2' title='lampe de chevet'/>
+                <load name='l2' model-name='onoff_lighting' localisation='chambre 2' title="point d'éclairage central"/>
+                <load name='h1' model-name='pw_electric_heating_measurement' localisation='chambre 1' title='radiateur'/>
+            </loads>
+            <actuators>
+                <actuator name='actuator1' model-name='actuator_2_outputs_binary' device-id='05848526' device-model-name='d20112' localisation='tgbt' title=''>
+                    <channels>
+                        <channel idx='0' name='output1'/>
+                        <channel idx='1' name='output2'/>
+                    </channels>
+                    <outputs>
+                        <output actuator-property='output1' load='l1' actuated-property='state'/>
+                        <output actuator-property='output2' load='l2' actuated-property='state'/>
+                    </outputs>
+                </actuator>
+
+                <actuator name='pilot_wire1' model-name='pw_actuator_measurement' device-id='0428ad68' device-model-name='d2010c' localisation='tgbt' title=''>
+                    <channels>
+                        <channel idx='0' name='pw_mode'/>
+                        <channel idx='1' name='m_value'/>
+                        <channel idx='2' name='u_value'/>
+                    </channels>
+                    <outputs>
+                        <output actuator-property='pw_mode' load='h1' actuated-property='heating_mode'/>
+                        <output actuator-property='m_value' load='h1' actuated-property='heating_m_value'/>
+                        <output actuator-property='u_value' load='h1' actuated-property='heating_u_value'/>
+                    </outputs>
+                </actuator>
+
+                <actuator name='plug1' model-name='onoff_smart_plug_measurement' device-id='0521cec8' device-model-name='d2010e' localisation='chambre 2' title='prise télévision'>
+                    <channels>
+                        <channel idx='0' name='output1'/>
+                        <channel idx='1' name='m_value'/>
+                        <channel idx='2' name='u_value'/>
+                    </channels>
+                    <outputs>
+                    </outputs>
+                </actuator>
+            </actuators>
+            <sensors>
+                <sensor name='switch1' model-name='rocker_switch_2_buttons' device-id='00295e8b' device-model-name='f60201' localisation='tgbt' title=''>
+                    <channels>
+                        <channel idx='0' name='rocker1'/>
+                        <channel idx='1' name='rocker2'/>
+                    </channels>
+                </sensor>
+
+                <sensor name='switch2' model-name='rocker_switch_2_buttons' device-id='003292a4' device-model-name='f60201' localisation='tgbt' title=''>
+                    <channels>
+                        <channel idx='0' name='rocker1'/>
+                        <channel idx='1' name='rocker2'/>
+                    </channels>
+                </sensor>
+
+                <sensor name='temperature1' model-name='temperature_humidity_sensor' device-id='052b92c2' device-model-name='a50401' localisation='chambre 1' title='capteur de température de la pièce'>
+                    <channels>
+                        <channel idx='0' name='temperature'/>
+                        <channel idx='1' name='humidity'/>
+                    </channels>
+                </sensor>
+
+                <sensor name='wsensor1' model-name='window_sensor' device-id='052b7468' device-model-name='d50001' localisation='chambre 1' title="détecteur d'ouverture de la fenêtre">
+                    <channels>
+                        <channel idx='0' name='closed'/>
+                    </channels>
+                </sensor>
+            </sensors>
+        </observables>
+    </area>
+  </areas>
+</infrastructure>

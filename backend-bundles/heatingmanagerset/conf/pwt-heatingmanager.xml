@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Configuration file template. Do not use this file directly for deployment.
+Create a directory containing all the configuration files for a given deployment ! -->
+
+<heating-manager version="" conf-id="" control="pwt" name="" model-name="heating_manager_pilotwire_thermostat" localisation=""  title="">
+ 
+    <!-- pwth: pilot wire thermostat hysteresis -->
+    <!-- threshold=<int>, hysteresis threshold -->
+    <!-- max-temp=<float>, max thermostat's value -->
+    <!--algorithm=<pwth|pwth_wod> wod:windox opening detection -->
+    <!-- mode=<off|manual|scheduled>    -->
+    <pwt-control threshold="0.2" max-temp="24" window-opening-detection="yes" presence-detection="no" mode="scheduled" >
+        <scheduler>
+            <daily-schedulers>
+                <daily-scheduler name="">
+                    <!-- time format <hh:mm:ss> evt : any string -->
+                    <scheduled-event time="" evt="" />
+                    <scheduled-event time="" evt="" />
+                </daily-scheduler>
+                <daily-scheduler name="">
+                    <scheduled-event time="" evt="" />
+                    <scheduled-event time="" evt="" />
+                    <scheduled-event time="" evt="" />
+                </daily-scheduler>
+            </daily-schedulers>
+            <weekly-schedulers>
+                <weekly-scheduler name="" assigned-weeks="">
+                    <daily-sequence name="" assigned-days=""/>
+                    <daily-sequence name="" assigned-days=""/>
+                </weekly-scheduler>
+            </weekly-schedulers>
+        </scheduler>
+    </pwt-control>
+
+    <rooms>
+        <room name="">
+            <heaters>
+                <heater-ref name="" property=""/>
+            </heaters>
+            <window-sensors>
+                <window-sensor-ref name="" property=""/>
+            </window-sensors>
+            <temp-sensors>
+                <temp-sensor-ref name="" property=""/>
+            </temp-sensors>
+        </room>
+    </rooms>
+
+</heating-manager>

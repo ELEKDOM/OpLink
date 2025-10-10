@@ -1,0 +1,8 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "ObservableModelRegister",
+    "startlevel-beging" : "6",
+    "service-provided" : "ModelRegisterServiceInterface,1.0.0",
+    "service-provided2" : "ObservableBuilderServiceInterface,1.0.0"
+}

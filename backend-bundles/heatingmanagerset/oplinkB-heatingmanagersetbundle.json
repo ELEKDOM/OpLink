@@ -1,0 +1,8 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "HeatingManagerSet",
+    "startlevel-beging" : "11",
+    "service-required" : "ObservableServiceInterface,1.0.0",
+    "service-provided" : "VirtualEquipmentSetServiceInterface,1.0.0"
+}
