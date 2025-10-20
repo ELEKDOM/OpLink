@@ -16,31 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PROPERTY_H
 #define PROPERTY_H
 
+#include <QSharedPointer>
 #include <QVariant>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "logger/loggable.h"
 #include "observable/observablenames.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-class OLCORE_BACKEND_LIB_EXPORT Property : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT Property : public plugframe::Loggable
 {
 public:
     Property(Observable& observable,
              const PropertyName& propertyName,
-             QVariant::Type valueType);
+             QMetaType::Type valueType);
 
     ~Property() override;
 
@@ -53,15 +46,12 @@ public:
     virtual void changeValue(const QVariant& val);
 
 private:
-    Observable&  m_observable;
-    PropertyName m_name;
-    QVariant     m_value;
-    bool         m_validValue;
+    Observable&     m_observable;
+    PropertyName    m_name;
+    QVariant        m_value;
+    QMetaType::Type m_valueType;
+    bool            m_validValue;
 };
-
-}//namespace observable
-}//namespace core
+using QspProperty= QSharedPointer<Property>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // PROPERTY_H

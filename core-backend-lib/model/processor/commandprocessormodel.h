@@ -16,47 +16,37 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef COMMANDPROCESSORMODEL_H
 #define COMMANDPROCESSORMODEL_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "logger/loggable.h"
 #include "model/modelnames.h"
+#include "model/observable/observablebuilderargs.h"
 #include "command/command-names.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
-class OLCORE_BACKEND_LIB_EXPORT CommandProcessorModel : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT CommandProcessorModel : public plugframe::Loggable
 {
 public:
     CommandProcessorModel(const ProcessorModelName& modelName,
-                             const command::CommandName& commandName);
+                          const CommandName& commandName);
     ~CommandProcessorModel() override;
 
 public:
     const ProcessorModelName& modelName() {return m_modelName;}
-    virtual observable::CommandProcessor *createProcessor(const observable::Observable& parent,
-                                                             QspObservableBuilderArgs builderArgs) = 0;
+    virtual CommandProcessor *createProcessor(const Observable& parent,
+                                              QspObservableBuilderArgs builderArgs) = 0;
 protected:
-    const command::CommandName& commandName() {return m_commandName;}
+    const CommandName& commandName() {return m_commandName;}
 
 private:
     const ProcessorModelName   m_modelName;
-    const command::CommandName m_commandName;
+    const CommandName          m_commandName;
 };
-
-}//namespace model
-}//namespace core
+using QspCommandProcessorModel = QSharedPointer<CommandProcessorModel>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // COMMANDPROCESSORMODEL_H

@@ -16,22 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PROPERTYID_H
 #define PROPERTYID_H
 
 #include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT PropertyId
 {
 public:
@@ -50,10 +42,5 @@ public:
 
     static QString groupPropertyName(const QString& groupName, const PropertyName& propertyName);
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // PROPERTYID_H

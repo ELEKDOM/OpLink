@@ -16,26 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODEL_H
 #define OBSERVABLEMODEL_H
 
+#include <QSharedPointer>
 #include <QList>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "logger/loggable.h"
 #include "model/modelnames.h"
+#include "model/property/observablepropertymodel.h"
+#include "model/processor/commandprocessormodel.h"
+#include "observable/observable/observablebuilder.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
-class OLCORE_BACKEND_LIB_EXPORT ObservableModel : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT ObservableModel : public plugframe::Loggable
 {
 public:
     ObservableModel(const ObservableModelName& name);
@@ -43,23 +38,23 @@ public:
 
 public:
     const ObservableModelName& modelName() {return m_modelName;}
-    void addPropertyModelRef(QspObservablePropertyModel ref);
-    void addProcessorModelRef(QspCommandProcessorModel ref);
-    observable::QspObservableBuilder buildObservable(QspObservableBuilderArgs builderArgs);
+    void addPropertyModelRef(oplink::QspObservablePropertyModel ref);
+    void addProcessorModelRef(oplink::QspCommandProcessorModel ref);
+    oplink::QspObservableBuilder buildObservable(QspObservableBuilderArgs builderArgs);
 
 protected:
     virtual bool checkBuilderArgs(QspObservableBuilderArgs builderArgs) = 0;
-    virtual observable::ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) = 0;
-    virtual bool buildProperties(observable::QspObservableBuilder observableBuilder,
+    virtual oplink::ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) = 0;
+    virtual bool buildProperties(oplink::QspObservableBuilder observableBuilder,
                                  QspObservableBuilderArgs builderArgs);
-    virtual bool setPropertyMandatoryValues(observable::QspObservableBuilder observableBuilder,
+    virtual bool setPropertyMandatoryValues(oplink::QspObservableBuilder observableBuilder,
                                             QspObservableBuilderArgs builderArgs);
-    virtual void postBuild(observable::QspObservableBuilder observableBuilder,
+    virtual void postBuild(oplink::QspObservableBuilder observableBuilder,
                            QspObservableBuilderArgs builderArgs);
 
 private:
-    bool createProperties(observable::QspObservableBuilder observableBuilder);
-    bool buildProcessors(observable::QspObservableBuilder observableBuilder,
+    bool createProperties(oplink::QspObservableBuilder observableBuilder);
+    bool buildProcessors(oplink::QspObservableBuilder observableBuilder,
                          QspObservableBuilderArgs builderArgs);
 
 private:
@@ -67,10 +62,6 @@ private:
     QList<QspObservablePropertyModel> m_propertyModelRefs;
     QList<QspCommandProcessorModel>   m_processorModelRefs;
 };
-
-}//namespace model
-}//namespace core
+using QspObservableModel = QSharedPointer<ObservableModel>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLEMODEL_H

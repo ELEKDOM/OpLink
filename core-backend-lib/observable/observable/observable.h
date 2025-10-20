@@ -16,24 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GacObservable_H
 #define GacObservable_H
 
 #include <QHash>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "observable/observable/observablebuilder.h"
+#include "observable/observable/observablenotifier.h"
+#include "observable/processor/commandprocessor.h"
 #include "model/modelnames.h"
 #include "command/command-names.h"
+#include "command/command.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace observable
 {
 ///
 /// \brief The Observable class.
@@ -48,10 +43,10 @@ public:
 
 public:
     const ObservableName& name() const;
-    model::ObservableModelName modelId();
+    ObservableModelName modelId();
     LocalisationName localisation();
     QspProperty property(PropertyName propId) const override;
-    void process(command::QspCommand order);
+    void process(QspCommand order);
     bool subscribe(ObservableSubscriber *subscriber);
     bool unsubscribe(ObservableSubscriber *subscriber);
     void notifyPropertyValueChange(Property& prop);
@@ -60,19 +55,14 @@ protected: // GacObservableBuilder
     void addProperty(Property *newProperty) override;
     void addProcessor(CommandProcessor *newProcessor) override;
     bool setMandatoryPropertyValue(PropertyName propId, QVariant propValue) override;
-    void setDevice(infrastructure::QspDevice device) override;
+    void setDevice(QspDevice device) override;
     bool propertyValue(PropertyName propId, QVariant propValue);
 
 private:
-    ObservableName                                   m_name;
-    QHash<PropertyName, QspProperty>                 m_properties;
-    QHash<command::CommandName, QspCommandProcessor> m_processors;
-    QspObservableNotifier                            m_notifier;
+    ObservableName                          m_name;
+    QHash<PropertyName, QspProperty>        m_properties;
+    QHash<CommandName, QspCommandProcessor> m_processors;
+    QspObservableNotifier                   m_notifier;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GacObservable_H

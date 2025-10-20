@@ -16,23 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef Command_H
 #define Command_H
 
 #include <QString>
 #include <QVariant>
+#include <QSharedPointer>
 #include "olcore-backend-lib_export.h"
 #include "command/command-names.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace command
 {
 /////////////////////////////////////
 /// \brief The GacCommand class
@@ -44,9 +38,6 @@ namespace command
 ///             index 3 ... command's pars (could be empty)
 class OLCORE_BACKEND_LIB_EXPORT Command
 {
-private:
-    QStringList   m_args;
-
 protected:
     static const int COMMAND_NAME_IDX;
     static const int TARGET_OBSERVABLE_IDX;
@@ -59,15 +50,14 @@ public:
 
 public:
     const CommandName name();
-    const observable::ObservableName observable();
-    const observable::PropertyName property();
+    const ObservableName observable();
+    const PropertyName property();
     QVariant value();
-    void replaceTarget(const observable::ObservableName& oname, const observable::PropertyName& pname);
+    void replaceTarget(const ObservableName& oname,const PropertyName& pname);
+
+private:
+    QStringList   m_args;
 };
-
-}//namespace command
-}//namespace core
+using QspCommand = QSharedPointer<Command>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // Command_H

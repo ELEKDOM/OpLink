@@ -16,45 +16,35 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DEVICECOMMANDPROCESSOR_H
 #define DEVICECOMMANDPROCESSOR_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "logger/loggable.h"
 #include "observable/observablenames.h"
+#include "command/command.h"
+#include "device.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT DeviceCommandProcessor : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT DeviceCommandProcessor : public plugframe::Loggable
 {
 public:
     DeviceCommandProcessor(const QString& logChannel,
-                              const QspDevice& device);
+                           const QspDevice& device);
     virtual ~DeviceCommandProcessor();
 
 public:
-    virtual void processDeviceCmd(command::QspCommand order) = 0;
+    virtual void processDeviceCmd(QspCommand order) = 0;
 
 protected:
     const QspDevice& device() {return m_device;}
-    bool getChannelIdx(const observable::PropertyName& propertyName, int& idx);
+    bool getChannelIdx(const PropertyName& propertyName, int& idx);
 
 private:
     QspDevice m_device;
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspDeviceCommandProcessor = QSharedPointer<DeviceCommandProcessor>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // DEVICECOMMANDPROCESSOR_H

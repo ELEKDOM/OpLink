@@ -16,16 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "commandprocessormodel.h"
 #include "logger/pflog.h"
 #include "model/modellogchannel.h"
 
-using namespace elekdom::oplink::core::model;
-
-CommandProcessorModel::CommandProcessorModel(const ProcessorModelName& modelName,
-                                                   const command::CommandName& commandName) :
-    plugframe::core::logger::Loggable{s_ModelLogChannel},
+oplink::CommandProcessorModel::CommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                     const oplink::CommandName& commandName) :
+    plugframe::Loggable{s_ModelLogChannel},
     m_modelName{modelName},
     m_commandName{commandName}
 {
@@ -34,7 +31,7 @@ CommandProcessorModel::CommandProcessorModel(const ProcessorModelName& modelName
     pfDebug1(logChannel()) << "<-CommandProcessorModel::CommandProcessorModel";
 }
 
-CommandProcessorModel::~CommandProcessorModel()
+oplink::CommandProcessorModel::~CommandProcessorModel()
 {
 
 }

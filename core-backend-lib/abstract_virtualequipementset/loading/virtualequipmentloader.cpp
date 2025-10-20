@@ -80,7 +80,7 @@ bool VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableN
     //-----
     prop = new observable::Property{*m_newlyVirtualEquipment,
                                     observable::PropertyId::P_NAME,
-                                    QVariant::String};
+                                    QMetaType::QString};
     obsBuilder->addProperty(prop);
     obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_NAME,observableName);
 
@@ -88,7 +88,7 @@ bool VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableN
     //-----------
     prop = new observable::Property{*m_newlyVirtualEquipment,
                                     observable::PropertyId::P_MODEL,
-                                    QVariant::String};
+                                    QMetaType::QString};
     prop->value(modelName);
     obsBuilder->addProperty(prop);
     obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_MODEL,modelName);
@@ -98,7 +98,7 @@ bool VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableN
     //-------------
     prop = new observable::Property{*m_newlyVirtualEquipment,
                                     observable::PropertyId::P_LOCALISATION,
-                                    QVariant::String};
+                                    QMetaType::QString};
     obsBuilder->addProperty(prop);
     obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_LOCALISATION,localisation);
 
@@ -106,7 +106,7 @@ bool VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableN
     //--------
     prop = new observable::Property{*m_newlyVirtualEquipment,
                                     observable::PropertyId::P_CONF,
-                                    QVariant::Int};
+                                    QMetaType::Int};
     obsBuilder->addProperty(prop);
     obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_CONF,confId);
 
@@ -114,7 +114,7 @@ bool VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableN
     //----------------------
     prop = new observable::Property{*m_newlyVirtualEquipment,
                                     observable::PropertyId::P_MODE,
-                                    QVariant::String};
+                                    QMetaType::QString};
     obsBuilder->addProperty(prop);
 
     return ret;
@@ -128,7 +128,8 @@ void VirtualEquipmentLoader::modeValue(const QString &val)
 }
 
 
-void VirtualEquipmentLoader::addProperty(const observable::PropertyName &propertyName, QVariant::Type valueType)
+void VirtualEquipmentLoader::addProperty(const observable::PropertyName &propertyName,
+                                         QMetaType::Type valueType)
 {
     observable::Property *prop;
     observable::ObservableBuilder *obsBuilder{dynamic_cast<observable::ObservableBuilder*>(m_newlyVirtualEquipment.data())};
@@ -139,7 +140,9 @@ void VirtualEquipmentLoader::addProperty(const observable::PropertyName &propert
     obsBuilder->addProperty(prop);
 }
 
-void VirtualEquipmentLoader::addGroupProperty(const QString &groupName, const observable::PropertyName &propertyName, QVariant::Type valueType)
+void VirtualEquipmentLoader::addGroupProperty(const QString &groupName,
+                                              const observable::PropertyName &propertyName,
+                                              QMetaType::Type valueType)
 {
     addProperty(observable::PropertyId::groupPropertyName(groupName, propertyName),
                 valueType);

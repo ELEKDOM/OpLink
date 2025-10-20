@@ -16,26 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "devicecommandprocessor.h"
 #include "abstract_infrastructure/device/device.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-DeviceCommandProcessor::DeviceCommandProcessor(const QString& logChannel,
-                                                     const QspDevice& device):
-    plugframe::core::logger::Loggable{logChannel},
+oplink::DeviceCommandProcessor::DeviceCommandProcessor(const QString& logChannel,
+                                                       const oplink::QspDevice& device):
+    plugframe::Loggable{logChannel},
     m_device{device}
 {
 
 }
 
-DeviceCommandProcessor::~DeviceCommandProcessor()
+oplink::DeviceCommandProcessor::~DeviceCommandProcessor()
 {
 
 }
 
-bool DeviceCommandProcessor::getChannelIdx(const observable::PropertyName &propertyName, int &idx)
+bool oplink::DeviceCommandProcessor::getChannelIdx(const oplink::PropertyName &propertyName,int &idx)
 {
     return device()->getChannelIdx(propertyName, idx);
 }

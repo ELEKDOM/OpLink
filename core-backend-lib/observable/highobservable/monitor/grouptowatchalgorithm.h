@@ -20,21 +20,13 @@
 #ifndef GROUPTOWATCHALGORITHM_H
 #define GROUPTOWATCHALGORITHM_H
 
+#include <QSharedPointer>
 #include "observable/observable/observablesubscriber.h"
 #include "service-int/observableserviceinterface.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-namespace monitoring
-{
-
-class OLCORE_BACKEND_LIB_EXPORT GroupToWatchAlgorithm : public ObservableSubscriber
+class OLCORE_BACKEND_LIB_EXPORT GroupToWatchAlgorithm : public oplink::ObservableSubscriber
 {
 public:
     GroupToWatchAlgorithm(SupervisorObservable& manager, QObject *parent = nullptr);
@@ -60,11 +52,6 @@ private:
     GroupToWatch *m_group;
     engine::service::ObservableServiceInterface *m_observableService;
 };
-
-}//namespace monitoring
-}//namespace observable
-}//namespace core
+using QspGroupToWatchAlgorithm = QSharedPointer<GroupToWatchAlgorithm>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GROUPTOWATCHALGORITHM_H

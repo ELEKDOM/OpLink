@@ -16,39 +16,36 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QVariant>
 #include "device.h"
 #include "devicehook.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-Device::Device(const QString& logChannel,
-                     const DeviceId &id,
-                     DeviceHook &deviceHook):
-    plugframe::core::logger::Loggable{logChannel},
-    m_id{id},
-    m_deviceHook{deviceHook}
+oplink::Device::Device(const QString& logChannel,
+                       const oplink::DeviceId& id,
+                       oplink::DeviceHook& deviceHook):
+                       plugframe::Loggable{logChannel},
+                       m_id{id},
+                       m_deviceHook{deviceHook}
 {
 
 }
 
-Device::~Device()
+oplink::Device::~Device()
 {
 
 }
 
-void Device::setChannelValue(int idx, QVariant value)
+void oplink::Device::setChannelValue(int idx, QVariant value)
 {
     m_deviceHook.setChannelValue(idx, value);
 }
 
-bool Device::getChannelIdx(const observable::PropertyName &propertyName, int &idx)
+bool oplink::Device::getChannelIdx(const oplink::PropertyName &propertyName, int &idx)
 {
     return m_deviceHook.getChannelIdx(propertyName, idx);
 }
 
-bool Device::hasChannel(int idx)
+bool oplink::Device::hasChannel(int idx)
 {
     return m_deviceHook.hasChannel(idx);
 }

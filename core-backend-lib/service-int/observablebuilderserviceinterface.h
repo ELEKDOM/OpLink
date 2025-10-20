@@ -16,23 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEBUILDERSERVICEINTERFACE_H
 #define OBSERVABLEBUILDERSERVICEINTERFACE_H
 
 #include "service-int/serviceinterface.h"
-#include "olcore-backend-lib_forward.h"
+#include "observable/observable/observablebuilder.h"
+#include "model/observable/observablebuilderargs.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace observablemodelregister
-{
-namespace service
-{
-
-class ObservableBuilderServiceInterface : public plugframe::core::plugin::ServiceInterface
+class ObservableBuilderServiceInterface : public plugframe::ServiceInterface
 {
 public:
     static QString serviceName() {return QStringLiteral("ObservableBuilderServiceInterface");}
@@ -41,15 +34,11 @@ public:
     ~ObservableBuilderServiceInterface() override {}
 
 public:
-    virtual core::observable::QspObservableBuilder buildObservable(core::model::QspObservableBuilderArgs builderargs) = 0;
+    virtual oplink::QspObservableBuilder buildObservable(oplink::QspObservableBuilderArgs builderargs) = 0;
 };
-
-}//namespace service
-}//namespace observablemodelregister
 }//namespace oplink
-}//namespace elekdom
 
-#define OlObservableBuilderService_iid "elekdom.oplink.observablemodelregister.service.ObservableBuilderService"
-Q_DECLARE_INTERFACE(elekdom::oplink::observablemodelregister::service::ObservableBuilderServiceInterface, OlObservableBuilderService_iid)
+#define OlObservableBuilderService_iid "oplink.ObservableBuilderService"
+Q_DECLARE_INTERFACE(oplink::ObservableBuilderServiceInterface, OlObservableBuilderService_iid)
 
 #endif // OBSERVABLEBUILDERSERVICEINTERFACE_H

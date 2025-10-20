@@ -16,51 +16,41 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEPROPERTYMODEL_H
 #define OBSERVABLEPROPERTYMODEL_H
 
+#include <QSharedPointer>
 #include <QVariant>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "logger/loggable.h"
 #include "observable/observablenames.h"
-#include "model/property/propertymodelnames.h"
+#include "model/modelnames.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
-class OLCORE_BACKEND_LIB_EXPORT ObservablePropertyModel : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT ObservablePropertyModel : public plugframe::Loggable
 {
 public:
     ObservablePropertyModel(const PropertyModelName& modelName,
-                               const observable::PropertyName& propertyName,
-                               QVariant::Type valueType);
+                            const PropertyName& propertyName,
+                            QMetaType::Type valueType);
     ~ObservablePropertyModel() override;
 
 public:
     const PropertyModelName& modelName() {return m_modelName;}
-    virtual observable::Property *createProperty(observable::Observable& observable);
+    virtual Property *createProperty(Observable& observable);
 
 protected:
-    const observable::PropertyName& propertyName(){return m_propertyName;}
-    QVariant::Type valueType(){return m_valueType;}
+    const PropertyName& propertyName(){return m_propertyName;}
+    QMetaType::Type valueType(){return m_valueType;}
 
 private:
-    const PropertyModelName         m_modelName;
-    const observable::PropertyName  m_propertyName;
-    QVariant::Type                     m_valueType;
+    const PropertyModelName m_modelName;
+    const PropertyName      m_propertyName;
+    QMetaType::Type         m_valueType;
 };
-
-}//namespace model
-}//namespace core
+using QspObservablePropertyModel = QSharedPointer<ObservablePropertyModel>;
 }//namespace oplink
-}//namespace elekdom
 
 #endif // OBSERVABLEPROPERTYMODEL_H

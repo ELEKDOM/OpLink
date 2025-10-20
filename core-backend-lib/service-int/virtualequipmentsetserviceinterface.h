@@ -16,25 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETSERVICEINTERFACE_H
 #define VIRTUALEQUIPMENTSETSERVICEINTERFACE_H
 
 #include "service-int/serviceinterface.h"
-#include "pfcore-lib_forward.h"
+#include "worker/workerwatcher.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-namespace service
-{
-
-class VirtualEquipmentSetServiceInterface : public plugframe::core::plugin::ServiceInterface
+class VirtualEquipmentSetServiceInterface : public plugframe::ServiceInterface
 {
 public:
     static QString serviceName() {return QStringLiteral("VirtualEquipmentSetServiceInterface");}
@@ -46,18 +36,13 @@ public:
     virtual const QString& getVirtualEquipmentSetName() = 0;
 
     // virtual equipments loading is realized by a worker task. At the end of loading, the workerwatcher is notified
-    virtual bool startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher) = 0;
+    virtual bool startLoading(plugframe::WorkerWatcher *workerWatcher) = 0;
 
     virtual bool loadingFinished() = 0;
 };
-
-}//namespace service
-}//namespace virtualequipmentset
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 
-#define OlVirtualEquipmentSetService_iid "elekdom.oplink.core.virtualequipmentset.service.VirtualEquipmentSetServiceInterface"
-Q_DECLARE_INTERFACE(elekdom::oplink::core::virtualequipmentset::service::VirtualEquipmentSetServiceInterface, OlVirtualEquipmentSetService_iid)
+#define OlVirtualEquipmentSetService_iid "oplink.VirtualEquipmentSetServiceInterface"
+Q_DECLARE_INTERFACE(oplink::VirtualEquipmentSetServiceInterface, OlVirtualEquipmentSetService_iid)
 
 #endif // VIRTUALEQUIPMENTSETSERVICEINTERFACE_H

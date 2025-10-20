@@ -22,7 +22,8 @@
 
 using namespace elekdom::oplink::core::remote;
 
-ObservableStates::ObservableStates(QObject *parent)
+ObservableStates::ObservableStates(QObject *parent):
+    ObservableSubscriber{parent}
 {
 
 }

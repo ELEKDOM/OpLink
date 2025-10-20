@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "propertymodelnames.h"
 
-using namespace elekdom::oplink::core::model;
-
-const PropertyModelName PropertyModelNames::MODEL_P_NAME{"model_p_name"};
-const PropertyModelName PropertyModelNames::MODEL_P_OMODEL{"model_p_omodel"};
-const PropertyModelName PropertyModelNames::MODEL_P_LOCALISATION{"model_p_localisation"};
+const oplink::PropertyModelName oplink::PropertyModelNames::MODEL_P_NAME{"model_p_name"};
+const oplink::PropertyModelName oplink::PropertyModelNames::MODEL_P_OMODEL{"model_p_omodel"};
+const oplink::PropertyModelName oplink::PropertyModelNames::MODEL_P_LOCALISATION{"model_p_localisation"};

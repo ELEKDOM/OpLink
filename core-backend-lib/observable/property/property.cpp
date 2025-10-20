@@ -16,37 +16,34 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "property.h"
 #include "observable/observablelogchannel.h"
 #include "observable/observable/observable.h"
 
-using namespace elekdom::oplink::core::observable;
-
-Property::Property(Observable &observable,
-                         const PropertyName &propertyName,
-                         QVariant::Type valueType) :
-    plugframe::core::logger::Loggable{s_ObservableLogChannel},
+oplink::Property::Property(oplink::Observable &observable,
+                           const oplink::PropertyName &propertyName,
+                           QMetaType::Type valueType) :
+    plugframe::Loggable{s_ObservableLogChannel},
     m_observable{observable},
     m_name{propertyName},
-    m_value{valueType},
+    m_valueType{valueType},
     m_validValue{false}
 {
 
 }
 
-Property::~Property()
+oplink::Property::~Property()
 {
 
 }
 
-void Property::value(const QVariant &val)
+void oplink::Property::value(const QVariant &val)
 {
     m_value = val;
     m_validValue = true;
 }
 
-void Property::changeValue(const QVariant &val)
+void oplink::Property::changeValue(const QVariant &val)
 {
     if (!m_validValue || (val != value()))
     {

@@ -62,10 +62,10 @@ protected:
     virtual observable::monitoring::StateToWatch *createStateToWatch(const observable::ObservableName& observableName,
                                                                      const observable::PropertyName& propertyName);
 
-    void addProperty(const observable::PropertyName& propertyName, QVariant::Type valueType);
+    void addProperty(const observable::PropertyName& propertyName, QMetaType::Type valueType);
     void addGroupProperty(const QString& groupName,
                           const observable::PropertyName& propertyName,
-                          QVariant::Type valueType);
+                          QMetaType::Type valueType);
 
 
 private:

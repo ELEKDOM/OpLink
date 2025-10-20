@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablebuilderargs.h"
 
-using namespace elekdom::oplink::core::model;
-
-ObservableBuilderArgs::ObservableBuilderArgs(const observable::ObservableName& observableName,
-                                                   const ObservableModelName& observableModelName,
-                                                   const observable::LocalisationName& observableLocalisation):
+oplink::ObservableBuilderArgs::ObservableBuilderArgs(const oplink::ObservableName& observableName,
+                                                     const oplink::ObservableModelName& observableModelName,
+                                                     const oplink::LocalisationName& observableLocalisation):
     m_observableName{observableName},
     m_observableModelName{observableModelName},
     m_observableLocalisation{observableLocalisation}
@@ -31,7 +28,7 @@ ObservableBuilderArgs::ObservableBuilderArgs(const observable::ObservableName& o
 
 }
 
-ObservableBuilderArgs::~ObservableBuilderArgs()
+oplink::ObservableBuilderArgs::~ObservableBuilderArgs()
 {
 
 }

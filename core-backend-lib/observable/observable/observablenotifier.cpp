@@ -16,30 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablenotifier.h"
 #include "logger/pflog.h"
 #include "observable/observablelogchannel.h"
 
-using namespace elekdom::oplink::core::observable;
-
-ObservableNotifier::ObservableNotifier(QObject *parent) : QObject(parent)
+oplink::ObservableNotifier::ObservableNotifier(QObject *parent) : QObject(parent)
 {
 
 }
 
-ObservableNotifier::~ObservableNotifier()
+oplink::ObservableNotifier::~ObservableNotifier()
 {
 
 }
 
-bool ObservableNotifier::subscribe(ObservableSubscriber *subscriber)
+bool oplink::ObservableNotifier::subscribe(ObservableSubscriber *subscriber)
 {
-    bool ok = connect(this ,
-                      SIGNAL(stateChange(const elekdom::oplink::core::observable::ObservableName&,const elekdom::oplink::core::observable::PropertyName&,QVariant)),
-                      subscriber,
-                      SLOT(onStateChange(const elekdom::oplink::core::observable::ObservableName&,const elekdom::oplink::core::observable::PropertyName&,QVariant)),
-                      Qt::QueuedConnection);
+    bool ok{true};
+
+    ok = connect(this ,
+                 SIGNAL(stateChange(oplink::ObservableName,oplink::PropertyName,QVariant)),
+                 subscriber,
+                 SLOT(onStateChange(oplink::ObservableName,oplink::PropertyName,QVariant)),
+                 Qt::QueuedConnection);
     if (!ok)
     {
         pfErr(s_ObservableLogChannel) << tr("--GacObservableNotifier connect signal stateChange : échec");
@@ -48,12 +47,12 @@ bool ObservableNotifier::subscribe(ObservableSubscriber *subscriber)
     return ok;
 }
 
-bool ObservableNotifier::unsubscribe(ObservableSubscriber *subscriber)
+bool oplink::ObservableNotifier::unsubscribe(ObservableSubscriber *subscriber)
 {
     bool ok = disconnect(this ,
-                      SIGNAL(stateChange(const elekdom::oplink::core::observable::ObservableName&,const elekdom::oplink::core::observable::PropertyName&,QVariant)),
-                      subscriber,
-                      SLOT(onStateChange(const elekdom::oplink::core::observable::ObservableName&,const elekdom::oplink::core::observable::PropertyName&,QVariant)));
+                         SIGNAL(stateChange(oplink::ObservableName,oplink::PropertyName,QVariant)),
+                         subscriber,
+                         SLOT(onStateChange(oplink::ObservableName,oplink::PropertyName,QVariant)));
     if (!ok)
     {
         pfWarning1(s_ObservableLogChannel) << tr("--GacObservableNotifier disconnect signal stateChange : échec");
@@ -62,9 +61,9 @@ bool ObservableNotifier::unsubscribe(ObservableSubscriber *subscriber)
     return ok;
 }
 
-void ObservableNotifier::notifyPropertyValueChange(const ObservableName& observableName,
-                                                   const PropertyName& propertyName,
-                                                   QVariant propertyValue)
+void oplink::ObservableNotifier::notifyPropertyValueChange(oplink::ObservableName observableName,
+                                                           oplink::PropertyName propertyName,
+                                                           QVariant propertyValue)
 {
     emit stateChange(observableName, propertyName, propertyValue);
 }

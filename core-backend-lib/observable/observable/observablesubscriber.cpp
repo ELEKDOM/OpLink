@@ -16,16 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablesubscriber.h"
 
-using namespace elekdom::oplink::core::observable;
-
-ObservableSubscriber::ObservableSubscriber(QObject *parent)
+oplink::ObservableSubscriber::ObservableSubscriber(QObject *parent)
     : QObject{parent}
 {}
 
-ObservableSubscriber::~ObservableSubscriber()
+oplink::ObservableSubscriber::~ObservableSubscriber()
 {
 
 }

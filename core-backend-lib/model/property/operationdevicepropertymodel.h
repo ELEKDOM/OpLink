@@ -37,7 +37,7 @@ class OLCORE_BACKEND_LIB_EXPORT OperationDevicePropertyModel: public ObservableP
 public:
     OperationDevicePropertyModel(const PropertyModelName& modelName,
                                     const observable::PropertyName& propertyName,
-                                    QVariant::Type valueType);
+                                    QMetaType::Type valueType);
     ~OperationDevicePropertyModel() override;
 };
 

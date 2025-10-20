@@ -16,32 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURECONTROLSERVICEINTERFACE_H
 #define INFRASTRUCTURECONTROLSERVICEINTERFACE_H
 
 #include "service-int/serviceinterface.h"
 #include "abstract_infrastructure/infrastructure-names.h"
-#include "pfcore-lib_forward.h"
+#include "worker/workerwatcher.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-namespace service
-{
-
-class InfrastructureControlServiceInterface : public plugframe::core::plugin::ServiceInterface
+class InfrastructureControlServiceInterface : public plugframe::ServiceInterface
 {        
 public:
     static QString serviceName() {return QStringLiteral("InfrastructureControlServiceInterface");}
 
 public:
-        enum class OperationalMode {Operating, Setup};
+    enum class OperationalMode {Operating, Setup};
 
 public:
     virtual ~InfrastructureControlServiceInterface() {}
@@ -50,19 +40,14 @@ public:
     virtual const InfrastructureName& getInfrastructureName() = 0;
 
     // infrastructure loading is realized by a worker task. At the end of loading, the workerwatcher is notified
-    virtual bool startLoadingInfrastructure(plugframe::core::worker::WorkerWatcher *workerWatcher,
+    virtual bool startLoadingInfrastructure(plugframe::WorkerWatcher *workerWatcher,
                                             OperationalMode mode = OperationalMode::Operating) = 0;
 
     virtual bool loadingFinished() = 0;
 };
-
-}//namespace service
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 
-#define OlInfrastructureControlService_iid "elekdom.oplink.core.infrastructure.service.InfrastructureControlServiceInterface"
-Q_DECLARE_INTERFACE(elekdom::oplink::core::infrastructure::service::InfrastructureControlServiceInterface, OlInfrastructureControlService_iid)
+#define OlInfrastructureControlService_iid "oplink.InfrastructureControlServiceInterface"
+Q_DECLARE_INTERFACE(oplink::InfrastructureControlServiceInterface, OlInfrastructureControlService_iid)
 
 #endif // INFRASTRUCTURECONTROLSERVICEINTERFACE_H

@@ -23,7 +23,7 @@ using namespace elekdom::oplink::core::model;
 
 OperationDevicePropertyModel::OperationDevicePropertyModel(const PropertyModelName& modelName,
                                                                  const observable::PropertyName& propertyName,
-                                                                 QVariant::Type valueType):
+                                                                 QMetaType::Type valueType):
      ObservablePropertyModel{modelName, propertyName, valueType}
 {
 

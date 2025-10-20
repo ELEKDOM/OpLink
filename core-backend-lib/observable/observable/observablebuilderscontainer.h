@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEBUILDERSCONTAINER_H
 #define OBSERVABLEBUILDERSCONTAINER_H
 
 #include <QHash>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "observable/observablenames.h"
+#include "observable/observable/observablebuilder.h"
+#include "olcore-backend-lib_export.h"
+//#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ObservableBuildersContainer
 {
 public:
@@ -44,8 +37,8 @@ public:
     ~ObservableBuildersContainer();
 
 public:
-    bool insert(const ObservableName& name, const QspObservableBuilder& observable);
-    bool find(const ObservableName& name, QspObservableBuilder& observable);
+    bool insert(const ObservableName& name,const QspObservableBuilder& observable);
+    bool find(const ObservableName& name,QspObservableBuilder& observable);
     bool contains(const ObservableName& name) const;
     ConstIt begin();
     ConstIt end();
@@ -53,10 +46,5 @@ public:
 private:
     QHash<ObservableName, QspObservableBuilder> m_observables;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLEBUILDERSCONTAINER_H

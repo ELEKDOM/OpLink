@@ -25,7 +25,7 @@ using namespace elekdom::oplink::core;
 
 ActuatorPropertyModel::ActuatorPropertyModel(const PropertyModelName& modelName,
                                                    const observable::PropertyName& propertyName,
-                                                   QVariant::Type valueType):
+                                                   QMetaType::Type valueType):
     OperationDevicePropertyModel{modelName, propertyName, valueType}
 {
 

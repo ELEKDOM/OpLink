@@ -16,19 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "lowcommandprocessor.h"
 
-using namespace elekdom::oplink::core::observable;
-
-LowCommandProcessor::LowCommandProcessor(const Observable& observable,
-                                               const command::CommandName& cmdName):
+oplink::LowCommandProcessor::LowCommandProcessor(const oplink::Observable& observable,
+                                                 const oplink::CommandName& cmdName):
     CommandProcessor{observable, cmdName}
 {
 
 }
 
-LowCommandProcessor::~LowCommandProcessor()
+oplink::LowCommandProcessor::~LowCommandProcessor()
 {
 
 }

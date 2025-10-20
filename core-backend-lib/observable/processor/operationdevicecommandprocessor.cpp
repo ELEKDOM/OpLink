@@ -16,30 +16,26 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "observable/observablelogchannel.h"
 #include "operationdevicecommandprocessor.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
-#include "command/command.h"
 
-using namespace elekdom::oplink::core::observable;
-
-OperationDeviceCommandProcessor::OperationDeviceCommandProcessor(const Observable& observable,
-                                                                       const command::CommandName& cmdName,
-                                                                       const infrastructure::QspDeviceCommandProcessor& deviceProcessor):
+oplink::OperationDeviceCommandProcessor::OperationDeviceCommandProcessor(const oplink::Observable& observable,
+                                                                         const oplink::CommandName& cmdName,
+                                                                         const oplink::QspDeviceCommandProcessor& deviceProcessor):
     LowCommandProcessor{observable, cmdName},
     m_deviceProcessor{deviceProcessor}
 {
 
 }
 
-OperationDeviceCommandProcessor::~OperationDeviceCommandProcessor()
+oplink::OperationDeviceCommandProcessor::~OperationDeviceCommandProcessor()
 {
 
 }
 
-void OperationDeviceCommandProcessor::process(command::QspCommand order)
+void oplink::OperationDeviceCommandProcessor::process(oplink::QspCommand order)
 {
     setCheckStrategy(order);
     if (m_deviceProcessor)

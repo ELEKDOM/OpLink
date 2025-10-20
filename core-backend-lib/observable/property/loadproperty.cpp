@@ -24,7 +24,7 @@ using namespace elekdom::oplink::core::observable;
 
 LoadProperty::LoadProperty(Observable& observable,
                                  const PropertyName& propertyName,
-                                 QVariant::Type valueType):
+                                 QMetaType::Type valueType):
     LowProperty{observable,
                    propertyName,
                    valueType}

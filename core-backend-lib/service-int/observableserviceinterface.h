@@ -16,25 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLESERVICEINTERFACE_H
 #define OBSERVABLESERVICEINTERFACE_H
 
 #include "service-int/serviceinterface.h"
-#include "olcore-backend-lib_forward.h"
 #include "command/command-names.h"
 #include "observable/observablenames.h"
+#include "observable/property/property.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace engine
-{
-namespace service
-{
-
-class ObservableServiceInterface : public plugframe::core::plugin::ServiceInterface
+class ObservableServiceInterface : public plugframe::ServiceInterface
 {
 public:
     static QString serviceName() {return QStringLiteral("ObservableServiceInterface");}
@@ -43,24 +36,20 @@ public:
     virtual ~ObservableServiceInterface() {}
 
 public: // service interface definition = 0
-    virtual bool submitOrder(core::command::StrOrder command) = 0;
-    virtual bool subscribe(core::observable::ObservableName observableName,
-                           core::observable::ObservableSubscriber *subscriber) = 0;
-    virtual bool unsubscribe(core::observable::ObservableName observableName,
-                             core::observable::ObservableSubscriber *subscriber) = 0;
-    virtual bool propertyValue(core::observable::ObservableName observableName,
-                               core::observable::PropertyName propertyName,
+    virtual bool submitOrder(oplink::StrOrder command) = 0;
+    virtual bool subscribe(oplink::ObservableName observableName,
+                           oplink::ObservableSubscriber *subscriber) = 0;
+    virtual bool unsubscribe(oplink::ObservableName observableName,
+                             oplink::ObservableSubscriber *subscriber) = 0;
+    virtual bool propertyValue(oplink::ObservableName observableName,
+                               oplink::PropertyName propertyName,
                                QVariant& value) = 0;
-    virtual core::observable::QspProperty property(core::observable::ObservableName observableName,
-                                                   core::observable::PropertyName propertyName) = 0;
+    virtual oplink::QspProperty property(oplink::ObservableName observableName,
+                                         oplink::PropertyName propertyName) = 0;
 };
-
-}//namespace service
-}//namespace engine
 }//namespace oplink
-}//namespace elekdom
 
-#define OlObservableService_iid "elekdom.oplink.engine.service.ObservableService"
-Q_DECLARE_INTERFACE(elekdom::oplink::engine::service::ObservableServiceInterface, OlObservableService_iid)
+#define OlObservableService_iid "oplink.ObservableServiceInterface"
+Q_DECLARE_INTERFACE(oplink::ObservableServiceInterface, OlObservableService_iid)
 
 #endif // OBSERVABLESERVICEINTERFACE_H

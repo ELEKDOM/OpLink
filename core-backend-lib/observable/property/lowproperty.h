@@ -39,7 +39,7 @@ private:
 public:
     LowProperty(Observable& observable,
                    const PropertyName& propertyName,
-                   QVariant::Type valueType);
+                   QMetaType::Type valueType);
     ~LowProperty() override;
 
 protected:

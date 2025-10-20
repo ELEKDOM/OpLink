@@ -16,26 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GROUPTOWATCH_H
 #define GROUPTOWATCH_H
 
 #include <QHash>
 #include <QString>
-#include "olcore-backend-lib_export.h"
 #include "service-int/observableserviceinterface.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-namespace monitoring
-{
-
 class OLCORE_BACKEND_LIB_EXPORT GroupToWatch
 {
 public:
@@ -60,11 +50,5 @@ private:
     QspMonitoredGroupAlgorithm            m_algorithm;
     QString                               m_groupName;
 };
-
-}//namespace monitoring
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GROUPTOWATCH_H

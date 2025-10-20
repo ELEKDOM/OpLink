@@ -22,18 +22,11 @@
 
 #include <QObject>
 #include <QVariant>
-#include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ObservableSubscriber : public QObject
 {
     Q_OBJECT
@@ -43,14 +36,9 @@ public:
     ~ObservableSubscriber() override;
 
 public slots:
-    virtual void onStateChange(const elekdom::oplink::core::observable::ObservableName& observableName,
-                               const elekdom::oplink::core::observable::PropertyName& propertyName,
+    virtual void onStateChange(oplink::ObservableName observableName,
+                               oplink::PropertyName propertyName,
                                QVariant propertyValue) = 0;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLESUBSCRIBER_H

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QCoreApplication>
 #include "observable.h"
 #include "observable/observable/observablenotifier.h"
@@ -26,49 +25,46 @@
 #include "command/command.h"
 #include "logger/pflog.h"
 
-using namespace elekdom::oplink::core::observable;
-using namespace elekdom::oplink::core;
-
-Observable::Observable():
+oplink::Observable::Observable():
     m_name{""},
-    m_notifier{new ObservableNotifier}
+    m_notifier{new oplink::ObservableNotifier}
 {
     m_notifier->moveToThread(QCoreApplication::instance()->thread());
 }
 
-Observable::~Observable()
+oplink::Observable::~Observable()
 {
 }
 
-const ObservableName& Observable::name() const
+const oplink::ObservableName& oplink::Observable::name() const
 {
     return m_name;
 }
 
-model::ObservableModelName Observable::modelId()
+oplink::ObservableModelName oplink::Observable::modelId()
 {
-    QspProperty propertyModelId{m_properties.value(PropertyId::P_MODEL)};
+    oplink::QspProperty propertyModelId{m_properties.value(oplink::PropertyId::P_MODEL)};
     return (propertyModelId->value()).toString();
 }
 
-LocalisationName Observable::localisation()
+oplink::LocalisationName oplink::Observable::localisation()
 {
-    QspProperty propertyLocalisation{m_properties.value(PropertyId::P_LOCALISATION)};
+    QspProperty propertyLocalisation{m_properties.value(oplink::PropertyId::P_LOCALISATION)};
     return (propertyLocalisation->value()).toString();
 }
 
-QspProperty Observable::property(PropertyName propId) const
+oplink::QspProperty oplink::Observable::property(PropertyName propId) const
 {
     return m_properties.value(propId);
 }
 
-void Observable::process(command::QspCommand order)
+void oplink::Observable::process(oplink::QspCommand order)
 {
-    const command::CommandName& cmdName{order->name()};
+    const oplink::CommandName& cmdName{order->name()};
 
     if (m_processors.contains(cmdName))
     {
-        QspCommandProcessor selected{m_processors.value(cmdName)};
+        oplink::QspCommandProcessor selected{m_processors.value(cmdName)};
 
         if (!selected->acceptCmd(order))
         {
@@ -81,59 +77,59 @@ void Observable::process(command::QspCommand order)
     }
 }
 
-bool Observable::subscribe(ObservableSubscriber *subscriber)
+bool oplink::Observable::subscribe(oplink::ObservableSubscriber *subscriber)
 {
     return m_notifier->subscribe(subscriber);
 }
 
-bool Observable::unsubscribe(ObservableSubscriber *subscriber)
+bool oplink::Observable::unsubscribe(oplink::ObservableSubscriber *subscriber)
 {
     return m_notifier->unsubscribe(subscriber);
 }
 
-void Observable::notifyPropertyValueChange(Property &prop)
+void oplink::Observable::notifyPropertyValueChange(oplink::Property &prop)
 {
     m_notifier->notifyPropertyValueChange(name(),
                                           prop.name(),
                                           prop.value());
 }
 
-void Observable::addProperty(Property *newProperty)
+void oplink::Observable::addProperty(oplink::Property *newProperty)
 {
-    QspProperty newProp{newProperty};
+    oplink::QspProperty newProp{newProperty};
 
     m_properties.insert(newProp->name(), newProp);
 }
 
-void Observable::addProcessor(CommandProcessor *newProcessor)
+void oplink::Observable::addProcessor(oplink::CommandProcessor *newProcessor)
 {
-    QspCommandProcessor newProc{newProcessor};
+    oplink::QspCommandProcessor newProc{newProcessor};
     m_processors.insert(newProc->cmdName(), newProc);
 }
 
-bool Observable::setMandatoryPropertyValue(PropertyName propId, QVariant propValue)
+bool oplink::Observable::setMandatoryPropertyValue(oplink::PropertyName propId, QVariant propValue)
 {
     bool ret {propertyValue(propId, propValue)};
 
-    if (propId == PropertyId::P_NAME)
+    if (propId == oplink::PropertyId::P_NAME)
     {
         m_name = propValue.toString();
     }
     return ret;
 }
 
-void Observable::setDevice(QSharedPointer<infrastructure::Device> device)
+void oplink::Observable::setDevice(oplink::QspDevice device)
 {
     Q_UNUSED(device)
 }
 
-bool Observable::propertyValue(PropertyName propId, QVariant propValue)
+bool oplink::Observable::propertyValue(oplink::PropertyName propId,QVariant propValue)
 {
     bool ret{false};
 
     if (m_properties.contains(propId))
     {
-        QspProperty selected{property(propId)};
+        oplink::QspProperty selected{property(propId)};
 
         if (!selected.isNull())
         {

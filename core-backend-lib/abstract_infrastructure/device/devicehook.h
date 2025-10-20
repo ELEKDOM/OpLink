@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DEVICEHOOK_H
 #define DEVICEHOOK_H
 
@@ -24,15 +23,8 @@
 #include "olcore-backend-lib_forward.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT DeviceHook
 {
 public:
@@ -41,13 +33,8 @@ public:
 public:
     virtual void bindChannels(const DeviceChannelsBinding& deviceChannelsBinding) = 0;
     virtual void setChannelValue(int idx, QVariant value) = 0;
-    virtual bool getChannelIdx(const observable::PropertyName& propertyName, int& idx) = 0;
+    virtual bool getChannelIdx(const oplink::PropertyName& propertyName, int& idx) = 0;
     virtual bool hasChannel(int idx) = 0;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // DEVICEHOOK_H

@@ -16,32 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOWCOMMANDPROCESSOR_H
 #define LOWCOMMANDPROCESSOR_H
 
 #include "commandprocessor.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-class LowCommandProcessor : public CommandProcessor
+class OLCORE_BACKEND_LIB_EXPORT LowCommandProcessor : public CommandProcessor
 {
 public:
     LowCommandProcessor(const Observable& observable,
-                           const command::CommandName& cmdName);
+                        const CommandName& cmdName);
     virtual ~LowCommandProcessor();
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOWCOMMANDPROCESSOR_H

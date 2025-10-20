@@ -16,19 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablepropertymodel.h"
 #include "model/modellogchannel.h"
 #include "logger/pflog.h"
 #include "observable/property/property.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-ObservablePropertyModel::ObservablePropertyModel(const PropertyModelName &modelName,
-                                                       const observable::PropertyName &propertyName,
-                                                       QVariant::Type valueType):
-    plugframe::core::logger::Loggable{s_ModelLogChannel},
+oplink::ObservablePropertyModel::ObservablePropertyModel(const oplink::PropertyModelName &modelName,
+                                                         const oplink::PropertyName &propertyName,
+                                                         QMetaType::Type valueType):
+    plugframe::Loggable{s_ModelLogChannel},
     m_modelName{modelName},
     m_propertyName{propertyName},
     m_valueType{valueType}
@@ -38,12 +34,12 @@ ObservablePropertyModel::ObservablePropertyModel(const PropertyModelName &modelN
     pfDebug1(logChannel()) << "<-ObservablePropertyModel::ObservablePropertyModel";
 }
 
-ObservablePropertyModel::~ObservablePropertyModel()
+oplink::ObservablePropertyModel::~ObservablePropertyModel()
 {
 
 }
 
-observable::Property *ObservablePropertyModel::createProperty(observable::Observable& observable)
+oplink::Property *oplink::ObservablePropertyModel::createProperty(oplink::Observable& observable)
 {
-    return new observable::Property{observable, propertyName(), valueType()};
+    return new oplink::Property{observable, propertyName(), valueType()};
 }

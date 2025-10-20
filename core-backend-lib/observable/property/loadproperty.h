@@ -38,7 +38,7 @@ class OLCORE_BACKEND_LIB_EXPORT LoadProperty : public LowProperty
 public:
     LoadProperty(Observable& observable,
                     const PropertyName& propertyName,
-                    QVariant::Type valueType);
+                    QMetaType::Type valueType);
     ~LoadProperty() override;
 
 public:
