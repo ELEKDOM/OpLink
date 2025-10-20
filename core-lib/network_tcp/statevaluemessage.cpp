@@ -16,13 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "statevaluemessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-StateValueMessage::StateValueMessage(quint32 sessionId, QString observableName, QString propertyName, QVariant value):
-    SessionMessage{static_cast<quint16>(MessageType::StateValue),sessionId},
+oplink::StateValueMessage::StateValueMessage(quint32 sessionId, QString observableName, QString propertyName, QVariant value):
+    oplink::SessionMessage{static_cast<quint16>(oplink::MessageType::StateValue),sessionId},
     m_observableName{observableName},
     m_propertyName{propertyName},
     m_value{value}
@@ -30,7 +28,7 @@ StateValueMessage::StateValueMessage(quint32 sessionId, QString observableName, 
 
 }
 
-StateValueMessage::~StateValueMessage()
+oplink::StateValueMessage::~StateValueMessage()
 {
 
 }

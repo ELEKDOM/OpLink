@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SIGNOUTMESSAGE_H
 #define SIGNOUTMESSAGE_H
 
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT SignoutMessage : public SessionMessage
 {
@@ -36,8 +29,5 @@ public:
     SignoutMessage(quint32 sessionId);
     ~SignoutMessage() override;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // SIGNOUTMESSAGE_H

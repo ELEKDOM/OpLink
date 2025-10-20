@@ -16,19 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "message.h"
 
-using namespace elekdom::plugframe::core::tcp;
-using namespace elekdom::oplink;
-
-core::tcp::Message::Message(quint16 msgType):
+oplink::Message::Message(quint16 msgType):
     TcpChannelMessage{msgType}
 {
 
 }
 
-core::tcp::Message::~Message()
+oplink::Message::~Message()
 {
 
 }

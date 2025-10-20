@@ -16,19 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "signoutmessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-
-SignoutMessage::SignoutMessage(quint32 sessionId):
-SessionMessage{static_cast<quint16>(MessageType::Signout),sessionId}
+oplink::SignoutMessage::SignoutMessage(quint32 sessionId):
+oplink::SessionMessage{static_cast<quint16>(oplink::MessageType::Signout),sessionId}
 {
 
 }
 
-SignoutMessage::~SignoutMessage()
+oplink::SignoutMessage::~SignoutMessage()
 {
 
 }

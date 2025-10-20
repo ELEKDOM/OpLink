@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef READYMESSAGE_H
 #define READYMESSAGE_H
 
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT ReadyMessage : public SessionMessage
 {
@@ -36,8 +29,5 @@ public:
     ReadyMessage(quint32 sessionId);
     ~ReadyMessage() override;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // READYMESSAGE_H

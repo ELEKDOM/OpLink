@@ -16,28 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QString>
 #include <QStringLiteral>
 #include "type.h"
 
-using namespace elekdom::oplink::core::observable;
-
 // SENSORS
-QString Type::TEMPERATURE_HUMIDITY_SENSOR = QStringLiteral("temperature_humidity_sensor");
-QString Type::DOOR_SENSOR = QStringLiteral("door_sensor");
-QString Type::WINDOW_SENSOR = QStringLiteral("window_sensor");
-QString Type::ROCKER_SWITCH_2_BUTTONS = QStringLiteral("rocker_switch_2_buttons");
+QString oplink::Type::TEMPERATURE_HUMIDITY_SENSOR = QStringLiteral("temperature_humidity_sensor");
+QString oplink::Type::DOOR_SENSOR = QStringLiteral("door_sensor");
+QString oplink::Type::WINDOW_SENSOR = QStringLiteral("window_sensor");
+QString oplink::Type::ROCKER_SWITCH_2_BUTTONS = QStringLiteral("rocker_switch_2_buttons");
 
 // ACTUATORS
-QString Type::ACTUATOR_2_OUTPUTS_BINARY = QStringLiteral("actuator_2_outputs_binary");
-QString Type::ONOFF_SMART_PLUG = QStringLiteral("onoff_smart_plug");
-QString Type::ONOFF_SMART_PLUG_MEASUREMENT = QStringLiteral("onoff_smart_plug_measurement");
-QString Type::PW_ACTUATOR = QStringLiteral("pw_actuator");
-QString Type::PW_ACTUATOR_MEASUREMENT = QStringLiteral("pw_actuator_measurement");
+QString oplink::Type::ACTUATOR_2_OUTPUTS_BINARY = QStringLiteral("actuator_2_outputs_binary");
+QString oplink::Type::ONOFF_SMART_PLUG = QStringLiteral("onoff_smart_plug");
+QString oplink::Type::ONOFF_SMART_PLUG_MEASUREMENT = QStringLiteral("onoff_smart_plug_measurement");
+QString oplink::Type::PW_ACTUATOR = QStringLiteral("pw_actuator");
+QString oplink::Type::PW_ACTUATOR_MEASUREMENT = QStringLiteral("pw_actuator_measurement");
 
 // LOADS
-QString Type::BASIC_ELECTRIC_HEATING = QStringLiteral("basic_electriic_heating");
-QString Type::PW_ELECTRIC_HEATING = QStringLiteral("pw_electric_heating");
-QString Type::PW_ELECTRIC_HEATING_MEASUREMENT = QStringLiteral("pw_electric_heating_measurement");
-QString Type::ONOFF_LIGHTING = QStringLiteral("onoff_lighting");
+QString oplink::Type::BASIC_ELECTRIC_HEATING = QStringLiteral("basic_electriic_heating");
+QString oplink::Type::PW_ELECTRIC_HEATING = QStringLiteral("pw_electric_heating");
+QString oplink::Type::PW_ELECTRIC_HEATING_MEASUREMENT = QStringLiteral("pw_electric_heating_measurement");
+QString oplink::Type::ONOFF_LIGHTING = QStringLiteral("onoff_lighting");

@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QString>
 #include <QStringLiteral>
 #include "frontendtypes.h"
 
-using namespace elekdom::oplink::core;
-
-QString FrontendTypes::OPLINK_QT_DESKTOP = QStringLiteral("OpLInk_Qt_Desktop");
+QString oplink::FrontendTypes::OPLINK_QT_DESKTOP = QStringLiteral("OpLInk_Qt_Desktop");

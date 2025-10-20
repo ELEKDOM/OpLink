@@ -16,31 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTLOADERHOOK_H
 #define VIRTUALEQUIPMENTLOADERHOOK_H
 
-#include "xmldom/browserhook.h"
+#include "xmldom/xmlbrowserhook.h"
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipment
-{
-
-class OLCORE_LIB_EXPORT VirtualEquipmentLoaderHook : public plugframe::core::xmldom::BrowserHook
+class OLCORE_LIB_EXPORT VirtualEquipmentLoaderHook : public plugframe::XmlBrowserHook
 {
 public:
     ~VirtualEquipmentLoaderHook() override {}
 };
-
-}//namespace virtualequipment
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTLOADERHOOK_H

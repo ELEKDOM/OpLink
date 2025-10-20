@@ -16,23 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERLOADERHOOK_H
 #define HEATINGMANAGERLOADERHOOK_H
 
 #include "observable/virtualequipment/virtualequipmentloaderhook.h"
-#include "pfcore-lib_forward.h"
+#include "scheduler/schedulerelementhook.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace heatingmanager
-{
-
-class OLCORE_LIB_EXPORT HeatingManagerLoaderHook : public virtualequipment::VirtualEquipmentLoaderHook
+class OLCORE_LIB_EXPORT HeatingManagerLoaderHook : public VirtualEquipmentLoaderHook
 {
 public:
     enum class ControlType {PW,PWT,Unknow};
@@ -54,7 +46,7 @@ public:
                                          double threshold,
                                          double maxTemp) = 0;
     virtual bool controlDeclarationEnd() = 0;
-    virtual plugframe::core::scheduler::SchedulerElementHook& schedulerDeclarationBegin() = 0;
+    virtual plugframe::SchedulerElementHook& schedulerDeclarationBegin() = 0;
     virtual bool schedulerDeclarationEnd() = 0;
     virtual bool roomsDeclarationBegin() = 0;
     virtual bool roomsDeclarationEnd() = 0;
@@ -70,9 +62,5 @@ public:
     virtual bool temperatureSensorsDeclarationEnd() = 0;
     virtual bool temperatureSensorRefDeclaration(const QString& temperatureSensorName,const QString& temperatureSensorPropertyName) = 0;
 };
-
-}//namespace heatingmanager
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // HEATINGMANAGERLOADERHOOK_H

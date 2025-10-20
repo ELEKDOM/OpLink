@@ -16,31 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
 #include "abstract_network_tcp/common/tcpchannelmessage.h"
-#include "messagetype.h"
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace tcp
-{
-class OLCORE_LIB_EXPORT Message : public plugframe::core::tcp::TcpChannelMessage
+class OLCORE_LIB_EXPORT Message : public plugframe::TcpChannelMessage
 {
 public:
     Message(quint16 msgType);
     ~Message() override;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // MESSAGE_H

@@ -16,27 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef FRONTENDTYPES_H
 #define FRONTENDTYPES_H
 
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-
 class OLCORE_LIB_EXPORT FrontendTypes
 {
 public:
     static QString OPLINK_QT_DESKTOP;
 };
-
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // FRONTENDTYPES_H

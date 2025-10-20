@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef STATEVALUEMESSAGE_H
 #define STATEVALUEMESSAGE_H
 
@@ -24,13 +23,7 @@
 #include <QVariant>
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT StateValueMessage : public SessionMessage
 {
@@ -48,8 +41,5 @@ private:
     QString  m_propertyName;
     QVariant m_value;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // STATEVALUEMESSAGE_H

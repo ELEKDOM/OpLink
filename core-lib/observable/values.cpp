@@ -16,24 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QString>
 #include <QStringLiteral>
 #include "values.h"
 
-using namespace elekdom::oplink::core::observable;
-
-bool Values::STATE_ON = true;
-bool Values::STATE_OFF = false;
-quint8 Values::PW_MODE_STOP = 0x00;
-quint8 Values::PW_MODE_COMFORT = 0x01;
-quint8 Values::PW_MODE_COMFORT_1 = 0x02;
-quint8 Values::PW_MODE_COMFORT_2 = 0x03;
-quint8 Values::PW_MODE_ECO = 0x04;
-quint8 Values::PW_MODE_ANTI_FREEZE = 0x05;
-QString Values::ENERGY_Ws = QStringLiteral("Ws");
-QString Values::ENERGY_Wh = QStringLiteral("Wh");
-QString Values::ENERGY_KWh = QStringLiteral("KWh");
-QString Values::POWER_W = QStringLiteral("W");
-QString Values::POWER_KW = QStringLiteral("KW");
+bool oplink::Values::STATE_ON = true;
+bool oplink::Values::STATE_OFF = false;
+quint8 oplink::Values::PW_MODE_STOP = 0x00;
+quint8 oplink::Values::PW_MODE_COMFORT = 0x01;
+quint8 oplink::Values::PW_MODE_COMFORT_1 = 0x02;
+quint8 oplink::Values::PW_MODE_COMFORT_2 = 0x03;
+quint8 oplink::Values::PW_MODE_ECO = 0x04;
+quint8 oplink::Values::PW_MODE_ANTI_FREEZE = 0x05;
+QString oplink::Values::ENERGY_Ws = QStringLiteral("Ws");
+QString oplink::Values::ENERGY_Wh = QStringLiteral("Wh");
+QString oplink::Values::ENERGY_KWh = QStringLiteral("KWh");
+QString oplink::Values::POWER_W = QStringLiteral("W");
+QString oplink::Values::POWER_KW = QStringLiteral("KW");
 

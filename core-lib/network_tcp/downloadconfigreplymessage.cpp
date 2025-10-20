@@ -16,19 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "downloadconfigreplymessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-DownloadConfigReplyMessage::DownloadConfigReplyMessage(quint32 sessionId, const QString &xmlConfig):
-    SessionMessage{static_cast<quint16>(MessageType::DownloadConfigReply),sessionId},
+oplink::DownloadConfigReplyMessage::DownloadConfigReplyMessage(quint32 sessionId, const QString &xmlConfig):
+    SessionMessage{static_cast<quint16>(oplink::MessageType::DownloadConfigReply),sessionId},
     m_xmlConfig{xmlConfig}
 {
 
 }
 
-DownloadConfigReplyMessage::~DownloadConfigReplyMessage()
+oplink::DownloadConfigReplyMessage::~DownloadConfigReplyMessage()
 {
 
 }

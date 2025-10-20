@@ -16,18 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "readymessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-ReadyMessage::ReadyMessage(quint32 sessionId):
+oplink::ReadyMessage::ReadyMessage(quint32 sessionId):
     SessionMessage{static_cast<quint16>(MessageType::Ready),sessionId}
 {
 
 }
 
-ReadyMessage::~ReadyMessage()
+oplink::ReadyMessage::~ReadyMessage()
 {
 
 }

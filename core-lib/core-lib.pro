@@ -1,12 +1,12 @@
 QT -= gui
 QT += xml
-CONFIG += c++11
+CONFIG += c++17
 
 TEMPLATE = lib
 DEFINES += OLCORE_LIBRARY
 
 OL_LIB_VERSION = $$cat(olcore-lib.ver)
-TARGET = oplink-core-qt5-$${OL_LIB_VERSION}
+TARGET = oplink-core-qt6-$${OL_LIB_VERSION}
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

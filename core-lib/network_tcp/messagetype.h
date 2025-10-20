@@ -16,20 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MESSAGETYPE_H
 #define MESSAGETYPE_H
 
 #include <QtGlobal>
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
-{                                                         // Server     Client
+{                                                    // Server     Client
 enum class MessageType : quint16 {Signin,                 // I          O
                                   SiginReply,             // O          I
                                   Signout,                // I & O      O & I
@@ -40,9 +33,5 @@ enum class MessageType : quint16 {Signin,                 // I          O
                                   StateValue,             // O          I
                                   SubmitOrder};           // I          O
 
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // MESSAGETYPE_H

@@ -16,20 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "command-names.h"
 
-using namespace elekdom::oplink::core::command;
+const oplink::CommandName oplink::CommandNames::SYNCHRONIZE{QStringLiteral("synchronize")};
+const oplink::CommandName oplink::CommandNames::SET{QStringLiteral("set")};
+const oplink::CommandName oplink::CommandNames::ENERGY{QStringLiteral("energy")};
+const oplink::CommandName oplink::CommandNames::POWER{QStringLiteral("power")};
 
-const CommandName CommandNames::SYNCHRONIZE{QStringLiteral("synchronize")};
-const CommandName CommandNames::SET{QStringLiteral("set")};
-const CommandName CommandNames::ENERGY{QStringLiteral("energy")};
-const CommandName CommandNames::POWER{QStringLiteral("power")};
-
-const CommandArg CommandArgs::ON{QStringLiteral("on")};
-const CommandArg CommandArgs::OFF{QStringLiteral("off")};
-const CommandArg CommandArgs::COMFORT{QStringLiteral("comfort")};
-const CommandArg CommandArgs::COMFORT_1{QStringLiteral("comfort_1")};
-const CommandArg CommandArgs::COMFORT_2{QStringLiteral("comfort_2")};
-const CommandArg CommandArgs::ECO{QStringLiteral("eco")};
-const CommandArg CommandArgs::NOFROST{QStringLiteral("nofrost")};
+const oplink::CommandArg oplink::CommandArgs::ON{QStringLiteral("on")};
+const oplink::CommandArg oplink::CommandArgs::OFF{QStringLiteral("off")};
+const oplink::CommandArg oplink::CommandArgs::COMFORT{QStringLiteral("comfort")};
+const oplink::CommandArg oplink::CommandArgs::COMFORT_1{QStringLiteral("comfort_1")};
+const oplink::CommandArg oplink::CommandArgs::COMFORT_2{QStringLiteral("comfort_2")};
+const oplink::CommandArg oplink::CommandArgs::ECO{QStringLiteral("eco")};
+const oplink::CommandArg oplink::CommandArgs::NOFROST{QStringLiteral("nofrost")};
