@@ -16,28 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "devicechannelsbinding.h"
 
-using namespace elekdom::oplink::core;
-
-infrastructure::DeviceChannelsBinding::DeviceChannelsBinding()
+oplink::DeviceChannelsBinding::DeviceChannelsBinding()
 {
 
 }
 
-void infrastructure::DeviceChannelsBinding::insert(int index,
-                                                      const observable::PropertyName &pname)
+void oplink::DeviceChannelsBinding::insert(int index,
+                                           const oplink::PropertyName &pname)
 {
     m_channels.insert(index, pname);
 }
 
-const observable::PropertyName& infrastructure::DeviceChannelsBinding::at(int i) const
+const oplink::PropertyName& oplink::DeviceChannelsBinding::at(int i) const
 {
     return m_channels.at(i);
 }
 
-int infrastructure::DeviceChannelsBinding::size() const
+int oplink::DeviceChannelsBinding::size() const
 {
     return m_channels.size();
 }

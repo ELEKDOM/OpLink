@@ -21,7 +21,6 @@
 #include "command/command.h"
 #include "observable/property/property.h"
 #include "observable/property/loadproperty.h"
-#include "observable/property/operationdeviceproperty.h"
 #include "observable/observable/observable.h"
 
 oplink::LoadCommandProcessor::LoadCommandProcessor(const oplink::Observable& observable,
@@ -46,7 +45,7 @@ void oplink::LoadCommandProcessor::process(oplink::QspCommand order)
 
     if (!targetLoadProperty.isNull())
     {
-        oplink::QspOperationDeviceProperty relatedMasterProperty{targetLoadProperty->master()};
+        oplink::QspLowProperty relatedMasterProperty{targetLoadProperty->master()};
         Observable& relatedMasterObservable{relatedMasterProperty->observable()};
 
         //Redirect order

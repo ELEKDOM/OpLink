@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "processormodelnames.h"
 
-using namespace elekdom::oplink::core::model;
-
-const elekdom::oplink::core::model::ProcessorModelName ProcessorModelNames::SYNCHRONIZE_OPERATION_DEVICE {"synchronize_operation_device"};
-const elekdom::oplink::core::model::ProcessorModelName ProcessorModelNames::SYNCHRONIZE_LOAD {"synchronize_load"};
-const elekdom::oplink::core::model::ProcessorModelName ProcessorModelNames::SET_ACTUATOR {"set_actuator"};
-const elekdom::oplink::core::model::ProcessorModelName ProcessorModelNames::SET_LOAD {"set_load"};
+const oplink::ProcessorModelName oplink::ProcessorModelNames::SYNCHRONIZE_OPERATION_DEVICE {"synchronize_operation_device"};
+const oplink::ProcessorModelName oplink::ProcessorModelNames::SYNCHRONIZE_LOAD {"synchronize_load"};
+const oplink::ProcessorModelName oplink::ProcessorModelNames::SET_ACTUATOR {"set_actuator"};
+const oplink::ProcessorModelName oplink::ProcessorModelNames::SET_LOAD {"set_load"};

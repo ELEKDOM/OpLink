@@ -16,24 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DEVICEPROCESSORBUILDER_H
 #define DEVICEPROCESSORBUILDER_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "command/command-names.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "abstract_infrastructure/device/device.h"
+#include "abstract_infrastructure/device/devicecommandprocessor.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT DeviceProcessorBuilder
 {
 public:
@@ -41,14 +35,10 @@ public:
     virtual ~DeviceProcessorBuilder();
 
 public:
-    virtual DeviceCommandProcessor *createDeviceProcessor(const command::CommandName& commandName,
-                                                             const DeviceModelName& deviceModelName,
-                                                             const QspDevice& device) = 0;
+    virtual DeviceCommandProcessor *createDeviceProcessor(const CommandName& commandName,
+                                                          const DeviceModelName& deviceModelName,
+                                                          const QspDevice& device) = 0;
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspDeviceProcessorBuilder = QSharedPointer<DeviceProcessorBuilder>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // DEVICEPROCESSORBUILDER_H

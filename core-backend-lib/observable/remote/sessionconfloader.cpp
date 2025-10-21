@@ -16,51 +16,51 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "sessionconfloader.h"
 #include "subscribesession.h"
 #include "observable/remote/observablestates.h"
 
-using namespace elekdom::oplink::core::remote;
-
-SessionConfLoader::SessionConfLoader(SubscribeSession &session):
+oplink::SessionConfLoader::SessionConfLoader(oplink::SubscribeSession &session):
     m_session{session}
 {
 
 }
 
-SessionConfLoader::~SessionConfLoader()
+oplink::SessionConfLoader::~SessionConfLoader()
 {
 
 }
 
-void SessionConfLoader::browseBegin()
+void oplink::SessionConfLoader::browseBegin()
 {
 
 }
 
-void SessionConfLoader::browseEnd()
+void oplink::SessionConfLoader::browseEnd()
 {
 
 }
 
-void SessionConfLoader::beginObservableDeclaration(QString observableName, QString observableTitle, QString observableType, QString observableLocalisation)
+void oplink::SessionConfLoader::beginObservableDeclaration(QString observableName,
+                                                           QString observableTitle,
+                                                           QString observableType,
+                                                           QString observableLocalisation)
 {
     Q_UNUSED(observableTitle)
     Q_UNUSED(observableType)
     Q_UNUSED(observableLocalisation)
-    m_curRemoteMonitoredDeclaration.reset(new core::remote::ObservableStates);
+    m_curRemoteMonitoredDeclaration.reset(new oplink::ObservableStates);
     m_curObservableName = observableName;
 }
 
-void SessionConfLoader::endObservableDeclaration()
+void oplink::SessionConfLoader::endObservableDeclaration()
 {
     m_session.addRemoteMonitoredObservable(m_curObservableName,
                                            m_curPropertyNames,
                                            m_curRemoteMonitoredDeclaration);
 }
 
-void SessionConfLoader::propertyDeclaration(QString propertyName)
+void oplink::SessionConfLoader::propertyDeclaration(QString propertyName)
 {
     m_curPropertyNames << propertyName;
 }

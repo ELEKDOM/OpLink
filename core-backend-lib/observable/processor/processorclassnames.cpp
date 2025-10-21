@@ -19,8 +19,6 @@
 
 #include "processorclassnames.h"
 
-using namespace elekdom::oplink::core::observable;
-
-const ProcessorType ProcessorClassNames::EXPECTED_VALUE_CHECK_COMMAND_PROCESSOR_CLASS{"expected_value_check_command_processor_class"};
-const ProcessorType ProcessorClassNames::EXPECTED_VALUE_NO_CHECK_COMMAND_PROCESSOR_CLASS{"expected_value_no_check_command_processor_class"};
-const ProcessorType ProcessorClassNames::LOAD_COMMAND_PROCESSOR_CLASS{"load_command_processor_class"};
+const oplink::ProcessorType oplink::ProcessorClassNames::EXPECTED_VALUE_CHECK_COMMAND_PROCESSOR_CLASS{"expected_value_check_command_processor_class"};
+const oplink::ProcessorType oplink::ProcessorClassNames::EXPECTED_VALUE_NO_CHECK_COMMAND_PROCESSOR_CLASS{"expected_value_no_check_command_processor_class"};
+const oplink::ProcessorType oplink::ProcessorClassNames::LOAD_COMMAND_PROCESSOR_CLASS{"load_command_processor_class"};

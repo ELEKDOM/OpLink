@@ -19,6 +19,7 @@
 #ifndef OBSERVABLEBUILDERSCONTAINER_H
 #define OBSERVABLEBUILDERSCONTAINER_H
 
+#include <QSharedPointer>
 #include <QHash>
 #include "observable/observablenames.h"
 #include "observable/observable/observablebuilder.h"
@@ -46,5 +47,6 @@ public:
 private:
     QHash<ObservableName, QspObservableBuilder> m_observables;
 };
+using QspObservableBuildersContainer = QSharedPointer<ObservableBuildersContainer>;
 }//namespace oplink
 #endif // OBSERVABLEBUILDERSCONTAINER_H

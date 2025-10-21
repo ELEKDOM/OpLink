@@ -16,35 +16,31 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loadmodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "model/observable/loadbuilderargs.h"
 #include "observable/lowobservable/load.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-LoadModel::LoadModel(const ObservableModelName &name) :
-    ObservableModel{name}
+oplink::LoadModel::LoadModel(const oplink::ObservableModelName &name) :
+    oplink::ObservableModel{name}
 {
 
 }
 
-LoadModel::~LoadModel()
+oplink::LoadModel::~LoadModel()
 {
 
 }
 
-bool LoadModel::checkBuilderArgs(QspObservableBuilderArgs builderArgs)
+bool oplink::LoadModel::checkBuilderArgs(oplink::QspObservableBuilderArgs builderArgs)
 {
-    QspLoadBuilderArgs loadArgs{builderArgs.dynamicCast<LoadBuilderArgs>()};
+    oplink::QspLoadBuilderArgs loadArgs{builderArgs.dynamicCast<oplink::LoadBuilderArgs>()};
     return !loadArgs.isNull();
 }
 
-observable::ObservableBuilder *LoadModel::createInstance(QspObservableBuilderArgs builderArgs)
+oplink::ObservableBuilder *oplink::LoadModel::createInstance(oplink::QspObservableBuilderArgs builderArgs)
 {
     Q_UNUSED(builderArgs)
 
-    return new observable::Load;
+    return new oplink::Load;
 }

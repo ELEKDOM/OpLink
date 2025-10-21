@@ -52,6 +52,6 @@ private:
     QMetaType::Type m_valueType;
     bool            m_validValue;
 };
-using QspProperty= QSharedPointer<Property>;
+using QspProperty = QSharedPointer<Property>;
 }//namespace oplink
 #endif // PROPERTY_H

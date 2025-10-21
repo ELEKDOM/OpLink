@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLESTATESGROUP_H
 #define OBSERVABLESTATESGROUP_H
 
@@ -25,47 +24,35 @@
 #include <QVariant>
 #include "service-int/observableserviceinterface.h"
 #include "observable/observablenames.h"
-#include "olcore-backend-lib_forward.h"
+#include "observable/remote/observablestates.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace remote
-{
-
 class ObservableStatesGroup : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ObservableStatesGroup(engine::service::ObservableServiceInterface *oService,
+    explicit ObservableStatesGroup(ObservableServiceInterface *oService,
                                    QObject *parent = nullptr);
     ~ObservableStatesGroup() override;
 
 public slots:
-    virtual void onStateChange(const observable::ObservableName& observableName,
-                               const observable::PropertyName& propertyName,
+    virtual void onStateChange(ObservableName observableName,
+                               PropertyName propertyName,
                                QVariant propertyValue) = 0;
 
 protected:
     void orderToObservable(const QString &order);
     void addMonitoredObservable(const QString& observableName,
                                 const QStringList& propertyNames,
-                                core::remote::QspObservableStates remoteMonitored);
+                                QspObservableStates remoteMonitored);
     void subscribe();
     void unsubscribe();
 
 private:
-    engine::service::ObservableServiceInterface                        *m_observableService;
-    QHash<observable::ObservableName,core::remote::QspObservableStates> m_monitoredObservables;
+    ObservableServiceInterface               *m_observableService;
+    QHash<ObservableName,QspObservableStates> m_monitoredObservables;
 };
-
-}//namespace remote
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLESTATESGROUP_H

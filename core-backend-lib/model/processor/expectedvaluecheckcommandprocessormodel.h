@@ -16,39 +16,26 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef EXPECTEDVALUECHECKCOMMANDPROCESSORMODEL_H
 #define EXPECTEDVALUECHECKCOMMANDPROCESSORMODEL_H
 
+#include "model/processor/operationdevicecommandprocessormodel.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "model/processor/operationdevicecommandprocessormodel.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ExpectedValueCheckCommandProcessorModel : public OperationDeviceCommandProcessorModel
 {
 public:
     ExpectedValueCheckCommandProcessorModel(const ProcessorModelName& modelName,
-                                               const command::CommandName& commandName);
+                                            const CommandName& commandName);
     ~ExpectedValueCheckCommandProcessorModel() override;
 
 protected:
-    observable::OperationDeviceCommandProcessor *createInstance(const observable::Observable& parent,
-                                                                   infrastructure::QspDeviceCommandProcessor deviceProcessor) override;
+    OperationDeviceCommandProcessor *createInstance(const Observable& parent,
+                                                    QspDeviceCommandProcessor deviceProcessor) override;
 
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // EXPECTEDVALUECHECKCOMMANDPROCESSORMODEL_H

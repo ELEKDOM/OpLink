@@ -34,13 +34,18 @@ namespace oplink
     //
     class DeviceHook;
     class DeviceChannelsBinding;
+    class ActuatorOutputsBinding;
+    class OperationDeviceCommandProcessor;
+
+    //
+    class SubscribeSession;
 
 
 //class InfrastructureLoader;
 //class Area;
 //class DeviceBuilder;
 //
-//class ActuatorOutputsBinding;
+//
 //class AreaGateway;
 //class Device;
 //
@@ -97,7 +102,7 @@ namespace oplink
 //class SupervisorObservable;
 //class Property;
 //class CommandProcessor;
-//class OperationDeviceCommandProcessor;
+//
 //class LoadProperty;
 //class LowProperty;
 //class OperationDeviceProperty;
@@ -127,7 +132,7 @@ namespace oplink
 //using QspMonitoredGroupAlgorithm = QSharedPointer<GroupToWatchAlgorithm>;
 //
 //class ObservableStates;
-//class SubscribeSession;
+//
 //class SessionConfLoader;
 
 //using QspObservableStates = QSharedPointer<ObservableStates>;

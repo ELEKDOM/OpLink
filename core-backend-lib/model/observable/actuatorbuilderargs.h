@@ -19,45 +19,35 @@
 
 #ifndef ACTUATORBUILDERARGS_H
 #define ACTUATORBUILDERARGS_H
-
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "observable/observablenames.h"
+#include "observable/observable/observablebuilderscontainer.h"
 #include "model/modelnames.h"
 #include "model/observable/operationdevicebuilderargs.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ActuatorBuilderArgs : public OperationDeviceBuilderArgs
 {
 public:
-    ActuatorBuilderArgs(const observable::ObservableName& observableName,
-                           const ObservableModelName& observableModelName,
-                           const observable::LocalisationName& observableLocalisation,
-                           const infrastructure::DeviceId& deviceId,
-                           const infrastructure::DeviceModelName& deviceModelName,
-                           const infrastructure::QspDeviceBuilder& deviceBuilder,
-                           const infrastructure::DeviceChannelsBinding& deviceChannelsBinding,
-                           const infrastructure::ActuatorOutputsBinding& actuatorOutputsBinding,
-                           const observable::QspObservableBuildersContainer& loadedObservables);
+    ActuatorBuilderArgs(const ObservableName& observableName,
+                        const ObservableModelName& observableModelName,
+                        const LocalisationName& observableLocalisation,
+                        const DeviceId& deviceId,
+                        const DeviceModelName& deviceModelName,
+                        const QspDeviceBuilder& deviceBuilder,
+                        const DeviceChannelsBinding& deviceChannelsBinding,
+                        const ActuatorOutputsBinding& actuatorOutputsBinding,
+                        const QspObservableBuildersContainer& loadedObservables);
     ~ActuatorBuilderArgs() override;
 
 public:
-    const infrastructure::ActuatorOutputsBinding& m_actuatorOutputsBinding;
-    const observable::QspObservableBuildersContainer&    m_loadedObservables;
+    const ActuatorOutputsBinding&         m_actuatorOutputsBinding;
+    const QspObservableBuildersContainer& m_loadedObservables;
 };
-
-}//namespace model
-}//namespace core
+using QspActuatorBuilderArgs = QSharedPointer<ActuatorBuilderArgs>;
 }//namespace oplink
-}//namespace infrastructure
-
 #endif // ACTUATORBUILDERARGS_H

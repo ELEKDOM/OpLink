@@ -22,7 +22,6 @@
 #include "lowcommandprocessor.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 
 namespace oplink
 {

@@ -16,23 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOADMODEL_H
 #define LOADMODEL_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "model/observable/observablemodel.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT LoadModel : public ObservableModel
 {
 public:
@@ -41,12 +32,7 @@ public:
 
 protected:
     bool checkBuilderArgs(QspObservableBuilderArgs builderArgs) override;
-    observable::ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) override;
+    ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOADMODEL_H

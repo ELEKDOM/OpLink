@@ -16,40 +16,27 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DEVICECHANNELSBINDING_H
 #define DEVICECHANNELSBINDING_H
 
 #include <QVector>
-#include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT DeviceChannelsBinding
 {
 public:
     DeviceChannelsBinding();
 
 public:
-    void insert(int index, const observable::PropertyName& pname);
-    const observable::PropertyName& at(int i) const;
+    void insert(int index, const oplink::PropertyName& pname);
+    const oplink::PropertyName& at(int i) const;
     int size() const;
 
 private:
-    QVector<observable::PropertyName> m_channels;
+    QVector<oplink::PropertyName> m_channels;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // DEVICECHANNELSBINDING_H

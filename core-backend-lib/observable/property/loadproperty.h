@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LoadProperty_H
 #define LoadProperty_H
 
+#include <QSharedPointer>
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 #include "observable/property/lowproperty.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-class OLCORE_BACKEND_LIB_EXPORT LoadProperty : public LowProperty
+class OLCORE_BACKEND_LIB_EXPORT LoadProperty : public oplink::LowProperty
 {
 public:
     LoadProperty(Observable& observable,
@@ -42,13 +35,9 @@ public:
     ~LoadProperty() override;
 
 public:
-    QspOperationDeviceProperty master();
-    void master(QspOperationDeviceProperty masterProp);
+    QspLowProperty master();
+    void master(QspLowProperty masterProp);
 };
-
-}//namespace observable
-}//namespace core
+using QspLoadProperty = QSharedPointer<LoadProperty>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LoadProperty_H

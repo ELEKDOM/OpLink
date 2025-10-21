@@ -16,22 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GACLOADOBSERVABLE_H
 #define GACLOADOBSERVABLE_H
 
 #include "olcore-backend-lib_export.h"
 #include "lowobservable.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 ///
 /// \brief The Load class.
 ///        Base class of an object associated with an actuator.
@@ -41,10 +33,5 @@ public:
     Load();
     ~Load() override;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GACLOADOBSERVABLE_H

@@ -16,19 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "lowcommandprocessormodel.h"
 
-using namespace elekdom::oplink::core::model;
-
-LowCommandProcessorModel::LowCommandProcessorModel(const ProcessorModelName& modelName,
-                                                         const command::CommandName& commandName):
+oplink::LowCommandProcessorModel::LowCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                           const oplink::CommandName& commandName):
     CommandProcessorModel{modelName, commandName}
 {
 
 }
 
-LowCommandProcessorModel::~LowCommandProcessorModel()
+oplink::LowCommandProcessorModel::~LowCommandProcessorModel()
 {
 
 }

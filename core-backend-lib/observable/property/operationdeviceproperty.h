@@ -16,41 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OPERATIONDEVICEPROPERTY_H
 #define OPERATIONDEVICEPROPERTY_H
 
+#include <QSharedPointer>
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 #include "observable/observablenames.h"
 #include "observable/property/lowproperty.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT OperationDeviceProperty : public LowProperty
 {
 public:
     OperationDeviceProperty(Observable& observable,
-                               const PropertyName& propertyName,
-                               QMetaType::Type valueType);
+                            const PropertyName& propertyName,
+                            QMetaType::Type valueType);
     ~OperationDeviceProperty() override;
 
 public:
-    void slave(QspLoadProperty slaveProp);
-    QspLoadProperty slave();
+    void slave(QspLowProperty slaveProp);
+    QspLowProperty slave();
     void changeValue(const QVariant& val) override;
 };
-
-}//namespace observable
-}//namespace core
+using QspOperationDeviceProperty = QSharedPointer<OperationDeviceProperty>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OPERATIONDEVICEPROPERTY_H

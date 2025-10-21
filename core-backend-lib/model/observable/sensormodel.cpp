@@ -16,26 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "sensormodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "model/observable/sensorbuilderargs.h"
 
-using namespace elekdom::oplink::core::model;
-
-SensorModel::SensorModel(const ObservableModelName &name):
-      OperationDeviceModel{name}
+oplink::SensorModel::SensorModel(const oplink::ObservableModelName &name):
+      oplink::OperationDeviceModel{name}
 {
 
 }
 
-SensorModel::~SensorModel()
+oplink::SensorModel::~SensorModel()
 {
 
 }
 
-bool SensorModel::checkBuilderArgs(QspObservableBuilderArgs builderArgs)
+bool oplink::SensorModel::checkBuilderArgs(oplink::QspObservableBuilderArgs builderArgs)
 {
-    QspSensorBuilderArgs sensorArgs{builderArgs.dynamicCast<SensorBuilderArgs>()};
+    oplink::QspSensorBuilderArgs sensorArgs{builderArgs.dynamicCast<SensorBuilderArgs>()};
     return !sensorArgs.isNull();
 }

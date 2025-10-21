@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "operationdevicemodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "model/observable/operationdevicebuilderargs.h"
@@ -26,42 +25,40 @@
 #include "abstract_infrastructure/device/devicehook.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-OperationDeviceModel::OperationDeviceModel(const ObservableModelName &name) :
+oplink::OperationDeviceModel::OperationDeviceModel(const ObservableModelName &name) :
     ObservableModel{name}
 {
 
 }
 
-OperationDeviceModel::~OperationDeviceModel()
+oplink::OperationDeviceModel::~OperationDeviceModel()
 {
 
 }
 
-observable::ObservableBuilder *OperationDeviceModel::createInstance(QspObservableBuilderArgs builderArgs)
+oplink::ObservableBuilder *oplink::OperationDeviceModel::createInstance(oplink::QspObservableBuilderArgs builderArgs)
 {
-    observable::ObservableBuilder *ret{createObservable()};
-    infrastructure::DeviceHook&    observableAsDeviceHook{dynamic_cast<infrastructure::DeviceHook&>(ret->toObservable())};
-    QspOperationDeviceBuilderArgs  args{builderArgs.dynamicCast<OperationDeviceBuilderArgs>()};
-    infrastructure::QspDevice      device{args->m_deviceBuilder->createDevice(args->m_deviceId,
-                                                                                 args->m_deviceModelName,
-                                                                                 observableAsDeviceHook)};
+    oplink::ObservableBuilder *ret{createObservable()};
+    oplink::DeviceHook&    observableAsDeviceHook{dynamic_cast<oplink::DeviceHook&>(ret->toObservable())};
+    oplink::QspOperationDeviceBuilderArgs  args{builderArgs.dynamicCast<oplink::OperationDeviceBuilderArgs>()};
+    oplink::QspDevice      device{args->m_deviceBuilder->createDevice(args->m_deviceId,
+                                                                      args->m_deviceModelName,
+                                                                      observableAsDeviceHook)};
     args->setDevice(device); // needed during the command processor build phase!
     ret->setDevice(device);
     return ret;
 }
 
-void OperationDeviceModel::postBuild(observable::QspObservableBuilder observableBuilder, QspObservableBuilderArgs builderArgs)
+void oplink::OperationDeviceModel::postBuild(oplink::QspObservableBuilder observableBuilder,
+                                             oplink::QspObservableBuilderArgs builderArgs)
 {
-    infrastructure::DeviceHook&    observableAsDeviceHook{dynamic_cast<infrastructure::DeviceHook&>(observableBuilder->toObservable())};
-    QspOperationDeviceBuilderArgs  args{builderArgs.dynamicCast<OperationDeviceBuilderArgs>()};
+    oplink::DeviceHook&    observableAsDeviceHook{dynamic_cast<oplink::DeviceHook&>(observableBuilder->toObservable())};
+    oplink::QspOperationDeviceBuilderArgs  args{builderArgs.dynamicCast<oplink::OperationDeviceBuilderArgs>()};
 
     observableAsDeviceHook.bindChannels(args->m_deviceChannelsBinding);// device's channels binding
 }
 
-observable::ObservableBuilder *OperationDeviceModel::createObservable()
+oplink::ObservableBuilder *oplink::OperationDeviceModel::createObservable()
 {
-    return new observable::OperationDevice;
+    return new oplink::OperationDevice;
 }

@@ -16,33 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablestates.h"
 #include "observable/property/property.h"
 
-using namespace elekdom::oplink::core::remote;
-
-ObservableStates::ObservableStates(QObject *parent):
+oplink::ObservableStates::ObservableStates(QObject *parent):
     ObservableSubscriber{parent}
 {
 
 }
 
-ObservableStates::~ObservableStates()
+oplink::ObservableStates::~ObservableStates()
 {
 
 }
 
-void ObservableStates::addMonitoredProperty(observable::QspProperty property)
+void oplink::ObservableStates::addMonitoredProperty(oplink::QspProperty property)
 {
     QString propertyName{property->name()};
     m_monitoredStates.insert(propertyName,property);
 }
 
-void ObservableStates::reportValidStates(const observable::ObservableName& observableName)
+void oplink::ObservableStates::reportValidStates(const oplink::ObservableName& observableName)
 {
-    QHash<observable::PropertyName,observable::QspProperty>::Iterator it{m_monitoredStates.begin()};
-    observable::QspProperty curProperty;
+    QHash<oplink::PropertyName,oplink::QspProperty>::Iterator it{m_monitoredStates.begin()};
+    oplink::QspProperty curProperty;
     QString propertyName;
 
     while (it != m_monitoredStates.end())
@@ -63,9 +60,9 @@ void ObservableStates::reportValidStates(const observable::ObservableName& obser
     }
 }
 
-void ObservableStates::onStateChange(const observable::ObservableName& observableName,
-                                     const observable::PropertyName& propertyName,
-                                     QVariant propertyValue)
+void oplink::ObservableStates::onStateChange(oplink::ObservableName observableName,
+                                             oplink::PropertyName propertyName,
+                                             QVariant propertyValue)
 {
     if (m_monitoredStates.find(propertyName) != m_monitoredStates.end())
     {
