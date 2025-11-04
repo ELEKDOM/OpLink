@@ -21,6 +21,7 @@
 
 namespace oplink
 {
-class VirtualEquipmentLoaderHook;
+    class VirtualEquipmentLoaderHook;
+    class VirtualEquipmentConfDocument;
 }
 #endif // OLCORELIB_FORWARD_H

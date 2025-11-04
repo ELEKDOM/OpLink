@@ -19,6 +19,7 @@
 #ifndef VIRTUALEQUIPMENTCONFDOCUMENT_H
 #define VIRTUALEQUIPMENTCONFDOCUMENT_H
 
+#include <QSharedPointer>
 #include "xmldom/xmldocument.h"
 #include "olcore-lib_forward.h"
 #include "olcore-lib_export.h"
@@ -38,5 +39,6 @@ public:
     VirtualEquipmentConfDocument(VirtualEquipmentLoaderHook& browserHook);
     ~VirtualEquipmentConfDocument() override;
 };
+using QspVirtualEquipmentConfDocument = QSharedPointer<VirtualEquipmentConfDocument>;
 }//namespace oplink
 #endif // VIRTUALEQUIPMENTCONFDOCUMENT_H
