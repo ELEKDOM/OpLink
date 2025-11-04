@@ -16,39 +16,32 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTLOADER_H
 #define VIRTUALEQUIPMENTLOADER_H
 
 #include <QVariant>
+#include "observable/observable/observable.h"
+#include "observable/virtualequipment/virtualequipmentconfdocument.h"
 #include "olcore-backend-lib_forward.h"
 #include "olcore-lib_forward.h"
-#include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipment
-{
-
 class VirtualEquipmentLoader
 {
 public:
-    VirtualEquipmentLoader(virtualequipmentset::bundle::VirtualEquipmentSet *veSet);
+    VirtualEquipmentLoader(VirtualEquipmentSet *veSet);
     virtual ~VirtualEquipmentLoader();
 
 public:
-    virtual virtualequipment::VirtualEquipmentLoaderHook& loaderHook() = 0;
+    virtual VirtualEquipmentLoaderHook& loaderHook() = 0;
     void load(QString fileName);
-    void confDocument(virtualequipment::VirtualEquipmentConfDocument *confDoc);
-    virtualequipmentset::bundle::VirtualEquipmentSet *veSet() {return m_veSet;}
-    observable::QspObservable newly();
+    void confDocument(VirtualEquipmentConfDocument *confDoc);
+    VirtualEquipmentSet *veSet() {return m_veSet;}
+    QspObservable newly();
 
 protected:
-    void newly(observable::Observable *newve);
+    void newly(Observable *newve);
     bool buildMandatoryProperties(const QString& observableName,
                                   const QString& modelName,
                                   const QString& localisation,
@@ -59,24 +52,20 @@ protected:
 
 
 
-    virtual observable::monitoring::StateToWatch *createStateToWatch(const observable::ObservableName& observableName,
-                                                                     const observable::PropertyName& propertyName);
+    virtual StateToWatch *createStateToWatch(const ObservableName& observableName,
+                                             const PropertyName& propertyName);
 
-    void addProperty(const observable::PropertyName& propertyName, QMetaType::Type valueType);
+    void addProperty(const PropertyName& propertyName, QMetaType::Type valueType);
     void addGroupProperty(const QString& groupName,
-                          const observable::PropertyName& propertyName,
+                          const PropertyName& propertyName,
                           QMetaType::Type valueType);
 
 
 private:
-    virtualequipmentset::bundle::VirtualEquipmentSet *m_veSet;
-    virtualequipment::QspVirtualEquipmentConfDocument m_confDoc;
-    observable::QspObservable                         m_newlyVirtualEquipment;
+    VirtualEquipmentSet            *m_veSet;
+    QspVirtualEquipmentConfDocument m_confDoc;
+    QspObservable                   m_newlyVirtualEquipment;
 };
-
-}//namespace virtualequipment
-}//namespace core
+using QspVirtualEquipmentLoader = QSharedPointer<VirtualEquipmentLoader>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTLOADER_H

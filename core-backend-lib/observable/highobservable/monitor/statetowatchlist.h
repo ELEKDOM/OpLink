@@ -16,25 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef STATETOWATCHLIST_H
 #define STATETOWATCHLIST_H
 
+#include <QList>
+#include <QSharedPointer>
+#include "observable/highobservable/monitor/statetowatch.h"
 #include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
-#include "statetowatch.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-namespace monitoring
-{
-
 class OLCORE_BACKEND_LIB_EXPORT StateToWatchList : public QList<QspMonitoredState>
 {
 public:
@@ -44,11 +35,6 @@ public:
 public:
     bool allTrue();
 };
-
-}//namespace monitoring
-}//namespace observable
-}//namespace core
+using QspMonitoredStateList = QSharedPointer<StateToWatchList>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // STATETOWATCHLIST_H

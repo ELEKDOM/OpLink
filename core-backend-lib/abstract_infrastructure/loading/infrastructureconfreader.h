@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURECONFREADER_H
 #define INFRASTRUCTURECONFREADER_H
 
@@ -24,25 +23,16 @@
 #include <QFile>
 #include <QVector>
 #include <QXmlStreamReader>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "worker/workerthread.h"
 #include "logger/loggable.h"
 #include "abstract_infrastructure/loading/confreadererror.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureConfReader : public worker::WorkerThread,
-                                                               public logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureConfReader : public plugframe::WorkerThread,
+                                                           public plugframe::Loggable
 {
 protected:
     inline QString infrastructureNode() { return QStringLiteral("infrastructure"); }
@@ -74,15 +64,15 @@ protected:
 
 public:
     InfrastructureConfReader(const QString& logChannel,
-                                      InfrastructureStore& store,
-                                      worker::WorkerSignal *wSignal,
-                                      const worker::QspWorkerArgs& args,
-                                      QObject *parent = nullptr);
+                             oplink::InfrastructureStore& store,
+                             plugframe::WorkerSignal *wSignal,
+                             const plugframe::QspWorkerArgs& args,
+                             QObject *parent = nullptr);
     ~InfrastructureConfReader() override;
 
 protected: // SmfWorkerThread
-    bool execWork(worker::QspWorkerArgs args) override;
-    worker::WorkerOuts *getWorkerOuts() override;
+    bool execWork(plugframe::QspWorkerArgs args) override;
+    plugframe::WorkerOuts *getWorkerOuts() override;
 
 protected:
     virtual void extractDataFromGateway(LoadingError& err)= 0;
@@ -106,17 +96,12 @@ private:
     void readSensor(LoadingError& err);
 
 private:
-    QFile                   m_file;
+    QFile                m_file;
 
 protected:
     InfrastructureStore& m_store;
-    QXmlStreamReader        m_xmlReader;
+    QXmlStreamReader     m_xmlReader;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTURECONFREADER_H
 

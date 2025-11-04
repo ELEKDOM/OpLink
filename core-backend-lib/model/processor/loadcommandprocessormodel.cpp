@@ -16,29 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loadcommandprocessormodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "observable/processor/loadcommandprocessor.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-LoadCommandProcessorModel::LoadCommandProcessorModel(const ProcessorModelName& modelName,
-                                                           const command::CommandName& commandName):
+oplink::LoadCommandProcessorModel::LoadCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                             const oplink::CommandName& commandName):
     LowCommandProcessorModel{modelName, commandName}
 {
 
 }
 
-LoadCommandProcessorModel::~LoadCommandProcessorModel()
+oplink::LoadCommandProcessorModel::~LoadCommandProcessorModel()
 {
 
 }
 
-observable::CommandProcessor *LoadCommandProcessorModel::createProcessor(const observable::Observable& parent,
-                                                                               QspObservableBuilderArgs builderArgs)
+oplink::CommandProcessor *oplink::LoadCommandProcessorModel::createProcessor(const oplink::Observable& parent,
+                                                                             oplink::QspObservableBuilderArgs builderArgs)
 {
     Q_UNUSED(builderArgs)
-    return new observable::LoadCommandProcessor{parent, commandName()};
+    return new oplink::LoadCommandProcessor{parent, commandName()};
 }

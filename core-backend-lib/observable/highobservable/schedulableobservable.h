@@ -16,23 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SCHEDULABLEOBSERVABLE_H
 #define SCHEDULABLEOBSERVABLE_H
 
-#include "pfcore-lib_forward.h"
 #include "observable/highobservable/supervisorobservable.h"
 #include "schedulerhook.h"
+#include "pfcore-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SchedulableObservable : public SupervisorObservable
 {
 protected:
@@ -48,7 +40,7 @@ public:
     ~SchedulableObservable() override;
 
 public:
-    void setScheduler(plugframe::core::scheduler::Scheduler *schedul);
+    void setScheduler(plugframe::Scheduler *schedul);
     virtual void onSchedulerEvt(QString evt) = 0;
 
 protected:
@@ -59,12 +51,6 @@ protected:
 
 private:
     SchedulerHook m_schedulerSoc;
-
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SCHEDULABLEOBSERVABLE_H

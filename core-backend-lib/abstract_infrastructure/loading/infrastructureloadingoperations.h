@@ -16,26 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURELOADINGOPERATIONS_H
 #define INFRASTRUCTURELOADINGOPERATIONS_H
 
 #include <QString>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "observable/observablenames.h"
 #include "model/modelnames.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "abstract_infrastructure/area/area.h"
+#include "abstract_infrastructure/loading/devicebuilder.h"
+#include "observable/observable/observablebuilder.h"
+#include "observable/observable/observablebuilderscontainer.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT InfrastructureLoadingOperations
 {
 public:
@@ -45,33 +40,28 @@ public:
     virtual bool checkInfrastructureName(const QString& name) = 0;
     virtual bool isAreaAlreadyExist(const QString& areaName) = 0;
     virtual void addArea(const QspArea& newArea) = 0;
-    virtual observable::QspObservableBuilder buildLoadInstance(const observable::ObservableName& loadName,
-                                                                  const model::ObservableModelName& observableModelName,
-                                                                  const observable::LocalisationName& loadLocalisation) = 0;
-    virtual observable::QspObservableBuilder buildActuatorInstance(const observable::ObservableName& actuatorName,
-                                                                      const model::ObservableModelName& observableModelName,
-                                                                      const DeviceId& deviceId,
-                                                                      const DeviceModelName& deviceModelName,
-                                                                      const observable::LocalisationName& actuatorLocalisation,
-                                                                      const QspDeviceBuilder& deviceCommunicationBuilder,
-                                                                      const DeviceChannelsBinding& deviceChannelsBinding,
-                                                                      const ActuatorOutputsBinding &outputsBinding,
-                                                                      const observable::QspObservableBuildersContainer& loadedObservables) = 0;
-    virtual observable::QspObservableBuilder buildSensorInstance(const observable::ObservableName& sensorName,
-                                                                    const model::ObservableModelName& observableModelName,
-                                                                    const DeviceId& deviceId,
-                                                                    const DeviceModelName& deviceModelName,
-                                                                    const observable::LocalisationName& sensorLocalisation,
-                                                                    const QspDeviceBuilder& deviceCommunicationBuilder,
-                                                                    const DeviceChannelsBinding& deviceChannelsBinding) = 0;
+    virtual QspObservableBuilder buildLoadInstance(const ObservableName& loadName,
+                                                   const ObservableModelName& observableModelName,
+                                                   const LocalisationName& loadLocalisation) = 0;
+    virtual QspObservableBuilder buildActuatorInstance(const ObservableName& actuatorName,
+                                                       const ObservableModelName& observableModelName,
+                                                       const DeviceId& deviceId,
+                                                       const DeviceModelName& deviceModelName,
+                                                       const LocalisationName& actuatorLocalisation,
+                                                       const QspDeviceBuilder& deviceCommunicationBuilder,
+                                                       const DeviceChannelsBinding& deviceChannelsBinding,
+                                                       const ActuatorOutputsBinding &outputsBinding,
+                                                       const QspObservableBuildersContainer& loadedObservables) = 0;
+    virtual QspObservableBuilder buildSensorInstance(const ObservableName& sensorName,
+                                                     const ObservableModelName& observableModelName,
+                                                     const DeviceId& deviceId,
+                                                     const DeviceModelName& deviceModelName,
+                                                     const LocalisationName& sensorLocalisation,
+                                                     const QspDeviceBuilder& deviceCommunicationBuilder,
+                                                     const DeviceChannelsBinding& deviceChannelsBinding) = 0;
     virtual void LoadingOk() = 0;
     virtual void LoadingKo() = 0;
     virtual bool isLoaded() = 0;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTURELOADINGOPERATIONS_H

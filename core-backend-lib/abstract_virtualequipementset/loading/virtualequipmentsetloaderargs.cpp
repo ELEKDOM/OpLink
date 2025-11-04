@@ -16,18 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetloaderargs.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset;
-
-VirtualEquipmentSetLoaderArgs::VirtualEquipmentSetLoaderArgs(virtualequipment::QspVirtualEquipmentLoader veLoader):
+oplink::VirtualEquipmentSetLoaderArgs::VirtualEquipmentSetLoaderArgs(oplink::QspVirtualEquipmentLoader veLoader):
     m_veLoader{veLoader}
 {
 
 }
 
-VirtualEquipmentSetLoaderArgs::~VirtualEquipmentSetLoaderArgs()
+oplink::VirtualEquipmentSetLoaderArgs::~VirtualEquipmentSetLoaderArgs()
 {
 
 }

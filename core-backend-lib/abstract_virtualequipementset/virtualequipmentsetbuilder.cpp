@@ -16,34 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetbuilder.h"
 #include "virtualequipmentsetfactory.h"
 #include "virtualequipmentset.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
-#include "service/virtualequipmentsetservice.h"
 #include "observable/virtualequipment/virtualequipmentconfdocument.h"
-#include "observable/virtualequipment/virtualequipmentloaderhook.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset::builder;
-
-VirtualEquipmentSetBuilder::VirtualEquipmentSetBuilder(plugframe::core::bundle::Bundle4BuilderInterface &myBundle):
-    plugframe::core::bundle::BundleBuilder{myBundle}
+oplink::VirtualEquipmentSetBuilder::VirtualEquipmentSetBuilder(plugframe::Bundle4BuilderInterface &myBundle):
+    plugframe::BundleBuilder{myBundle}
 {
 
 }
 
-VirtualEquipmentSetBuilder::~VirtualEquipmentSetBuilder()
+oplink::VirtualEquipmentSetBuilder::~VirtualEquipmentSetBuilder()
 {
 
 }
 
-void VirtualEquipmentSetBuilder::specificBuild()
+void oplink::VirtualEquipmentSetBuilder::specificBuild()
 {
-    factory::VirtualEquipmentSetFactory&  veSetFactory{dynamic_cast<virtualequipmentset::factory::VirtualEquipmentSetFactory&>(getFactory())};
-    bundle::VirtualEquipmentSet *veSet{dynamic_cast<virtualequipmentset::bundle::VirtualEquipmentSet*>(getImplementation())};
-    virtualequipment::VirtualEquipmentLoader *equipmentLoader;
-    virtualequipment::VirtualEquipmentConfDocument *confDocument;
+    oplink::VirtualEquipmentSetFactory&  veSetFactory{dynamic_cast<oplink::VirtualEquipmentSetFactory&>(getFactory())};
+    oplink::VirtualEquipmentSet *veSet{dynamic_cast<oplink::VirtualEquipmentSet*>(getImplementation())};
+    oplink::VirtualEquipmentLoader *equipmentLoader;
+    oplink::VirtualEquipmentConfDocument *confDocument;
 
     equipmentLoader = veSetFactory.createVirtualEquipmentLoader(veSet);
     veSet->setVirtualEquipmentSetLoader(veSetFactory.createVirtualEquipmentSetLoader(equipmentLoader));

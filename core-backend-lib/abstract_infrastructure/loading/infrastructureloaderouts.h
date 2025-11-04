@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURELOADEROUTS_H
 #define INFRASTRUCTURELOADEROUTS_H
 
@@ -25,30 +24,18 @@
 #include "abstract_infrastructure/infrastructure-names.h"
 #include "observable/observable/observablebuilderscontainer.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT InfrastructureLoaderOuts : public InfrastructureWorkerOuts
 {
 public:
     InfrastructureLoaderOuts(InfrastructureName infrastructureName,
-                                bool loadedFlag,
-                                observable::QspObservableBuildersContainer loadedObservables);
+                             bool loadedFlag,
+                             QspObservableBuildersContainer loadedObservables);
     ~InfrastructureLoaderOuts() override;
 
 public:
-    observable::QspObservableBuildersContainer m_loadedObservables;
+    QspObservableBuildersContainer m_loadedObservables;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTURELOADEROUTS_H

@@ -20,6 +20,7 @@
 #define GacObservable_H
 
 #include <QHash>
+#include <QSharedPointer>
 #include "observable/observable/observablebuilder.h"
 #include "observable/observable/observablenotifier.h"
 #include "observable/processor/commandprocessor.h"
@@ -64,5 +65,6 @@ private:
     QHash<CommandName, QspCommandProcessor> m_processors;
     QspObservableNotifier                   m_notifier;
 };
+using QspObservable = QSharedPointer<Observable>;
 }//namespace oplink
 #endif // GacObservable_H

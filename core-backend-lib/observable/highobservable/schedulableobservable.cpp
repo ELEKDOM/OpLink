@@ -16,29 +16,26 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QVariant>
 #include "schedulableobservable.h"
 #include "observable/property/propertyid.h"
 #include "observable/property/property.h"
 
-using namespace elekdom::oplink::core::observable;
-
-SchedulableObservable::SchedulableObservable():
+oplink::SchedulableObservable::SchedulableObservable():
     m_schedulerSoc{*this}
 {}
 
-SchedulableObservable::~SchedulableObservable()
+oplink::SchedulableObservable::~SchedulableObservable()
 {
 
 }
 
-void SchedulableObservable::setScheduler(plugframe::core::scheduler::Scheduler *schedul)
+void oplink::SchedulableObservable::setScheduler(plugframe::Scheduler *schedul)
 {
     m_schedulerSoc.setScheduler(schedul);
 }
 
-void SchedulableObservable::initScheduler()
+void oplink::SchedulableObservable::initScheduler()
 {
     // initialization depends on the mode value
     QString modeValStr{mode()};
@@ -52,7 +49,7 @@ void SchedulableObservable::initScheduler()
 /// \brief SchedulableObservable::isActivated
 /// \return true if the manager is activated
 ///
-bool SchedulableObservable::isActivated()
+bool oplink::SchedulableObservable::isActivated()
 {
     bool ret{false};
     QString veMode{mode()};
@@ -61,19 +58,19 @@ bool SchedulableObservable::isActivated()
     return ret;
 }
 
-void SchedulableObservable::mode(const QString &val)
+void oplink::SchedulableObservable::mode(const QString &val)
 {
-    observable::QspProperty prop{property(observable::PropertyId::P_MODE)};
+    oplink::QspProperty prop{property(oplink::PropertyId::P_MODE)};
     QVariant v(val);
 
     prop->changeValue(v);
 }
 
-const QString SchedulableObservable::mode()
+const QString oplink::SchedulableObservable::mode()
 {
     QString ret;
 
-    observable::QspProperty prop{property(observable::PropertyId::P_MODE)};
+    oplink::QspProperty prop{property(oplink::PropertyId::P_MODE)};
     ret = prop->value().toString();
     return ret;
 }

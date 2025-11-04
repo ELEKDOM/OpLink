@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructure.h"
 #include "abstract_infrastructure/infrastructurefactory.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"
@@ -32,69 +31,65 @@
 #include "model/observable/sensorbuilderargs.h"
 #include "service-int/observablebuilderserviceinterface.h"
 
-using namespace elekdom::plugframe::core;
-using namespace elekdom::oplink::core::infrastructure::bundle;
-using namespace elekdom::oplink::core;
-
-Infrastructure::Infrastructure(QString logBundleName, QString infrastructureName):
-    plugframe::core::bundle::BundleImplementation{logBundleName},
+oplink::Infrastructure::Infrastructure(QString logBundleName, QString infrastructureName):
+    plugframe::BundleImplementation{logBundleName},
     m_infrastructureName {infrastructureName},
     m_infraState {InfrastructureState::Created}
 {
 }
 
-Infrastructure::~Infrastructure()
+oplink::Infrastructure::~Infrastructure()
 {
 
 }
 
-model::LoadBuilderArgs *Infrastructure::createLoadBuilderArgs(const observable::ObservableName& loadName,
-                                                                    const model::ObservableModelName& observableModelName,
-                                                                    const observable::LocalisationName& loadLocalisation)
+oplink::LoadBuilderArgs *oplink::Infrastructure::createLoadBuilderArgs(const oplink::ObservableName& loadName,
+                                                                       const oplink::ObservableModelName& observableModelName,
+                                                                       const oplink::LocalisationName& loadLocalisation)
 {
-    return new model::LoadBuilderArgs(loadName, observableModelName, loadLocalisation);
+    return new oplink::LoadBuilderArgs(loadName, observableModelName, loadLocalisation);
 }
 
-model::ActuatorBuilderArgs *Infrastructure::createActuatorBuilderArgs(const observable::ObservableName& actuatorName,
-                                                                            const model::ObservableModelName& observableModelName,
-                                                                            const DeviceId& deviceId,
-                                                                            const DeviceModelName& deviceModelName,
-                                                                            const observable::LocalisationName& actuatorLocalisation,
-                                                                            const QspDeviceBuilder& deviceBuilder,
-                                                                            const DeviceChannelsBinding& deviceChannelsBinding,
-                                                                            const ActuatorOutputsBinding &outputsBinding,
-                                                                            const observable::QspObservableBuildersContainer& loadedObservables)
+oplink::ActuatorBuilderArgs *oplink::Infrastructure::createActuatorBuilderArgs(const oplink::ObservableName& actuatorName,
+                                                                               const oplink::ObservableModelName& observableModelName,
+                                                                               const oplink::DeviceId& deviceId,
+                                                                               const oplink::DeviceModelName& deviceModelName,
+                                                                               const oplink::LocalisationName& actuatorLocalisation,
+                                                                               const oplink::QspDeviceBuilder& deviceBuilder,
+                                                                               const oplink::DeviceChannelsBinding& deviceChannelsBinding,
+                                                                               const oplink::ActuatorOutputsBinding &outputsBinding,
+                                                                               const oplink::QspObservableBuildersContainer& loadedObservables)
 {
-    return new core::model::ActuatorBuilderArgs(actuatorName,
-                                                   observableModelName,
-                                                   actuatorLocalisation,
-                                                   deviceId,
-                                                   deviceModelName,
-                                                   deviceBuilder,
-                                                   deviceChannelsBinding,
-                                                   outputsBinding,
-                                                   loadedObservables);
+    return new oplink::ActuatorBuilderArgs(actuatorName,
+                                           observableModelName,
+                                           actuatorLocalisation,
+                                           deviceId,
+                                           deviceModelName,
+                                           deviceBuilder,
+                                           deviceChannelsBinding,
+                                           outputsBinding,
+                                           loadedObservables);
 }
 
-model::SensorBuilderArgs *Infrastructure::createSensorBuilderArgs(const observable::ObservableName& sensorName,
-                                                                        const model::ObservableModelName& observableModelName,
-                                                                        const DeviceId& deviceId,
-                                                                        const DeviceModelName& deviceModelName,
-                                                                        const observable::LocalisationName sensorLocalisation,
-                                                                        const QspDeviceBuilder& deviceBuilder,
-                                                                        const DeviceChannelsBinding& deviceChannelsBinding)
+oplink::SensorBuilderArgs *oplink::Infrastructure::createSensorBuilderArgs(const oplink::ObservableName& sensorName,
+                                                                           const oplink::ObservableModelName& observableModelName,
+                                                                           const oplink::DeviceId& deviceId,
+                                                                           const oplink::DeviceModelName& deviceModelName,
+                                                                           const oplink::LocalisationName sensorLocalisation,
+                                                                           const oplink::QspDeviceBuilder& deviceBuilder,
+                                                                           const oplink::DeviceChannelsBinding& deviceChannelsBinding)
 {
-    return new core::model::SensorBuilderArgs(sensorName,
-                                                 observableModelName,
-                                                 sensorLocalisation,
-                                                 deviceId,
-                                                 deviceModelName,
-                                                 deviceBuilder,
-                                                 deviceChannelsBinding);
+    return new oplink::SensorBuilderArgs(sensorName,
+                                         observableModelName,
+                                         sensorLocalisation,
+                                         deviceId,
+                                         deviceModelName,
+                                         deviceBuilder,
+                                         deviceChannelsBinding);
 }
 
-bool Infrastructure::startLoadingInfrastructure(service::InfrastructureControlServiceInterface::OperationalMode mode,
-                                                   worker::WorkerWatcher *workerWatcher)
+bool oplink::Infrastructure::startLoadingInfrastructure(oplink::InfrastructureControlServiceInterface::OperationalMode mode,
+                                                        plugframe::WorkerWatcher *workerWatcher)
 {
     QMutexLocker lock{&m_mutex};
 
@@ -129,138 +124,138 @@ bool Infrastructure::startLoadingInfrastructure(service::InfrastructureControlSe
     return ret;
 }
 
-bundle::BundleFactory *Infrastructure::createFactory()
+plugframe::BundleFactory *oplink::Infrastructure::createFactory()
 {
-    return new factory::InfrastructureFactory;
+    return new oplink::InfrastructureFactory;
 }
 
-plugin::ServiceInterface *Infrastructure::qtServiceInterface(const QString &sName)
+plugframe::ServiceInterface *oplink::Infrastructure::qtServiceInterface(const QString &sName)
 {
-    plugframe::core::plugin::ServiceInterface *ret{nullptr};
+    plugframe::ServiceInterface *ret{nullptr};
 
-    if (service::InfrastructureControlServiceInterface::serviceName() == sName)
+    if (oplink::InfrastructureControlServiceInterface::serviceName() == sName)
     {
-        ret = qobject_cast<service::InfrastructureControlServiceInterface*>(getQplugin());
+        ret = qobject_cast<oplink::InfrastructureControlServiceInterface*>(getQplugin());
         setRegistered();
     }
 
     return ret;
 }
 
-const QString& Infrastructure::getInfrastructureName()
+const QString& oplink::Infrastructure::getInfrastructureName()
 {
     return m_infrastructureName;
 }
 
-bool Infrastructure::loadingFinished()
+bool oplink::Infrastructure::loadingFinished()
 {
     return m_infraState == InfrastructureState::Loaded || m_infraState == InfrastructureState::Error;
 }
 
-bool Infrastructure::checkInfrastructureName(const QString &name)
+bool oplink::Infrastructure::checkInfrastructureName(const QString &name)
 {
     return name == m_infrastructureName;
 }
 
-bool Infrastructure::isAreaAlreadyExist(const QString &areaName)
+bool oplink::Infrastructure::isAreaAlreadyExist(const QString &areaName)
 {
     return m_areas.contains(areaName);
 }
 
-void Infrastructure::addArea(const core::infrastructure::QspArea& newArea)
+void oplink::Infrastructure::addArea(const oplink::QspArea& newArea)
 {
     m_areas.insert(newArea->name(), newArea);
     emit newArea->devicesLoaded(); // to synchronize initial devices state
 }
 
-observable::QspObservableBuilder Infrastructure::buildLoadInstance(const observable::ObservableName& loadName,
-                                                                         const model::ObservableModelName& observableModelName,
-                                                                         const observable::LocalisationName& loadLocalisation)
+oplink::QspObservableBuilder oplink::Infrastructure::buildLoadInstance(const oplink::ObservableName& loadName,
+                                                                       const oplink::ObservableModelName& observableModelName,
+                                                                       const oplink::LocalisationName& loadLocalisation)
 {
     pfDebug3(logChannel()) << "->DeviceInfrastructure::buildLoadInstance, loadName=" << loadName << ", observableModelName=" << observableModelName << ", loadLocalisation=" << loadLocalisation;
-    observablemodelregister::service::ObservableBuilderServiceInterface *obsBuilderService;
-    obsBuilderService = bundleContext()->getService<observablemodelregister::service::ObservableBuilderServiceInterface>(observablemodelregister::service::ObservableBuilderServiceInterface::serviceName());
+    oplink::ObservableBuilderServiceInterface *obsBuilderService;
+    obsBuilderService = bundleContext()->getService<oplink::ObservableBuilderServiceInterface>(oplink::ObservableBuilderServiceInterface::serviceName());
 
-    core::model::QspLoadBuilderArgs builderArgs{createLoadBuilderArgs(loadName,
-                                                                         observableModelName,
-                                                                        loadLocalisation)};
-    core::observable::QspObservableBuilder ret{obsBuilderService->buildObservable(builderArgs)};
+    oplink::QspLoadBuilderArgs builderArgs{createLoadBuilderArgs(loadName,
+                                           observableModelName,
+                                           loadLocalisation)};
+    oplink::QspObservableBuilder ret{obsBuilderService->buildObservable(builderArgs)};
     pfDebug3(logChannel()) << "<-DeviceInfrastructure::buildLoadInstance, ret=" << ret;
     return ret;
  }
 
-observable::QspObservableBuilder Infrastructure::buildActuatorInstance(const observable::ObservableName &actuatorName,
-                                                                             const model::ObservableModelName &observableModelName,
-                                                                             const infrastructure::DeviceId &deviceId,
-                                                                             const infrastructure::DeviceModelName &deviceModelName,
-                                                                             const core::observable::LocalisationName &actuatorLocalisation,
-                                                                             const QspDeviceBuilder &deviceBuilder,
-                                                                             const DeviceChannelsBinding& deviceChannelsBinding,
-                                                                             const ActuatorOutputsBinding &outputsBinding,
-                                                                             const core::observable::QspObservableBuildersContainer &loadedObservables)
+oplink::QspObservableBuilder oplink::Infrastructure::buildActuatorInstance(const oplink::ObservableName &actuatorName,
+                                                                           const oplink::ObservableModelName &observableModelName,
+                                                                           const oplink::DeviceId &deviceId,
+                                                                           const oplink::DeviceModelName &deviceModelName,
+                                                                           const oplink::LocalisationName &actuatorLocalisation,
+                                                                           const oplink::QspDeviceBuilder &deviceBuilder,
+                                                                           const oplink::DeviceChannelsBinding& deviceChannelsBinding,
+                                                                           const oplink::ActuatorOutputsBinding &outputsBinding,
+                                                                           const oplink::QspObservableBuildersContainer &loadedObservables)
 {
     pfDebug3(logChannel()) << "->DeviceInfrastructure::buildActuatorInstance, actuatorName = " << actuatorName << ", observableModelName = " << observableModelName << ", deviceId = " << deviceId << ", deviceModelName = " << deviceModelName << ", actuatorLocalisation = " << actuatorLocalisation;
-    observablemodelregister::service::ObservableBuilderServiceInterface *obsBuilderService;
-    obsBuilderService = bundleContext()->getService<observablemodelregister::service::ObservableBuilderServiceInterface>(observablemodelregister::service::ObservableBuilderServiceInterface::serviceName());
-    core::model::QspActuatorBuilderArgs builderArgs{createActuatorBuilderArgs(actuatorName,
-                                                                                 observableModelName,
-                                                                                 deviceId,
-                                                                                 deviceModelName,
-                                                                                 actuatorLocalisation,
-                                                                                 deviceBuilder,
-                                                                                 deviceChannelsBinding,
-                                                                                 outputsBinding,
-                                                                                 loadedObservables)};
-    core::observable::QspObservableBuilder ret{obsBuilderService->buildObservable(builderArgs)};
+    oplink::ObservableBuilderServiceInterface *obsBuilderService;
+    obsBuilderService = bundleContext()->getService<oplink::ObservableBuilderServiceInterface>(oplink::ObservableBuilderServiceInterface::serviceName());
+    oplink::QspActuatorBuilderArgs builderArgs{createActuatorBuilderArgs(actuatorName,
+                                                                         observableModelName,
+                                                                         deviceId,
+                                                                         deviceModelName,
+                                                                         actuatorLocalisation,
+                                                                         deviceBuilder,
+                                                                         deviceChannelsBinding,
+                                                                         outputsBinding,
+                                                                         loadedObservables)};
+    oplink::QspObservableBuilder ret{obsBuilderService->buildObservable(builderArgs)};
     pfDebug3(logChannel()) << "<-DeviceInfrastructure::buildActuatorInstance, ret=" << ret;
     return ret;
  }
 
-observable::QspObservableBuilder Infrastructure::buildSensorInstance(const observable::ObservableName &sensorName,
-                                                                           const model::ObservableModelName &observableModelName,
-                                                                           const infrastructure::DeviceId &deviceId,
-                                                                           const infrastructure::DeviceModelName &deviceModelName,
-                                                                           const observable::LocalisationName &sensorLocalisation,
-                                                                           const QspDeviceBuilder &deviceBuilder,
-                                                                           const DeviceChannelsBinding& deviceChannelsBinding)
+oplink::QspObservableBuilder oplink::Infrastructure::buildSensorInstance(const oplink::ObservableName &sensorName,
+                                                                         const oplink::ObservableModelName &observableModelName,
+                                                                         const oplink::DeviceId &deviceId,
+                                                                         const oplink::DeviceModelName &deviceModelName,
+                                                                         const oplink::LocalisationName &sensorLocalisation,
+                                                                         const oplink::QspDeviceBuilder &deviceBuilder,
+                                                                         const oplink::DeviceChannelsBinding& deviceChannelsBinding)
 {
     pfDebug3(logChannel()) << "->DeviceInfrastructure::buildSensorInstance, sensorName=" << sensorName << ", observableModelName=" << observableModelName << ", deviceId=" << deviceId << ", deviceModelName=" << deviceModelName << ", sensorLocalisation=" << sensorLocalisation;
-    observablemodelregister::service::ObservableBuilderServiceInterface *obsBuilderService;
-    obsBuilderService = bundleContext()->getService<observablemodelregister::service::ObservableBuilderServiceInterface>(observablemodelregister::service::ObservableBuilderServiceInterface::serviceName());
-    core::model::QspSensorBuilderArgs builderArgs{createSensorBuilderArgs(sensorName,
-                                                                             observableModelName,
-                                                                             deviceId,
-                                                                             deviceModelName,
-                                                                             sensorLocalisation,
-                                                                             deviceBuilder,
-                                                                             deviceChannelsBinding)};
-    core::observable::QspObservableBuilder ret{obsBuilderService->buildObservable(builderArgs)};
+    oplink::ObservableBuilderServiceInterface *obsBuilderService;
+    obsBuilderService = bundleContext()->getService<oplink::ObservableBuilderServiceInterface>(oplink::ObservableBuilderServiceInterface::serviceName());
+    oplink::QspSensorBuilderArgs builderArgs{createSensorBuilderArgs(sensorName,
+                                                                     observableModelName,
+                                                                     deviceId,
+                                                                     deviceModelName,
+                                                                     sensorLocalisation,
+                                                                     deviceBuilder,
+                                                                     deviceChannelsBinding)};
+    oplink::QspObservableBuilder ret{obsBuilderService->buildObservable(builderArgs)};
     pfDebug3(logChannel()) << "<-DeviceInfrastructure::buildSensorInstance, ret=" << ret;
     return ret;
 }
 
-void Infrastructure::LoadingOk()
+void oplink::Infrastructure::LoadingOk()
 {
     setLoaded();
 }
 
-void Infrastructure::LoadingKo()
+void oplink::Infrastructure::LoadingKo()
 {
     setError();
 }
 
-bool Infrastructure::isLoaded()
+bool oplink::Infrastructure::isLoaded()
 {
     return m_infraState == InfrastructureState::Loaded;
 }
 
-void Infrastructure::buildLoader(service::InfrastructureControlServiceInterface::OperationalMode mode)
+void oplink::Infrastructure::buildLoader(oplink::InfrastructureControlServiceInterface::OperationalMode mode)
 {
-    if (mode == service::InfrastructureControlServiceInterface::OperationalMode::Operating)
+    if (mode == oplink::InfrastructureControlServiceInterface::OperationalMode::Operating)
     {
         m_loader.reset(createOperatingLoader(logChannel()));
     }
-    else if (mode == service::InfrastructureControlServiceInterface::OperationalMode::Setup)
+    else if (mode == oplink::InfrastructureControlServiceInterface::OperationalMode::Setup)
     {
         m_loader.reset(createSetupLoader(logChannel()));
     }

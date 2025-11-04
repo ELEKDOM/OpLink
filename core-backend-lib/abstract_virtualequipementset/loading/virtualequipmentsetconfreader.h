@@ -16,43 +16,28 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETCONFREADER_H
 #define VIRTUALEQUIPMENTSETCONFREADER_H
 
+#include "worker/workerthread.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "worker/workerthread.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetConfReader : public worker::WorkerThread
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetConfReader : public plugframe::WorkerThread
 {
 public:
-    VirtualEquipmentSetConfReader(worker::WorkerSignal *wSignal,
-                                     const worker::QspWorkerArgs& args);
-    ~VirtualEquipmentSetConfReader();
+    VirtualEquipmentSetConfReader(plugframe::WorkerSignal *wSignal,
+                                  const plugframe::QspWorkerArgs& args);
+    ~VirtualEquipmentSetConfReader() override;
 
 protected: // SmfWorkerThread
-    bool execWork(worker::QspWorkerArgs args) override;
-    worker::WorkerOuts *getWorkerOuts() override;
+    bool execWork(plugframe::QspWorkerArgs args) override;
+    plugframe::WorkerOuts *getWorkerOuts() override;
 
 private:
-    bundle::VirtualEquipmentSet *m_veSet;
+    VirtualEquipmentSet *m_veSet;
 };
-
-}//namespace virtualequipmentset
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETCONFREADER_H

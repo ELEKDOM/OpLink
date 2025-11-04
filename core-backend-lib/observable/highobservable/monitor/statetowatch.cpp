@@ -16,35 +16,32 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "statetowatch.h"
 #include "observable/observable/observable.h"
 #include "observable/property/property.h"
 
-using namespace elekdom::oplink::core::observable::monitoring;
-
-StateToWatch::StateToWatch(core::observable::QspProperty& property):
+oplink::StateToWatch::StateToWatch(oplink::QspProperty& property):
     m_property{property}
 {
 
 }
 
-const QString& StateToWatch::observableName()
+const QString& oplink::StateToWatch::observableName()
 {
     return m_property->observable().name();
 }
 
-const QString& StateToWatch::propertyName()
+const QString& oplink::StateToWatch::propertyName()
 {
     return m_property->name();
 }
 
-QVariant StateToWatch::value()
+QVariant oplink::StateToWatch::value()
 {
     return m_property->value();
 }
 
-bool StateToWatch::isValidValue()
+bool oplink::StateToWatch::isValidValue()
 {
     return m_property->isValidValue();
 }

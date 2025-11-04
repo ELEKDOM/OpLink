@@ -16,28 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef AREA_H
 #define AREA_H
 
 #include <QObject>
 #include <QString>
 #include <QHash>
+#include <QSharedPointer>
 #include "logger/loggable.h"
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "abstract_infrastructure/area/areagateway.h"
+#include "abstract_infrastructure/device/device.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class  OLCORE_BACKEND_LIB_EXPORT Area : public QObject, public plugframe::core::logger::Loggable
+class  OLCORE_BACKEND_LIB_EXPORT Area : public QObject, public plugframe::Loggable
 {
     Q_OBJECT
 
@@ -68,10 +62,6 @@ protected:
     AreaGateway *gateway() {return m_gateway.get();}
     void recoverDevicesState();
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspArea = QSharedPointer<Area>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // AREA_H

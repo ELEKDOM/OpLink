@@ -16,41 +16,38 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "grouptowatch.h"
 #include "statetowatchlist.h"
 #include "grouptowatchalgorithm.h"
 
-using namespace elekdom::oplink::core::observable::monitoring;
-
-GroupToWatch::GroupToWatch(QspMonitoredGroupAlgorithm algo):
+oplink::GroupToWatch::GroupToWatch(oplink::QspMonitoredGroupAlgorithm algo):
     m_algorithm{algo}
 {
     m_algorithm->group(this);
 }
 
-GroupToWatch::~GroupToWatch()
+oplink::GroupToWatch::~GroupToWatch()
 {
 
 }
 
-void GroupToWatch::addCategory(const QString &categoryName)
+void oplink::GroupToWatch::addCategory(const QString &categoryName)
 {
     if (!m_categories.contains(categoryName))
     {
-        QspMonitoredStateList newCat{new StateToWatchList};
+        oplink::QspMonitoredStateList newCat{new oplink::StateToWatchList};
 
         m_categories.insert(categoryName, newCat);
     }
 }
 
-bool GroupToWatch::isCategoryEmpty(const QString &categoryName)
+bool oplink::GroupToWatch::isCategoryEmpty(const QString &categoryName)
 {
     bool ret{true};
 
     if (m_categories.contains(categoryName))
     {
-        QspMonitoredStateList cat{m_categories.value(categoryName)};
+        oplink::QspMonitoredStateList cat{m_categories.value(categoryName)};
 
         ret = cat->isEmpty();
     }
@@ -58,11 +55,11 @@ bool GroupToWatch::isCategoryEmpty(const QString &categoryName)
     return ret;
 }
 
-void GroupToWatch::addMonitoredState(const QString &categoryName, QspMonitoredState monitoredState)
+void oplink::GroupToWatch::addMonitoredState(const QString &categoryName, oplink::QspMonitoredState monitoredState)
 {
     if (m_categories.contains(categoryName))
     {
-        QspMonitoredStateList category{m_categories.value(categoryName)};
+        oplink::QspMonitoredStateList category{m_categories.value(categoryName)};
 
         category->append(monitoredState);
 
@@ -74,12 +71,12 @@ void GroupToWatch::addMonitoredState(const QString &categoryName, QspMonitoredSt
     }
 }
 
-QspMonitoredStateList GroupToWatch::category(const QString &categoryName)
+oplink::QspMonitoredStateList oplink::GroupToWatch::category(const QString &categoryName)
 {
     return m_categories.value(categoryName);
 }
 
-void GroupToWatch::initAlgorithm(engine::service::ObservableServiceInterface *observableService)
+void oplink::GroupToWatch::initAlgorithm(oplink::ObservableServiceInterface *observableService)
 {
     if (!m_algorithm.isNull())
     {
@@ -87,9 +84,9 @@ void GroupToWatch::initAlgorithm(engine::service::ObservableServiceInterface *ob
     }
 }
 
-GroupToWatchAlgorithm *GroupToWatch::algorithm()
+oplink::GroupToWatchAlgorithm *oplink::GroupToWatch::algorithm()
 {
-    GroupToWatchAlgorithm *ret{nullptr};
+    oplink::GroupToWatchAlgorithm *ret{nullptr};
 
     if (!m_algorithm.isNull())
     {
@@ -98,14 +95,14 @@ GroupToWatchAlgorithm *GroupToWatch::algorithm()
     return ret;
 }
 
-QString GroupToWatch::reverseLookUp(const QString &reverseInput)
+QString oplink::GroupToWatch::reverseLookUp(const QString &reverseInput)
 {
     return m_reversLookUp.value(reverseInput);
 }
 
-bool GroupToWatch::allTrue(const QString &categoryName)
+bool oplink::GroupToWatch::allTrue(const QString &categoryName)
 {
-    QspMonitoredStateList msList{category(categoryName)};
+    oplink::QspMonitoredStateList msList{category(categoryName)};
 
     return msList->allTrue();
 }

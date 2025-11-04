@@ -16,29 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef STATETOWATCH_H
 #define STATETOWATCH_H
 
 #include <QVariant>
-#include "observable/observablenames.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
+#include "observable/property/property.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-namespace monitoring
-{
-
 class StateToWatch
 {
 public:
-    StateToWatch(core::observable::QspProperty& property);
+    StateToWatch(QspProperty& property);
 
 public:
     const QString& observableName();
@@ -47,13 +37,8 @@ public:
     bool isValidValue();
 
 private:
-    core::observable::QspProperty m_property;
+    QspProperty m_property;
 };
-
-}//namespace monitoring
-}//namespace observable
-}//namespace core
+using QspMonitoredState = QSharedPointer<StateToWatch>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // STATETOWATCH_H

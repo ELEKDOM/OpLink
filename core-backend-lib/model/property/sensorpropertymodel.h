@@ -16,37 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SENSORPROPERTYMODEL_H
 #define SENSORPROPERTYMODEL_H
 
 #include "olcore-backend-lib_export.h"
 #include "operationdevicepropertymodel.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SensorPropertyModel : public OperationDevicePropertyModel
 {
 public:
     SensorPropertyModel(const PropertyModelName& modelName,
-                           const observable::PropertyName& propertyName,
-                           QMetaType::Type valueType);
+                        const PropertyName& propertyName,
+                        QMetaType::Type valueType);
     ~SensorPropertyModel() override;
 
 protected:
-    observable::Property *createProperty(observable::Observable& observable) override;
+    Property *createProperty(Observable& observable) override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SENSORPROPERTYMODEL_H

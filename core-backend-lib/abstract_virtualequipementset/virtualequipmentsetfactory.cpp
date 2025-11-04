@@ -16,54 +16,47 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetfactory.h"
 #include "virtualequipmentsetbuilder.h"
-#include "virtualequipmentset.h"
 #include "service/virtualequipmentsetservice.h"
 #include "service-int/virtualequipmentsetserviceinterface.h"
 #include "loading/virtualequipmentsetloader.h"
 #include "loading/virtualequipmentloader.h"
 #include "bundle/bundle.h"
 
-using namespace elekdom::plugframe::core::bundle;
-using namespace elekdom::oplink::core::virtualequipmentset;
-using namespace elekdom::oplink::core::virtualequipmentset::factory;
-using namespace elekdom::oplink::core::virtualequipmentset::service;
-
-VirtualEquipmentSetFactory::VirtualEquipmentSetFactory()
+oplink::VirtualEquipmentSetFactory::VirtualEquipmentSetFactory()
 {
 
 }
 
-VirtualEquipmentSetFactory::~VirtualEquipmentSetFactory()
+oplink::VirtualEquipmentSetFactory::~VirtualEquipmentSetFactory()
 {
 
 }
 
-VirtualEquipmentSetService *VirtualEquipmentSetFactory::createVirtualEquipmentSetService(plugframe::core::bundle::BundleImplementation *implementation)
+oplink::VirtualEquipmentSetService *oplink::VirtualEquipmentSetFactory::createVirtualEquipmentSetService(plugframe::BundleImplementation *implementation)
 {
-    return new VirtualEquipmentSetService{implementation};
+    return new oplink::VirtualEquipmentSetService{implementation};
 }
 
-VirtualEquipmentSetLoader *VirtualEquipmentSetFactory::createVirtualEquipmentSetLoader(virtualequipment::VirtualEquipmentLoader *veLoader)
+oplink::VirtualEquipmentSetLoader *oplink::VirtualEquipmentSetFactory::createVirtualEquipmentSetLoader(oplink::VirtualEquipmentLoader *veLoader)
 {
-    return new VirtualEquipmentSetLoader{veLoader};
+    return new oplink::VirtualEquipmentSetLoader{veLoader};
 }
 
-BundleBuilder *VirtualEquipmentSetFactory::createBuilder(plugframe::core::bundle::Bundle &myBundle)
+plugframe::BundleBuilder *oplink::VirtualEquipmentSetFactory::createBuilder(plugframe::Bundle &myBundle)
 {
-    return new virtualequipmentset::builder::VirtualEquipmentSetBuilder{myBundle};
+    return new oplink::VirtualEquipmentSetBuilder{myBundle};
 }
 
-elekdom::plugframe::core::service::ServiceImplementationInterface *VirtualEquipmentSetFactory::createServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation,
-                                                                                                                           const QString &sName,
-                                                                                                                           const QString &serviceVersion)
+plugframe::ServiceImplementationInterface *oplink::VirtualEquipmentSetFactory::createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                                                           const QString &sName,
+                                                                                                           const QString &serviceVersion)
 {
-    elekdom::plugframe::core::service::ServiceImplementationInterface *ret{nullptr};
+    plugframe::ServiceImplementationInterface *ret{nullptr};
     Q_UNUSED(serviceVersion) // not implemented in this release !
 
-    if (service::VirtualEquipmentSetServiceInterface::serviceName() == sName)
+    if (oplink::VirtualEquipmentSetServiceInterface::serviceName() == sName)
     {
         ret = createVirtualEquipmentSetService(implementation);
     }

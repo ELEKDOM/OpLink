@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SUPERVISOROBSERVABLE_H
 #define SUPERVISOROBSERVABLE_H
 
@@ -24,21 +23,15 @@
 #include <QStringList>
 #include <QHash>
 #include "observable/highobservable/highobservable.h"
+#include "observable/highobservable/monitor/grouptowatch.h"
 #include "service-int/observableserviceinterface.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SupervisorObservable : public HighObservable
 {
 protected:
-    using HashGroup = QHash<QString,monitoring::QspMonitoredObservableGroup>;
+    using HashGroup = QHash<QString,QspMonitoredObservableGroup>;
 
 public:
     SupervisorObservable();
@@ -46,22 +39,17 @@ public:
 
 public:
     void addMonitoredObservableGroup(const QString& groupName,
-                                     monitoring::QspMonitoredObservableGroup ptrGroup);
-    void init(engine::service::ObservableServiceInterface *observableService);
+                                     QspMonitoredObservableGroup ptrGroup);
+    void init(ObservableServiceInterface *observableService);
     QVariant propertyValue(PropertyName propId);
 
 protected:
-    virtual void specificInit(engine::service::ObservableServiceInterface *observableService) = 0;
-    void initGroupAlgotithms(engine::service::ObservableServiceInterface *observableService);
+    virtual void specificInit(ObservableServiceInterface *observableService) = 0;
+    void initGroupAlgotithms(ObservableServiceInterface *observableService);
     const HashGroup& groups() {return m_monitoredObservableGroups;}
 
 private:
-    QHash<QString,monitoring::QspMonitoredObservableGroup> m_monitoredObservableGroups;
+    HashGroup m_monitoredObservableGroups;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SUPERVISOROBSERVABLE_H

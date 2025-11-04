@@ -16,28 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef CONFREADERERROR_H
 #define CONFREADERERROR_H
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 enum class LoadingError {
                             NoError,
                             FileError,
                             XmlError,
                             StructuralError};
 
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // CONFREADERERROR_H

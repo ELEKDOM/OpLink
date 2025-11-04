@@ -16,37 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ACTUATORPROPERTYMODEL_H
 #define ACTUATORPROPERTYMODEL_H
 
 #include "olcore-backend-lib_export.h"
 #include "model/property/operationdevicepropertymodel.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ActuatorPropertyModel : public OperationDevicePropertyModel
 {
 public:
     ActuatorPropertyModel(const PropertyModelName& modelName,
-                             const observable::PropertyName& propertyName,
-                             QMetaType::Type valueType);
+                          const PropertyName& propertyName,
+                          QMetaType::Type valueType);
     ~ActuatorPropertyModel() override;
 
 protected:
-    observable::Property *createProperty(observable::Observable& observable) override;
+    Property *createProperty(Observable& observable) override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // ACTUATORPROPERTYMODEL_H

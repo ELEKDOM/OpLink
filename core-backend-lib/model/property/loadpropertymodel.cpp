@@ -16,27 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loadpropertymodel.h"
 #include "observable/property/loadproperty.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-LoadPropertyModel::LoadPropertyModel(const PropertyModelName& modelName,
-                                           const observable::PropertyName&      propertyName,
-                                           QMetaType::Type             valueType):
-    ObservablePropertyModel{modelName, propertyName, valueType}
+oplink::LoadPropertyModel::LoadPropertyModel(const oplink::PropertyModelName& modelName,
+                                             const oplink::PropertyName&      propertyName,
+                                             QMetaType::Type             valueType):
+    oplink::ObservablePropertyModel{modelName,propertyName,valueType}
 {
 
 }
 
-LoadPropertyModel::~LoadPropertyModel()
+oplink::LoadPropertyModel::~LoadPropertyModel()
 {
 
 }
 
-observable::Property *LoadPropertyModel::createProperty(observable::Observable& observable)
+oplink::Property *oplink::LoadPropertyModel::createProperty(oplink::Observable& observable)
 {
-    return new observable::LoadProperty{observable, propertyName(), valueType()};
+    return new oplink::LoadProperty{observable,propertyName(),valueType()};
 }

@@ -16,26 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "statetowatchlist.h"
 
-using namespace elekdom::oplink::core::observable::monitoring;
+oplink::StateToWatchList::StateToWatchList() {}
 
-StateToWatchList::StateToWatchList() {}
-
-StateToWatchList::~StateToWatchList()
+oplink::StateToWatchList::~StateToWatchList()
 {
 
 }
 
-bool StateToWatchList::allTrue()
+bool oplink::StateToWatchList::allTrue()
 {
     bool ret{true};
 
     ret = size() > 0;
     if (ret)
     {
-        for (int i = 0; i < size() && ret; i++)
+        for (qsizetype i = 0; i < size() && ret; i++)
         {
             QspMonitoredState ms{at(i)};
 

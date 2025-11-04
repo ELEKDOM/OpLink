@@ -16,13 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GROUPTOWATCHALGORITHM_H
 #define GROUPTOWATCHALGORITHM_H
 
 #include <QSharedPointer>
 #include "observable/observable/observablesubscriber.h"
 #include "service-int/observableserviceinterface.h"
+#include "olcore-backend-lib_forward.h"
 
 namespace oplink
 {
@@ -33,7 +33,7 @@ public:
     ~GroupToWatchAlgorithm() override;
 
 public:
-    virtual void initAlgorithm(engine::service::ObservableServiceInterface *observableService);
+    virtual void initAlgorithm(ObservableServiceInterface *observableService);
     void group(GroupToWatch *group) {m_group = group;}
 
 protected:
@@ -43,15 +43,15 @@ protected:
     SupervisorObservable& manager() {return m_manager;}
     GroupToWatch *group() {return m_group;}
     void subscribeToCategory(const QString& category,
-                             core::observable::monitoring::GroupToWatch *myRoom,
-                             engine::service::ObservableServiceInterface *observableService);
-    engine::service::ObservableServiceInterface *observableService() {return m_observableService;}
+                             GroupToWatch *myRoom,
+                             ObservableServiceInterface *observableService);
+    ObservableServiceInterface *observableService() {return m_observableService;}
 
 private:
-    SupervisorObservable& m_manager;
-    GroupToWatch *m_group;
-    engine::service::ObservableServiceInterface *m_observableService;
+    SupervisorObservable&       m_manager;
+    GroupToWatch               *m_group;
+    ObservableServiceInterface *m_observableService;
 };
-using QspGroupToWatchAlgorithm = QSharedPointer<GroupToWatchAlgorithm>;
+using QspMonitoredGroupAlgorithm = QSharedPointer<GroupToWatchAlgorithm>;
 }//namespace oplink
 #endif // GROUPTOWATCHALGORITHM_H

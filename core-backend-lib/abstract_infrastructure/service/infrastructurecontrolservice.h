@@ -16,46 +16,32 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURECONTROLSERVICE_H
 #define INFRASTRUCTURECONTROLSERVICE_H
 
-#include "olcore-backend-lib_export.h"
+#include <QSharedPointer>
 #include "service/serviceimplementation.h"
 #include "abstract_infrastructure/infrastructure-names.h"
 #include "service-int/infrastructurecontrolserviceinterface.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-namespace service
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureControlService : public plugframe::core::service::ServiceImplementation
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureControlService : public plugframe::ServiceImplementation
 {
 public:
-    InfrastructureControlService(plugframe::core::bundle::BundleImplementation *implementation);
+    InfrastructureControlService(plugframe::BundleImplementation *implementation);
     ~InfrastructureControlService() override;
 
 public:
     const InfrastructureName& getInfrastructureName();
-    bool startLoadingInfrastructure(plugframe::core::worker::WorkerWatcher *workerWatcher,
+    bool startLoadingInfrastructure(plugframe::WorkerWatcher *workerWatcher,
                                     InfrastructureControlServiceInterface::OperationalMode mode = InfrastructureControlServiceInterface::OperationalMode::Operating);
     bool loadingFinished();
 
 protected:
     QString serviceName() override;
 };
-
-}//namespace service
-}//namespace infrastructure
-}//namespace core
+using QspInfrastructureControlService = QSharedPointer<InfrastructureControlService>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTURECONTROLSERVICE_H

@@ -16,28 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETPLUGIN_H
 #define VIRTUALEQUIPMENTSETPLUGIN_H
 
 #include "plugin/plugin.h"
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "service-int/virtualequipmentsetserviceinterface.h"
+#include "abstract_virtualequipementset/service/virtualequipmentsetservice.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-namespace plugin
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetPlugin : public plugframe::core::plugin::Plugin,
-                                                            public virtualequipmentset::service::VirtualEquipmentSetServiceInterface
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetPlugin : public plugframe::Plugin,
+                                                            public VirtualEquipmentSetServiceInterface
 {
 public:
     VirtualEquipmentSetPlugin();
@@ -48,17 +38,11 @@ protected: // SmfPlugin
 
 protected: // VirtualEquipmentSetServiceInterface
     const QString& getVirtualEquipmentSetName() override;
-    bool startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher) override;
+    bool startLoading(plugframe::WorkerWatcher *workerWatcher) override;
     bool loadingFinished() override;
 
 private:
-    virtualequipmentset::service::QspVirtualEquipmentSetService m_virtualEquipmentSetServiceImpl;
+    QspVirtualEquipmentSetService m_virtualEquipmentSetServiceImpl;
 };
-
-}//namespace plugin
-}//namespace virtualequipmentset
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETPLUGIN_H

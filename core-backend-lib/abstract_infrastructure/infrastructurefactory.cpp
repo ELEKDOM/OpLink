@@ -16,39 +16,33 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructurefactory.h"
-#include "infrastructure.h"
 #include "service/infrastructurecontrolservice.h"
 #include "service-int/infrastructurecontrolserviceinterface.h"
-#include "bundle/bundle.h"
 
-using namespace elekdom::oplink::core::infrastructure::factory;
-using namespace elekdom::oplink::core;
-
-InfrastructureFactory::InfrastructureFactory()
+oplink::InfrastructureFactory::InfrastructureFactory()
 {
 }
 
-InfrastructureFactory::~InfrastructureFactory()
+oplink::InfrastructureFactory::~InfrastructureFactory()
 {
 
 }
 
-infrastructure::service::InfrastructureControlService *infrastructure::factory::InfrastructureFactory::createDeviceInfrastructureControlService(plugframe::core::bundle::BundleImplementation *implementation)
+oplink::InfrastructureControlService *oplink::InfrastructureFactory::createDeviceInfrastructureControlService(plugframe::BundleImplementation *implementation)
 {
-    return new infrastructure::service::InfrastructureControlService{implementation};
+    return new oplink::InfrastructureControlService{implementation};
 }
 
-elekdom::plugframe::core::service::ServiceImplementationInterface *InfrastructureFactory::createServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation,
-                                                                                                                      const QString &sName,
-                                                                                                                      const QString &serviceVersion)
+plugframe::ServiceImplementationInterface *oplink::InfrastructureFactory::createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                                                      const QString &sName,
+                                                                                                      const QString &serviceVersion)
 {
-    elekdom::plugframe::core::service::ServiceImplementationInterface *ret{nullptr};
+    plugframe::ServiceImplementationInterface *ret{nullptr};
 
-    if (service::InfrastructureControlServiceInterface::serviceName() == sName)
+    if (oplink::InfrastructureControlServiceInterface::serviceName() == sName)
     {
-        if (plugframe::core::plugin::ServiceInterface::V_100() == serviceVersion)
+        if (plugframe::ServiceInterface::V_100() == serviceVersion)
         {
             ret = createDeviceInfrastructureControlService(implementation);
         }

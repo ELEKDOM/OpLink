@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DEVICEAREAGATEWAY_H
 #define DEVICEAREAGATEWAY_H
 
 #include <QObject>
+#include <QSharedPointer>
 #include "logger/loggable.h"
 #include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT AreaGateway : public QObject, public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT AreaGateway : public QObject, public plugframe::Loggable
 {
     Q_OBJECT
 
@@ -41,10 +34,6 @@ public:
     AreaGateway(const QString& logChannel, QObject *parent = nullptr);
     ~AreaGateway() override;
 };
-
-} //namespace infrastructure
-} //namespace core
+using QspAreaGateway = QSharedPointer<AreaGateway>;
 } //namespace oplink
-} //namespace elekdom
-
 #endif // DEVICEAREAGATEWAY_H

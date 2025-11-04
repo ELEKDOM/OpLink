@@ -16,43 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETSERVICE_H
 #define VIRTUALEQUIPMENTSETSERVICE_H
 
-#include "olcore-backend-lib_export.h"
+#include <QSharedPointer>
 #include "service/serviceimplementation.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-namespace service
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetService : public plugframe::core::service::ServiceImplementation
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetService : public plugframe::ServiceImplementation
 {
 public:
-    VirtualEquipmentSetService(plugframe::core::bundle::BundleImplementation *implementation);
+    VirtualEquipmentSetService(plugframe::BundleImplementation *implementation);
     ~VirtualEquipmentSetService() override;
 
 public:
     const QString& getVirtualEquipmentSetName();
-    bool startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher);
+    bool startLoading(plugframe::WorkerWatcher *workerWatcher);
     bool loadingFinished();
 
 protected:
     QString serviceName() override;
 };
-
-}//namespace service
-}//namespace virtualequipmentset
-}//namespace core
+using QspVirtualEquipmentSetService = QSharedPointer<VirtualEquipmentSetService>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETSERVICE_H

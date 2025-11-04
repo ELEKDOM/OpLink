@@ -16,44 +16,41 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructureplugin.h"
 #include "service/serviceimplementationinterface.h"
 #include "bundle/bundle4plugininterface.h"
 #include "abstract_infrastructure/service/infrastructurecontrolservice.h"
 
-
-using namespace elekdom::oplink::core::infrastructure::plugin;
-
-InfrastructurePlugin::InfrastructurePlugin()
+oplink::InfrastructurePlugin::InfrastructurePlugin()
 {
 
 }
 
-InfrastructurePlugin::~InfrastructurePlugin()
+oplink::InfrastructurePlugin::~InfrastructurePlugin()
 {
 
 }
 
-void InfrastructurePlugin::bindServicesImplementations()
+void oplink::InfrastructurePlugin::bindServicesImplementations()
 {
-    plugframe::core::service::QspServiceImplementationInterface serviceImplementationItf;
+    plugframe::QspServiceImplementationInterface serviceImplementationItf;
 
-    serviceImplementationItf = implementation()->getServiceImplementation(InfrastructureControlServiceInterface::serviceName());
-    m_controlServiceImpl = serviceImplementationItf.dynamicCast<service::InfrastructureControlService>();
+    serviceImplementationItf = implementation()->getServiceImplementation(oplink::InfrastructureControlServiceInterface::serviceName());
+    m_controlServiceImpl = serviceImplementationItf.dynamicCast<oplink::InfrastructureControlService>();
 }
 
-const elekdom::oplink::core::infrastructure::InfrastructureName &InfrastructurePlugin::getInfrastructureName()
+const oplink::InfrastructureName &oplink::InfrastructurePlugin::getInfrastructureName()
 {
     return m_controlServiceImpl->getInfrastructureName();
 }
 
-bool InfrastructurePlugin::startLoadingInfrastructure(elekdom::plugframe::core::worker::WorkerWatcher *workerWatcher, elekdom::oplink::core::infrastructure::service::InfrastructureControlServiceInterface::OperationalMode mode)
+bool oplink::InfrastructurePlugin::startLoadingInfrastructure(plugframe::WorkerWatcher *workerWatcher,
+                                                              oplink::InfrastructureControlServiceInterface::OperationalMode mode)
 {
     return m_controlServiceImpl->startLoadingInfrastructure(workerWatcher, mode);
 }
 
-bool InfrastructurePlugin::loadingFinished()
+bool oplink::InfrastructurePlugin::loadingFinished()
 {
     return m_controlServiceImpl->loadingFinished();
 }

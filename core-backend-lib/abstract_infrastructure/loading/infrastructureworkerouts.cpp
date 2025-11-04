@@ -16,20 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructureworkerouts.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-InfrastructureWorkerOuts::InfrastructureWorkerOuts(InfrastructureName infrastructureName,
-                                                                     bool retFlag):
-    worker::WorkerOuts{retFlag},
+oplink::InfrastructureWorkerOuts::InfrastructureWorkerOuts(InfrastructureName infrastructureName,
+                                                           bool retFlag):
+    plugframe::WorkerOuts{retFlag},
     m_infrastructureName{infrastructureName}
 {
 
 }
 
-InfrastructureWorkerOuts::~InfrastructureWorkerOuts()
+oplink::InfrastructureWorkerOuts::~InfrastructureWorkerOuts()
 {
 
 }

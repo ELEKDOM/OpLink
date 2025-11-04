@@ -16,18 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructurestore.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-InfrastructureStore::InfrastructureStore(const QString& logChannel):
-    plugframe::core::logger::Loggable{logChannel}
+oplink::InfrastructureStore::InfrastructureStore(const QString& logChannel):
+    plugframe::Loggable{logChannel}
 {
 
 }
 
-InfrastructureStore::~InfrastructureStore()
+oplink::InfrastructureStore::~InfrastructureStore()
 {
 
 }

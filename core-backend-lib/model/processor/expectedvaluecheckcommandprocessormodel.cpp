@@ -21,23 +21,20 @@
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "observable/processor/expectedvaluecheckprocessor.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-ExpectedValueCheckCommandProcessorModel::ExpectedValueCheckCommandProcessorModel(const ProcessorModelName& modelName,
-                                                                                       const command::CommandName& commandName):
-    OperationDeviceCommandProcessorModel{modelName, commandName}
+oplink::ExpectedValueCheckCommandProcessorModel::ExpectedValueCheckCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                                         const oplink::CommandName& commandName):
+    oplink::OperationDeviceCommandProcessorModel{modelName, commandName}
 {
 
 }
 
-ExpectedValueCheckCommandProcessorModel::~ExpectedValueCheckCommandProcessorModel()
+oplink::ExpectedValueCheckCommandProcessorModel::~ExpectedValueCheckCommandProcessorModel()
 {
 
 }
 
-observable::OperationDeviceCommandProcessor *ExpectedValueCheckCommandProcessorModel::createInstance(const observable::Observable &parent,
-                                                                                                           infrastructure::QspDeviceCommandProcessor deviceProcessor)
+oplink::OperationDeviceCommandProcessor *oplink::ExpectedValueCheckCommandProcessorModel::createInstance(const oplink::Observable &parent,
+                                                                                                         oplink::QspDeviceCommandProcessor deviceProcessor)
 {
-    return new observable::ExpectedValueCheckProcessor{parent, commandName(), deviceProcessor};
+    return new oplink::ExpectedValueCheckProcessor{parent, commandName(), deviceProcessor};
 }

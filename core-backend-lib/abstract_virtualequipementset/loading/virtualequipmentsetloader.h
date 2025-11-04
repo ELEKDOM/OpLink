@@ -16,47 +16,34 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETLOADER_H
 #define VIRTUALEQUIPMENTSETLOADER_H
 
 #include <QStringList>
+#include <QSharedPointer>
+#include "virtualequipmentloader.h"
+#include "worker/worker.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "service-int/observableserviceinterface.h"
-#include "worker/worker.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoader : public worker::Worker
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoader : public plugframe::Worker
 {
 public:
-    VirtualEquipmentSetLoader(virtualequipment::VirtualEquipmentLoader *veLoader);
+    VirtualEquipmentSetLoader(VirtualEquipmentLoader *veLoader);
     ~VirtualEquipmentSetLoader() override;
 
 public:
     bool startLoading();
 
 protected:
-    virtual worker::WorkerArgs *createWorkerArgs();
-    worker::WorkerThread *createWorkerThread(worker::QspWorkerArgs args) override;
+    virtual plugframe::WorkerArgs *createWorkerArgs();
+    plugframe::WorkerThread *createWorkerThread(plugframe::QspWorkerArgs args) override;
 
 private:
-    virtualequipment::QspVirtualEquipmentLoader m_veLoader;
+    QspVirtualEquipmentLoader m_veLoader;
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspVirtualEquipmentSetLoader = QSharedPointer<VirtualEquipmentSetLoader>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETLOADER_H

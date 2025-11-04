@@ -21,7 +21,10 @@
 
 #include <QHash>
 #include <QString>
-#include "service-int/observableserviceinterface.h"
+#include <QSharedPointer>
+#include "observable/highobservable/monitor/grouptowatchalgorithm.h"
+#include "observable/highobservable/monitor/statetowatch.h"
+#include "observable/highobservable/monitor/statetowatchlist.h"
 #include "olcore-backend-lib_export.h"
 
 namespace oplink
@@ -39,7 +42,7 @@ public:
     bool isCategoryEmpty(const QString& categoryName);
     void addMonitoredState(const QString& categoryName, QspMonitoredState monitoredState);
     QspMonitoredStateList category(const QString& categoryName);
-    void initAlgorithm(engine::service::ObservableServiceInterface *observableService);
+    void initAlgorithm(oplink::ObservableServiceInterface *observableService);
     GroupToWatchAlgorithm* algorithm();
     QString reverseLookUp(const QString& reverseInput);
     bool allTrue(const QString& categoryName);
@@ -50,5 +53,6 @@ private:
     QspMonitoredGroupAlgorithm            m_algorithm;
     QString                               m_groupName;
 };
+using QspMonitoredObservableGroup = QSharedPointer<GroupToWatch>;
 }//namespace oplink
 #endif // GROUPTOWATCH_H

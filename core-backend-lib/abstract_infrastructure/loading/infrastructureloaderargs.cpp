@@ -16,18 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructureloaderargs.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-InfrastructureLoaderArgs::InfrastructureLoaderArgs(const QString& configFile):
+oplink::InfrastructureLoaderArgs::InfrastructureLoaderArgs(const QString& configFile):
     m_configFile{configFile}
 {
 
 }
 
-InfrastructureLoaderArgs::~InfrastructureLoaderArgs()
+oplink::InfrastructureLoaderArgs::~InfrastructureLoaderArgs()
 {
 
 }
