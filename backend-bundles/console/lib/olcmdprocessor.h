@@ -16,41 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCMDPROCESSOR_H
 #define OLCMDPROCESSOR_H
 
 #include "cmd/cmdprocessor.h"
 #include "olconsole_forward.h"
 
-using namespace elekdom::plugframe::console::cmd;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-namespace cmd
-{
-
 class OlCmdProcessor : public CmdProcessor
 {
 public:
     OlCmdProcessor(const QString& logChannel,
-                   bundle::OlConsole& console,
+                   OlConsole& console,
                    QString cmdName,
                    QString description);
 
     ~OlCmdProcessor() override;
 
 protected:
-    bundle::OlConsole& m_olConsole;
+    OlConsole& m_olConsole;
 };
-
-} //namespace cmd
-} //namespace console
-} //namespace gac
-} //namespace elekdom
-
 #endif // OLCMDPROCESSOR_H

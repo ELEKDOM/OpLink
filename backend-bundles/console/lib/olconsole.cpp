@@ -16,16 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olconsole.h"
 #include "olconsolefactory.h"
 #include "bundle/bundlecontext.h"
 #include "cmd/cmdprocessor.h"
-#include "observable/observable/observablesubscriber.h"
-
-using namespace elekdom::oplink::console::bundle;
-using namespace elekdom::oplink::engine::service;
-using namespace elekdom::plugframe::console::bundle;
+#include "subscribecmdprocessor.h"
 
 OlConsole::OlConsole():
     m_subscriber{nullptr}
@@ -38,30 +33,30 @@ OlConsole::~OlConsole()
 
 }
 
-bool OlConsole::submitOrder(StrOrder &order)
+bool OlConsole::submitOrder(oplink::StrOrder &order)
 {
     bool ret{false};
-    engine::service::ObservableServiceInterface *observableBroker{observableService()};
+    oplink::ObservableServiceInterface *observableBroker{observableService()};
 
     ret = observableBroker->submitOrder(order);
 
     return ret;
 }
 
-bool OlConsole::subscribe(core::observable::ObservableName name)
+bool OlConsole::subscribe(oplink::ObservableName name)
 {
     bool ret{false};
-    engine::service::ObservableServiceInterface *observableBroker{observableService()};
+    oplink::ObservableServiceInterface *observableBroker{observableService()};
 
     ret = observableBroker->subscribe(name, m_subscriber);
 
     return ret;
 }
 
-bool OlConsole::unsubscribe(core::observable::ObservableName name)
+bool OlConsole::unsubscribe(oplink::ObservableName name)
 {
     bool ret{false};
-    engine::service::ObservableServiceInterface *observableBroker{observableService()};
+    oplink::ObservableServiceInterface *observableBroker{observableService()};
 
     ret = observableBroker->unsubscribe(name, m_subscriber);
 
@@ -69,15 +64,16 @@ bool OlConsole::unsubscribe(core::observable::ObservableName name)
     return ret;
 }
 
-elekdom::plugframe::core::bundle::BundleFactory *OlConsole::createFactory()
+plugframe::BundleFactory *OlConsole::createFactory()
 {
-    return new factory::OlConsoleFactory;
+    return new OlConsoleFactory;
 }
 
 void OlConsole::buildCommandProcessorSet()
 {
-    factory::OlConsoleFactory& factory{dynamic_cast<factory::OlConsoleFactory&>(getFactory())};
+    OlConsoleFactory& factory{dynamic_cast<OlConsoleFactory&>(getFactory())};
     QspCmdProcessor cmdProcessor;
+    SubscribeCmdProcessor *subscribeProc;
 
     // specific gac console cmd
     //-------------------------
@@ -89,7 +85,9 @@ void OlConsole::buildCommandProcessorSet()
     // subscribe command processor
     cmdProcessor = factory.createSubscribeCmdProcessor(logChannel(), *this);
     addCmdProcessor(cmdProcessor);
-    m_subscriber = dynamic_cast<core::observable::ObservableSubscriber*>(cmdProcessor.get());
+
+    subscribeProc = dynamic_cast<SubscribeCmdProcessor*>(cmdProcessor.get());
+    m_subscriber = subscribeProc->observableSubscriber();
 
     // unsubscribe command processor
     cmdProcessor = factory.createUnsubscribeCmdProcessor(logChannel(), *this);
@@ -100,9 +98,9 @@ void OlConsole::buildCommandProcessorSet()
     Console::buildCommandProcessorSet();
 }
 
-ObservableServiceInterface *OlConsole::observableService()
+oplink::ObservableServiceInterface *OlConsole::observableService()
 {
-     return bundleContext()->getService<elekdom::oplink::engine::service::ObservableServiceInterface>(elekdom::oplink::engine::service::ObservableServiceInterface::serviceName());
+     return bundleContext()->getService<oplink::ObservableServiceInterface>(oplink::ObservableServiceInterface::serviceName());
 }
 
 

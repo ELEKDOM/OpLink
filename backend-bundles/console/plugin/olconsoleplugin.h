@@ -16,41 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCONSOLEPLUGIN_H
 #define OLCONSOLEPLUGIN_H
 
 #include "plugin/plugin.h"
 
-using namespace elekdom::plugframe::core::bundle;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-namespace plugin
-{
-
-class OlConsolePlugin : public plugframe::core::plugin::Plugin
+class OlConsolePlugin : public plugframe::Plugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "elekdom.oplink.console.plugin" FILE "../consolebundle.json")
-    Q_INTERFACES(elekdom::plugframe::core::plugin::BundleInterface)
+    Q_PLUGIN_METADATA(IID "oplink.console.plugin" FILE "../consolebundle.json")
+    Q_INTERFACES(plugframe::BundleInterface)
 
 public:
     OlConsolePlugin();
     virtual ~OlConsolePlugin();
 
 protected:
-    plugframe::core::bundle::Bundle4PluginInterface *createImplementation() override;
+    plugframe::Bundle4PluginInterface *createImplementation() override;
     PF_bindServicesImplementations_DECL
 };
-
-} // namespace plugin
-} // namespace console
-} // namespace gac
-} // namespace elekdom
-
 #endif // OLCONSOLEPLUGIN_H

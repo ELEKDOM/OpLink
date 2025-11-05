@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCONSOLE_H
 #define OLCONSOLE_H
 
@@ -25,18 +24,7 @@
 #include "observable/observablenames.h"
 #include "service-int/observableserviceinterface.h"
 
-using namespace elekdom::oplink::core::command;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-namespace bundle
-{
-
-class OlConsole: public elekdom::plugframe::console::bundle::Console
+class OlConsole: public Console
 {
 
 public:
@@ -44,24 +32,18 @@ public:
     ~OlConsole() override;
 
 public:
-    bool submitOrder(StrOrder& order);
-    bool subscribe(core::observable::ObservableName name);
-    bool unsubscribe(core::observable::ObservableName name);
+    bool submitOrder(oplink::StrOrder& order);
+    bool subscribe(oplink::ObservableName name);
+    bool unsubscribe(oplink::ObservableName name);
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
+    plugframe::BundleFactory* createFactory() override;
     void buildCommandProcessorSet() override;
 
 protected:
-    engine::service::ObservableServiceInterface *observableService();
+    oplink::ObservableServiceInterface *observableService();
 
 private:
-    core::observable::ObservableSubscriber *m_subscriber;
+    oplink::ObservableSubscriber *m_subscriber;
 };
-
-}//namespace bundle
-}//namespace console
-}//namespace oplink
-}//namespace elekdom
-
 #endif // OLCONSOLE_H

@@ -16,21 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QTextStream>
 #include "unsubscribecmdprocessor.h"
 #include "observable/observablenames.h"
 #include "olconsole.h"
 
-using namespace elekdom::oplink::console::cmd;
-
-
 UnsubscribeCmdProcessor::UnsubscribeCmdProcessor(const QString &logChannel,
-                                                 bundle::OlConsole &console):
+                                                 OlConsole &console):
     OlCmdProcessor{logChannel,
-                    console,
-                    "unsubscribe",
-                    "Se désabonne des changements d'états d'un observable"}
+                   console,
+                   "unsubscribe",
+                   "Se désabonne des changements d'états d'un observable"}
 {
 
 }
@@ -44,7 +40,7 @@ bool UnsubscribeCmdProcessor::exec(const RawCmd &cmd)
 {
     Q_UNUSED(cmd)
     QTextStream                         stream(stdin);
-    core::observable::ObservableName name;
+    oplink::ObservableName name;
 
     console().print(QObject::tr("Format d'une commande : observable_name\n"));
     console().print(QObject::tr("<Entrée> pour quitter ce mode\n"));
