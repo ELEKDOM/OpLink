@@ -16,21 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOADINGVIRTUALEQUIPMENTSETSSTATE_H
 #define LOADINGVIRTUALEQUIPMENTSETSSTATE_H
 
 #include "serverstartingstate.h"
-#include "pfcore-lib_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-namespace bundle
-{
 
 class LoadingVirtualEquipmentSetsState : public ServerStartingState
 {
@@ -40,21 +29,15 @@ public:
 
 protected:
     void starting() override;
-    void doProcessing(const worker::QspWorkerOuts& outs) override;
+    void doProcessing(const plugframe::QspWorkerOuts& outs) override;
     bool test4transition() override;
     void transition() override;
 
 private:
-    void initScheduler(observable::QspObservableBuildersContainer loadedVirtualEquipments);
+    void initScheduler(oplink::QspObservableBuildersContainer loadedVirtualEquipments);
 
 private:
     int m_nbVirtualEquipmentSets;
 
 };
-
-}//namespace bundle
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
-
 #endif // LOADINGVIRTUALEQUIPMENTSETSSTATE_H

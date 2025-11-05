@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "startingclientsstate.h"
 #include "worker/workerouts.h"
 #include "logger/pflog.h"
-
-using namespace elekdom::oplink::engine::bundle;
 
 StartingClientsState::StartingClientsState(ServerEngine &engine):
     ServerStartingState{engine},
@@ -53,7 +50,7 @@ void StartingClientsState::starting()
     doTransition();
 }
 
-void StartingClientsState::doProcessing(const worker::QspWorkerOuts &outs)
+void StartingClientsState::doProcessing(const plugframe::QspWorkerOuts &outs)
 {
     Q_UNUSED(outs)
 }

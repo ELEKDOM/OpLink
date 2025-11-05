@@ -19,6 +19,7 @@
 #ifndef VIRTUALEQUIPMENTSETLOADEROUTS_H
 #define VIRTUALEQUIPMENTSETLOADEROUTS_H
 
+#include <QSharedPointer>
 #include "worker/workerouts.h"
 #include "observable/observable/observablebuilderscontainer.h"
 #include "olcore-backend-lib_export.h"
@@ -37,5 +38,6 @@ public:
     QString                        m_virtualEquipmentSetName;
     QspObservableBuildersContainer m_loadedVirtualEquipments;
 };
+using QspVirtualEquipmentSetLoaderOuts = QSharedPointer<VirtualEquipmentSetLoaderOuts>;
 }//namespace oplink
 #endif // VIRTUALEQUIPMENTSETLOADEROUTS_H

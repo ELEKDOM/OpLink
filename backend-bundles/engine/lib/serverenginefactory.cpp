@@ -16,13 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "serverenginefactory.h"
 #include "serverenginelistener.h"
 #include "service-int/observableserviceinterface.h"
-
-using namespace elekdom::plugframe::core;
-using namespace elekdom::oplink::engine::factory;
 
 ServerEngineFactory::ServerEngineFactory()
 
@@ -35,15 +31,15 @@ ServerEngineFactory::~ServerEngineFactory()
 
 }
 
-service::ServiceImplementationInterface *ServerEngineFactory::createServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation,
-                                                                                          const QString &sName,
-                                                                                          const QString &serviceVersion)
+plugframe::ServiceImplementationInterface *ServerEngineFactory::createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                                            const QString &sName,
+                                                                                            const QString &serviceVersion)
 {
-    plugframe::core::service::ServiceImplementationInterface *ret{nullptr};
+    plugframe::ServiceImplementationInterface *ret{nullptr};
 
-    if (service::ObservableServiceInterface::serviceName() == sName)
+    if (oplink::ObservableServiceInterface::serviceName() == sName)
     {
-        if (plugin::ServiceInterface::V_100() == serviceVersion)
+        if (plugframe::ServiceInterface::V_100() == serviceVersion)
         {
             ret = createObservableService(implementation);
         }
@@ -52,12 +48,12 @@ service::ServiceImplementationInterface *ServerEngineFactory::createServiceImple
     return ret;
 }
 
-bundle::BundleListener *ServerEngineFactory::createBundleListener(plugframe::core::bundle::Bundle &myBundle)
+plugframe::BundleListener *ServerEngineFactory::createBundleListener(plugframe::Bundle &myBundle)
 {
-    return new bundle::ServerEngineListener{myBundle};
+    return new ServerEngineListener{myBundle};
 }
 
-elekdom::oplink::engine::service::ObservableService *ServerEngineFactory::createObservableService(plugframe::core::bundle::BundleImplementation *implementation)
+ObservableService *ServerEngineFactory::createObservableService(plugframe::BundleImplementation *implementation)
 {
-    return new engine::service::ObservableService{implementation};
+    return new ObservableService{implementation};
 }

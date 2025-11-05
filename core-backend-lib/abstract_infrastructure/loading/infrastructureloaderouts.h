@@ -19,6 +19,7 @@
 #ifndef INFRASTRUCTURELOADEROUTS_H
 #define INFRASTRUCTURELOADEROUTS_H
 
+#include <QSharedPointer>
 #include "olcore-backend-lib_export.h"
 #include "abstract_infrastructure/loading/infrastructureworkerouts.h"
 #include "abstract_infrastructure/infrastructure-names.h"
@@ -37,5 +38,6 @@ public:
 public:
     QspObservableBuildersContainer m_loadedObservables;
 };
+using QspInfrastructureLoaderOuts = QSharedPointer<InfrastructureLoaderOuts>;
 }//namespace oplink
 #endif // INFRASTRUCTURELOADEROUTS_H

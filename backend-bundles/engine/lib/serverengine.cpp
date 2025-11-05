@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QMutexLocker>
 #include "logger/pflog.h"
 #include "bundle/bundlecontext.h"
@@ -28,18 +27,15 @@
 #include "service-int/observableserviceinterface.h"
 #include "observable/observable/observablebuilderscontainer.h"
 
-using namespace elekdom::oplink::engine::bundle;
-using namespace elekdom::plugframe;
-
 ServerEngine::ServerEngine():
-   plugframe::core::bundle::BundleImplementation{"ServerEngine"},
+   plugframe::BundleImplementation{"ServerEngine"},
    m_startingInfrastructuresState{*this},
    m_loadingVirtualEquipmentSetsState{*this},
    m_startingClientsState{*this},
    m_currentStartingState{&m_startingInfrastructuresState}
 {
-    qRegisterMetaType<elekdom::oplink::core::observable::ObservableName>("elekdom::oplink::core::observable::ObservableName");
-    qRegisterMetaType<elekdom::oplink::core::observable::PropertyName>("elekdom::oplink::core::observable::PropertyName");
+    qRegisterMetaType<oplink::ObservableName>("oplink::ObservableName");
+    qRegisterMetaType<oplink::PropertyName>("oplink::PropertyName");
 }
 
 ServerEngine::~ServerEngine()
@@ -52,17 +48,17 @@ void ServerEngine::startEngine()
     pfDebug3(logChannel()) << "->GacServerEngine::startEngine";
 
     // Retrieves the registered infrastructures
-    m_registeredInfrastructures = bundleContext()->getServices<infrastructure::service::InfrastructureControlServiceInterface>(infrastructure::service::InfrastructureControlServiceInterface::serviceName());
+    m_registeredInfrastructures = bundleContext()->getServices<oplink::InfrastructureControlServiceInterface>(oplink::InfrastructureControlServiceInterface::serviceName());
 
 #ifndef QT_NO_DEBUG_OUTPUT
     printRegisteredInfrastructures();
 #endif
 
     // Retrieves the registered virtualequipment sets
-    m_registeredVirtualEquipmentSets = bundleContext()->getServices<virtualequipmentset::service::VirtualEquipmentSetServiceInterface>(virtualequipmentset::service::VirtualEquipmentSetServiceInterface::serviceName());
+    m_registeredVirtualEquipmentSets = bundleContext()->getServices<oplink::VirtualEquipmentSetServiceInterface>(oplink::VirtualEquipmentSetServiceInterface::serviceName());
 
     // Retrieves the registered frontenditfs
-    m_registeredFrontendItfs = bundleContext()->getServices<plugframe::frontenditf::service::BackendControlServiceInterface>(plugframe::frontenditf::service::BackendControlServiceInterface::serviceName());
+    m_registeredFrontendItfs = bundleContext()->getServices<plugframe::BackendControlServiceInterface>(plugframe::BackendControlServiceInterface::serviceName());
 
     // Starts background loading !
     m_currentStartingState = &m_startingInfrastructuresState;
@@ -139,13 +135,13 @@ void ServerEngine::startCurrentState()
     }
 }
 
-void ServerEngine::registerObservables(const observable::QspObservableBuildersContainer &loadedObservables)
+void ServerEngine::registerObservables(const oplink::QspObservableBuildersContainer &loadedObservables)
 {
-    plugframe::core::service::QspServiceImplementationInterface serviceImplementationItf;
-    service::QspObservableService                         observableServiceImpl;
+    plugframe::QspServiceImplementationInterface serviceImplementationItf;
+    QspObservableService                         observableServiceImpl;
 
-    serviceImplementationItf = getServiceImplementation(service::ObservableServiceInterface::serviceName());
-    observableServiceImpl = serviceImplementationItf.dynamicCast<service::ObservableService>();
+    serviceImplementationItf = getServiceImplementation(oplink::ObservableServiceInterface::serviceName());
+    observableServiceImpl = serviceImplementationItf.dynamicCast<ObservableService>();
 
     if (observableServiceImpl)
     {
@@ -162,29 +158,29 @@ void ServerEngine::printRegisteredInfrastructures()
 }
 #endif
 
-bundle::BundleFactory *ServerEngine::createFactory()
+plugframe::BundleFactory *ServerEngine::createFactory()
 {
-    return new factory::ServerEngineFactory;
+    return new ServerEngineFactory;
 }
 
-void ServerEngine::_start(plugframe::core::bundle::QspBundleContext bundleContext)
+void ServerEngine::_start(plugframe::QspBundleContext bundleContext)
 {
-    plugframe::core::bundle::BundleImplementation::_start(bundleContext);
+    plugframe::BundleImplementation::_start(bundleContext);
 
-    framework::service::SystemServiceInterface *systemServiceItf;
-    systemServiceItf = bundleContext->getService<framework::service::SystemServiceInterface>(plugframe::framework::service::SystemServiceInterface::serviceName());
+    plugframe::SystemServiceInterface *systemServiceItf;
+    systemServiceItf = bundleContext->getService<plugframe::SystemServiceInterface>(plugframe::SystemServiceInterface::serviceName());
 
     // Register the listener to wait for framework started evt
     systemServiceItf->registerListener(getListener().get());
 }
 
-plugin::ServiceInterface *ServerEngine::qtServiceInterface(const QString &sName)
+plugframe::ServiceInterface *ServerEngine::qtServiceInterface(const QString &sName)
 {
-    plugin::ServiceInterface *ret{nullptr};
+    plugframe::ServiceInterface *ret{nullptr};
 
-    if (service::ObservableServiceInterface::serviceName() == sName)
+    if (oplink::ObservableServiceInterface::serviceName() == sName)
     {
-        ret = qobject_cast<service::ObservableServiceInterface*>(getQplugin());
+        ret = qobject_cast<oplink::ObservableServiceInterface*>(getQplugin());
     }
 
     return ret;

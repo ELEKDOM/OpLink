@@ -16,34 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SERVERENGINELISTENER_H
 #define SERVERENGINELISTENER_H
 
 #include "bundle/bundlelistener4fws.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-namespace bundle
-{
-
-class ServerEngineListener : public plugframe::core::bundle::BundleListener4fws
+class ServerEngineListener : public plugframe::BundleListener4fws
 {
 public:
-    ServerEngineListener(plugframe::core::bundle::Bundle& bundle, QObject *parent = nullptr);
+    ServerEngineListener(plugframe::Bundle& bundle, QObject *parent = nullptr);
     ~ServerEngineListener() override;
 
 protected:
-    void onFrameworkStartedEvent(plugframe::core::event::FrameworkStartedEvent *evt) override;
+    void onFrameworkStartedEvent(plugframe::FrameworkStartedEvent *evt) override;
 };
-
-}//namespace bundle
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
-
 #endif // SERVERENGINELISTENER_H
