@@ -16,15 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201setpilotwiremode.h"
 #include "command/command-names.h"
 #include "command/command.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd8format.h"
 
-using namespace elekdom::oplink::enocean;
-
-D201SetPilotWireMode::D201SetPilotWireMode(const core::infrastructure::QspDevice &device):
+D201SetPilotWireMode::D201SetPilotWireMode(const oplink::QspDevice &device):
     D201CommandProcessor{device, new D201Cmd8Format}
 {
 
@@ -35,10 +32,10 @@ D201SetPilotWireMode::~D201SetPilotWireMode()
 
 }
 
-bool D201SetPilotWireMode::completePacket(core::command::QspCommand order)
+bool D201SetPilotWireMode::completePacket(oplink::QspCommand order)
 {
     bool ret;
-    const core::observable::PropertyName& pname{order->property()};
+    const oplink::PropertyName& pname{order->property()};
     int idx;
     quint8 mode;
 
@@ -52,27 +49,27 @@ bool D201SetPilotWireMode::completePacket(core::command::QspCommand order)
         {
             QString pwm{val.toString()};
 
-            if (pwm == core::command::CommandArgs::OFF)
+            if (pwm == oplink::CommandArgs::OFF)
             {
                 mode = 0x00;
             }
-            else if (pwm == core::command::CommandArgs::COMFORT)
+            else if (pwm == oplink::CommandArgs::COMFORT)
             {
                 mode = 0x01;
             }
-            else if (pwm == core::command::CommandArgs::COMFORT_1)
+            else if (pwm == oplink::CommandArgs::COMFORT_1)
             {
                 mode = 0x04;
             }
-            else if (pwm == core::command::CommandArgs::COMFORT_2)
+            else if (pwm == oplink::CommandArgs::COMFORT_2)
             {
                 mode = 0x05;
             }
-            else if (pwm == core::command::CommandArgs::ECO)
+            else if (pwm == oplink::CommandArgs::ECO)
             {
                 mode = 0x02;
             }
-            else if (pwm == core::command::CommandArgs::NOFROST)
+            else if (pwm == oplink::CommandArgs::NOFROST)
             {
                 mode = 0x03;
             }

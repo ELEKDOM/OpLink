@@ -16,24 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D2010CEEP_H
 #define D2010CEEP_H
 
 #include "d201eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class D2010CEep : public D201Eep
 {
 public:
-    D2010CEep(const core::infrastructure::DeviceId& id,
-              core::infrastructure::DeviceHook& deviceHook);
+    D2010CEep(const oplink::DeviceId& id,
+              oplink::DeviceHook& deviceHook);
     ~D2010CEep() override;
 
 protected:
@@ -42,9 +34,5 @@ protected:
 protected:
     void recoverState() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D2010CEEP_H

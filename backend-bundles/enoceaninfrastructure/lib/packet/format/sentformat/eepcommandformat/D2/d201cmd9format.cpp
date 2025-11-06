@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201cmd9format.h"
-
-using namespace elekdom::oplink::enocean;
 
 D201Cmd9Format::D201Cmd9Format():
     D201CommandFormat{1, 0x09}

@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/esp3sentpacketformat.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3SentPacketFormat::Esp3SentPacketFormat(quint16 dataLenght, quint8 optionalLenght, quint8 packetType):
     m_dataLenght{dataLenght},

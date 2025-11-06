@@ -16,20 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3PACKET_H
 #define ESP3PACKET_H
 
 #include <QSharedPointer>
 #include <QByteArray>
 #include "esp3crc8.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class Esp3Packet
 {
@@ -79,9 +71,5 @@ private:
     quint8 *m_data;
     quint32 m_data_byte_idx;  // used to populate the data
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspEsp3Packet = QSharedPointer<Esp3Packet>;
 #endif // ESP3PACKET_H

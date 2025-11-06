@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3PACKETFORMAT_H
 #define ESP3PACKETFORMAT_H
 
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
+#include "packet/esp3packet.h"
 
 class Esp3PacketFormat
 {
@@ -43,9 +35,5 @@ public:
 private:
     QspEsp3Packet m_associatedPacket;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // ESP3PACKETFORMAT_H

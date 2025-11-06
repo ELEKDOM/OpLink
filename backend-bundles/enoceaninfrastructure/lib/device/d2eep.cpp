@@ -16,15 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d2eep.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd3format.h"
-#include "packet/format/receivedformat/eeptelegram/d2telegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-D2Eep::D2Eep(const core::infrastructure::DeviceId &id,
-             core::infrastructure::DeviceHook &deviceHook,
+D2Eep::D2Eep(const oplink::DeviceId &id,
+             oplink::DeviceHook& deviceHook,
              EepTelegramFormat *msgFormat):
     EnoceanEquipmentProfile{id, deviceHook, msgFormat}
 {

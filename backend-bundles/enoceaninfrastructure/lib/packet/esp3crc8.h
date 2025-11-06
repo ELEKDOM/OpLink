@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3CRC8_H
 #define ESP3CRC8_H
 
 #include <QtGlobal>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class Esp3Crc8
 {
@@ -40,9 +32,5 @@ public:
 public:
     quint8 computeCrc(const quint8* data, unsigned short size);
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // ESP3CRC8_H

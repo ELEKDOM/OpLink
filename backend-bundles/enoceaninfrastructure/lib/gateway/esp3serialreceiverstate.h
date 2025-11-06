@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3SERIALRECEIVERSTATE_H
 #define ESP3SERIALRECEIVERSTATE_H
 
 #include <QtGlobal>
 #include "enoceaninfrastructure_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 class Esp3SerialReceiverState
 {
 private:
@@ -59,9 +52,5 @@ protected:
     void wait4DataState();
     void wait4DataCrcState();
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ESP3SERIALRECEIVERSTATE_H

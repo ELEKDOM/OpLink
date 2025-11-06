@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201TELEGRAMFORMAT_H
 #define D201TELEGRAMFORMAT_H
 
+#include <QSharedPointer>
 #include "d2telegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class D201TelegramFormat : public D2TelegramFormat
 {
@@ -54,9 +47,5 @@ private:
 private:
     quint8 getCmd();
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
-
+using QspD201TelegramFormat = QSharedPointer<D201TelegramFormat>;
 #endif // D201TELEGRAMFORMAT_H

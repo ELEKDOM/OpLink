@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201CMD8FORMAT_H
 #define D201CMD8FORMAT_H
 
+#include <QSharedPointer>
 #include "d201commandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 // EnOcean Command 0x08 : Actuator Set Pilot Wire Mode
 class D201Cmd8Format : public D201CommandFormat
@@ -39,9 +32,5 @@ public:
 public:
     void setMode(quint8 mode);
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspD201Cmd8Format = QSharedPointer<D201Cmd8Format>;
 #endif // D201CMD8FORMAT_H

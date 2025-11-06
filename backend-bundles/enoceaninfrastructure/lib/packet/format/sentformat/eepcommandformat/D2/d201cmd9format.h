@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201CMD9FORMAT_H
 #define D201CMD9FORMAT_H
 
+#include <QSharedPointer>
 #include "d201commandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 // EnOcean Command 0x09 : Actuator Pilot Wire Mode Query
 class D201Cmd9Format : public D201CommandFormat
@@ -36,9 +29,5 @@ public:
     D201Cmd9Format();
     ~D201Cmd9Format() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspD201Cmd9Format = QSharedPointer<D201Cmd9Format>;
 #endif // D201CMD9FORMAT_H

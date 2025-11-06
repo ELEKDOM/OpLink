@@ -5,7 +5,7 @@ TEMPLATE = lib
 CONFIG  += staticlib
 
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = oplinkB-enoceaninfrastructure-qt5-$${BUNDLE_VERSION}
+TARGET = oplinkB-enoceaninfrastructure-qt6-$${BUNDLE_VERSION}
 
 SOURCES +=  \
             area/enoceandevicearea.cpp \

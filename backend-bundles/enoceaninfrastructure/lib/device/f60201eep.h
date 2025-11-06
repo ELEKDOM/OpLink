@@ -16,32 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef F60201EEP_H
 #define F60201EEP_H
 
 #include "f602eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class F60201Eep : public F602Eep
 {
 public:
-    F60201Eep(const core::infrastructure::DeviceId& id,
-              core::infrastructure::DeviceHook& deviceHook);
+    F60201Eep(const oplink::DeviceId& id,
+              oplink::DeviceHook& deviceHook);
     ~F60201Eep() override;
 
 protected:
     bool processTelegram() override;
 };
-
-}//namespace bundleTemplate
-}//namespace hac
-}//namespace enocean
 
 #endif // F60201EEP_H

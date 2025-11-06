@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/esp3packet.h"
 #include "packet/format/esp3packetformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3PacketFormat::Esp3PacketFormat()
 {

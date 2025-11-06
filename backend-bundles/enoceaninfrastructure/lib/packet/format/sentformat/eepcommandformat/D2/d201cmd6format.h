@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201CMD6FORMAT_H
 #define D201CMD6FORMAT_H
 
+#include <QSharedPointer>
 #include "d201commandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 // EnOcean Command 0x06 : Actuator Measurement Query
 class D201Cmd6Format : public D201CommandFormat
@@ -42,9 +35,5 @@ protected:
 private:
     bool m_queryEnergy;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspD201Cmd6Format = QSharedPointer<D201Cmd6Format>;
 #endif // D201CMD6FORMAT_H

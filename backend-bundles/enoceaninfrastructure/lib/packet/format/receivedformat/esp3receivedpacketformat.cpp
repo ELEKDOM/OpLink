@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/receivedformat/esp3receivedpacketformat.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3ReceivedPacketFormat::Esp3ReceivedPacketFormat()
 {

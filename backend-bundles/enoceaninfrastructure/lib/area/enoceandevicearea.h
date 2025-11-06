@@ -16,22 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANDEVICEAREA_H
 #define ENOCEANDEVICEAREA_H
 
-#include "olcore-backend-lib_forward.h"
-#include "enoceaninfrastructure_forward.h"
 #include "abstract_infrastructure/area/area.h"
+#include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanDeviceArea : public core::infrastructure::Area
+class EnoceanDeviceArea : public oplink::Area
 {
     Q_OBJECT
 
@@ -48,8 +39,8 @@ signals:
     void initializeUsb300BaseId();
 
 protected:
-    void setGateway(core::infrastructure::AreaGateway *gateway) override;
-    bool addDevice(const core::infrastructure::QspDevice& newDevice) override;
+    void setGateway(oplink::AreaGateway *gateway) override;
+    bool addDevice(const oplink::QspDevice& newDevice) override;
 
 private slots:
     void onDevicesLoaded();
@@ -59,9 +50,5 @@ private:
     bool m_devicesLoaded;
     bool m_usb300IdRecovered;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // ENOCEANDEVICEAREA_H

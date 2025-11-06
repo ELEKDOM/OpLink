@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef A5TELEGRAMFORMAT_H
 #define A5TELEGRAMFORMAT_H
 
 #include "eeptelegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class A5TelegramFormat : public EepTelegramFormat
 {
@@ -41,9 +33,5 @@ public:
     quint8 db_1();
     quint8 db_0();
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // A5TELEGRAMFORMAT_H

@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "commandprocessor/D2/d2commandprocessor.h"
 #include "abstract_infrastructure/device/device.h"
 
-using namespace elekdom::oplink::enocean;
-
-D2CommandProcessor::D2CommandProcessor(const core::infrastructure::QspDevice &device,
+D2CommandProcessor::D2CommandProcessor(const oplink::QspDevice &device,
                                        EepCommandFormat *sentCommandFormat):
     EnoceanCommandProcessor{device, sentCommandFormat}
 {

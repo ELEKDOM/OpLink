@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "device/f601eep.h"
 
-using namespace elekdom::oplink::enocean;
-
-F601Eep::F601Eep(const core::infrastructure::DeviceId &id,
-                 core::infrastructure::DeviceHook &deviceHook,
+F601Eep::F601Eep(const oplink::DeviceId &id,
+                 oplink::DeviceHook &deviceHook,
                  EepTelegramFormat *msgFormat):
     F6Eep{id, deviceHook, msgFormat}
 {

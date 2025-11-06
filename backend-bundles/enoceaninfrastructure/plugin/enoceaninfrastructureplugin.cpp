@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "enoceaninfrastructureplugin.h"
 #include "enoceaninfrastructure.h"
-
-using namespace elekdom::oplink::enocean::plugin;
 
 EnoceanInfrastructurePlugin::EnoceanInfrastructurePlugin()
 {
@@ -32,7 +29,7 @@ EnoceanInfrastructurePlugin::~EnoceanInfrastructurePlugin()
 
 }
 
-elekdom::plugframe::core::bundle::Bundle4PluginInterface *EnoceanInfrastructurePlugin::createImplementation()
+plugframe::Bundle4PluginInterface *EnoceanInfrastructurePlugin::createImplementation()
 {
-    return new bundle::EnoceanInfrastructure;
+    return new EnoceanInfrastructure;
 }

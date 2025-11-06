@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "gateway/waitfordatacrc.h"
 #include "enoceaninfrastructurelogchannel.h"
-
-using namespace elekdom::oplink::enocean;
 
 WaitForDataCrc::WaitForDataCrc(Esp3PacketSerialReceiver& receiver):
     Esp3SerialReceiverState{receiver}

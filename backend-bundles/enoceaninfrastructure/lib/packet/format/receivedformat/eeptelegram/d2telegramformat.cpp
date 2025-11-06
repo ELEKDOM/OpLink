@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d2telegramformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 D2TelegramFormat::D2TelegramFormat()
 {

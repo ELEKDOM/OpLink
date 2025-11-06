@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "gateway/waitforheader.h"
-
-using namespace elekdom::oplink::enocean;
 
 WaitForHeader::WaitForHeader(Esp3PacketSerialReceiver& receiver):
     Esp3SerialReceiverState{receiver}

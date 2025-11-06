@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201cmd6format.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 D201Cmd6Format::D201Cmd6Format(bool queryEnergy):
     D201CommandFormat{2, 0x06},

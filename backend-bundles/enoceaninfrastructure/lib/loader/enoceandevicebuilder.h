@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANDEVICEBUILDER_H
 #define ENOCEANDEVICEBUILDER_H
 
@@ -24,16 +23,7 @@
 #include "abstract_infrastructure/loading/devicebuilder.h"
 #include "abstract_infrastructure/infrastructure-names.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanDeviceBuilder : public infrastructure::DeviceBuilder
+class EnoceanDeviceBuilder : public oplink::DeviceBuilder
 {
 public:
     static const QString D20112_EEP;
@@ -45,31 +35,27 @@ public:
     static const QString D50001_EEP;
 
 public:
-    EnoceanDeviceBuilder(const QSharedPointer<infrastructure::DeviceProcessorBuilder>& processorBuilder);
+    EnoceanDeviceBuilder(const oplink::QspDeviceProcessorBuilder& processorBuilder);
     ~EnoceanDeviceBuilder() override;
 
 protected:
-    QSharedPointer<infrastructure::Device> createDevice(const infrastructure::DeviceId& id,
-                                                           const infrastructure::DeviceModelName& deviceModelName,
-                                                           infrastructure::DeviceHook& deviceHook) override;
-    virtual infrastructure::Device *createD20112(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
-    virtual infrastructure::Device *createD2010C(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
-    virtual infrastructure::Device *createD2010E(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
-    virtual infrastructure::Device *createF60101(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
-    virtual infrastructure::Device *createF60201(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
-    virtual infrastructure::Device *createA50401(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
-    virtual infrastructure::Device *createD50001(const infrastructure::DeviceId& id,
-                                                    infrastructure::DeviceHook& deviceHook);
+    oplink::QspDevice createDevice(const oplink::DeviceId& id,
+                                   const oplink::DeviceModelName& deviceModelName,
+                                   oplink::DeviceHook& deviceHook) override;
+    virtual oplink::Device *createD20112(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
+    virtual oplink::Device *createD2010C(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
+    virtual oplink::Device *createD2010E(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
+    virtual oplink::Device *createF60101(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
+    virtual oplink::Device *createF60201(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
+    virtual oplink::Device *createA50401(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
+    virtual oplink::Device *createD50001(const oplink::DeviceId& id,
+                                         oplink::DeviceHook& deviceHook);
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ENOCEANDEVICEBUILDER_H

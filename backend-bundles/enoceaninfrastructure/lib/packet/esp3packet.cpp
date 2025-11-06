@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3Crc8 Esp3Packet::s_CRC8;
 

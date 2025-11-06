@@ -16,32 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANCOMMANDPROCESSOR_H
 #define ENOCEANCOMMANDPROCESSOR_H
 
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
-#include "enoceaninfrastructure_forward.h"
+#include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanCommandProcessor : public core::infrastructure::DeviceCommandProcessor
+class EnoceanCommandProcessor : public oplink::DeviceCommandProcessor
 {
 public:
-    EnoceanCommandProcessor(const core::infrastructure::QspDevice& device,
+    EnoceanCommandProcessor(const oplink::QspDevice& device,
                             EepCommandFormat *sentCommandFormat);
 
     ~EnoceanCommandProcessor() override;
 
 protected:
     QspEepCommandFormat& sentCommandFormat() {return m_sentCommandFormat;}
-    void processDeviceCmd(core::command::QspCommand order) override;
-    virtual bool completePacket(core::command::QspCommand order) = 0;
+    void processDeviceCmd(oplink::QspCommand order) override;
+    virtual bool completePacket(oplink::QspCommand order) = 0;
 
 private:
     void sendPacket();
@@ -49,9 +41,5 @@ private:
 private:
     QspEepCommandFormat m_sentCommandFormat;
 };
-
-}//namespace bundleTemplate
-}//namespace hac
-}//namespace enocean
 
 #endif // ENOCEANCOMMANDPROCESSOR_H

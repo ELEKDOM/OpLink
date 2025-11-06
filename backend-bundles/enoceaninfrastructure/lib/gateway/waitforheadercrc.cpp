@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "gateway/waitforheadercrc.h"
 #include "enoceaninfrastructurelogchannel.h"
-
-using namespace elekdom::oplink::enocean;
 
 WaitForHeaderCrc::WaitForHeaderCrc(Esp3PacketSerialReceiver& receiver):
     Esp3SerialReceiverState{receiver}

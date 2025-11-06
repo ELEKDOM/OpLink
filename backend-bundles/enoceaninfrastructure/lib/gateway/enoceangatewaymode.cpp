@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "gateway/enoceangatewaymode.h"
 #include "enoceaninfrastructurelogchannel.h"
 #include "packet/format/receivedformat/response/eepcommandresponseformat.h"
 #include "packet/format/receivedformat/response/commoncommandresponse/readidbaseresponseformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanGatewayMode::EnoceanGatewayMode(QObject *parent):
     ResponseHandler{parent},

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QCoreApplication>
 #include "worker/workerargs.h"
 #include "abstract_infrastructure/loading/deviceprocessorbuilder.h"
@@ -26,11 +25,9 @@
 #include "loader/enoceangatewayargs.h"
 #include "gateway/enoceangateway.h"
 
-using namespace elekdom::oplink::enocean;
-
 EnoceanInfrastructureLoader::EnoceanInfrastructureLoader(const QString& logChannel,
-                                                         infrastructure::InfrastructureLoadingOperations& infrastructure):
-    infrastructure::InfrastructureLoader{logChannel, infrastructure}
+                                                         oplink::InfrastructureLoadingOperations& infrastructure):
+    oplink::InfrastructureLoader{logChannel, infrastructure}
 {
 
 }
@@ -40,7 +37,7 @@ EnoceanInfrastructureLoader::~EnoceanInfrastructureLoader()
 
 }
 
-worker::WorkerThread *EnoceanInfrastructureLoader::createWorkerThread(worker::QspWorkerArgs args)
+plugframe::WorkerThread *EnoceanInfrastructureLoader::createWorkerThread(plugframe::QspWorkerArgs args)
 {
     return new EnoceanConfReader(logChannel(),
                                  *this,
@@ -48,12 +45,12 @@ worker::WorkerThread *EnoceanInfrastructureLoader::createWorkerThread(worker::Qs
                                  args);
 }
 
-infrastructure::DeviceBuilder *EnoceanInfrastructureLoader::createDeviceBuilder(const infrastructure::QspDeviceProcessorBuilder &processorBuilder)
+oplink::DeviceBuilder *EnoceanInfrastructureLoader::createDeviceBuilder(const oplink::QspDeviceProcessorBuilder &processorBuilder)
 {
     return new EnoceanDeviceBuilder(processorBuilder);
 }
 
-infrastructure::AreaGateway *EnoceanInfrastructureLoader::createGateway(infrastructure::GatewayArgs& gatewayArgs)
+oplink::AreaGateway *EnoceanInfrastructureLoader::createGateway(oplink::GatewayArgs& gatewayArgs)
 {
    EnoceanGateway *gateway;
    EnoceanGatewayArgs& enoceanGatewayArgs{dynamic_cast<EnoceanGatewayArgs&>(gatewayArgs)};

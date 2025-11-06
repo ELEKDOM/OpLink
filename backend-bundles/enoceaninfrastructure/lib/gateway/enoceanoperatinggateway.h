@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANOPERATINGGATEWAY_H
 #define ENOCEANOPERATINGGATEWAY_H
 
 #include "enoceangatewaymode.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class EnoceanOperatingGateway : public EnoceanGatewayMode
 {
@@ -38,9 +30,5 @@ public:
 protected:
     void visit(CommonCommandResponseFormat& response) override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ENOCEANOPERATINGGATEWAY_H

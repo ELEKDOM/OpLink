@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D500TELEGRAMFORMAT_H
 #define D500TELEGRAMFORMAT_H
 
+#include <QSharedPointer>
 #include "d5telegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class D500TelegramFormat : public D5TelegramFormat
 {
@@ -39,9 +32,5 @@ public:
     bool contactState(bool& state);
 
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspD500TelegramFormat = QSharedPointer<D500TelegramFormat>;
 #endif // D500TELEGRAMFORMAT_H

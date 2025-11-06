@@ -16,19 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef USBGATEWAYPORT_H
 #define USBGATEWAYPORT_H
 
 #include <QSerialPort>
 #include "gatewayport.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class UsbGatewayPort : public GatewayPort
 {
@@ -58,9 +50,4 @@ private:
     QSerialPort                  m_serialPort;
     QSerialPort::SerialPortError m_lastError;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // USBGATEWAYPORT_H

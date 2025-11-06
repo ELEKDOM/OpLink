@@ -16,20 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GATEWAYPORT_H
 #define GATEWAYPORT_H
 
 #include <QObject>
 #include <QSharedPointer>
 #include <QByteArray>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class GatewayPort : public QObject
 {
@@ -44,9 +36,5 @@ public:
     virtual void close() = 0;
     virtual void write(QByteArray data) = 0;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspGatewayPort = QSharedPointer<GatewayPort>;
 #endif // GATEWAYPORT_H

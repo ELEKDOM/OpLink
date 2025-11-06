@@ -16,19 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef RESPONSEFORMAT_H
 #define RESPONSEFORMAT_H
 
+#include <QSharedPointer>
 #include "packet/format/receivedformat/esp3receivedpacketformat.h"
 #include "enoceaninfrastructure_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 class ResponseFormat : public Esp3ReceivedPacketFormat
 {
 public:
@@ -50,9 +44,5 @@ public:
     static const quint8 RET_BUFFER_TO_SMALL = 0x06;
     static const quint8 RET_NO_FREE_BUFFER = 0x07;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspResponseFormat = QSharedPointer<ResponseFormat>;
 #endif // RESPONSEFORMAT_H

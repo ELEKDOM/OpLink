@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "loader/enoceandevicebuilder.h"
 #include "device/d20112eep.h"
@@ -28,8 +27,6 @@
 #include "device/d50001eep.h"
 #include "enoceaninfrastructurelogchannel.h"
 
-using namespace elekdom::oplink::enocean;
-
 const QString EnoceanDeviceBuilder::D20112_EEP{QStringLiteral("d20112")};
 const QString EnoceanDeviceBuilder::D2010C_EEP{QStringLiteral("d2010c")};
 const QString EnoceanDeviceBuilder::D2010E_EEP{QStringLiteral("d2010e")};
@@ -38,8 +35,8 @@ const QString EnoceanDeviceBuilder::F60201_EEP{QStringLiteral("f60201")};
 const QString EnoceanDeviceBuilder::A50401_EEP{QStringLiteral("a50401")};
 const QString EnoceanDeviceBuilder::D50001_EEP{QStringLiteral("d50001")};
 
-EnoceanDeviceBuilder::EnoceanDeviceBuilder(const QSharedPointer<infrastructure::DeviceProcessorBuilder>& processorBuilder):
-                                           infrastructure::DeviceBuilder{processorBuilder}
+EnoceanDeviceBuilder::EnoceanDeviceBuilder(const oplink::QspDeviceProcessorBuilder& processorBuilder):
+    oplink::DeviceBuilder{processorBuilder}
 {
 
 }
@@ -49,11 +46,11 @@ EnoceanDeviceBuilder::~EnoceanDeviceBuilder()
 
 }
 
-infrastructure::QspDevice EnoceanDeviceBuilder::createDevice(const infrastructure::DeviceId &id,
-                                                                const infrastructure::DeviceModelName &deviceModelName,
-                                                                infrastructure::DeviceHook &deviceHook)
+oplink::QspDevice EnoceanDeviceBuilder::createDevice(const oplink::DeviceId &id,
+                                                     const oplink::DeviceModelName &deviceModelName,
+                                                     oplink::DeviceHook &deviceHook)
 {
-    infrastructure::QspDevice ret;
+    oplink::QspDevice ret;
 
     if (D20112_EEP == deviceModelName)
     {
@@ -91,37 +88,42 @@ infrastructure::QspDevice EnoceanDeviceBuilder::createDevice(const infrastructur
     return ret;
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createD20112(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createD20112(const oplink::DeviceId &id,
+                                                   oplink::DeviceHook &deviceHook)
 {
     return new D20112Eep{id, deviceHook};
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createD2010C(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createD2010C(const oplink::DeviceId &id,
+                                                   oplink::DeviceHook &deviceHook)
 {
     return new D2010CEep{id, deviceHook};
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createD2010E(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createD2010E(const oplink::DeviceId &id,
+                                                   oplink::DeviceHook &deviceHook)
 {
     return new D2010EEep{id, deviceHook};
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createF60101(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createF60101(const oplink::DeviceId &id,
+                                                   oplink::DeviceHook &deviceHook)
 {
     return new F60101Eep{id, deviceHook};
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createF60201(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createF60201(const oplink::DeviceId &id, oplink::DeviceHook &deviceHook)
 {
     return new F60201Eep{id, deviceHook};
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createA50401(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createA50401(const oplink::DeviceId &id,
+                                                   oplink::DeviceHook &deviceHook)
 {
     return new A50401Eep{id, deviceHook};
 }
 
-infrastructure::Device *EnoceanDeviceBuilder::createD50001(const infrastructure::DeviceId &id, infrastructure::DeviceHook &deviceHook)
+oplink::Device *EnoceanDeviceBuilder::createD50001(const oplink::DeviceId &id, oplink::DeviceHook &deviceHook)
 {
     return new D50001Eep{id, deviceHook};
 }

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "enoceaninfrastructure.h"
 #include "enoceaninfrastructurelogchannel.h"
 #include "loader/enoceaninfrastructureoperatingloader.h"
@@ -24,14 +23,12 @@
 #include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
 #include "packet/format/sentformat/esp3sentpacketformat.h"
 
-using namespace elekdom::oplink::enocean::bundle;
-
 EnoceanInfrastructure::EnoceanInfrastructure():
-    infrastructure::bundle::Infrastructure{s_EnoceanLogChannel, "ENOCEAN"}
+    oplink::Infrastructure{s_EnoceanLogChannel, "ENOCEAN"}
 {
-    qRegisterMetaType<elekdom::oplink::enocean::QspEsp3Packet>("elekdom::oplink::enocean::QspEsp3Packet");
-    qRegisterMetaType<elekdom::oplink::enocean::QspEepTelegramFormat>("elekdom::oplink::enocean::QspEepTelegramFormat");
-    qRegisterMetaType<elekdom::oplink::enocean::QspEsp3SentPacketFormat>("elekdom::oplink::enocean::QspEsp3SentPacketFormat");
+    qRegisterMetaType<QspEsp3Packet>("elekdom::oplink::enocean::QspEsp3Packet");
+    qRegisterMetaType<QspEepTelegramFormat>("elekdom::oplink::enocean::QspEepTelegramFormat");
+    qRegisterMetaType<QspEsp3SentPacketFormat>("elekdom::oplink::enocean::QspEsp3SentPacketFormat");
 }
 
 EnoceanInfrastructure::~EnoceanInfrastructure()
@@ -39,12 +36,12 @@ EnoceanInfrastructure::~EnoceanInfrastructure()
 
 }
 
-infrastructure::InfrastructureLoader *EnoceanInfrastructure::createOperatingLoader(const QString& logChannel)
+oplink::InfrastructureLoader *EnoceanInfrastructure::createOperatingLoader(const QString& logChannel)
 {
     return new EnoceanInfrastructureOperatingLoader(logChannel, *this);
 }
 
-infrastructure::InfrastructureLoader *EnoceanInfrastructure::createSetupLoader(const QString& logChannel)
+oplink::InfrastructureLoader *EnoceanInfrastructure::createSetupLoader(const QString& logChannel)
 {
     Q_UNUSED(logChannel)
 

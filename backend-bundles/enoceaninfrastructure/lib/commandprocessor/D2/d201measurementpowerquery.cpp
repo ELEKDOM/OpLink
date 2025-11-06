@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201measurementpowerquery.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd6format.h"
 
-using namespace elekdom::oplink::enocean;
-
-D201MeasurementPowerQuery::D201MeasurementPowerQuery(const core::infrastructure::QspDevice &device):
+D201MeasurementPowerQuery::D201MeasurementPowerQuery(const oplink::QspDevice &device):
     D201CommandProcessor{device, new D201Cmd6Format{false}}
 {
 
@@ -33,7 +30,7 @@ D201MeasurementPowerQuery::~D201MeasurementPowerQuery()
 
 }
 
-bool D201MeasurementPowerQuery::completePacket(core::command::QspCommand order)
+bool D201MeasurementPowerQuery::completePacket(oplink::QspCommand order)
 {
     // No arg for CMD 0x06 !
     Q_UNUSED(order)

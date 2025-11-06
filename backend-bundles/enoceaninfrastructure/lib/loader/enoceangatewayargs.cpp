@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loader/enoceangatewayargs.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanGatewayArgs::EnoceanGatewayArgs()
 {

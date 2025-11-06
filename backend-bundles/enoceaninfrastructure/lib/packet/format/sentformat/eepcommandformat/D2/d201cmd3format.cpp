@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201cmd3format.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 D201Cmd3Format::D201Cmd3Format():
     D201CommandFormat{2, 0x03}

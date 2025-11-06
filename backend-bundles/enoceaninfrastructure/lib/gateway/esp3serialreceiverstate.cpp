@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "gateway/esp3serialreceiverstate.h"
 #include "gateway/esp3packetserialreceiver.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3SerialReceiverState::Esp3SerialReceiverState(Esp3PacketSerialReceiver& receiver):
     m_receiver{receiver}

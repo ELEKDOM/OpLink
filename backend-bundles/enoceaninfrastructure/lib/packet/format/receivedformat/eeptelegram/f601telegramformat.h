@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef F601TELEGRAMFORMAT_H
 #define F601TELEGRAMFORMAT_H
 
+#include <QSharedPointer>
 #include "f6telegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class F601TelegramFormat : public F6TelegramFormat
 {
@@ -35,9 +28,5 @@ public:
     F601TelegramFormat();
     ~F601TelegramFormat() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspF601TelegramFormat = QSharedPointer<F601TelegramFormat>;
 #endif // F601TELEGRAMFORMAT_H

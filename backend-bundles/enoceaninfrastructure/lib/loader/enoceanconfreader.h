@@ -16,22 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANCONFREADER_H
 #define ENOCEANCONFREADER_H
 
 #include "abstract_infrastructure/loading/infrastructureconfreader.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanConfReader : public infrastructure::InfrastructureConfReader
+class EnoceanConfReader : public oplink::InfrastructureConfReader
 {
 protected:
     inline QString usbStickNode() { return QStringLiteral("usb-stick"); }
@@ -46,18 +36,13 @@ protected:
 
 public:
     EnoceanConfReader(const QString& logChannel,
-                      infrastructure::InfrastructureStore& store,
-                      worker::WorkerSignal *wSignal,
-                      const worker::QspWorkerArgs& args,
+                      oplink::InfrastructureStore& store,
+                      plugframe::WorkerSignal *wSignal,
+                      const plugframe::QspWorkerArgs& args,
                       QObject *parent = nullptr);
     ~EnoceanConfReader() override;
 
 protected:
-    void extractDataFromGateway(infrastructure::LoadingError& err) override;
+    void extractDataFromGateway(oplink::LoadingError& err) override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // ENOCEANCONFREADER_H

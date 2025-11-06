@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "gateway/waitfordata.h"
-
-using namespace elekdom::oplink::enocean;
 
 WaitForData::WaitForData(Esp3PacketSerialReceiver& receiver):
     Esp3SerialReceiverState{receiver}

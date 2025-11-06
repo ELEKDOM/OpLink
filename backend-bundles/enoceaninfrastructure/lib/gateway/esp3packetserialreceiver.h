@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3PACKETSERIALRECEIVER_H
 #define ESP3PACKETSERIALRECEIVER_H
 
@@ -27,12 +26,6 @@
 #include "waitfordata.h"
 #include "waitfordatacrc.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 class Esp3SerialReceiverState;
 class Esp3PacketSerialReceiver : public Esp3PacketReceiver
 {
@@ -62,9 +55,5 @@ protected:
     void wait4DataState(){m_curState = &m_wait4Data;}
     void wait4DataCrcState(){m_curState = &m_wait4DataCrc;}
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ESP3PACKETSERIALRECEIVER_H

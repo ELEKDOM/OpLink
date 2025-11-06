@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d20112eep.h"
 #include "packet/format/receivedformat/eeptelegram/d201telegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-D20112Eep::D20112Eep(const core::infrastructure::DeviceId &id,
-                     core::infrastructure::DeviceHook &deviceHook):
+D20112Eep::D20112Eep(const oplink::DeviceId &id,
+                     oplink::DeviceHook &deviceHook):
 D201Eep{id, deviceHook}
 {
 

@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/receivedformat/eeptelegram/d201telegramformat.h"
 #include "observable/values.h"
-
-using namespace elekdom::oplink::enocean;
 
 D201TelegramFormat::D201TelegramFormat()
 {
@@ -56,11 +53,11 @@ bool D201TelegramFormat::getActuatorStatus(quint8 &channel, bool &value)
     {
         if (output_val > 0)
         {
-            value = core::observable::Values::STATE_ON;
+            value = oplink::Values::STATE_ON;
         }
         else
         {
-            value = core::observable::Values::STATE_OFF;
+            value = oplink::Values::STATE_OFF;
         }
     }
 
@@ -88,27 +85,27 @@ bool D201TelegramFormat::getActuatorMeasurementValue(quint8& channel, quint32 &v
     if (val == 0x00)
     {
         ret = true;
-        unit = core::observable::Values::ENERGY_Ws;
+        unit = oplink::Values::ENERGY_Ws;
     }
     else if (val == 0x01)
     {
         ret = true;
-        unit = core::observable::Values::ENERGY_Wh;
+        unit = oplink::Values::ENERGY_Wh;
     }
     else if (val == 0x02)
     {
         ret = true;
-        unit = core::observable::Values::ENERGY_KWh;
+        unit = oplink::Values::ENERGY_KWh;
     }
     else if (val == 0x03)
     {
         ret = true;
-        unit = core::observable::Values::POWER_W;
+        unit = oplink::Values::POWER_W;
     }
     else if (val == 0x04)
     {
         ret = true;
-        unit = core::observable::Values::POWER_KW;
+        unit = oplink::Values::POWER_KW;
     }
 
     if (ret)
@@ -136,14 +133,8 @@ bool D201TelegramFormat::getActuatorMeasurementValue(quint8& channel, quint32 &v
             *(++ptr8) = data[5];
             *(++ptr8) = data[4];
             *(++ptr8) = data[3];
-            if (measurement >= 0 && measurement <= 4294967295)
-            {
-                value = measurement;
-            }
-            else
-            {
-                ret = false;
-            }
+
+            value = measurement;
         }
     }
 
@@ -169,32 +160,32 @@ bool D201TelegramFormat::getActuatorPilotWireMode(quint8 &mode)
     if (mode_val == 0x00)
     {
         ret = true;
-        mode = core::observable::Values::PW_MODE_STOP;
+        mode = oplink::Values::PW_MODE_STOP;
     }
     else if (mode_val == 0x01)
     {
         ret = true;
-        mode = core::observable::Values::PW_MODE_COMFORT;
+        mode = oplink::Values::PW_MODE_COMFORT;
     }
     else if (mode_val == 0x02)
     {
         ret = true;
-        mode = core::observable::Values::PW_MODE_ECO;
+        mode = oplink::Values::PW_MODE_ECO;
     }
     else if (mode_val == 0x03)
     {
         ret = true;
-        mode = core::observable::Values::PW_MODE_ANTI_FREEZE;
+        mode = oplink::Values::PW_MODE_ANTI_FREEZE;
     }
     else if (mode_val == 0x04)
     {
         ret = true;
-        mode = core::observable::Values::PW_MODE_COMFORT_1;
+        mode = oplink::Values::PW_MODE_COMFORT_1;
     }
     else if (mode_val == 0x05)
     {
         ret = true;
-        mode = core::observable::Values::PW_MODE_COMFORT_2;
+        mode = oplink::Values::PW_MODE_COMFORT_2;
     }
 
     return ret;

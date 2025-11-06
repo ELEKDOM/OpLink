@@ -16,32 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef A50401EEP_H
 #define A50401EEP_H
 
 #include "a504eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class A50401Eep : public A504Eep
 {
 public:
-    A50401Eep(const core::infrastructure::DeviceId& id,
-              core::infrastructure::DeviceHook& deviceHook);
+    A50401Eep(const oplink::DeviceId& id,
+              oplink::DeviceHook& deviceHook);
     ~A50401Eep() override;
 
 protected:
     bool processTelegram() override;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // A50401EEP_H

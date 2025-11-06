@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/eepcommandformat/D2/d201commandformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 D201CommandFormat::D201CommandFormat(quint16 dataPayload, quint8 cmd):
     D2CommandFormat{dataPayload, cmd}

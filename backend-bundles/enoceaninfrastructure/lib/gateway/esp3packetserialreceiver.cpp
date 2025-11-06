@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "gateway/esp3packetserialreceiver.h"
 #include "enoceaninfrastructurelogchannel.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3PacketSerialReceiver::Esp3PacketSerialReceiver(QObject *parent):
     Esp3PacketReceiver{parent},

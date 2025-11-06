@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201COMMANDFORMAT_H
 #define D201COMMANDFORMAT_H
 
 #include "d2commandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class D201CommandFormat : public D2CommandFormat
 {
@@ -35,9 +27,5 @@ public:
     D201CommandFormat(quint16 dataPayload, quint8 cmd);
     ~D201CommandFormat() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D201COMMANDFORMAT_H

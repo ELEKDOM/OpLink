@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loader/enoceantcpgatewayargs.h"
 #include "gateway/enoceangateway.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanTcpGatewayArgs::EnoceanTcpGatewayArgs(QHostAddress hostAddr, quint16 port):
     m_hostAddr{hostAddr},

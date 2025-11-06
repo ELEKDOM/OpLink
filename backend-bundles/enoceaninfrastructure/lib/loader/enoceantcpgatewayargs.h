@@ -16,19 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANTCPGATEWAYARGS_H
 #define ENOCEANTCPGATEWAYARGS_H
 
 #include <QtNetwork/QHostAddress>
 #include "enoceangatewayargs.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class EnoceanTcpGatewayArgs : public EnoceanGatewayArgs
 {
@@ -43,9 +35,5 @@ public:
     QHostAddress m_hostAddr;
     quint16      m_port;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ENOCEANTCPGATEWAYARGS_H

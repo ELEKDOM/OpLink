@@ -16,19 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef READIDBASERESPONSEFORMAT_H
 #define READIDBASERESPONSEFORMAT_H
 
 #include "commoncommandresponseformat.h"
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class ReadIdBaseResponseFormat : public CommonCommandResponseFormat
 {
@@ -44,9 +35,5 @@ public:
 protected:
     void accept(ResponseHandler& visitor) override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // READIDBASERESPONSEFORMAT_H

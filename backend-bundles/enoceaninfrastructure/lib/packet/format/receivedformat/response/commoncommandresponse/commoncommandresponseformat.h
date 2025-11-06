@@ -16,19 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef COMMONCOMMANDRESPONSEFORMAT_H
 #define COMMONCOMMANDRESPONSEFORMAT_H
 
 #include "packet/format/receivedformat/response/responseformat.h"
 #include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class CommonCommandResponseFormat : public ResponseFormat
 {
@@ -40,9 +32,5 @@ public:
 protected:
     void accept(ResponseHandler& visitor) override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // COMMONCOMMANDRESPONSEFORMAT_H

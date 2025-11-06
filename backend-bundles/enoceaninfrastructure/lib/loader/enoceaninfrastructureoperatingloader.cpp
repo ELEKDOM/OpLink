@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QCoreApplication>
 #include "loader/enoceaninfrastructureoperatingloader.h"
 #include "loader/enoceanoperatingdeviceprocessorbuilder.h"
 #include "area/enoceanoperatingdevicearea.h"
 #include "gateway/enoceanoperatinggateway.h"
 
-using namespace elekdom::oplink::enocean;
-
 EnoceanInfrastructureOperatingLoader::EnoceanInfrastructureOperatingLoader(const QString& logChannel,
-                                                                           infrastructure::InfrastructureLoadingOperations& infrastructure):
+                                                                           oplink::InfrastructureLoadingOperations& infrastructure):
     EnoceanInfrastructureLoader{logChannel, infrastructure}
 {
 
@@ -37,14 +34,14 @@ EnoceanInfrastructureOperatingLoader::~EnoceanInfrastructureOperatingLoader()
 
 }
 
-infrastructure::DeviceProcessorBuilder *EnoceanInfrastructureOperatingLoader::createDeviceProcessorBuilder()
+oplink::DeviceProcessorBuilder *EnoceanInfrastructureOperatingLoader::createDeviceProcessorBuilder()
 {
     return new EnoceanOperatingDeviceProcessorBuilder;
 }
 
-infrastructure::Area *EnoceanInfrastructureOperatingLoader::createArea(const QString &areaName)
+oplink::Area *EnoceanInfrastructureOperatingLoader::createArea(const QString &areaName)
 {
-    infrastructure::Area *area{new EnoceanOperatingDeviceArea(logChannel(),areaName)};
+    oplink::Area *area{new EnoceanOperatingDeviceArea(logChannel(),areaName)};
 
     area->moveToThread(QCoreApplication::instance()->thread());
 

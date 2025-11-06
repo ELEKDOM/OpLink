@@ -20,14 +20,8 @@
 #define ESP3PACKETRECEIVER_H
 
 #include <QObject>
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
+#include <QSharedPointer>
+#include "packet/esp3packet.h"
 
 class Esp3PacketReceiver : public QObject
 {
@@ -56,9 +50,5 @@ protected:
 private:
     QspEsp3Packet m_buffer;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspEsp3PacketReceiver = QSharedPointer<Esp3PacketReceiver>;
 #endif // ESP3PACKETRECEIVER_H

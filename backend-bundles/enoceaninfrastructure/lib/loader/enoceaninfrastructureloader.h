@@ -16,39 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANINFRASTRUCTURELOADER_H
 #define ENOCEANINFRASTRUCTURELOADER_H
 
 #include "abstract_infrastructure/loading/infrastructureloader.h"
 #include "enoceaninfrastructure_forward.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanInfrastructureLoader : public infrastructure::InfrastructureLoader
+class EnoceanInfrastructureLoader : public oplink::InfrastructureLoader
 {
 public:
     EnoceanInfrastructureLoader(const QString& logChannel,
-                                infrastructure::InfrastructureLoadingOperations& infrastructure);
+                                oplink::InfrastructureLoadingOperations& infrastructure);
     ~EnoceanInfrastructureLoader() override;
 
 protected:
-    worker::WorkerThread *createWorkerThread(worker::QspWorkerArgs args) override;
-    infrastructure::DeviceBuilder *createDeviceBuilder(const infrastructure::QspDeviceProcessorBuilder& processorBuilder) override;
-    infrastructure::AreaGateway *createGateway(infrastructure::GatewayArgs& gatewayArgs) override;
+    plugframe::WorkerThread *createWorkerThread(plugframe::QspWorkerArgs args) override;
+    oplink::DeviceBuilder *createDeviceBuilder(const oplink::QspDeviceProcessorBuilder& processorBuilder) override;
+    oplink::AreaGateway *createGateway(oplink::GatewayArgs& gatewayArgs) override;
     virtual EnoceanGateway *createGateway(EnoceanGatewayMode *mode);
     virtual EnoceanGatewayMode *createGatewayMode() = 0;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // ENOCEANINFRASTRUCTURELOADER_H

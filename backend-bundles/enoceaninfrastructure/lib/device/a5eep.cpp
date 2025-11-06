@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "a5eep.h"
 #include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-A5Eep::A5Eep(const core::infrastructure::DeviceId &id,
-             core::infrastructure::DeviceHook &deviceHook,
+A5Eep::A5Eep(const oplink::DeviceId &id,
+             oplink::DeviceHook &deviceHook,
              EepTelegramFormat *msgFormat):
     EnoceanEquipmentProfile{id, deviceHook, msgFormat}
 {

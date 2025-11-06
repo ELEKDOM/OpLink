@@ -16,31 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201MEASUREMENTPOWERQUERY_H
 #define D201MEASUREMENTPOWERQUERY_H
 
 #include "d201commandprocessor.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class D201MeasurementPowerQuery : public D201CommandProcessor
 {
 public:
-    D201MeasurementPowerQuery(const core::infrastructure::QspDevice& device);
+    D201MeasurementPowerQuery(const oplink::QspDevice& device);
     ~D201MeasurementPowerQuery() override;
 
 protected:
-    bool completePacket(core::command::QspCommand order) override;
+    bool completePacket(oplink::QspCommand order) override;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // D201MEASUREMENTPOWERQUERY_H

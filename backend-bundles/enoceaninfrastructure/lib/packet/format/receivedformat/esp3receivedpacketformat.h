@@ -16,19 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3RECEIVEDPACKETFORMAT_H
 #define ESP3RECEIVEDPACKETFORMAT_H
 
 #include "packet/format/esp3packetformat.h"
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class Esp3ReceivedPacketFormat : public Esp3PacketFormat
 {
@@ -41,9 +32,5 @@ protected:
    void replacePacket(const QspEsp3Packet& packet);
    const quint8 *rawData();
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ESP3RECEIVEDPACKETFORMAT_H

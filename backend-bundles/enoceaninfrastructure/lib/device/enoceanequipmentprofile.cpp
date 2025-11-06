@@ -16,23 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
-#include "device/enoceanequipmentprofile.h"
-#include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
-#include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
-#include "packet/esp3packet.h"
+#include "enoceanequipmentprofile.h"
 #include "gateway/enoceangateway.h"
 #include "enoceaninfrastructurelogchannel.h"
 
-using namespace elekdom::oplink::enocean;
-
-EnoceanEquipmentProfile::EnoceanEquipmentProfile(const core::infrastructure::DeviceId& id,
-                                                 core::infrastructure::DeviceHook& deviceHook,
+EnoceanEquipmentProfile::EnoceanEquipmentProfile(const oplink::DeviceId& id,
+                                                 oplink::DeviceHook& deviceHook,
                                                  EepTelegramFormat *msgFormat):
-    core::infrastructure::Device{s_EnoceanLogChannel,
-                              id,
-                              deviceHook},
+    oplink::Device{s_EnoceanLogChannel,
+                   id,
+                   deviceHook},
     m_msgFormat{msgFormat},
     m_gateway{nullptr}
 {
