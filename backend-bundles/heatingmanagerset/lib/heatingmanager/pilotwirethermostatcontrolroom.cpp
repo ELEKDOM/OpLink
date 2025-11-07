@@ -16,23 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "pilotwirethermostatcontrolroom.h"
 #include "heatingmanager.h"
 #include "observable/highobservable/monitor/grouptowatch.h"
 #include "observable/values.h"
 #include "logger/pflog.h"
 
-using namespace elekdom::oplink::heatingmanager;
-using namespace elekdom::oplink::core;
-
-PilotWireThermostatControlRoom::PilotWireThermostatControlRoom(core::observable::SupervisorObservable &manager,bool wod,bool pd,double max_temp,double threshold):
+PilotWireThermostatControlRoom::PilotWireThermostatControlRoom(oplink::SupervisorObservable &manager,bool wod,bool pd,double max_temp,double threshold):
     PilotWireControlRoom{manager,wod,pd},
     m_max_temp{max_temp},
     m_threshold{threshold},
     m_temp_order{0},
     m_last_temp{0},
-    m_last_regulation_order{observable::Values::PW_MODE_STOP}
+    m_last_regulation_order{oplink::Values::PW_MODE_STOP}
 {
 
 }
@@ -44,7 +40,7 @@ PilotWireThermostatControlRoom::~PilotWireThermostatControlRoom()
 
 void PilotWireThermostatControlRoom::initAlgo()
 {
-    observable::monitoring::GroupToWatch *myRoom{group()};
+    oplink::GroupToWatch *myRoom{group()};
 
     PilotWireControlRoom::initAlgo();
 
@@ -66,8 +62,8 @@ void PilotWireThermostatControlRoom::orderForHeaters(const QString &order)
     regulHeaters();
 }
 
-void PilotWireThermostatControlRoom::onStateChangeFromHeaters(const core::observable::ObservableName& observableName,
-                                                              const core::observable::PropertyName& propertyName,
+void PilotWireThermostatControlRoom::onStateChangeFromHeaters(const oplink::ObservableName& observableName,
+                                                              const oplink::PropertyName& propertyName,
                                                               QVariant propertyValue)
 {
     quint8 val;
@@ -78,10 +74,10 @@ void PilotWireThermostatControlRoom::onStateChangeFromHeaters(const core::observ
 
     if (wod() && !roomClosed())
     {
-        if (val != observable::Values::PW_MODE_STOP)
+        if (val != oplink::Values::PW_MODE_STOP)
         {
             // Force stop, windows are open !
-            pwmHeater(observableName,propertyName,command::CommandArgs::OFF);
+            pwmHeater(observableName,propertyName,oplink::CommandArgs::OFF);
             pfInfo2(manager().logChannel()) << tr("> %1 commandé à OFF").arg(observableName);
         }
     }
@@ -93,8 +89,8 @@ void PilotWireThermostatControlRoom::onStateChangeFromHeaters(const core::observ
     }
 }
 
-void PilotWireThermostatControlRoom::onStateChangeFromTemperatureSensors(const core::observable::ObservableName& observableName,
-                                                                         const core::observable::PropertyName& propertyName,
+void PilotWireThermostatControlRoom::onStateChangeFromTemperatureSensors(const oplink::ObservableName& observableName,
+                                                                         const oplink::PropertyName& propertyName,
                                                                          QVariant propertyValue)
 {
     Q_UNUSED(observableName)
@@ -110,13 +106,13 @@ void PilotWireThermostatControlRoom::regulHeaters()
 {
     if (m_last_temp > m_temp_order)
     {
-        m_last_regulation_order = observable::Values::PW_MODE_STOP;
+        m_last_regulation_order = oplink::Values::PW_MODE_STOP;
         turnOffHeaters();
         pfInfo2(manager().logChannel()) << tr("HeaterManager %1 pièce %2 régulation > radiateurs à OFF").arg(manager().name(), group()->groupName());
     }
     else if (m_last_temp < (m_temp_order - m_threshold))
     {
-        m_last_regulation_order = observable::Values::PW_MODE_COMFORT;
+        m_last_regulation_order = oplink::Values::PW_MODE_COMFORT;
         turnComfortHeaters();
         pfInfo2(manager().logChannel()) << tr("HeaterManager %1 pièce %2 régulation > radiateurs à COMFORT").arg(manager().name(), group()->groupName());
     }

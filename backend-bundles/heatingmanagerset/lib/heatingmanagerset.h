@@ -16,22 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERSET_H
 #define HEATINGMANAGERSET_H
 
 #include "abstract_virtualequipementset/virtualequipmentset.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanagerset
-{
-namespace bundle
-{
-
-class HeatingManagerSet: public oplink::core::virtualequipmentset::bundle::VirtualEquipmentSet
+class HeatingManagerSet: public oplink::VirtualEquipmentSet
 {
 
 public:
@@ -39,12 +29,7 @@ public:
     ~HeatingManagerSet() override;
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
+    plugframe::BundleFactory* createFactory() override;
 };
-
-}//namespace bundle
-}//namespace heatingmanagerset
-}//namespace oplink
-}//namespace elekdom
 
 #endif // HEATINGMANAGERSET_H

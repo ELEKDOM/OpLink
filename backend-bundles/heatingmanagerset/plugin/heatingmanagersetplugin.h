@@ -16,40 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERSETPLUGIN_H
 #define HEATINGMANAGERSETPLUGIN_H
 
 #include "abstract_virtualequipementset/plugin/virtualequipmentsetplugin.h"
-#include "service-int/virtualequipmentsetserviceinterface.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanagerset
-{
-namespace plugin
-{
-
-class HeatingManagerSetPlugin : public core::virtualequipmentset::plugin::VirtualEquipmentSetPlugin
+class HeatingManagerSetPlugin : public oplink::VirtualEquipmentSetPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "elekdom.oplink.heatingmanagerset.plugin" FILE "../oplinkB-heatingmanagersetbundle.json")
-    Q_INTERFACES(elekdom::plugframe::core::plugin::BundleInterface
-                 elekdom::oplink::core::virtualequipmentset::service::VirtualEquipmentSetServiceInterface)
+    Q_PLUGIN_METADATA(IID "oplink.heatingmanagerset.plugin" FILE "../oplinkB-heatingmanagersetbundle.json")
+    Q_INTERFACES(plugframe::BundleInterface
+                 oplink::VirtualEquipmentSetServiceInterface)
 
 public:
     HeatingManagerSetPlugin();
     ~HeatingManagerSetPlugin() override;
 
 protected:
-    plugframe::core::bundle::Bundle4PluginInterface *createImplementation() override;
+    plugframe::Bundle4PluginInterface *createImplementation() override;
 };
-
-}//namespace plugin
-}//namespace heatingmanagerset
-}//namespace oplink
-}//namespace elekdom
 
 #endif // HEATINGMANAGERSETPLUGIN_H

@@ -5,9 +5,9 @@ TEMPLATE = lib
 CONFIG  += plugin
 
 BUNDLE_NAME = oplinkB-heatingmanagerset
-BUNDLE_NAME_QT5 = $${BUNDLE_NAME}-qt5
+BUNDLE_NAME_QT = $${BUNDLE_NAME}-qt6
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = $${BUNDLE_NAME_QT5}-$${BUNDLE_VERSION}
+TARGET = $${BUNDLE_NAME_QT}-$${BUNDLE_VERSION}
 
 SOURCES += \
     heatingmanagersetplugin.cpp
@@ -27,5 +27,5 @@ INCLUDEPATH +=  \
 
 RESOURCES +=
 
-LIBS    +=  -l$${BUNDLE_NAME_QT5}-$${BUNDLE_VERSION} -L../lib
-PRE_TARGETDEPS += ../lib/lib$${BUNDLE_NAME_QT5}-$${BUNDLE_VERSION}.a
+LIBS    +=  -l$${BUNDLE_NAME_QT}-$${BUNDLE_VERSION} -L../lib
+PRE_TARGETDEPS += ../lib/lib$${BUNDLE_NAME_QT}-$${BUNDLE_VERSION}.a

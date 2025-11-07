@@ -16,21 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGER_H
 #define HEATINGMANAGER_H
 
 #include <QStringLiteral>
 #include "observable/highobservable/schedulableobservable.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanager
-{
-
-class HeatingManager : public core::observable::SchedulableObservable
+class HeatingManager : public oplink::SchedulableObservable
 {
 public:
     static QString heaterCategory() {return QStringLiteral("heater");}
@@ -46,7 +38,7 @@ public:
     void heaterState(const QString& roomName, QString pwm);
 
 protected:
-    void specificInit(engine::service::ObservableServiceInterface *observableService) override;
+    void specificInit(oplink::ObservableServiceInterface *observableService) override;
     void onSchedulerEvt(QString evt) override;
 
 private:
@@ -59,9 +51,5 @@ private:
     void roomDerogated(const QString& roomName,bool flag);
     void processScheduledOrder(const QString& order);
 };
-
-}//namespace heatingmanager
-}//namespace oplink
-}//namespace elekdom
 
 #endif // HEATINGMANAGER_H

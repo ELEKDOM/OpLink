@@ -16,21 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERSET_FORWARD_H
 #define HEATINGMANAGERSET_FORWARD_H
 
-namespace elekdom
-{
-namespace oplink
-{
-    namespace heatingmanager
-    {
-        class HeatingManagerLoader;
-        class HeatingManager;
-        class PilotWireControlRoom;
-    }
-}//namespace oplink
-}//namespace elekdom
+class HeatingManager;
+class PilotWireControlRoom;
 
 #endif // HEATINGMANAGERSET_FORWARD_H

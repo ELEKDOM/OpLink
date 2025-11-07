@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heatingmanagersetplugin.h"
 #include "heatingmanagerset.h"
-
-using namespace elekdom::oplink::heatingmanagerset::plugin;
 
 HeatingManagerSetPlugin::HeatingManagerSetPlugin()
 {
@@ -32,7 +29,7 @@ HeatingManagerSetPlugin::~HeatingManagerSetPlugin()
 
 }
 
-elekdom::plugframe::core::bundle::Bundle4PluginInterface *HeatingManagerSetPlugin::createImplementation()
+plugframe::Bundle4PluginInterface *HeatingManagerSetPlugin::createImplementation()
 {
-    return new bundle::HeatingManagerSet;
+    return new HeatingManagerSet;
 }

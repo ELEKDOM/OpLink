@@ -16,23 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PILOTWIRECONTROLROOM_H
 #define PILOTWIRECONTROLROOM_H
 
 #include "observable/highobservable/monitor/grouptowatchalgorithm.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanager
-{
-
-class PilotWireControlRoom : public core::observable::monitoring::GroupToWatchAlgorithm
+class PilotWireControlRoom : public oplink::GroupToWatchAlgorithm
 {
 public:
-    PilotWireControlRoom(core::observable::SupervisorObservable& manager,bool wod,bool pd);
+    PilotWireControlRoom(oplink::SupervisorObservable& manager,bool wod,bool pd);
     ~PilotWireControlRoom() override;
 
 public:
@@ -40,20 +32,20 @@ public:
 
 protected:
     void initAlgo() override;
-    void onStateChange(const elekdom::oplink::core::observable::ObservableName& observableName,
-                       const elekdom::oplink::core::observable::PropertyName& propertyName,
+    void onStateChange(oplink::ObservableName observableName,
+                       oplink::PropertyName propertyName,
                        QVariant propertyValue) override;
-    virtual void onStateChangeFromHeaters(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                          const elekdom::oplink::core::observable::PropertyName& propertyName,
+    virtual void onStateChangeFromHeaters(const oplink::ObservableName& observableName,
+                                          const oplink::PropertyName& propertyName,
                                           QVariant propertyValue);
-    virtual void onStateChangeFromWindowSensors(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                                const elekdom::oplink::core::observable::PropertyName& propertyName,
+    virtual void onStateChangeFromWindowSensors(const oplink::ObservableName& observableName,
+                                                const oplink::PropertyName& propertyName,
                                                 QVariant propertyValue);
-    virtual void onStateChangeFromTemperatureSensors(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                                     const elekdom::oplink::core::observable::PropertyName& propertyName,
+    virtual void onStateChangeFromTemperatureSensors(const oplink::ObservableName& observableName,
+                                                     const oplink::PropertyName& propertyName,
                                                      QVariant propertyValue);
-    virtual void onStateChangeFromUnknownCategory(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                                  const elekdom::oplink::core::observable::PropertyName& propertyName,
+    virtual void onStateChangeFromUnknownCategory(const oplink::ObservableName& observableName,
+                                                  const oplink::PropertyName& propertyName,
                                                   QVariant propertyValue);
     bool wod(){return m_wod;}
     bool roomClosed() {return m_roomClosed;}
@@ -70,9 +62,5 @@ private:
     bool m_pd; // presence detection flag
     bool m_roomClosed;
 };
-
-}//namespace heatingmanager
-}//namespace oplink
-}//namespace elekdom
 
 #endif // PILOTWIRECONTROLROOM_H
