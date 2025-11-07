@@ -16,16 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
-#include "bundle/bundle.h"
 #include "observablemodelregisterfactory.h"
-#include "observablemodelregister.h"
+#include "modelregisterservice.h"
+#include "observablebuilderservice.h"
 #include "service-int/modelregisterserviceinterface.h"
 #include "service-int/observablebuilderserviceinterface.h"
-
-using namespace elekdom::oplink::observablemodelregister::factory;
-using namespace elekdom::oplink::observablemodelregister::service;
-using namespace elekdom::oplink::observablemodelregister::bundle;
 
 ObservableModelRegisterFactory::ObservableModelRegisterFactory()
 {
@@ -37,32 +32,32 @@ ObservableModelRegisterFactory::~ObservableModelRegisterFactory()
 
 }
 
-ModelRegisterService *ObservableModelRegisterFactory::createModelRegisterService(elekdom::plugframe::core::bundle::BundleImplementation *implementation)
+ModelRegisterService *ObservableModelRegisterFactory::createModelRegisterService(plugframe::BundleImplementation *implementation)
 {
     return new ModelRegisterService{implementation};
 }
 
-ObservableBuilderService *ObservableModelRegisterFactory::createObservableBuilderService(elekdom::plugframe::core::bundle::BundleImplementation *implementation)
+ObservableBuilderService *ObservableModelRegisterFactory::createObservableBuilderService(plugframe::BundleImplementation *implementation)
 {
     return new ObservableBuilderService{implementation};
 }
 
-elekdom::plugframe::core::service::ServiceImplementationInterface *ObservableModelRegisterFactory::createServiceImplementation(elekdom::plugframe::core::bundle::BundleImplementation *implementation,
-                                                                                                     const QString &sName,
-                                                                                                     const QString &serviceVersion)
+plugframe::ServiceImplementationInterface *ObservableModelRegisterFactory::createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                                                       const QString &sName,
+                                                                                                       const QString &serviceVersion)
 {
-    plugframe::core::service::ServiceImplementationInterface *ret{nullptr};
+    plugframe::ServiceImplementationInterface *ret{nullptr};
 
-    if (service::ModelRegisterServiceInterface::serviceName() == sName)
+    if (oplink::ModelRegisterServiceInterface::serviceName() == sName)
     {
-        if (plugin::ServiceInterface::V_100() == serviceVersion)
+        if (plugframe::ServiceInterface::V_100() == serviceVersion)
         {
             ret = createModelRegisterService(implementation);
         }
     }
-    else if (service::ObservableBuilderServiceInterface::serviceName() == sName)
+    else if (oplink::ObservableBuilderServiceInterface::serviceName() == sName)
     {
-        if (plugin::ServiceInterface::V_100() == serviceVersion)
+        if (plugframe::ServiceInterface::V_100() == serviceVersion)
         {
             ret = createObservableBuilderService(implementation);
         }

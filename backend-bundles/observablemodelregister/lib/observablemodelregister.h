@@ -16,55 +16,42 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELREGISTER_H
 #define OBSERVABLEMODELREGISTER_H
 
 #include "bundle/bundleimplementation.h"
 #include "model/modelnames.h"
-#include "olcore-backend-lib_forward.h"
+#include "model/property/observablepropertymodel.h"
+#include "model/processor/commandprocessormodel.h"
+#include "model/observable/observablemodel.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-namespace bundle
-{
-
-class ObservableModelRegister : public plugframe::core::bundle::BundleImplementation
+class ObservableModelRegister : public plugframe::BundleImplementation
 {
 private:
-    QHash<const core::model::PropertyModelName,core::model::QspObservablePropertyModel> m_propertyModels; // properties definition (models) store.
-    QHash<const core::model::ProcessorModelName,core::model::QspCommandProcessorModel>  m_processorModels;
-    QHash<const core::model::ObservableModelName,core::model::QspObservableModel>       m_observableModels; // observables definition (models) store. Key is model's name
+    QHash<const oplink::PropertyModelName,oplink::QspObservablePropertyModel> m_propertyModels; // properties definition (models) store.
+    QHash<const oplink::ProcessorModelName,oplink::QspCommandProcessorModel>  m_processorModels;
+    QHash<const oplink::ObservableModelName,oplink::QspObservableModel>       m_observableModels; // observables definition (models) store. Key is model's name
 
 public:
     ObservableModelRegister();
     ~ObservableModelRegister() override;
 
 public:
-    core::model::QspObservableModel getObservableModel(const core::model::ObservableModelName& modelName);
+    oplink::QspObservableModel getObservableModel(const oplink::ObservableModelName& modelName);
 
 public: // for class EdModelRegisterService;
-    bool addPropertyModel(core::model::QspObservablePropertyModel model);
-    core::model::QspObservablePropertyModel getPropertyModel(core::model::PropertyModelName id);
-    bool addProcessorModel(core::model::QspCommandProcessorModel model);
-    core::model::QspCommandProcessorModel getProcessorModel(core::model::ProcessorModelName id);
-    bool addObservableModel(core::model::QspObservableModel model);
+    bool addPropertyModel(oplink::QspObservablePropertyModel model);
+    oplink::QspObservablePropertyModel getPropertyModel(oplink::PropertyModelName id);
+    bool addProcessorModel(oplink::QspCommandProcessorModel model);
+    oplink::QspCommandProcessorModel getProcessorModel(oplink::ProcessorModelName id);
+    bool addObservableModel(oplink::QspObservableModel model);
 
 public: // for class EdObservableBuilderService
-    core::observable::QspObservableBuilder buildObservable(core::model::QspObservableBuilderArgs builderargs);
+    oplink::QspObservableBuilder buildObservable(oplink::QspObservableBuilderArgs builderargs);
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
-    plugframe::core::plugin::ServiceInterface *qtServiceInterface(const QString& sName) override;
+    plugframe::BundleFactory* createFactory() override;
+    plugframe::ServiceInterface *qtServiceInterface(const QString& sName) override;
 };
-
-}//namespace bundle
-}//namespace observablemodelregister
-}//namespace oplink
-}//namespace elekdom
 
 #endif // OBSERVABLEMODELREGISTER_H

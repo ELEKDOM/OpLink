@@ -16,45 +16,31 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MODELREGISTERSERVICE_H
 #define MODELREGISTERSERVICE_H
 
+#include <QSharedPointer>
 #include "observablemodelregisterserviceimplementation.h"
-#include "olcore-backend-lib_forward.h"
 #include "model/modelnames.h"
-
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-namespace service
-{
+#include "model/property/observablepropertymodel.h"
+#include "model/processor/commandprocessormodel.h"
+#include "model/observable/observablemodel.h"
 
 class ModelRegisterService : public ObservableModelRegisterServiceImplementation
 {
 public:
-    ModelRegisterService(plugframe::core::bundle::BundleImplementation *implementation);
+    ModelRegisterService(plugframe::BundleImplementation *implementation);
     ~ModelRegisterService() override;
 
 public:
-    virtual bool addPropertyModel(core::model::QspObservablePropertyModel model);
-    virtual core::model::QspObservablePropertyModel getPropertyModel(core::model::PropertyModelName id);
-    virtual bool addProcessorModel(core::model::QspCommandProcessorModel model);
-    virtual core::model::QspCommandProcessorModel getProcessorModel(core::model::ProcessorModelName id);
-    virtual bool addObservableModel(core::model::QspObservableModel model);
+    virtual bool addPropertyModel(oplink::QspObservablePropertyModel model);
+    virtual oplink::QspObservablePropertyModel getPropertyModel(oplink::PropertyModelName id);
+    virtual bool addProcessorModel(oplink::QspCommandProcessorModel model);
+    virtual oplink::QspCommandProcessorModel getProcessorModel(oplink::ProcessorModelName id);
+    virtual bool addObservableModel(oplink::QspObservableModel model);
 
 protected:
     QString serviceName() override;
 };
-
-}//namespace service
-}//namespace observablemodelregister
-}//namespace oplink
-}//namespace elekdom
-
+using QspModelRegisterService = QSharedPointer<ModelRegisterService>;
 #endif // MODELREGISTERSERVICE_H

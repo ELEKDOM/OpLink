@@ -16,38 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEBUILDERSERVICE_H
 #define OBSERVABLEBUILDERSERVICE_H
 
+#include <QSharedPointer>
 #include "observablemodelregisterserviceimplementation.h"
-#include "olcore-backend-lib_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-namespace service
-{
+#include "observable/observable/observablebuilder.h"
+#include "model/observable/observablebuilderargs.h"
 
 class ObservableBuilderService : public ObservableModelRegisterServiceImplementation
 {
 public:
-    ObservableBuilderService(plugframe::core::bundle::BundleImplementation *implementation);
+    ObservableBuilderService(plugframe::BundleImplementation *implementation);
     ~ObservableBuilderService() override;
 
 public:
-     virtual core::observable::QspObservableBuilder buildObservable(core::model::QspObservableBuilderArgs builderargs);
+     virtual oplink::QspObservableBuilder buildObservable(oplink::QspObservableBuilderArgs builderargs);
 
 protected:
     QString serviceName() override;
 };
-
-}//namespace service
-}//namespace observablemodelregister
-}//namespace oplink
-}//namespace elekdom
-
+using QspObservableBuilderService = QSharedPointer<ObservableBuilderService>;
 #endif // OBSERVABLEBUILDERSERVICE_H

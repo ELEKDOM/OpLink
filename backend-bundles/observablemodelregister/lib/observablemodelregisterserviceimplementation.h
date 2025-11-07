@@ -16,34 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELREGISTERSERVICEIMPLEMENTATION_H
 #define OBSERVABLEMODELREGISTERSERVICEIMPLEMENTATION_H
 
 #include "service/serviceimplementation.h"
 #include "observablemodelregister_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-namespace service
-{
-
-class ObservableModelRegisterServiceImplementation : public plugframe::core::service::ServiceImplementation
+class ObservableModelRegisterServiceImplementation : public plugframe::ServiceImplementation
 {
 public:
-    ObservableModelRegisterServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation);
+    ObservableModelRegisterServiceImplementation(plugframe::BundleImplementation *implementation);
     virtual ~ObservableModelRegisterServiceImplementation();
 
 protected:
-    bundle::ObservableModelRegister *observableModelRegister();
+    ObservableModelRegister *observableModelRegister();
 };
 
-}//service
-}//observablemodelregister
-}//gac
-}//elekdom
 #endif // OBSERVABLEMODELREGISTERSERVICEIMPLEMENTATION_H

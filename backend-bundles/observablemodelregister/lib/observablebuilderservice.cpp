@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablebuilderservice.h"
 #include "observablemodelregister.h"
 #include "service-int/observablebuilderserviceinterface.h"
-#include "observable/observable/observablebuilder.h"
-#include "model/observable/observablebuilderargs.h"
 
-using namespace elekdom::oplink::observablemodelregister::service;
-using namespace elekdom::oplink::core;
-
-
-ObservableBuilderService::ObservableBuilderService(elekdom::plugframe::core::bundle::BundleImplementation *implementation):
+ObservableBuilderService::ObservableBuilderService(plugframe::BundleImplementation *implementation):
     ObservableModelRegisterServiceImplementation{implementation}
 {
 
@@ -38,12 +31,12 @@ ObservableBuilderService::~ObservableBuilderService()
 
 }
 
-observable::QspObservableBuilder ObservableBuilderService::buildObservable(model::QspObservableBuilderArgs builderargs)
+oplink::QspObservableBuilder ObservableBuilderService::buildObservable(oplink::QspObservableBuilderArgs builderargs)
 {
     return observableModelRegister()->buildObservable(builderargs);
 }
 
 QString ObservableBuilderService::serviceName()
 {
-    return service::ObservableBuilderServiceInterface::serviceName();
+    return oplink::ObservableBuilderServiceInterface::serviceName();
 }

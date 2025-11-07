@@ -16,41 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELREGISTERFACTORY_H
 #define OBSERVABLEMODELREGISTERFACTORY_H
 
 #include "factory/bundlefactory.h"
-#include "modelregisterservice.h"
-#include "observablebuilderservice.h"
 #include "observablemodelregister_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-namespace factory
-{
-
-class ObservableModelRegisterFactory : public plugframe::core::bundle::BundleFactory
+class ObservableModelRegisterFactory : public plugframe::BundleFactory
 {
 public:
     ObservableModelRegisterFactory();
     ~ObservableModelRegisterFactory() override;
 
 protected:
-    virtual service::ModelRegisterService *createModelRegisterService(elekdom::plugframe::core::bundle::BundleImplementation *implementation);
-    virtual service::ObservableBuilderService *createObservableBuilderService(elekdom::plugframe::core::bundle::BundleImplementation *implementation);
-    virtual elekdom::plugframe::core::service::ServiceImplementationInterface *createServiceImplementation(elekdom::plugframe::core::bundle::BundleImplementation *implementation,
-                                                                                 const QString& sName,
-                                                                                 const QString& serviceVersion) override;
+    virtual ModelRegisterService *createModelRegisterService(plugframe::BundleImplementation *implementation);
+    virtual ObservableBuilderService *createObservableBuilderService(plugframe::BundleImplementation *implementation);
+    virtual plugframe::ServiceImplementationInterface *createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                                   const QString& sName,
+                                                                                   const QString& serviceVersion) override;
 };
-
-}//namespace factory
-}//namespace observablemodelregister
-}//namespace oplink
-}//namespace elekdom
 
 #endif // OBSERVABLEMODELREGISTERFACTORY_H

@@ -16,24 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablemodelregisterserviceimplementation.h"
 #include "observablemodelregister.h"
 
-using namespace elekdom::oplink::observablemodelregister;
-
-service::ObservableModelRegisterServiceImplementation::ObservableModelRegisterServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation):
-    plugframe::core::service::ServiceImplementation{implementation}
+ObservableModelRegisterServiceImplementation::ObservableModelRegisterServiceImplementation(plugframe::BundleImplementation *implementation):
+    plugframe::ServiceImplementation{implementation}
 {
 
 }
 
-service::ObservableModelRegisterServiceImplementation::~ObservableModelRegisterServiceImplementation()
+ObservableModelRegisterServiceImplementation::~ObservableModelRegisterServiceImplementation()
 {
 
 }
 
-bundle::ObservableModelRegister *service::ObservableModelRegisterServiceImplementation::observableModelRegister()
+ObservableModelRegister *ObservableModelRegisterServiceImplementation::observableModelRegister()
 {
-    return dynamic_cast<bundle::ObservableModelRegister*>(implementation());
+    return dynamic_cast<ObservableModelRegister*>(implementation());
 }

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "modelregisterservice.h"
 #include "observablemodelregister.h"
 #include "service-int/modelregisterserviceinterface.h"
@@ -24,11 +23,7 @@
 #include "model/processor/commandprocessormodel.h"
 #include "model/observable/observablemodel.h"
 
-using namespace elekdom::oplink::observablemodelregister::service;
-using namespace elekdom::oplink::core;
-
-
-ModelRegisterService::ModelRegisterService(plugframe::core::bundle::BundleImplementation *implementation):
+ModelRegisterService::ModelRegisterService(plugframe::BundleImplementation *implementation):
     ObservableModelRegisterServiceImplementation{implementation}
 {
 
@@ -39,32 +34,32 @@ ModelRegisterService::~ModelRegisterService()
 
 }
 
-bool ModelRegisterService::addPropertyModel(model::QspObservablePropertyModel model)
+bool ModelRegisterService::addPropertyModel(oplink::QspObservablePropertyModel model)
 {
     return observableModelRegister()->addPropertyModel(model);
 }
 
-model::QspObservablePropertyModel ModelRegisterService::getPropertyModel(model::PropertyModelName id)
+oplink::QspObservablePropertyModel ModelRegisterService::getPropertyModel(oplink::PropertyModelName id)
 {
     return observableModelRegister()->getPropertyModel(id);
 }
 
-bool ModelRegisterService::addProcessorModel(model::QspCommandProcessorModel model)
+bool ModelRegisterService::addProcessorModel(oplink::QspCommandProcessorModel model)
 {
     return observableModelRegister()->addProcessorModel(model);
 }
 
-model::QspCommandProcessorModel ModelRegisterService::getProcessorModel(model::ProcessorModelName id)
+oplink::QspCommandProcessorModel ModelRegisterService::getProcessorModel(oplink::ProcessorModelName id)
 {
     return observableModelRegister()->getProcessorModel(id);
 }
 
-bool ModelRegisterService::addObservableModel(model::QspObservableModel model)
+bool ModelRegisterService::addObservableModel(oplink::QspObservableModel model)
 {
     return observableModelRegister()->addObservableModel(model);
 }
 
 QString ModelRegisterService::serviceName()
 {
-    return service::ModelRegisterServiceInterface::serviceName();
+    return oplink::ModelRegisterServiceInterface::serviceName();
 }

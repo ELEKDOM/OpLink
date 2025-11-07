@@ -16,12 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QMutexLocker>
 #include "logger/pflog.h"
 #include "service-int/modelregisterserviceinterface.h"
 #include "service-int/observablebuilderserviceinterface.h"
-#include "bundle/bundlecontext.h"
 #include "model/observable/observablemodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "model/property/observablepropertymodel.h"
@@ -30,11 +28,8 @@
 #include "observablemodelregister.h"
 #include "observablemodelregisterfactory.h"
 
-using namespace elekdom::oplink::observablemodelregister::bundle;
-using namespace elekdom::oplink::core;
-
 ObservableModelRegister::ObservableModelRegister():
-    plugframe::core::bundle::BundleImplementation{"ObservableModelRegister"}
+    plugframe::BundleImplementation{"ObservableModelRegister"}
 {
 }
 
@@ -45,9 +40,9 @@ ObservableModelRegister::~ObservableModelRegister()
     m_observableModels.clear();
 }
 
-model::QspObservableModel ObservableModelRegister::getObservableModel(const model::ObservableModelName& modelName)
+oplink::QspObservableModel ObservableModelRegister::getObservableModel(const oplink::ObservableModelName& modelName)
 {
-    model::QspObservableModel ret;
+    oplink::QspObservableModel ret;
 
     if (m_observableModels.contains(modelName))
     {
@@ -57,11 +52,11 @@ model::QspObservableModel ObservableModelRegister::getObservableModel(const mode
     return ret;
 }
 
-bool ObservableModelRegister::addPropertyModel(model::QspObservablePropertyModel model)
+bool ObservableModelRegister::addPropertyModel(oplink::QspObservablePropertyModel model)
 {
     QMutexLocker        locker(&m_mutex);
     bool                ret{false};
-    const model::PropertyModelName& id{model->modelName()};
+    const oplink::PropertyModelName& id{model->modelName()};
 
     if (!m_propertyModels.contains(id))
     {
@@ -73,18 +68,18 @@ bool ObservableModelRegister::addPropertyModel(model::QspObservablePropertyModel
     return ret;
 }
 
-model::QspObservablePropertyModel ObservableModelRegister::getPropertyModel(model::PropertyModelName id)
+oplink::QspObservablePropertyModel ObservableModelRegister::getPropertyModel(oplink::PropertyModelName id)
 {
     QMutexLocker locker(&m_mutex);
 
     return m_propertyModels.value(id);
 }
 
-bool ObservableModelRegister::addProcessorModel(model::QspCommandProcessorModel model)
+bool ObservableModelRegister::addProcessorModel(oplink::QspCommandProcessorModel model)
 {
-    QMutexLocker                locker(&m_mutex);
-    bool                        ret{false};
-    const model::ProcessorModelName& id{model->modelName()};
+    QMutexLocker                      locker(&m_mutex);
+    bool                              ret{false};
+    const oplink::ProcessorModelName& id{model->modelName()};
 
     if (!m_processorModels.contains(id))
     {
@@ -96,14 +91,14 @@ bool ObservableModelRegister::addProcessorModel(model::QspCommandProcessorModel 
     return ret;
 }
 
-model::QspCommandProcessorModel ObservableModelRegister::getProcessorModel(model::ProcessorModelName id)
+oplink::QspCommandProcessorModel ObservableModelRegister::getProcessorModel(oplink::ProcessorModelName id)
 {
     QMutexLocker locker(&m_mutex);
 
     return m_processorModels.value(id);
 }
 
-bool ObservableModelRegister::addObservableModel(model::QspObservableModel model)
+bool ObservableModelRegister::addObservableModel(oplink::QspObservableModel model)
 {
     QMutexLocker    locker(&m_mutex);
     bool            ret{false};
@@ -118,12 +113,12 @@ bool ObservableModelRegister::addObservableModel(model::QspObservableModel model
     return ret;
 }
 
-observable::QspObservableBuilder ObservableModelRegister::buildObservable(model::QspObservableBuilderArgs builderargs)
+oplink::QspObservableBuilder ObservableModelRegister::buildObservable(oplink::QspObservableBuilderArgs builderargs)
 {
     pfInfo2(logChannel()) << "buildObservable : observableName = " << builderargs->m_observableName << ", observableModelName = " << builderargs->m_observableModelName << ", observableLocalisation = " << builderargs->m_observableLocalisation;
-    QMutexLocker                     locker(&m_mutex);
-    model::QspObservableModel        observableModel{getObservableModel(builderargs->m_observableModelName)};
-    observable::QspObservableBuilder newObs;
+    QMutexLocker                 locker(&m_mutex);
+    oplink::QspObservableModel   observableModel{getObservableModel(builderargs->m_observableModelName)};
+    oplink::QspObservableBuilder newObs;
 
     if (!observableModel.isNull())
     {
@@ -133,22 +128,22 @@ observable::QspObservableBuilder ObservableModelRegister::buildObservable(model:
     return newObs;
 }
 
-elekdom::plugframe::core::bundle::BundleFactory *ObservableModelRegister::createFactory()
+plugframe::BundleFactory *ObservableModelRegister::createFactory()
 {
-    return new factory::ObservableModelRegisterFactory;
+    return new ObservableModelRegisterFactory;
 }
 
-plugin::ServiceInterface *ObservableModelRegister::qtServiceInterface(const QString &sName)
+plugframe::ServiceInterface *ObservableModelRegister::qtServiceInterface(const QString &sName)
 {
-    plugframe::core::plugin::ServiceInterface *ret{nullptr};
+    plugframe::ServiceInterface *ret{nullptr};
 
-    if (service::ModelRegisterServiceInterface::serviceName() == sName)
+    if (oplink::ModelRegisterServiceInterface::serviceName() == sName)
     {
-        ret = qobject_cast<service::ModelRegisterServiceInterface*>(getQplugin());
+        ret = qobject_cast<oplink::ModelRegisterServiceInterface*>(getQplugin());
     }
-    else if (service::ObservableBuilderServiceInterface::serviceName() == sName)
+    else if (oplink::ObservableBuilderServiceInterface::serviceName() == sName)
     {
-        ret = qobject_cast<service::ObservableBuilderServiceInterface*>(getQplugin());
+        ret = qobject_cast<oplink::ObservableBuilderServiceInterface*>(getQplugin());
     }
 
     return ret;
