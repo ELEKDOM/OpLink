@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELLOADERFACTORY_H
 #define OBSERVABLEMODELLOADERFACTORY_H
 
@@ -24,22 +23,13 @@
 #include "model/modelnames.h"
 #include "observable/observablenames.h"
 #include "command/command-names.h"
+#include "event/mandatorypropertiesmodelloadingevent.h"
+#include "event/specificpropertiesmodelloadingevent.h"
+#include "event/processorsmodelloadingevent.h"
+#include "event/observablemodelsloadingevent.h"
 #include "olcore-backend-lib_forward.h"
-#include "observablemodelloader_forward.h"
 
-using namespace elekdom::plugframe::core::bundle;
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-namespace factory
-{
-
-class ObservableModelLoaderFactory : public plugframe::core::bundle::BundleFactory
+class ObservableModelLoaderFactory : public plugframe::BundleFactory
 {
 public:
     ObservableModelLoaderFactory();
@@ -50,46 +40,41 @@ public:
     virtual SpecificPropertiesModelLoadingEvent *createSpecificPropertiesModelLoadingEvent(unsigned short cpt);
     virtual ProcessorsModelLoadingEvent *createProcessorsModelLoadingEvent(unsigned short cpt);
     virtual ObservableModelsLoadingEvent *createObservableModelsLoadingEvent(unsigned short cpt);
-    virtual model::ObservablePropertyModel *createObservablePropertyModel(const model::PropertyModelName& modelName,
-                                                                             const observable::PropertyName& propertyId,
-                                                                             const observable::PropertyType& propertyType,
-                                                                             QVariant::Type valueType);
-    virtual model::ObservablePropertyModel *createPropertyModel(const model::PropertyModelName& modelName,
-                                                                   const observable::PropertyName& propertyId,
-                                                                   QVariant::Type valueType);
-    virtual model::ObservablePropertyModel *createLoadPropertyModel(const model::PropertyModelName& modelName,
-                                                                       const observable::PropertyName& propertyId,
-                                                                       QVariant::Type valueType);
-    virtual model::ObservablePropertyModel *createActuatorPropertyModel(const model::PropertyModelName& modelName,
-                                                                           const observable::PropertyName& propertyId,
-                                                                           QVariant::Type valueType);
-    virtual model::ObservablePropertyModel *createSensorPropertyModel(const model::PropertyModelName& modelName,
-                                                                         const observable::PropertyName& propertyId,
-                                                                         QVariant::Type valueType);
-    virtual model::CommandProcessorModel *createCommandProcessorModel(const model::ProcessorModelName& modelName,
-                                                                         const command::CommandName& commandName,
-                                                                         const observable::ProcessorType& proccessorType);
-    virtual model::CommandProcessorModel *createLoadCommandProcessorModel(const model::ProcessorModelName& modelName,
-                                                                             const command::CommandName& commandName);
-    virtual model::CommandProcessorModel *createCheckCommandProcessorModel(const model::ProcessorModelName& modelName,
-                                                                              const command::CommandName& commandName);
-    virtual model::CommandProcessorModel *createNoCheckCommandProcessorModel(const model::ProcessorModelName& modelName,
-                                                                                const command::CommandName& commandName);
-    virtual model::ObservableModel *createObservableModel(const model::ObservableModelName& modelName,
-                                                             const observable::ObservableType& className);
-    virtual model::ObservableModel *createLoadObservableModel(const model::ObservableModelName& modelName);
-    virtual model::ObservableModel *createActuatorObservableModel(const model::ObservableModelName& modelName);
-    virtual model::ObservableModel *createSensorObservableModel(const model::ObservableModelName& modelName);
+    virtual oplink::ObservablePropertyModel *createObservablePropertyModel(const oplink::PropertyModelName& modelName,
+                                                                           const oplink::PropertyName& propertyId,
+                                                                           const oplink::PropertyType& propertyType,
+                                                                           QMetaType::Type valueType);
+    virtual oplink::ObservablePropertyModel *createPropertyModel(const oplink::PropertyModelName& modelName,
+                                                                 const oplink::PropertyName& propertyId,
+                                                                 QMetaType::Type valueType);
+    virtual oplink::ObservablePropertyModel *createLoadPropertyModel(const oplink::PropertyModelName& modelName,
+                                                                     const oplink::PropertyName& propertyId,
+                                                                     QMetaType::Type valueType);
+    virtual oplink::ObservablePropertyModel *createActuatorPropertyModel(const oplink::PropertyModelName& modelName,
+                                                                         const oplink::PropertyName& propertyId,
+                                                                         QMetaType::Type valueType);
+    virtual oplink::ObservablePropertyModel *createSensorPropertyModel(const oplink::PropertyModelName& modelName,
+                                                                       const oplink::PropertyName& propertyId,
+                                                                       QMetaType::Type valueType);
+    virtual oplink::CommandProcessorModel *createCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                       const oplink::CommandName& commandName,
+                                                                       const oplink::ProcessorType& proccessorType);
+    virtual oplink::CommandProcessorModel *createLoadCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                           const oplink::CommandName& commandName);
+    virtual oplink::CommandProcessorModel *createCheckCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                            const oplink::CommandName& commandName);
+    virtual oplink::CommandProcessorModel *createNoCheckCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                              const oplink::CommandName& commandName);
+    virtual oplink::ObservableModel *createObservableModel(const oplink::ObservableModelName& modelName,
+                                                           const oplink::ObservableType& className);
+    virtual oplink::ObservableModel *createLoadObservableModel(const oplink::ObservableModelName& modelName);
+    virtual oplink::ObservableModel *createActuatorObservableModel(const oplink::ObservableModelName& modelName);
+    virtual oplink::ObservableModel *createSensorObservableModel(const oplink::ObservableModelName& modelName);
 
 protected:
     PF_createServiceImplementation_DECL
-    BundleEmitter *createBundleEmitter(Bundle& myBundle) override;
-    BundleListener *createBundleListener(Bundle& myBundle) override;
+    plugframe::BundleEmitter *createBundleEmitter(plugframe::Bundle& myBundle) override;
+    plugframe::BundleListener *createBundleListener(plugframe::Bundle& myBundle) override;
 };
-
-}//namespace factory
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
 
 #endif // OBSERVABLEMODELLOADERFACTORY_H

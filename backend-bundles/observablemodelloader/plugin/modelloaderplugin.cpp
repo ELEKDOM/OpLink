@@ -16,17 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "processorsmodelloadingevent.h"
+#include "modelloaderplugin.h"
+#include "observablemodelloader.h"
 
-const QString ProcessorsModelLoadingEvent::s_typeId {"OpLink.ProcessorsModel.LoadingEvent"};
-
-ProcessorsModelLoadingEvent::ProcessorsModelLoadingEvent(unsigned short cpt):
-    plugframe::LoopEvent{s_typeId, cpt}
+ModelLoaderPlugin::ModelLoaderPlugin()
 {
 
 }
 
-ProcessorsModelLoadingEvent::~ProcessorsModelLoadingEvent()
+ModelLoaderPlugin::~ModelLoaderPlugin()
 {
 
 }
+
+plugframe::Bundle4PluginInterface *ModelLoaderPlugin::createImplementation()
+{
+    return new ObservableModelLoader;
+}
+
+PF_bindServicesImplementations_DEF(ModelLoaderPlugin)

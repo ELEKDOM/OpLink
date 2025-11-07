@@ -24,29 +24,17 @@
 #include "observable/observablenames.h"
 #include "command/command-names.h"
 #include "service-int/modelregisterserviceinterface.h"
+#include "observablemodelloaderemitter.h"
 #include "observablemodelloader_forward.h"
-#include "olcore-backend-lib_forward.h"
 
-using namespace elekdom::plugframe::core::bundle;
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-namespace bundle
-{
-
-class ObservableModelLoaderListener : public BundleListener
+class ObservableModelLoaderListener : public plugframe::BundleListener
 {
 public:
-    ObservableModelLoaderListener(Bundle& bundle, QObject *parent = nullptr);
+    ObservableModelLoaderListener(plugframe::Bundle& bundle, QObject *parent = nullptr);
     ~ObservableModelLoaderListener() override;
 
 protected:
-    void onEvent(plugframe::core::event::QspEvent ev) override;
+    void onEvent(plugframe::QspEvent ev) override;
     virtual void onMandatoryPropertiesModelLoadingEvent(MandatoryPropertiesModelLoadingEvent *event);
     virtual void onSpecificPropertiesModelLoadingEvent(SpecificPropertiesModelLoadingEvent *event);
     virtual void onProcessorsModelLoadingEvent(ProcessorsModelLoadingEvent *event);
@@ -59,26 +47,21 @@ protected:
     void specificPropertiesModelEventLoop(quint16 cpt);
     void processorModelEventLoop(quint16 cpt);
     void observableModelsEventLoop(quint16 cpt);
-    bool buildRegisterPropertyModel(const model::PropertyModelName& modelName,
-                                    const observable::PropertyName& propertyId,
-                                    const observable::PropertyType& propertyType,
-                                    QVariant::Type valueType);
-    bool buildRegisterProcessorModel(const model::ProcessorModelName& modelName,
-                                     const command::CommandName& cmdName,
-                                     const observable::ProcessorType& processorType);
+    bool buildRegisterPropertyModel(const oplink::PropertyModelName& modelName,
+                                    const oplink::PropertyName& propertyId,
+                                    const oplink::PropertyType& propertyType,
+                                    QMetaType::Type valueType);
+    bool buildRegisterProcessorModel(const oplink::ProcessorModelName& modelName,
+                                     const oplink::CommandName& cmdName,
+                                     const oplink::ProcessorType& processorType);
     void observableModelsLoadingLoopEnd();
-    QSharedPointer<ObservableModelLoaderEmitter> loaderEmitter();
-    factory::ObservableModelLoaderFactory& loaderFactory();
-    observablemodelregister::service::ModelRegisterServiceInterface *modelRegisterService();
-    virtual void setMandatoryProperties(model::QspObservableModel &observableModel);
+    QspObservableModelLoaderEmitter loaderEmitter();
+    ObservableModelLoaderFactory& loaderFactory();
+    oplink::ModelRegisterServiceInterface *modelRegisterService();
+    virtual void setMandatoryProperties(oplink::QspObservableModel &observableModel);
 
 private:
     ObservableModelLoader &getObservableModelLoaderBundle();
 };
-
-}//namespace bundle
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
 
 #endif // OBSERVABLEMODELLOADERLISTENER_H

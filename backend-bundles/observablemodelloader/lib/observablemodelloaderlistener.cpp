@@ -22,25 +22,18 @@
 #include "event/specificpropertiesmodelloadingevent.h"
 #include "event/processorsmodelloadingevent.h"
 #include "event/observablemodelsloadingevent.h"
-#include "observable/property/property.h"
 #include "observable/property/propertyid.h"
 #include "observable/property/propertyclassnames.h"
-#include "observable/property/lowproperty.h"
 #include "model/property/propertymodelnames.h"
 #include "model/property/observablepropertymodel.h"
 #include "model/processor/commandprocessormodel.h"
 #include "model/observable/observablemodel.h"
 #include "observablemodelloaderlistener.h"
-#include "observablemodelloaderemitter.h"
 #include "observablemodelloader.h"
 #include "observablemodelloaderfactory.h"
 
-using namespace elekdom::oplink::observablemodelloader::bundle;
-using namespace elekdom::oplink::core;
-using namespace elekdom::oplink;
-
-ObservableModelLoaderListener::ObservableModelLoaderListener(Bundle& bundle, QObject *parent):
-    BundleListener{bundle,parent}
+ObservableModelLoaderListener::ObservableModelLoaderListener(plugframe::Bundle& bundle, QObject *parent):
+    plugframe::BundleListener{bundle,parent}
 {
 
 }
@@ -50,9 +43,9 @@ ObservableModelLoaderListener::~ObservableModelLoaderListener()
 
 }
 
-void ObservableModelLoaderListener::onEvent(plugframe::core::event::QspEvent ev)
+void ObservableModelLoaderListener::onEvent(plugframe::QspEvent ev)
 {
-    plugframe::core::event::Event* event{ev.data()};
+    plugframe::Event* event{ev.data()};
     QString evtTypeId {ev->getTypeId()};
 
     if (evtTypeId == MandatoryPropertiesModelLoadingEvent::s_typeId)
@@ -101,10 +94,10 @@ void ObservableModelLoaderListener::onSpecificPropertiesModelLoadingEvent(Specif
         ObservableModelLoader& bundle{getObservableModelLoaderBundle()};
         quint16 modelIdx;
         bool hasNext;
-        core::model::PropertyModelName modelName;
-        core::observable::PropertyName propertyName;
-        core::observable::PropertyType propertyClassName;
-        QVariant::Type valueType;
+        oplink::PropertyModelName modelName;
+        oplink::PropertyName propertyName;
+        oplink::PropertyType propertyClassName;
+        QMetaType::Type valueType;
 
         modelIdx = event->cpt() - 1;
         hasNext = bundle.nextPropertyModelDeclaration(modelIdx,
@@ -134,9 +127,9 @@ void ObservableModelLoaderListener::onProcessorsModelLoadingEvent(ProcessorsMode
         ObservableModelLoader& bundle{getObservableModelLoaderBundle()};
         quint16 modelIdx;
         bool hasNext;
-        core::model::ProcessorModelName modelName;
-        core::command::CommandName commandName;
-        core::observable::ProcessorType processorClassName;
+        oplink::ProcessorModelName modelName;
+        oplink::CommandName commandName;
+        oplink::ProcessorType processorClassName;
 
         modelIdx = event->cpt() - 1;
         hasNext = bundle.nextProcessorModelDeclaration(modelIdx,
@@ -165,8 +158,8 @@ void ObservableModelLoaderListener::onObservableModelsLoadingEvent(ObservableMod
         ObservableModelLoader& bundle{getObservableModelLoaderBundle()};
         quint16 modelIdx;
         bool hasNext;
-        core::model::ObservableModelName modelName;
-        core::observable::ObservableType observableClassName;
+        oplink::ObservableModelName modelName;
+        oplink::ObservableType observableClassName;
         QStringList propertyModelRefs;
         QStringList processorModelRefs;
 
@@ -178,10 +171,10 @@ void ObservableModelLoaderListener::onObservableModelsLoadingEvent(ObservableMod
                                                         processorModelRefs);
         if (hasNext)
         {
-            factory::ObservableModelLoaderFactory& modelLoaderFactory{dynamic_cast<factory::ObservableModelLoaderFactory&>(getFactory())};
+            ObservableModelLoaderFactory& modelLoaderFactory{dynamic_cast<ObservableModelLoaderFactory&>(getFactory())};
 
             // Create an observable model
-            oplink::core::model::QspObservableModel observableModel{modelLoaderFactory.createObservableModel(modelName,observableClassName)};
+            oplink::QspObservableModel observableModel{modelLoaderFactory.createObservableModel(modelName,observableClassName)};
 
             if(observableModel.isNull())
             {
@@ -196,7 +189,7 @@ void ObservableModelLoaderListener::onObservableModelsLoadingEvent(ObservableMod
                 setMandatoryProperties(observableModel);
 
                 // Specific properties
-                oplink::core::model::QspObservablePropertyModel propertyModel;
+                oplink::QspObservablePropertyModel propertyModel;
                 for (int i = 0; i < propertyModelRefs.size(); ++i)
                 {
                     propertyModel = modelRegisterService()->getPropertyModel(propertyModelRefs.at(i));
@@ -206,7 +199,7 @@ void ObservableModelLoaderListener::onObservableModelsLoadingEvent(ObservableMod
                 // Set the model's processors
                 //---------------------------
 
-                oplink::core::model::QspCommandProcessorModel processorModel;
+                oplink::QspCommandProcessorModel processorModel;
                 for (int i = 0; i < processorModelRefs.size(); ++i)
                 {
                     processorModel = modelRegisterService()->getProcessorModel(processorModelRefs.at(i));
@@ -236,10 +229,10 @@ void ObservableModelLoaderListener::mandatoryPropertiesModelLoadingLoop1()
 {
     pfDebug3(getLogBundleName()) << "->mandatoryPropertiesModelLoadingLoop1";
 
-    buildRegisterPropertyModel(model::PropertyModelNames::MODEL_P_NAME,
-                               observable::PropertyId::P_NAME,
-                               observable::PropertyClassNames::PROPERTY_CLASS,
-                               QVariant::String);
+    buildRegisterPropertyModel(oplink::PropertyModelNames::MODEL_P_NAME,
+                               oplink::PropertyId::P_NAME,
+                               oplink::PropertyClassNames::PROPERTY_CLASS,
+                               QMetaType::QString);
 
     mandatoryPropertiesModelEventLoop(2);
 
@@ -250,10 +243,10 @@ void ObservableModelLoaderListener::mandatoryPropertiesModelLoadingLoop2()
 {
     pfDebug3(getLogBundleName()) << "->mandatoryPropertiesModelLoadingLoop2";
 
-    buildRegisterPropertyModel(model::PropertyModelNames::MODEL_P_OMODEL,
-                               observable::PropertyId::P_MODEL,
-                               observable::PropertyClassNames::PROPERTY_CLASS,
-                               QVariant::String);
+    buildRegisterPropertyModel(oplink::PropertyModelNames::MODEL_P_OMODEL,
+                               oplink::PropertyId::P_MODEL,
+                               oplink::PropertyClassNames::PROPERTY_CLASS,
+                               QMetaType::QString);
 
     mandatoryPropertiesModelEventLoop(3);
 
@@ -264,10 +257,10 @@ void ObservableModelLoaderListener::mandatoryPropertiesModelLoadingLoop3()
 {
     pfDebug3(getLogBundleName()) << "->mandatoryPropertiesModelLoadingLoop3";
 
-    buildRegisterPropertyModel(model::PropertyModelNames::MODEL_P_LOCALISATION,
-                               observable::PropertyId::P_LOCALISATION,
-                               observable::PropertyClassNames::PROPERTY_CLASS,
-                               QVariant::String);
+    buildRegisterPropertyModel(oplink::PropertyModelNames::MODEL_P_LOCALISATION,
+                               oplink::PropertyId::P_LOCALISATION,
+                               oplink::PropertyClassNames::PROPERTY_CLASS,
+                               QMetaType::QString);
 
     mandatoryPropertiesModelEventLoop(4);
 
@@ -319,24 +312,24 @@ void ObservableModelLoaderListener::observableModelsEventLoop(quint16 cpt)
     pfDebug3(getLogBundleName()) << "<-observableModelsEventLoop";
 }
 
-bool ObservableModelLoaderListener::buildRegisterPropertyModel(const model::PropertyModelName& modelName,
-                                                                  const observable::PropertyName &propertyId,
-                                                                  const observable::PropertyType &propertyType,
-                                                                  QVariant::Type valueType)
+bool ObservableModelLoaderListener::buildRegisterPropertyModel(const oplink::PropertyModelName& modelName,
+                                                               const oplink::PropertyName &propertyId,
+                                                               const oplink::PropertyType &propertyType,
+                                                               QMetaType::Type valueType)
 {
     // Builds property model
-    model::QspObservablePropertyModel propertyModel{loaderFactory().createObservablePropertyModel(modelName, propertyId, propertyType, valueType)};
+    oplink::QspObservablePropertyModel propertyModel{loaderFactory().createObservablePropertyModel(modelName, propertyId, propertyType, valueType)};
 
     // Registers model
     return modelRegisterService()->addPropertyModel(propertyModel);
 }
 
-bool ObservableModelLoaderListener::buildRegisterProcessorModel(const model::ProcessorModelName &modelName,
-                                                                   const command::CommandName &cmdName,
-                                                                   const observable::ProcessorType &processorType)
+bool ObservableModelLoaderListener::buildRegisterProcessorModel(const oplink::ProcessorModelName &modelName,
+                                                                const oplink::CommandName &cmdName,
+                                                                const oplink::ProcessorType &processorType)
 {
     // Builds processor model
-    model::QspCommandProcessorModel processorModel{loaderFactory().createCommandProcessorModel(modelName, cmdName, processorType)};
+    oplink::QspCommandProcessorModel processorModel{loaderFactory().createCommandProcessorModel(modelName, cmdName, processorType)};
 
     // Registers model
     return modelRegisterService()->addProcessorModel(processorModel);
@@ -361,27 +354,27 @@ QspObservableModelLoaderEmitter ObservableModelLoaderListener::loaderEmitter()
     return loaderBundle.emitter();
 }
 
-observablemodelloader::factory::ObservableModelLoaderFactory& ObservableModelLoaderListener::loaderFactory()
+ObservableModelLoaderFactory& ObservableModelLoaderListener::loaderFactory()
 {
     ObservableModelLoader& loaderBundle{dynamic_cast<ObservableModelLoader&>(getBundle())};
-    return dynamic_cast<factory::ObservableModelLoaderFactory&>(loaderBundle.getFactory());
+    return dynamic_cast<ObservableModelLoaderFactory&>(loaderBundle.getFactory());
 }
 
-observablemodelregister::service::ModelRegisterServiceInterface *observablemodelloader::bundle::ObservableModelLoaderListener::modelRegisterService()
+oplink::ModelRegisterServiceInterface *ObservableModelLoaderListener::modelRegisterService()
 {
     ObservableModelLoader& loaderBundle{dynamic_cast<ObservableModelLoader&>(getBundle())};
     return loaderBundle.modelRegisterService();
 }
 
-void observablemodelloader::bundle::ObservableModelLoaderListener::setMandatoryProperties(model::QspObservableModel &observableModel)
+void ObservableModelLoaderListener::setMandatoryProperties(oplink::QspObservableModel &observableModel)
 {
-    model::QspObservablePropertyModel propertyModel = modelRegisterService()->getPropertyModel(model::PropertyModelNames::MODEL_P_NAME);
+    oplink::QspObservablePropertyModel propertyModel = modelRegisterService()->getPropertyModel(oplink::PropertyModelNames::MODEL_P_NAME);
     observableModel->addPropertyModelRef(propertyModel);
 
-    propertyModel = modelRegisterService()->getPropertyModel(model::PropertyModelNames::MODEL_P_OMODEL);
+    propertyModel = modelRegisterService()->getPropertyModel(oplink::PropertyModelNames::MODEL_P_OMODEL);
     observableModel->addPropertyModelRef(propertyModel);
 
-    propertyModel = modelRegisterService()->getPropertyModel(model::PropertyModelNames::MODEL_P_LOCALISATION);
+    propertyModel = modelRegisterService()->getPropertyModel(oplink::PropertyModelNames::MODEL_P_LOCALISATION);
     observableModel->addPropertyModelRef(propertyModel);
 }
 

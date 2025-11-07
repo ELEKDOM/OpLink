@@ -16,23 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SPECIFICPROPERTIESMODELLOADINGEVENT_H
 #define SPECIFICPROPERTIESMODELLOADINGEVENT_H
 
 #include <QString>
 #include "event/loopevent.h"
 
-using namespace elekdom::plugframe::core::event;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-
-class SpecificPropertiesModelLoadingEvent : public LoopEvent
+class SpecificPropertiesModelLoadingEvent : public plugframe::LoopEvent
 {
 public:
     SpecificPropertiesModelLoadingEvent(unsigned short cpt);
@@ -41,9 +31,5 @@ public:
 public:
     static const QString s_typeId;
 };
-
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
 
 #endif // SPECIFICPROPERTIESMODELLOADINGEVENT_H

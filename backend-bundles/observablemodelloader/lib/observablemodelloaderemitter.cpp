@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "event/event.h"
-#include "event/mandatorypropertiesmodelloadingevent.h"
-#include "event/specificpropertiesmodelloadingevent.h"
-#include "event/processorsmodelloadingevent.h"
-#include "event/observablemodelsloadingevent.h"
 #include "observablemodelloaderemitter.h"
 #include "observablemodelloaderfactory.h"
 
-using namespace elekdom::oplink::observablemodelloader::bundle;
-
-ObservableModelLoaderEmitter::ObservableModelLoaderEmitter(Bundle& bundle, QObject *parent):
+ObservableModelLoaderEmitter::ObservableModelLoaderEmitter(plugframe::Bundle& bundle, QObject *parent):
     BundleEmitter{bundle,parent}
 {
 
@@ -44,8 +37,8 @@ void ObservableModelLoaderEmitter::startLoadingEventLoop()
     pfDebug3(getLogBundleName()) << "->ObservableModelLoaderEmitter::startLoadingEventLoop";
 
     // Create the event
-    factory::ObservableModelLoaderFactory& myFactory = dynamic_cast<factory::ObservableModelLoaderFactory&>(getFactory());
-    plugframe::core::event::QspEvent evt{myFactory.createMandatoryPropertiesModelLoadingEvent(1)};
+    ObservableModelLoaderFactory& myFactory = dynamic_cast<ObservableModelLoaderFactory&>(getFactory());
+    plugframe::QspEvent evt{myFactory.createMandatoryPropertiesModelLoadingEvent(1)};
 
     // Post the event
     pfDebug4(getLogBundleName()) << "emit MandatoryPropertiesModelLoadingEvent 1";
@@ -58,8 +51,8 @@ void ObservableModelLoaderEmitter::mandatoryPropertiesModelEventLoop(unsigned sh
 {
     pfDebug3(getLogBundleName()) << "->ObservableModelLoaderEmitter::mandatoryPropertiesModelEventLoop, " << cpt;
 
-    factory::ObservableModelLoaderFactory& myFactory = dynamic_cast<factory::ObservableModelLoaderFactory&>(getFactory());
-    plugframe::core::event::QspEvent evt{myFactory.createMandatoryPropertiesModelLoadingEvent(cpt)};
+    ObservableModelLoaderFactory& myFactory = dynamic_cast<ObservableModelLoaderFactory&>(getFactory());
+    plugframe::QspEvent evt{myFactory.createMandatoryPropertiesModelLoadingEvent(cpt)};
 
     // Post the event
     pfDebug4(getLogBundleName()) << "emit MandatoryPropertiesModelLoadingEvent, " << cpt;
@@ -72,8 +65,8 @@ void ObservableModelLoaderEmitter::specificPropertiesModelEventLoop(unsigned sho
 {
     pfDebug3(getLogBundleName()) << "->ObservableModelLoaderEmitter::specificPropertiesModelEventLoop, " << cpt;
 
-    factory::ObservableModelLoaderFactory& myFactory = dynamic_cast<factory::ObservableModelLoaderFactory&>(getFactory());
-    plugframe::core::event::QspEvent evt{myFactory.createSpecificPropertiesModelLoadingEvent(cpt)};
+    ObservableModelLoaderFactory& myFactory = dynamic_cast<ObservableModelLoaderFactory&>(getFactory());
+    plugframe::QspEvent evt{myFactory.createSpecificPropertiesModelLoadingEvent(cpt)};
 
     // Post the event
     pfDebug4(getLogBundleName()) << "emit SpecificPropertiesModelLoadingEvent, " << cpt;
@@ -86,8 +79,8 @@ void ObservableModelLoaderEmitter::processorModelEventLoop(unsigned short cpt)
 {
     pfDebug3(getLogBundleName()) << "->ObservableModelLoaderEmitter::processorModelEventLoop, " << cpt;
 
-    factory::ObservableModelLoaderFactory& myFactory = dynamic_cast<factory::ObservableModelLoaderFactory&>(getFactory());
-    plugframe::core::event::QspEvent evt{myFactory.createProcessorsModelLoadingEvent(cpt)};
+    ObservableModelLoaderFactory& myFactory = dynamic_cast<ObservableModelLoaderFactory&>(getFactory());
+    plugframe::QspEvent evt{myFactory.createProcessorsModelLoadingEvent(cpt)};
 
     // Post the event
     pfDebug4(getLogBundleName()) << "emit ProcessorsModelLoadingEvent, " << cpt;
@@ -100,8 +93,8 @@ void ObservableModelLoaderEmitter::observableModelsEventLoop(unsigned short cpt)
 {
     pfDebug3(getLogBundleName()) << "->ObservableModelLoaderEmitter::observableModelsEventLoop, " << cpt;
 
-    factory::ObservableModelLoaderFactory& myFactory = dynamic_cast<factory::ObservableModelLoaderFactory&>(getFactory());
-    plugframe::core::event::QspEvent evt{myFactory.createObservableModelsLoadingEvent(cpt)};
+    ObservableModelLoaderFactory& myFactory = dynamic_cast<ObservableModelLoaderFactory&>(getFactory());
+    plugframe::QspEvent evt{myFactory.createObservableModelsLoadingEvent(cpt)};
 
     // Post the event
     pfDebug4(getLogBundleName()) << "emit ObservableModelsLoadingEvent, " << cpt;

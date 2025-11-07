@@ -16,15 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "mandatorypropertiesmodelloadingevent.h"
-
-using namespace elekdom::oplink::observablemodelloader;
 
 const QString MandatoryPropertiesModelLoadingEvent::s_typeId {"Gac.MandatoryProperties.LoadingEvent"};
 
 MandatoryPropertiesModelLoadingEvent::MandatoryPropertiesModelLoadingEvent(unsigned short cpt):
-    LoopEvent{s_typeId, cpt}
+    plugframe::LoopEvent{s_typeId, cpt}
 {
 
 }

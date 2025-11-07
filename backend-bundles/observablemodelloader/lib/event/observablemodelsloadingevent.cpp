@@ -16,15 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablemodelsloadingevent.h"
-
-using namespace elekdom::oplink::observablemodelloader;
 
 const QString ObservableModelsLoadingEvent::s_typeId {"OpLink.ObservableModels.LoadingEvent"};
 
 ObservableModelsLoadingEvent::ObservableModelsLoadingEvent(unsigned short cpt):
-    LoopEvent{s_typeId, cpt}
+    plugframe::LoopEvent{s_typeId, cpt}
 {
 
 }
