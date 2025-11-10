@@ -23,5 +23,15 @@ namespace oplink
 {
     class VirtualEquipmentLoaderHook;
     class VirtualEquipmentConfDocument;
+    //
+    class SessionStartedMessage;
+    class DownloadConfigMessage;
+    class DownloadConfigReplyMessage;
+    class StateValueMessage;
+    class SigninMessage;
+    class SigninReplyMessage;
+    class SignoutMessage;
+    class ReadyMessage;
+    class SubmitOrderMessage;
 }
 #endif // OLCORELIB_FORWARD_H

@@ -21,6 +21,7 @@
 
 #include <QString>
 #include <QStringList>
+#include <QSharedPointer>
 #include "observable/remote/observablestatesgroup.h"
 #include "observable/remote/sessionconfdocument.h"
 #include "observable/remote/sessionconfloader.h"
@@ -66,5 +67,6 @@ private:
     SessionConfDocument m_domDoc;
     SessionConfLoader   m_confLoader;
 };
+using QspSubscribeSession = QSharedPointer<SubscribeSession>;
 }//namespace oplink
 #endif // SUBSCRIBESESSION_H

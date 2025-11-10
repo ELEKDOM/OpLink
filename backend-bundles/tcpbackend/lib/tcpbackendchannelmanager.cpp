@@ -16,33 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QScopedPointer>
-#include "tcpbackendchannelmanager.h"
-#include "abstract_network_tcp/common/tcpchannelmessage.h"
-#include "tcpbackend.h"
 #include "tcpbackendlogchannel.h"
+#include "logger/pflog.h"
+#include "tcpbackendchannelmanager.h"
+#include "tcpbackend.h"
 #include "network_tcp/messagetype.h"
 #include "network_tcp/signinmessage.h"
-#include "network_tcp/signinreplymessage.h"
 #include "network_tcp/signoutmessage.h"
 #include "network_tcp/downloadconfigmessage.h"
-#include "network_tcp/readymessage.h"
 #include "network_tcp/downloadconfigreplymessage.h"
+#include "network_tcp/readymessage.h"
 #include "network_tcp/submitordermessage.h"
+#include "network_tcp/sessionstartedmessage.h"
 #include "network_tcp/statevaluemessage.h"
-#include "service-int/loginserviceinterface.h"
-#include "observable/remote/subscribesession.h"
-#include "logger/pflog.h"
 
-using namespace elekdom::plugframe::core;
-using namespace elekdom::oplink;
-using namespace elekdom::oplink::tcpbackend::bundle;
-
-TcpBackendChannelManager::TcpBackendChannelManager(tcp::server::bundle::TcpServer& bundle,
-                                                   tcp::TcpChannel *channel,
+TcpBackendChannelManager::TcpBackendChannelManager(plugframe::TcpServer& bundle,
+                                                   plugframe::TcpChannel *channel,
                                                    QObject *parent):
-    tcp::server::bundle::TcpServerChannelManager{bundle,channel,parent}
+    plugframe::TcpServerChannelManager{bundle,channel,parent}
 {
     connect(this,SIGNAL(sigDelayedOpenSession(quint32,QString)),SLOT(onDelayedOpenSession(quint32,QString)),Qt::QueuedConnection);
 }
@@ -57,7 +49,7 @@ TcpBackend &TcpBackendChannelManager::tcpBackendBundle()
     return dynamic_cast<TcpBackend&>(bundle());
 }
 
-void TcpBackendChannelManager::processMessage(tcp::TcpChannelMessage *input)
+void TcpBackendChannelManager::processMessage(plugframe::TcpChannelMessage *input)
 {
     if (input)
     {
@@ -66,24 +58,24 @@ void TcpBackendChannelManager::processMessage(tcp::TcpChannelMessage *input)
         // message types accepted as input from a client
         switch(msgType)
         {
-            case static_cast<quint16>(core::tcp::MessageType::Signin) :
-                processSiginMessage(dynamic_cast<core::tcp::SigninMessage*>(input));
+        case static_cast<quint16>(oplink::MessageType::Signin) :
+                processSiginMessage(dynamic_cast<oplink::SigninMessage*>(input));
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::Signout) :
-                processSignoutMessage(dynamic_cast<core::tcp::SignoutMessage*>(input));
+            case static_cast<quint16>(oplink::MessageType::Signout) :
+                processSignoutMessage(dynamic_cast<oplink::SignoutMessage*>(input));
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::DownloadConfig) :
-                processDownloadConfigMessage(dynamic_cast<core::tcp::DownloadConfigMessage*>(input));
+            case static_cast<quint16>(oplink::MessageType::DownloadConfig) :
+                processDownloadConfigMessage(dynamic_cast<oplink::DownloadConfigMessage*>(input));
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::Ready) :
-                processReadyMessage(dynamic_cast<core::tcp::ReadyMessage*>(input));
+            case static_cast<quint16>(oplink::MessageType::Ready) :
+                processReadyMessage(dynamic_cast<oplink::ReadyMessage*>(input));
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::SubmitOrder) :
-                processSubmitOrderMessage(dynamic_cast<core::tcp::SubmitOrderMessage*>(input));
+            case static_cast<quint16>(oplink::MessageType::SubmitOrder) :
+                processSubmitOrderMessage(dynamic_cast<oplink::SubmitOrderMessage*>(input));
             break;
 
             default:
@@ -92,42 +84,46 @@ void TcpBackendChannelManager::processMessage(tcp::TcpChannelMessage *input)
     }
 }
 
-core::tcp::SigninReplyMessage *TcpBackendChannelManager::createSigninSuccessMessage(const QString &identifier, const quint32 &sessionId)
+oplink::SigninReplyMessage *TcpBackendChannelManager::createSigninSuccessMessage(const QString &identifier,
+                                                                                 const quint32 &sessionId)
 {
-    return new core::tcp::SigninReplyMessage(sessionId,identifier,core::tcp::SigninReplyMessage::SigninStatus::Ok);
+    return new oplink::SigninReplyMessage(sessionId,identifier,oplink::SigninReplyMessage::SigninStatus::Ok);
 }
 
-core::tcp::SigninReplyMessage *TcpBackendChannelManager::createSigninFailedMessage(const QString &identifier,
-                                                                                   const core::tcp::SigninReplyMessage::SigninStatus& status)
+oplink::SigninReplyMessage *TcpBackendChannelManager::createSigninFailedMessage(const QString &identifier,
+                                                                                const oplink::SigninReplyMessage::SigninStatus& status)
 {
-    return new core::tcp::SigninReplyMessage(0,identifier,status);
+    return new oplink::SigninReplyMessage(0,identifier,status);
 }
 
-core::tcp::SessionStartedMessage *TcpBackendChannelManager::createSessionStartedMessage(const quint32 &sessionId, const qint16 &confId,const QString& profil)
+oplink::SessionStartedMessage *TcpBackendChannelManager::createSessionStartedMessage(const quint32 &sessionId,
+                                                                                     const qint16 &confId,
+                                                                                     const QString& profil)
 {
-    return new core::tcp::SessionStartedMessage(sessionId,confId,profil);
+    return new oplink::SessionStartedMessage(sessionId,confId,profil);
 }
 
-core::tcp::DownloadConfigReplyMessage *TcpBackendChannelManager::createDownloadConfigReplyMessage(const quint32 &sessionId, const QString &confContent)
+oplink::DownloadConfigReplyMessage *TcpBackendChannelManager::createDownloadConfigReplyMessage(const quint32 &sessionId,
+                                                                                               const QString &confContent)
 {
-    return new  core::tcp::DownloadConfigReplyMessage(sessionId,confContent);
+    return new  oplink::DownloadConfigReplyMessage(sessionId,confContent);
 }
 
-core::tcp::StateValueMessage *TcpBackendChannelManager::createStateValueMessage(const quint32 &sessionId,
-                                                                                const QString &observableName,
-                                                                                const QString &propertyName,
-                                                                                const QVariant &value)
+oplink::StateValueMessage *TcpBackendChannelManager::createStateValueMessage(const quint32 &sessionId,
+                                                                             const QString &observableName,
+                                                                             const QString &propertyName,
+                                                                             const QVariant &value)
 {
-    return new core::tcp::StateValueMessage(sessionId,observableName,propertyName,value);
+    return new oplink::StateValueMessage(sessionId,observableName,propertyName,value);
 }
 
-core::remote::SubscribeSession *TcpBackendChannelManager::createRemoteMonitoringSession(const quint32 &sessionId,
-                                                                                        const QString &fileName,
-                                                                                        engine::service::ObservableServiceInterface *observableService)
+oplink::SubscribeSession *TcpBackendChannelManager::createRemoteMonitoringSession(const quint32 &sessionId,
+                                                                                  const QString &fileName,
+                                                                                  oplink::ObservableServiceInterface *observableService)
 {
-    return new core::remote::SubscribeSession(sessionId,
-                                              fileName,
-                                              observableService);
+    return new oplink::SubscribeSession(sessionId,
+                                        fileName,
+                                        observableService);
 }
 
 void TcpBackendChannelManager::onDisconnectedFromClient()
@@ -136,11 +132,11 @@ void TcpBackendChannelManager::onDisconnectedFromClient()
 }
 
 void TcpBackendChannelManager::onNewState(quint32 sessionId,
-                                          elekdom::oplink::core::observable::ObservableName observableName,
-                                          elekdom::oplink::core::observable::PropertyName propertyName,
+                                          oplink::ObservableName observableName,
+                                          oplink::PropertyName propertyName,
                                           QVariant propertyValue)
 {
-    QScopedPointer<core::tcp::Message> p;
+    QScopedPointer<oplink::Message> p;
 
     p.reset(createStateValueMessage(sessionId,observableName,propertyName,propertyValue));
     sendMessage(*p);
@@ -149,9 +145,9 @@ void TcpBackendChannelManager::onNewState(quint32 sessionId,
 void TcpBackendChannelManager::onDelayedOpenSession(quint32 sessionId, QString profil)
 {
 
-    plugframe::users::service::LoginServiceInterface *loginServ{tcpBackendBundle().loginService()};
+    plugframe::LoginServiceInterface *loginServ{tcpBackendBundle().loginService()};
     qint16 confId;
-    QScopedPointer<core::tcp::Message> p;
+    QScopedPointer<oplink::Message> p;
     bool ok;
 
     ok = openSession(sessionId,profil,loginServ,confId);
@@ -169,15 +165,15 @@ void TcpBackendChannelManager::onDelayedOpenSession(quint32 sessionId, QString p
     sendMessage(*p); // session started on server
 }
 
-void TcpBackendChannelManager::processSiginMessage(core::tcp::SigninMessage *msg)
+void TcpBackendChannelManager::processSiginMessage(oplink::SigninMessage *msg)
 {
     if (msg)
     {
-        plugframe::users::service::LoginServiceInterface *loginServ{tcpBackendBundle().loginService()};
-        plugframe::users::service::LoginServiceInterface::LoginStatus loginStatus;
+        plugframe::LoginServiceInterface *loginServ{tcpBackendBundle().loginService()};
+        plugframe::LoginServiceInterface::LoginStatus loginStatus;
         quint32 sessionId;
         QString profil;
-        QScopedPointer<core::tcp::Message> p;
+        QScopedPointer<oplink::Message> p;
         bool openSession{false};
 
         if (loginServ != nullptr)
@@ -190,7 +186,7 @@ void TcpBackendChannelManager::processSiginMessage(core::tcp::SigninMessage *msg
                              sessionId,
                              profil);
 
-            if (loginStatus == plugframe::users::service::LoginServiceInterface::LoginStatus::Ok)
+            if (loginStatus == plugframe::LoginServiceInterface::LoginStatus::Ok)
             {
                 if (m_remoteMonitoringSessions.find(sessionId) == m_remoteMonitoringSessions.end())
                 {
@@ -201,20 +197,20 @@ void TcpBackendChannelManager::processSiginMessage(core::tcp::SigninMessage *msg
                 {
                     pfErr(s_TcpBackendLogChannel) << tr("Duplicate session Id : ") << sessionId;
                     p.reset(createSigninFailedMessage(msg->identifier(),
-                                                      core::tcp::SigninReplyMessage::SigninStatus::InternalErr));
+                                                      oplink::SigninReplyMessage::SigninStatus::InternalErr));
                 }
             }
             else
             {
                 p.reset(createSigninFailedMessage(msg->identifier(),
-                                                  static_cast<core::tcp::SigninReplyMessage::SigninStatus>(loginStatus)));
+                                                  static_cast<oplink::SigninReplyMessage::SigninStatus>(loginStatus)));
             }
         }
         else
         {
             pfErr(s_TcpBackendLogChannel) << tr("Users login service not found!");
             p.reset(createSigninFailedMessage(msg->identifier(),
-                                              core::tcp::SigninReplyMessage::SigninStatus::InternalErr));
+                                              oplink::SigninReplyMessage::SigninStatus::InternalErr));
         }
 
         sendMessage(*p); //sigin reply
@@ -228,7 +224,7 @@ void TcpBackendChannelManager::processSiginMessage(core::tcp::SigninMessage *msg
     }//if (msg)
 }
 
-void TcpBackendChannelManager::processSignoutMessage(core::tcp::SignoutMessage *msg)
+void TcpBackendChannelManager::processSignoutMessage(oplink::SignoutMessage *msg)
 {
     if (msg)
     {
@@ -237,11 +233,11 @@ void TcpBackendChannelManager::processSignoutMessage(core::tcp::SignoutMessage *
     }
 }
 
-void TcpBackendChannelManager::processDownloadConfigMessage(core::tcp::DownloadConfigMessage *msg)
+void TcpBackendChannelManager::processDownloadConfigMessage(oplink::DownloadConfigMessage *msg)
 {
     if (msg)
     {
-        QScopedPointer<core::tcp::Message> p;
+        QScopedPointer<oplink::Message> p;
         QString configContent;
         quint32 sid{msg->sessionId()};
 
@@ -251,7 +247,7 @@ void TcpBackendChannelManager::processDownloadConfigMessage(core::tcp::DownloadC
     }
 }
 
-void TcpBackendChannelManager::processReadyMessage(core::tcp::ReadyMessage *msg)
+void TcpBackendChannelManager::processReadyMessage(oplink::ReadyMessage *msg)
 {
     if (msg)
     {
@@ -261,7 +257,7 @@ void TcpBackendChannelManager::processReadyMessage(core::tcp::ReadyMessage *msg)
     }
 }
 
-void TcpBackendChannelManager::processSubmitOrderMessage(core::tcp::SubmitOrderMessage *msg)
+void TcpBackendChannelManager::processSubmitOrderMessage(oplink::SubmitOrderMessage *msg)
 {
     if (msg)
     {
@@ -270,7 +266,7 @@ void TcpBackendChannelManager::processSubmitOrderMessage(core::tcp::SubmitOrderM
     }
 }
 
-elekdom::plugframe::users::service::LoginServiceInterface *TcpBackendChannelManager::loginService()
+plugframe::LoginServiceInterface *TcpBackendChannelManager::loginService()
 {
     TcpBackend& tcpBundle{dynamic_cast<TcpBackend&>(bundle())};
 
@@ -279,19 +275,19 @@ elekdom::plugframe::users::service::LoginServiceInterface *TcpBackendChannelMana
 
 bool TcpBackendChannelManager::openSession(const quint32& sessionId,
                                const QString& profil,
-                               elekdom::plugframe::users::service::LoginServiceInterface *lService,
+                               plugframe::LoginServiceInterface *lService,
                                qint16& confId)
 {
     bool ret{false};
-    engine::service::ObservableServiceInterface *oService{tcpBackendBundle().observableService()};
+    oplink::ObservableServiceInterface *oService{tcpBackendBundle().observableService()};
     QString fileName{lService->absoluteUserConfFileName(profil)};
-    core::remote::QspSubscribeSession rs;
+    oplink::QspSubscribeSession rs;
 
     rs.reset(createRemoteMonitoringSession(sessionId,fileName,oService));
     m_remoteMonitoringSessions.insert(sessionId,rs);
     bool ok = connect(rs.get(),
-            SIGNAL(newState(quint32,elekdom::oplink::core::observable::ObservableName,elekdom::oplink::core::observable::PropertyName,QVariant)),
-            SLOT(onNewState(quint32,elekdom::oplink::core::observable::ObservableName,elekdom::oplink::core::observable::PropertyName,QVariant)));
+            SIGNAL(newState(quint32,oplink::ObservableName,oplink::PropertyName,QVariant)),
+            SLOT(onNewState(quint32,oplink::ObservableName,oplink::PropertyName,QVariant)));
     if (!ok)
     {
         pfErr(s_TcpBackendLogChannel) << tr("Can't connect newState signal from remote monit:oring session!");
@@ -303,7 +299,7 @@ bool TcpBackendChannelManager::openSession(const quint32& sessionId,
 
 void TcpBackendChannelManager::enableSession(const quint32 &sessionId)
 {
-    core::remote::QspSubscribeSession session;
+    oplink::QspSubscribeSession session;
 
     session = m_remoteMonitoringSessions.value(sessionId);
     if (!session.isNull())
@@ -324,7 +320,7 @@ void TcpBackendChannelManager::closeAllSessions()
 
 void TcpBackendChannelManager::closeSession(const quint32 &sessionId)
 {
-    core::remote::QspSubscribeSession session;
+    oplink::QspSubscribeSession session;
 
     session = m_remoteMonitoringSessions.value(sessionId);
     if (!session.isNull())
@@ -337,7 +333,7 @@ void TcpBackendChannelManager::closeSession(const quint32 &sessionId)
 QString TcpBackendChannelManager::confContentFromSession(const quint32 &sessionId)
 {
     QString ret;
-    core::remote::QspSubscribeSession session;
+    oplink::QspSubscribeSession session;
 
     session = m_remoteMonitoringSessions.value(sessionId);
     if (!session.isNull())
@@ -350,7 +346,7 @@ QString TcpBackendChannelManager::confContentFromSession(const quint32 &sessionI
 
 void TcpBackendChannelManager::submitOrderToSession(const quint32 &sessionId, const QString &order)
 {
-    core::remote::QspSubscribeSession session;
+    oplink::QspSubscribeSession session;
 
     session = m_remoteMonitoringSessions.value(sessionId);
     if (!session.isNull())

@@ -34,6 +34,10 @@ namespace oplink
     //
     class CommandProcessor;
     //
+    class ObservablePropertyModel;
+    class CommandProcessorModel;
+    class ObservableModel;
+    //
     class DeviceHook;
     class DeviceChannelsBinding;
     class ActuatorOutputsBinding;

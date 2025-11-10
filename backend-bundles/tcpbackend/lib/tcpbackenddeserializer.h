@@ -16,50 +16,35 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPBACKENDDESERIALIZER_H
 #define TCPBACKENDDESERIALIZER_H
 
 #include "abstract_network_tcp/common/tcpchanneldeserializer.h"
 #include "olcore-lib_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpbackend
-{
-namespace bundle
-{
-
-class TcpBackendDeserializer : public plugframe::core::tcp::TcpChannelDeserializer
+class TcpBackendDeserializer : public plugframe::TcpChannelDeserializer
 {
 public:
     TcpBackendDeserializer();
     ~TcpBackendDeserializer() override;
 
 protected:
-    plugframe::core::tcp::TcpChannelMessage *deserialize(QDataStream& input) override;
-    void serialize(plugframe::core::tcp::TcpChannelMessage& msg,QDataStream& out) override;
+    plugframe::TcpChannelMessage *deserialize(QDataStream& input) override;
+    void serialize(plugframe::TcpChannelMessage& msg,QDataStream& out) override;
 
     // input msgs
-    virtual plugframe::core::tcp::TcpChannelMessage *createSiginMessage(QDataStream &input);
-    virtual plugframe::core::tcp::TcpChannelMessage *createSignoutMessage(QDataStream &input);
-    virtual plugframe::core::tcp::TcpChannelMessage *createDownloadConfigMessage(QDataStream &input);
-    virtual plugframe::core::tcp::TcpChannelMessage *createReadyMessage(QDataStream &input);
-    virtual plugframe::core::tcp::TcpChannelMessage *createSubmitOrderMessage(QDataStream &input);
+    virtual plugframe::TcpChannelMessage *createSiginMessage(QDataStream &input);
+    virtual plugframe::TcpChannelMessage *createSignoutMessage(QDataStream &input);
+    virtual plugframe::TcpChannelMessage *createDownloadConfigMessage(QDataStream &input);
+    virtual plugframe::TcpChannelMessage *createReadyMessage(QDataStream &input);
+    virtual plugframe::TcpChannelMessage *createSubmitOrderMessage(QDataStream &input);
 
     // output msgs
-    virtual void serializeSiginReplyMessage(core::tcp::SigninReplyMessage& msg,QDataStream& out);
-    virtual void serializeSignoutMessage(core::tcp::SignoutMessage& msg,QDataStream& out);
-    virtual void serializeDownloadConfigReplyMessage(core::tcp::DownloadConfigReplyMessage& msg,QDataStream& out);
-    virtual void serializeSessionStartedMessage(core::tcp::SessionStartedMessage& msg,QDataStream& out);
-    virtual void serializeStateValueMessage(core::tcp::StateValueMessage& msg,QDataStream& out);
+    virtual void serializeSiginReplyMessage(oplink::SigninReplyMessage& msg,QDataStream& out);
+    virtual void serializeSignoutMessage(oplink::SignoutMessage& msg,QDataStream& out);
+    virtual void serializeDownloadConfigReplyMessage(oplink::DownloadConfigReplyMessage& msg,QDataStream& out);
+    virtual void serializeSessionStartedMessage(oplink::SessionStartedMessage& msg,QDataStream& out);
+    virtual void serializeStateValueMessage(oplink::StateValueMessage& msg,QDataStream& out);
 };
-
-} //namespace bundle
-} //namespace tcpbackend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPBACKENDDESERIALIZER_H
