@@ -1,10 +1,10 @@
 QT -= gui
 
-CONFIG += c++11 console
+CONFIG += c++17 console
 CONFIG -= app_bundle
 
 OL_LAUNCHER_VERSION = $$cat(./oplink-backend-launcher.ver)
-TARGET = oplink-server-qt5-$${OL_LAUNCHER_VERSION}
+TARGET = oplink-server-qt6-$${OL_LAUNCHER_VERSION}
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -22,17 +22,17 @@ OTHER_FILES += \
 #PLugFrame LIB
 ##############
 PF_LIB_VERSION = $$cat(../../../plugframe/core-lib/pfcore-lib.ver)
-LIBS += -lplugframe-core-qt5-$${PF_LIB_VERSION} -L../../../plugframe/core-lib
+LIBS += -lplugframe-core-qt6-$${PF_LIB_VERSION} -L../../../plugframe/core-lib
 
 #OpLink LIB
 ###########
 OL_LIB_VERSION = $$cat(../core-lib/olcore-lib.ver)
-LIBS += -loplink-core-qt5-$${OL_LIB_VERSION} -L../core-lib
+LIBS += -loplink-core-qt6-$${OL_LIB_VERSION} -L../core-lib
 
 #OpLink BACKEND LIB
 ###################
 OL_BACKEND_LIB_VERSION = $$cat(../core-backend-lib/olcore-backend-lib.ver)
-LIBS += -loplink-core-backend-qt5-$${OL_BACKEND_LIB_VERSION} -L../core-backend-lib
+LIBS += -loplink-core-backend-qt6-$${OL_BACKEND_LIB_VERSION} -L../core-backend-lib
 
 # Default rules for deployment.
 DESTDIR = ../../../bin/oplink_backend
