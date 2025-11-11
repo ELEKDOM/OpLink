@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "monitoredobservablewidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 MonitoredObservableWidgetView::MonitoredObservableWidgetView(QWidget *parent):
     QWidget{parent}

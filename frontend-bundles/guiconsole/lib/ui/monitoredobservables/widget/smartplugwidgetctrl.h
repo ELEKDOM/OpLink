@@ -16,25 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SMARTPLUGWIDGETCTRL_H
 #define SMARTPLUGWIDGETCTRL_H
 
 #include <QPixmap>
 #include "monitoredobservablewidgetctrl.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class SmartPlugWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
@@ -61,10 +47,4 @@ private:
     QPixmap m_plugOff;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // SMARTPLUGWIDGETCTRL_H

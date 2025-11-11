@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "pageviewlistlayout.h"
 #include "ui_pageviewlistlayout.h"
 #include "viewlistlayout.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable;
 
 PageViewListLayout::PageViewListLayout(QString toolActionName,QWidget *parent):
     OlfMonitoredObservablesView{toolActionName,parent},
@@ -42,7 +39,7 @@ void PageViewListLayout::pushUpWidgets()
 
     for (int j = 0; j < ListofViewListLayout.size(); ++j)
     {
-        monitoredobservable::ViewListLayout *vll{dynamic_cast<monitoredobservable::ViewListLayout*>(ListofViewListLayout.at(j))};
+        ViewListLayout *vll{dynamic_cast<ViewListLayout*>(ListofViewListLayout.at(j))};
 
         if (vll)
         {

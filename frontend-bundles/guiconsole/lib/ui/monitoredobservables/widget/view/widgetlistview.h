@@ -16,24 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef WIDGETLISTVIEW_H
 #define WIDGETLISTVIEW_H
 
 #include "monitoredobservablewidgetview.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class WidgetListView : public MonitoredObservableWidgetView
 {
@@ -41,12 +27,5 @@ public:
     explicit WidgetListView(QWidget *parent = nullptr);
     ~WidgetListView() override;
 };
-
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // WIDGETLISTVIEW_H

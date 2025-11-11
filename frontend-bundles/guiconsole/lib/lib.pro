@@ -6,7 +6,7 @@ TEMPLATE = lib
 CONFIG  += staticlib
 
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = oplinkF-guiconsole-qt5-$${BUNDLE_VERSION}
+TARGET = oplinkF-guiconsole-qt6-$${BUNDLE_VERSION}
 
 SOURCES += \
          olfconsole.cpp \

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MONITOREDOBSERVABLEWIDGETCTRL_H
 #define MONITOREDOBSERVABLEWIDGETCTRL_H
 
@@ -26,19 +25,7 @@
 #include <QString>
 #include <QVariant>
 #include <QHash>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
+#include <QSharedPointer>
 
 class MonitoredObservableWidgetCtrl : public QObject
 {
@@ -83,11 +70,5 @@ private:
     QHash<QString,bool>            m_monitoredStates;  // only to retrieve states by name !
     MonitoredObservableWidgetView *m_view;
 };
-
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
+using QspMonitoredObservableWidgetCtrl = QSharedPointer<MonitoredObservableWidgetCtrl>;
 #endif // MONITOREDOBSERVABLEWIDGETCTRL_H

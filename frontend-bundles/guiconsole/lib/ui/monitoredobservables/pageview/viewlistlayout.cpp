@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "viewlistlayout.h"
 #include "ui_viewlistlayout.h"
 #include "ui/monitoredobservables/widget/view/widgetlistview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable;
 
 ViewListLayout::ViewListLayout(const QString title, QWidget *parent):
     QWidget(parent)
@@ -42,7 +39,7 @@ ViewListLayout::~ViewListLayout()
 
 }
 
-void ViewListLayout::addWidget(widget::WidgetListView *widget)
+void ViewListLayout::addWidget(WidgetListView *widget)
 {
     ui->verticalLayout_3->addWidget(widget);
 }

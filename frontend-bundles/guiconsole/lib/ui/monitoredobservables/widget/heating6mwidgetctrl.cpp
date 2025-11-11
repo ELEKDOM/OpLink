@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heating6mwidgetctrl.h"
 #include "ui/monitoredobservables/widget/view/heating6mwidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 Heating6mWidgetCtrl::Heating6mWidgetCtrl(QString observableName,
                                          QString observableTitle,

@@ -22,19 +22,6 @@
 
 #include "monitoredobservablewidgetctrl.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
-
 class TemperatureHumidityWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
@@ -55,10 +42,4 @@ protected:
     void onButtonCmdClicked(QString cmdName) override;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // TEMPERATUREHUMIDITYWIDGETCTRL_H

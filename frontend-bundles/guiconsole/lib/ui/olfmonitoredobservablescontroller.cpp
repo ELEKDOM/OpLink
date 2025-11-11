@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QFile>
 #include "olfmonitoredobservablescontroller.h"
 #include "olfmonitoredobservablesview.h"
@@ -29,11 +28,7 @@
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 #include "logger/pflog.h"
 
-using namespace elekdom::plugframe::core::gui;
-using namespace elekdom::oplink::frontend::guiconsole;
-using namespace elekdom::oplink::core::remote;
-
-OlfMonitoredObservablesController::OlfMonitoredObservablesController(bundle::OlfConsole& console,
+OlfMonitoredObservablesController::OlfMonitoredObservablesController(OlfConsole& console,
                                                                      PageViewLayout monitoringViewLayout,
                                                                      QObject *parent):
     OlfConsoleController{console,
@@ -51,7 +46,9 @@ OlfMonitoredObservablesController::~OlfMonitoredObservablesController()
 
 }
 
-void OlfMonitoredObservablesController::sessionStartedOnServer(quint32 sessionId, const QString &profile, quint16 confId)
+void OlfMonitoredObservablesController::sessionStartedOnServer(quint32 sessionId,
+                                                               const QString &profile,
+                                                               quint16 confId)
 {
     if (state() == State::WaitingForSessionStarted)
     {
@@ -110,7 +107,7 @@ void OlfMonitoredObservablesController::newObservableStateFromServer(quint32 ses
 {
     if(state() == State::SessionInProgress && m_sessionIdOnServer == sessionId)
     {
-        monitoredobservable::widget::QspMonitoredObservableWidgetCtrl mo{monitoredObservable(observableName)};
+        QspMonitoredObservableWidgetCtrl mo{monitoredObservable(observableName)};
 
         if (!mo.isNull())
         {
@@ -119,7 +116,7 @@ void OlfMonitoredObservablesController::newObservableStateFromServer(quint32 ses
     }
 }
 
-void OlfMonitoredObservablesController::addMonitoredObservable(monitoredobservable::widget::QspMonitoredObservableWidgetCtrl newly)
+void OlfMonitoredObservablesController::addMonitoredObservable(QspMonitoredObservableWidgetCtrl newly)
 {
     m_monitoredObservables.insert(newly->name(),newly);
     connect(newly.get(),SIGNAL(execCmd(QString)),SLOT(execCmd(QString)));
@@ -127,7 +124,7 @@ void OlfMonitoredObservablesController::addMonitoredObservable(monitoredobservab
 
 void OlfMonitoredObservablesController::endOfLoadingViews()
 {
-    const plugframe::core::gui::GuiPageViewList& vl{viewList()};
+    const plugframe::GuiPageViewList& vl{viewList()};
 
     clearStatusMsg();
     // Initialize all view layout
@@ -159,9 +156,9 @@ void OlfMonitoredObservablesController::closeSession()
 OlfMonitoredObservablesView *OlfMonitoredObservablesController::viewByName(const QString &pageName)
 {
     OlfMonitoredObservablesView *ret{nullptr};
-    const GuiPageViewList& list{viewList()};
+    const plugframe::GuiPageViewList& list{viewList()};
 
-    for (int i = 0; i < list.size() && !ret; ++i)
+    for (qsizetype i = 0; i < list.size() && !ret; ++i)
     {
         OlfMonitoredObservablesView *v{dynamic_cast<OlfMonitoredObservablesView*>(list.at(i))};
 
@@ -179,9 +176,9 @@ void OlfMonitoredObservablesController::addMonitoredObservablesView(OlfMonitored
     addView(pageView);
 }
 
-monitoredobservable::MonitoredObservableBuilder *OlfMonitoredObservablesController::buildWidgetBuilder()
+MonitoredObservableBuilder *OlfMonitoredObservablesController::buildWidgetBuilder()
 {
-    monitoredobservable::PageViewLayoutBuilder *layoutBuilder{nullptr};
+    PageViewLayoutBuilder *layoutBuilder{nullptr};
 
     if (m_monitoringViewLayout == PageViewLayout::TypeListLayout)
     {
@@ -195,24 +192,24 @@ monitoredobservable::MonitoredObservableBuilder *OlfMonitoredObservablesControll
     return createMonitoredObservableBuilder(layoutBuilder);
 }
 
-monitoredobservable::MonitoredObservableBuilder *OlfMonitoredObservablesController::createMonitoredObservableBuilder(monitoredobservable::PageViewLayoutBuilder *viewsBuilder)
+MonitoredObservableBuilder *OlfMonitoredObservablesController::createMonitoredObservableBuilder(PageViewLayoutBuilder *viewsBuilder)
 {
-    return new monitoredobservable::MonitoredObservableBuilder(*this,viewsBuilder);
+    return new MonitoredObservableBuilder(*this,viewsBuilder);
 }
 
-monitoredobservable::PageViewLayoutBuilder *OlfMonitoredObservablesController::createLayoutByTypeBuilder()
+PageViewLayoutBuilder *OlfMonitoredObservablesController::createLayoutByTypeBuilder()
 {
-    return new monitoredobservable::PageViewByTypeBuilder;
+    return new PageViewByTypeBuilder;
 }
 
-monitoredobservable::PageViewLayoutBuilder *OlfMonitoredObservablesController::createLayoutByLocalisationBuilder()
+PageViewLayoutBuilder *OlfMonitoredObservablesController::createLayoutByLocalisationBuilder()
 {
-    return new monitoredobservable::PageViewByLocalisationBuilder;
+    return new PageViewByLocalisationBuilder;
 }
 
-SessionConfDocument *OlfMonitoredObservablesController::createProfileConfBrowser(monitoredobservable::MonitoredObservableBuilder& hook)
+oplink::SessionConfDocument *OlfMonitoredObservablesController::createProfileConfBrowser(MonitoredObservableBuilder& hook)
 {
-    return new SessionConfDocument(hook);
+    return new oplink::SessionConfDocument(hook);
 }
 
 bool OlfMonitoredObservablesController::profileFileExists(const QString &profile)
@@ -258,7 +255,7 @@ bool OlfMonitoredObservablesController::saveConfFile(const QString &xmlConfig)
     return ret;
 }
 
-monitoredobservable::widget::QspMonitoredObservableWidgetCtrl OlfMonitoredObservablesController::monitoredObservable(QString name)
+QspMonitoredObservableWidgetCtrl OlfMonitoredObservablesController::monitoredObservable(QString name)
 {
     return m_monitoredObservables.value(name);
 }

@@ -16,16 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
-#include "bundle/bundle.h"
 #include "olfconsolefactory.h"
 #include "olfconsole.h"
 #include "ui/olflogincontroller.h"
 #include "ui/olfmonitoredobservablescontroller.h"
-
-using namespace elekdom::plugframe::core::bundle;
-using namespace elekdom::oplink::frontend::guiconsole;
-using namespace elekdom::oplink::frontend::guiconsole::factory;
 
 OlfConsoleFactory::OlfConsoleFactory()
 {
@@ -37,13 +31,13 @@ OlfConsoleFactory::~OlfConsoleFactory()
 
 }
 
-OlfLoginController *OlfConsoleFactory::createOlfLoginController(bundle::OlfConsole& console,
+OlfLoginController *OlfConsoleFactory::createOlfLoginController(OlfConsole& console,
                                                                 int maxLoginAttempts)
 {
     return new OlfLoginController{console,maxLoginAttempts};
 }
 
-OlfMonitoredObservablesController *OlfConsoleFactory::createOlfMonitoredObservablesController(bundle::OlfConsole& console,
+OlfMonitoredObservablesController *OlfConsoleFactory::createOlfMonitoredObservablesController(OlfConsole& console,
                                                                                               PageViewLayout monitoringViewLayout)
 {
     return new OlfMonitoredObservablesController{console,monitoringViewLayout};

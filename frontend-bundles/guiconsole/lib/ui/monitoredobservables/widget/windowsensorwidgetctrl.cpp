@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "windowsensorwidgetctrl.h"
 #include "ui/monitoredobservables/widget/view/windowsensorwidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 WindowSensorWidgetCtrl::WindowSensorWidgetCtrl(QString observableName,
                                                QString observableTitle,

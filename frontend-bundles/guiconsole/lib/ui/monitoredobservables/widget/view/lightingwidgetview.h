@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LIGHTINGWIDGETVIEW_H
 #define LIGHTINGWIDGETVIEW_H
 
@@ -25,18 +24,6 @@
 namespace Ui {
 class lightingWidgetView;
 }
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class LightingWidgetView : public WidgetListView
 {
@@ -59,10 +46,4 @@ private:
     Ui::lightingWidgetView *ui;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // LIGHTINGWIDGETVIEW_H

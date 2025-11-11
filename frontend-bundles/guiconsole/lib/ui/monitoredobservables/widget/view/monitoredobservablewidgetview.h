@@ -16,24 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MONITOREDOBSERVABLEWIDGETVIEW_H
 #define MONITOREDOBSERVABLEWIDGETVIEW_H
 
 #include <QWidget>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class MonitoredObservableWidgetView : public QWidget
 {
@@ -69,12 +55,5 @@ public:
     static QString eco() {return QStringLiteral("eco");}
     static QString nofrost() {return QStringLiteral("nofrost");}
 };
-
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // MONITOREDOBSERVABLEWIDGETVIEW_H

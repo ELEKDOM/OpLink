@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olfloginview.h"
 #include "ui_loginview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole;
 
 OlfLoginView::OlfLoginView(QWidget *parent):
     OlfConsoleView{"",parent},

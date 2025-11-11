@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "windowsensorwidgetview.h"
 #include "ui_windowsensorwidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 WindowSensorWidgetView::WindowSensorWidgetView(QWidget *parent):
     WidgetListView{parent},

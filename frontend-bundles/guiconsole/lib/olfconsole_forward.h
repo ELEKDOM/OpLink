@@ -16,56 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFCONSOLE_FORWARD_H
 #define OLFCONSOLE_FORWARD_H
 
-#include <QSharedPointer>
+#include <QtTypes>
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-    enum class PageViewLayout : quint8;
+enum class PageViewLayout : quint8;
 
-    class OlfLoginController;
-    class OlfMonitoredObservablesController;
-    class OlfMonitoredObservablesView;
-    class OlfLoginView;
-
-    using QspOlfLoginController = QSharedPointer<OlfLoginController>;
-    using QspOlfMonitoredObservablesController = QSharedPointer<OlfMonitoredObservablesController>;
-
-    namespace bundle
-    {
-        class OlfConsole;
-    }
-    namespace monitoredobservable
-    {
-        class MonitoredObservableBuilder;
-        class PageViewLayoutBuilder;
-        class ViewListLayout;
-
-        using QspMonitoredObservableBuilder = QSharedPointer<MonitoredObservableBuilder>;
-        using QspPageViewLayoutBuilder = QSharedPointer<PageViewLayoutBuilder>;
-
-        namespace widget
-        {
-            class MonitoredObservableWidgetCtrl;
-            class MonitoredObservableWidgetView;
-            class WidgetListView;
-
-            using QspMonitoredObservableWidgetCtrl = QSharedPointer<MonitoredObservableWidgetCtrl>;
-        }
-    }
-
-}//namespace guiconsole
-}//namespace frontend
-}//namespace oplink
-}//namespace elekdom
+class OlfConsole;
+class OlfLoginView;
+class OlfMonitoredObservablesView;
+class OlfMonitoredObservablesController;
+class MonitoredObservableWidgetView;
+class MonitoredObservableWidgetCtrl;
+class MonitoredObservableBuilder;
+class PageViewLayoutBuilder;
+class ViewListLayout;
+class WidgetListView;
+class OlfLoginController;
 
 #endif // OLFCONSOLE_FORWARD_H

@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "smartplugwidgetview.h"
 #include "ui_smartplugwidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 SmartPlugWidgetView::SmartPlugWidgetView(QWidget *parent):
     WidgetListView{parent},

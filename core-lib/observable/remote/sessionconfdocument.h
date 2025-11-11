@@ -19,6 +19,7 @@
 #ifndef SESSIONONFDOCUMENT_H
 #define SESSIONONFDOCUMENT_H
 
+#include <QSharedPointer>
 #include "xmldom/xmldocument.h"
 #include "olcore-lib_export.h"
 
@@ -34,5 +35,6 @@ protected:
     QString rootNodeName() override;
     bool _browse() override;
 };
+using QspSessionConfDocument = QSharedPointer<SessionConfDocument>;
 }//namespace oplink
 #endif // SESSIONONFDOCUMENT_H

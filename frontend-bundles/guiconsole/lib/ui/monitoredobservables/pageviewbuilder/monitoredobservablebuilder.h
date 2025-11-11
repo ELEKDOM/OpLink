@@ -16,25 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MONITOREDOBSERVABLEBUILDER_H
 #define MONITOREDOBSERVABLEBUILDER_H
 
+#include <QString>
+#include <QSharedPointer>
 #include "observable/remote/sessionconfhook.h"
+#include "ui/monitoredobservables/pageviewbuilder/pageviewlayoutbuilder.h"
 #include "olfconsole_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-
-class MonitoredObservableBuilder : public core::remote::SessionConfHook
+class MonitoredObservableBuilder : public oplink::SessionConfHook
 {
 private:
     static QString onOffLighting() {return QStringLiteral("onoff_lighting");}
@@ -64,42 +55,34 @@ protected:
     void propertyDeclaration(QString propertyName) override;
 
 protected:
-    virtual widget::MonitoredObservableWidgetCtrl *createWidget(QString observableName,
+    virtual MonitoredObservableWidgetCtrl *createWidget(QString observableName,
+                                                        QString observableTitle,
+                                                        QString observableType,
+                                                        QString observableLocalisation);
+    virtual MonitoredObservableWidgetCtrl *createLightingWidget(QString observableName,
                                                                 QString observableTitle,
                                                                 QString observableType,
                                                                 QString observableLocalisation);
-    virtual widget::MonitoredObservableWidgetCtrl *createLightingWidget(QString observableName,
-                                                                        QString observableTitle,
-                                                                        QString observableType,
-                                                                        QString observableLocalisation);
-    virtual widget::MonitoredObservableWidgetCtrl *createHeating6mWidget(QString observableName,
-                                                                         QString observableTitle,
-                                                                         QString observableType,
-                                                                         QString observableLocalisation);
-    virtual widget::MonitoredObservableWidgetCtrl *createSmartPlugWidget(QString observableName,
-                                                                         QString observableTitle,
-                                                                         QString observableType,
-                                                                         QString observableLocalisation);
-    virtual widget::MonitoredObservableWidgetCtrl *createTemperatureHumidityWidget(QString observableName,
-                                                                                   QString observableTitle,
-                                                                                   QString observableType,
-                                                                                   QString observableLocalisation);
-    virtual widget::MonitoredObservableWidgetCtrl *createWindowSensorWidget(QString observableName,
-                                                                            QString observableTitle,
-                                                                            QString observableType,
-                                                                            QString observableLocalisation);
-
-
+    virtual MonitoredObservableWidgetCtrl *createHeating6mWidget(QString observableName,
+                                                                 QString observableTitle,
+                                                                 QString observableType,
+                                                                 QString observableLocalisation);
+    virtual MonitoredObservableWidgetCtrl *createSmartPlugWidget(QString observableName,
+                                                                 QString observableTitle,
+                                                                 QString observableType,
+                                                                 QString observableLocalisation);
+    virtual MonitoredObservableWidgetCtrl *createTemperatureHumidityWidget(QString observableName,
+                                                                           QString observableTitle,
+                                                                           QString observableType,
+                                                                           QString observableLocalisation);
+    virtual MonitoredObservableWidgetCtrl *createWindowSensorWidget(QString observableName,
+                                                                    QString observableTitle,
+                                                                    QString observableType,
+                                                                    QString observableLocalisation);
 private:
-    OlfMonitoredObservablesController&       m_controller;
-    QspPageViewLayoutBuilder                 m_viewsBuilder;
-    widget::QspMonitoredObservableWidgetCtrl m_creatingWidget;
+    OlfMonitoredObservablesController& m_controller;
+    QspPageViewLayoutBuilder           m_viewsBuilder;
+    QspMonitoredObservableWidgetCtrl   m_creatingWidget;
 };
-
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
-
+using QspMonitoredObservableBuilder = QSharedPointer<MonitoredObservableBuilder>;
 #endif // MONITOREDOBSERVABLEBUILDER_H

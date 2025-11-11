@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "monitoredobservablebuilder.h"
 #include "pageviewlayoutbuilder.h"
 #include "ui/olfmonitoredobservablescontroller.h"
@@ -25,8 +24,6 @@
 #include "ui/monitoredobservables/widget/smartplugwidgetctrl.h"
 #include "ui/monitoredobservables/widget/temperaturehumiditywidgetctrl.h"
 #include "ui/monitoredobservables/widget/windowsensorwidgetctrl.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable;
 
 MonitoredObservableBuilder::MonitoredObservableBuilder(OlfMonitoredObservablesController& controller,
                                                        PageViewLayoutBuilder *viewsBuilder):
@@ -115,12 +112,12 @@ void MonitoredObservableBuilder::propertyDeclaration(QString propertyName)
     }
 }
 
-widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createWidget(QString observableName,
-                                                                                QString observableTitle,
-                                                                                QString observableType,
-                                                                                QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createWidget(QString observableName,
+                                                                        QString observableTitle,
+                                                                        QString observableType,
+                                                                        QString observableLocalisation)
 {
-    widget::MonitoredObservableWidgetCtrl *ret{nullptr};
+    MonitoredObservableWidgetCtrl *ret{nullptr};
 
     if (onOffLighting() == observableType)
     {
@@ -161,57 +158,57 @@ widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createWidget(
     return ret;
 }
 
-widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createLightingWidget(QString observableName,
-                                                                                        QString observableTitle,
-                                                                                        QString observableType,
-                                                                                        QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createLightingWidget(QString observableName,
+                                                                                QString observableTitle,
+                                                                                QString observableType,
+                                                                                QString observableLocalisation)
 {
-    return new widget::LightingWidgetCtrl(observableName,
-                                          observableTitle,
-                                          observableType,
-                                          observableLocalisation);
+    return new LightingWidgetCtrl(observableName,
+                                  observableTitle,
+                                  observableType,
+                                  observableLocalisation);
 }
 
-widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createHeating6mWidget(QString observableName,
-                                                                                         QString observableTitle,
-                                                                                         QString observableType,
-                                                                                         QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createHeating6mWidget(QString observableName,
+                                                                                 QString observableTitle,
+                                                                                 QString observableType,
+                                                                                 QString observableLocalisation)
 {
-    return new widget::Heating6mWidgetCtrl(observableName,
-                                           observableTitle,
-                                           observableType,
-                                           observableLocalisation);
+    return new Heating6mWidgetCtrl(observableName,
+                                   observableTitle,
+                                   observableType,
+                                   observableLocalisation);
 }
 
-widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createSmartPlugWidget(QString observableName,
-                                                                                         QString observableTitle,
-                                                                                         QString observableType,
-                                                                                         QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createSmartPlugWidget(QString observableName,
+                                                                                 QString observableTitle,
+                                                                                 QString observableType,
+                                                                                 QString observableLocalisation)
 {
-    return new widget::SmartPlugWidgetCtrl(observableName,
-                                           observableTitle,
-                                           observableType,
-                                           observableLocalisation);
+    return new SmartPlugWidgetCtrl(observableName,
+                                   observableTitle,
+                                   observableType,
+                                   observableLocalisation);
 }
 
-widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createTemperatureHumidityWidget(QString observableName,
-                                                                                                   QString observableTitle,
-                                                                                                   QString observableType,
-                                                                                                   QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createTemperatureHumidityWidget(QString observableName,
+                                                                                           QString observableTitle,
+                                                                                           QString observableType,
+                                                                                           QString observableLocalisation)
 {
-    return new widget::TemperatureHumidityWidgetCtrl(observableName,
-                                                     observableTitle,
-                                                     observableType,
-                                                     observableLocalisation);
+    return new TemperatureHumidityWidgetCtrl(observableName,
+                                             observableTitle,
+                                             observableType,
+                                             observableLocalisation);
 }
 
-widget::MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createWindowSensorWidget(QString observableName,
-                                                                                            QString observableTitle,
-                                                                                            QString observableType,
-                                                                                            QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableBuilder::createWindowSensorWidget(QString observableName,
+                                                                                    QString observableTitle,
+                                                                                    QString observableType,
+                                                                                    QString observableLocalisation)
 {
-    return new widget::WindowSensorWidgetCtrl(observableName,
-                                              observableTitle,
-                                              observableType,
-                                              observableLocalisation);
+    return new WindowSensorWidgetCtrl(observableName,
+                                      observableTitle,
+                                      observableType,
+                                      observableLocalisation);
 }
