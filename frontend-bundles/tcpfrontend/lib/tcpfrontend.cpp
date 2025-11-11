@@ -16,16 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "tcpfrontend.h"
 #include "tcpfrontendfactory.h"
 #include "tcpfrontendlogchannel.h"
 
-using namespace elekdom::oplink::tcpfrontend;
-using namespace elekdom::oplink::tcpfrontend::bundle;
-
 TcpFrontend::TcpFrontend():
-    plugframe::core::tcp::client::bundle::TcpClient{s_TcpFrontendLogChannel}
+    plugframe::TcpClient{s_TcpFrontendLogChannel}
 {
 
 }
@@ -35,8 +31,8 @@ TcpFrontend::~TcpFrontend()
 
 }
 
-elekdom::plugframe::core::bundle::BundleFactory *TcpFrontend::createFactory()
+plugframe::BundleFactory *TcpFrontend::createFactory()
 {
-    return new factory::TcpFrontendFactory;
+    return new TcpFrontendFactory;
 }
 

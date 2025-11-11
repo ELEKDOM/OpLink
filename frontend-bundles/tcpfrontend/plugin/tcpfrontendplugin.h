@@ -16,39 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPFRONTENDPLUGIN_H
 #define TCPFRONTENDPLUGIN_H
 
 #include "abstract_network_tcp/client/plugin/tcpclientplugin.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpfrontend
-{
-namespace plugin
-{
-
-class TcpFrontendPlugin : public plugframe::core::tcp::client::plugin::TcpClientPlugin
+class TcpFrontendPlugin : public plugframe::TcpClientPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "elekdom.oplink.tcpfrontend.plugin" FILE "../oplinkF-tcpfrontendbundle.json")
-    Q_INTERFACES(elekdom::plugframe::core::plugin::BundleInterface
-                 elekdom::plugframe::frontend::service::FrontendControlServiceInterface)
-
+    Q_PLUGIN_METADATA(IID "oplink.tcpfrontend.plugin" FILE "../oplinkF-tcpfrontendbundle.json")
+    Q_INTERFACES(plugframe::BundleInterface
+                 plugframe::FrontendControlServiceInterface)
 public:
     TcpFrontendPlugin();
     ~TcpFrontendPlugin() override;
 
 protected: // Plugin
-    virtual plugframe::core::bundle::Bundle4PluginInterface *createImplementation() override;
+    virtual plugframe::Bundle4PluginInterface *createImplementation() override;
 };
-
-} //namespace plugin
-} //namespace tcpfrontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPFRONTENDPLUGIN_H

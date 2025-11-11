@@ -16,34 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPFRONTENDFACTORY_H
 #define TCPFRONTENDFACTORY_H
 
 #include "abstract_network_tcp/client/tcpclientfactory.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpfrontend
-{
-namespace factory
-{
-
-class TcpFrontendFactory : public plugframe::core::tcp::client::factory::TcpClientFactory
+class TcpFrontendFactory : public plugframe::TcpClientFactory
 {
 public:
     TcpFrontendFactory();
     virtual ~TcpFrontendFactory();
 
 protected:
-    plugframe::core::tcp::TcpChannelDeserializer *createDeserializer() override;
+    plugframe::TcpChannelDeserializer *createDeserializer() override;
 };
-
-} //namespace factory
-} //namespace tcpfrontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPFRONTENDFACTORY_H

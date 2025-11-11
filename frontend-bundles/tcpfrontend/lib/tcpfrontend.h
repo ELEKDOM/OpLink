@@ -16,34 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPFRONTEND_H
 #define TCPFRONTEND_H
 
 #include "abstract_network_tcp/client/tcpclient.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpfrontend
-{
-namespace bundle
-{
-
-class TcpFrontend : public plugframe::core::tcp::client::bundle::TcpClient
+class TcpFrontend : public plugframe::TcpClient
 {
 public:
     TcpFrontend();
     ~TcpFrontend() override;
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
+    plugframe::BundleFactory* createFactory() override;
 };
-
-} //namespace bundle
-} //namespace tcpfrontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPFRONTEND_H
