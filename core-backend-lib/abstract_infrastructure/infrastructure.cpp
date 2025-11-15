@@ -75,7 +75,7 @@ oplink::SensorBuilderArgs *oplink::Infrastructure::createSensorBuilderArgs(const
                                                                            const oplink::ObservableModelName& observableModelName,
                                                                            const oplink::DeviceId& deviceId,
                                                                            const oplink::DeviceModelName& deviceModelName,
-                                                                           const oplink::LocalisationName sensorLocalisation,
+                                                                           const oplink::LocalisationName& sensorLocalisation,
                                                                            const oplink::QspDeviceBuilder& deviceBuilder,
                                                                            const oplink::DeviceChannelsBinding& deviceChannelsBinding)
 {

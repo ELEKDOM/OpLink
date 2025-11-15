@@ -42,7 +42,7 @@ public:
     const PropertyName& name(){return m_name;}
     const QVariant& value(){return m_value;}
     void value(const QVariant& val);
-    bool isValidValue() {return m_validValue;}
+    bool isValidValue();
     virtual void changeValue(const QVariant& val);
 
 private:
@@ -50,7 +50,6 @@ private:
     PropertyName    m_name;
     QVariant        m_value;
     QMetaType::Type m_valueType;
-    bool            m_validValue;
 };
 using QspProperty = QSharedPointer<Property>;
 }//namespace oplink

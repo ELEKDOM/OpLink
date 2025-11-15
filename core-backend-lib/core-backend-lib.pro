@@ -1,5 +1,6 @@
+
+QT += core xml
 QT -= gui
-QT += xml
 
 TEMPLATE = lib
 DEFINES += OLCORE_BACKEND_LIBRARY

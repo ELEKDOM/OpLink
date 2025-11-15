@@ -54,8 +54,8 @@ public:
 
 signals:
     void newState(quint32 sessionId,
-                  ObservableName observableName,
-                  PropertyName propertyName,
+                  oplink::ObservableName observableName,
+                  oplink::PropertyName propertyName,
                   QVariant propertyValue);
 protected:
     void onStateChange(ObservableName observableName,

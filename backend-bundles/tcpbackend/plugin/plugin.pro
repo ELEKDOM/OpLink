@@ -27,3 +27,20 @@ INCLUDEPATH += \
 
 LIBS    +=  -l$${BUNDLE_NAME_QT}-$${BUNDLE_VERSION} -L../lib
 PRE_TARGETDEPS += ../lib/lib$${BUNDLE_NAME_QT}-$${BUNDLE_VERSION}.a
+
+#OpLink BACKEND LIB
+###################
+OL_BACKEND_LIB_VERSION = $$cat(../../../core-backend-lib/olcore-backend-lib.ver)
+LIBS += -loplink-core-backend-qt6-$${OL_BACKEND_LIB_VERSION} -L../../../core-backend-lib
+
+#OpLink LIB
+###########
+OL_LIB_VERSION = $$cat(../../../core-lib/olcore-lib.ver)
+LIBS += -loplink-core-qt6-$${OL_LIB_VERSION} -L../../../core-lib
+
+#PlugFrame LIB
+##############
+PF_LIB_VERSION = $$cat(../../../../../plugframe/core-lib/pfcore-lib.ver)
+PF_LIB_NAME = plugframe-core-qt6-$${PF_LIB_VERSION}
+LIBS += -l$${PF_LIB_NAME} -L../../../../../plugframe/core-lib
+

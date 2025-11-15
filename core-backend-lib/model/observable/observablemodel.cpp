@@ -51,7 +51,7 @@ void oplink::ObservableModel::addProcessorModelRef(oplink::QspCommandProcessorMo
 
 oplink::QspObservableBuilder oplink::ObservableModel::buildObservable(QspObservableBuilderArgs builderArgs)
 {
-    pfDebug3(logChannel()) << "->ObservableModel::buildObservable [" << m_modelName << "]";
+    pfDebug3(logChannel()) << "->ObservableModel::buildObservable, Model [" << m_modelName << "]";
 
     oplink::QspObservableBuilder newObservable;
 

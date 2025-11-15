@@ -16,6 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
+/**********************************************************************
+ * Warning: On Ubuntu, the process must belong to the "dialout" group
+ * to have permissions on the Serial Port.
+ * ********************************************************************/
+
 #ifndef USBGATEWAYPORT_H
 #define USBGATEWAYPORT_H
 

@@ -34,3 +34,14 @@ PF_BUNDLE_VERSION = $$cat(../../../../../plugframe/bundles/guiconsole/bundle.ver
 PF_BUNDLE_NAME_QT = guiconsole-qt6
 LIBS    +=  -l$${PF_BUNDLE_NAME_QT}-$${PF_BUNDLE_VERSION} -L../../../../../plugframe/bundles/guiconsole/lib
 PRE_TARGETDEPS += ../../../../../plugframe/bundles/guiconsole/lib/lib$${PF_BUNDLE_NAME_QT}-$${PF_BUNDLE_VERSION}.a
+
+#OpLink LIB
+###########
+OL_LIB_VERSION = $$cat(../../../core-lib/olcore-lib.ver)
+LIBS += -loplink-core-qt6-$${OL_LIB_VERSION} -L../../../core-lib
+
+#PlugFrame LIB
+##############
+PF_LIB_VERSION = $$cat(../../../../../plugframe/core-lib/pfcore-lib.ver)
+PF_LIB_NAME = plugframe-core-qt6-$${PF_LIB_VERSION}
+LIBS += -l$${PF_LIB_NAME} -L../../../../../plugframe/core-lib

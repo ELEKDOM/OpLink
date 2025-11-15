@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLESUBSCRIBER_H
 #define OBSERVABLESUBSCRIBER_H
 

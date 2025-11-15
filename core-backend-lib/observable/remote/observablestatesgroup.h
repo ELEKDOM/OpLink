@@ -38,8 +38,8 @@ public:
     ~ObservableStatesGroup() override;
 
 public slots:
-    virtual void onStateChange(ObservableName observableName,
-                               PropertyName propertyName,
+    virtual void onStateChange(oplink::ObservableName observableName,
+                               oplink::PropertyName propertyName,
                                QVariant propertyValue) = 0;
 
 protected:

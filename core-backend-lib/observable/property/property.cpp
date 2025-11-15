@@ -26,10 +26,8 @@ oplink::Property::Property(oplink::Observable &observable,
     plugframe::Loggable{s_ObservableLogChannel},
     m_observable{observable},
     m_name{propertyName},
-    m_valueType{valueType},
-    m_validValue{false}
+    m_valueType{valueType}
 {
-
 }
 
 oplink::Property::~Property()
@@ -40,12 +38,18 @@ oplink::Property::~Property()
 void oplink::Property::value(const QVariant &val)
 {
     m_value = val;
-    m_validValue = true;
+}
+
+bool oplink::Property::isValidValue()
+{
+    bool ret{m_value.isValid()};
+
+    return ret;
 }
 
 void oplink::Property::changeValue(const QVariant &val)
 {
-    if (!m_validValue || (val != value()))
+    if (!isValidValue() || (val != value()))
     {
         value(val);
         m_observable.notifyPropertyValueChange(*this);

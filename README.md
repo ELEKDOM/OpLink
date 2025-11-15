@@ -48,10 +48,10 @@ oplink/
 
 ## Requirements
 
-- Qt 5.15
+- Qt 6.9.3
 - `qmake` build system
-- C++11 compatible compiler
-- Linux (tested on Ubuntu 24.04)
+- C++17 compatible compiler
+- Linux (tested on Kubuntu 25.10)
 
 ---
 
@@ -140,9 +140,9 @@ OpLink is released under the GNU General Public License v3.0 (GPLv3).
 
 ### Next milestones:
 
-- Qt6 integration
-- Windows, MacOs, Andriod and Ios compilation
-- Raspy cross compiation 
+- Replacing qmake with cmake
+- Raspy cross compiation
+- Windows, MacOs, Andriod and Ios compilation 
 - Unit tests and CI integration
 - GitHub wiki with technical documentation
 - First packaged release (v0.1.0)

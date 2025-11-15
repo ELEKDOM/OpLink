@@ -31,5 +31,7 @@ TcpBackendPlugin::~TcpBackendPlugin()
 
 plugframe::Bundle4PluginInterface *TcpBackendPlugin::createImplementation()
 {
-    return new TcpBackend;
+    plugframe::Bundle4PluginInterface *ret{new TcpBackend};
+
+    return ret;
 }

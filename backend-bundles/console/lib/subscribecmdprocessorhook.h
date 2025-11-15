@@ -6,7 +6,6 @@
 
 class SubscribeCmdProcessorHook : public oplink::ObservableSubscriber
 {
-     Q_OBJECT
 public:
     SubscribeCmdProcessorHook(SubscribeCmdProcessor& processor);
     ~SubscribeCmdProcessorHook() override;

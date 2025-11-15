@@ -70,7 +70,7 @@ protected:
                                                        const ObservableModelName& observableModelName,
                                                        const DeviceId& deviceId,
                                                        const DeviceModelName& deviceModelName,
-                                                       const LocalisationName sensorLocalisation,
+                                                       const LocalisationName& sensorLocalisation,
                                                        const QspDeviceBuilder& deviceBuilder,
                                                        const DeviceChannelsBinding& deviceChannelsBinding);
 

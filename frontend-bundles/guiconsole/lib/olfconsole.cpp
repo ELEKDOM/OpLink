@@ -165,7 +165,7 @@ void OlfConsole::messageFromServer(plugframe::TcpChannelMessage *msg)
     {
         quint16 msgType{msg->msgType()};
 
-        // message types accepted from trhe server
+        // message types accepted from the server
         switch(msgType)
         {
             case static_cast<quint16>(oplink::MessageType::SiginReply) :
