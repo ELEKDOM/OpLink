@@ -16,36 +16,33 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "actuatorbuilderargs.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"
 #include "observable/observable/observablebuilderscontainer.h"
 
-using namespace elekdom::oplink::core::model;
-
-ActuatorBuilderArgs::ActuatorBuilderArgs(const observable::ObservableName& observableName,
-                                               const ObservableModelName& observableModelName,
-                                               const observable::LocalisationName& observableLocalisation,
-                                               const infrastructure::DeviceId& deviceId,
-                                               const infrastructure::DeviceModelName& deviceModelName,
-                                               const infrastructure::QspDeviceBuilder& deviceBuilder,
-                                               const infrastructure::DeviceChannelsBinding& deviceChannelsBinding,
-                                               const infrastructure::ActuatorOutputsBinding& actuatorOutputsBinding,
-                                               const observable::QspObservableBuildersContainer& loadedObservables):
-   OperationDeviceBuilderArgs{observableName,
-                                 observableModelName,
-                                 observableLocalisation,
-                                 deviceId,
-                                 deviceModelName,
-                                 deviceBuilder,
-                                 deviceChannelsBinding},
+oplink::ActuatorBuilderArgs::ActuatorBuilderArgs(const oplink::ObservableName& observableName,
+                                                 const oplink::ObservableModelName& observableModelName,
+                                                 const oplink::LocalisationName& observableLocalisation,
+                                                 const oplink::DeviceId& deviceId,
+                                                 const oplink::DeviceModelName& deviceModelName,
+                                                 const oplink::QspDeviceBuilder& deviceBuilder,
+                                                 const oplink::DeviceChannelsBinding& deviceChannelsBinding,
+                                                 const oplink::ActuatorOutputsBinding& actuatorOutputsBinding,
+                                                 const oplink::QspObservableBuildersContainer& loadedObservables):
+    OperationDeviceBuilderArgs{observableName,
+                               observableModelName,
+                               observableLocalisation,
+                               deviceId,
+                               deviceModelName,
+                               deviceBuilder,
+                               deviceChannelsBinding},
     m_actuatorOutputsBinding{actuatorOutputsBinding},
     m_loadedObservables{loadedObservables}
 {
 
 }
 
-ActuatorBuilderArgs::~ActuatorBuilderArgs()
+oplink::ActuatorBuilderArgs::~ActuatorBuilderArgs()
 {
 
 }

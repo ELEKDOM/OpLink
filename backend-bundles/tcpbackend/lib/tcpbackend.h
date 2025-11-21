@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPBACKEND_H
 #define TCPBACKEND_H
 
@@ -24,15 +23,7 @@
 #include "service-int/loginserviceinterface.h"
 #include "service-int/observableserviceinterface.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpbackend
-{
-namespace bundle
-{
-class TcpBackend : public plugframe::core::tcp::server::bundle::TcpServer
+class TcpBackend : public plugframe::TcpServer
 {
 
 public:
@@ -40,16 +31,11 @@ public:
     ~TcpBackend() override;
 
 public:
-    plugframe::users::service::LoginServiceInterface *loginService();
-    engine::service::ObservableServiceInterface *observableService();
+    plugframe::LoginServiceInterface *loginService();
+    oplink::ObservableServiceInterface *observableService();
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
+    plugframe::BundleFactory* createFactory() override;
 };
-
-} //namespace bundle
-} //namespace tcpbackend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPBACKEND_H

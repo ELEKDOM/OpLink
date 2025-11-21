@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olfmonitoredobservablesview.h"
 #include "ui/monitoredobservables/pageview/viewlistlayout.h"
-
-using namespace elekdom::oplink::frontend::guiconsole;
 
 OlfMonitoredObservablesView::OlfMonitoredObservablesView(QString toolActionName,QWidget *parent):
     OlfConsoleView{toolActionName,parent}
@@ -35,7 +32,7 @@ void OlfMonitoredObservablesView::pushUpWidgets()
 {
 }
 
-monitoredobservable::ViewListLayout *OlfMonitoredObservablesView::addListView(const QString &listName)
+ViewListLayout *OlfMonitoredObservablesView::addListView(const QString &listName)
 {
     Q_UNUSED(listName)
     return nullptr;

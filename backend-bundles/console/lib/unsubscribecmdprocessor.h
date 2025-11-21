@@ -16,35 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef UNSUBSCRIBECMDPROCESSOR_H
 #define UNSUBSCRIBECMDPROCESSOR_H
 
 #include "olcmdprocessor.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-namespace cmd
-{
-
 class UnsubscribeCmdProcessor : public OlCmdProcessor
 {
 public:
     UnsubscribeCmdProcessor(const QString& logChannel,
-                            bundle::OlConsole& console);
+                            OlConsole& console);
     ~UnsubscribeCmdProcessor() override;
 
 protected:
     bool exec(const RawCmd& cmd) override;
 };
-
-} //namespace cmd
-} //namespace console
-} //namespace gac
-} //namespace elekdom
-
 #endif // UNSUBSCRIBECMDPROCESSOR_H

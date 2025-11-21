@@ -16,19 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "sessionmessage.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-SessionMessage::SessionMessage(quint16 msgType,quint32 sessionId):
-    Message{msgType},
+oplink::SessionMessage::SessionMessage(quint16 msgType,quint32 sessionId):
+    oplink::Message{msgType},
     m_sessionId{sessionId}
 {
 
 }
 
-SessionMessage::~SessionMessage()
+oplink::SessionMessage::~SessionMessage()
 {
 
 }

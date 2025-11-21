@@ -16,36 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SESSIONONFDOCUMENT_H
 #define SESSIONONFDOCUMENT_H
 
-#include "xmldom/document.h"
+#include <QSharedPointer>
+#include "xmldom/xmldocument.h"
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace remote
-{
-
-class OLCORE_LIB_EXPORT SessionConfDocument: public plugframe::core::xmldom::Document
+class OLCORE_LIB_EXPORT SessionConfDocument: public plugframe::XmlDocument
 {
 public:
-    SessionConfDocument(plugframe::core::xmldom::BrowserHook& browserHook);
+    SessionConfDocument(plugframe::XmlBrowserHook& browserHook);
     ~SessionConfDocument() override;
 
 protected:
     QString rootNodeName() override;
     bool _browse() override;
 };
-
-}//namespace remote
-}//namespace core
+using QspSessionConfDocument = QSharedPointer<SessionConfDocument>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SESSIONONFDOCUMENT_H

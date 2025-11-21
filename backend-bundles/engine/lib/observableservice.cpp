@@ -16,9 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
+#include "bundle/bundleimplementation.h"
 #include "observableservice.h"
-#include "serverengine.h"
 #include "service-int/observableserviceinterface.h"
 #include "command/command.h"
 #include "observable/property/property.h"
@@ -26,11 +25,8 @@
 #include "observable/observable/observablebuilderscontainer.h"
 #include "logger/pflog.h"
 
-using namespace elekdom::oplink::engine::service;
-using namespace elekdom::oplink::core;
-
-ObservableService::ObservableService(elekdom::plugframe::core::bundle::BundleImplementation *implementation):
-    plugframe::core::service::ServiceImplementation{implementation}
+ObservableService::ObservableService(plugframe::BundleImplementation *implementation):
+    plugframe::ServiceImplementation{implementation}
 {
 
 }
@@ -40,12 +36,12 @@ ObservableService::~ObservableService()
 
 }
 
-bool ObservableService::submitOrder(core::command::StrOrder command)
+bool ObservableService::submitOrder(oplink::StrOrder command)
 {
-    QMutexLocker                 lock(&m_mtx);
-    bool                         ret{false};
-    command::QspCommand       cmd{new command::Command{command}};
-    observable::QspObservable observable{lookupObservable(cmd->observable())};
+    QMutexLocker          lock(&m_mtx);
+    bool                  ret{false};
+    oplink::QspCommand    cmd{new oplink::Command{command}};
+    oplink::QspObservable observable{lookupObservable(cmd->observable())};
 
     if (!observable.isNull())
     {
@@ -56,12 +52,12 @@ bool ObservableService::submitOrder(core::command::StrOrder command)
     return ret;
 }
 
-bool ObservableService::subscribe(core::observable::ObservableName observableName,
-                                           core::observable::ObservableSubscriber *subscriber)
+bool ObservableService::subscribe(oplink::ObservableName observableName,
+                                  oplink::ObservableSubscriber *subscriber)
 {
-    QMutexLocker                 lock(&m_mtx);
-    bool                         ret{false};
-    observable::QspObservable observable{lookupObservable(observableName)};
+    QMutexLocker          lock(&m_mtx);
+    bool                  ret{false};
+    oplink::QspObservable observable{lookupObservable(observableName)};
 
     if (!observable.isNull())
     {
@@ -71,12 +67,12 @@ bool ObservableService::subscribe(core::observable::ObservableName observableNam
     return ret;
 }
 
-bool ObservableService::unsubscribe(core::observable::ObservableName observableName,
-                                             core::observable::ObservableSubscriber *subscriber)
+bool ObservableService::unsubscribe(oplink::ObservableName observableName,
+                                    oplink::ObservableSubscriber *subscriber)
 {
-    QMutexLocker                 lock(&m_mtx);
-    bool                         ret{false};
-    observable::QspObservable observable{lookupObservable(observableName)};
+    QMutexLocker          lock(&m_mtx);
+    bool                  ret{false};
+    oplink::QspObservable observable{lookupObservable(observableName)};
 
     if (!observable.isNull())
     {
@@ -86,17 +82,17 @@ bool ObservableService::unsubscribe(core::observable::ObservableName observableN
     return ret;
 }
 
-bool ObservableService::propertyValue(core::observable::ObservableName observableName,
-                                      core::observable::PropertyName propertyName,
+bool ObservableService::propertyValue(oplink::ObservableName observableName,
+                                      oplink::PropertyName propertyName,
                                       QVariant& value)
 {
     QMutexLocker lock(&m_mtx);
     bool ret{false};
-    observable::QspObservable observable{lookupObservable(observableName)};
+    oplink::QspObservable observable{lookupObservable(observableName)};
 
     if (!observable.isNull())
     {
-        observable::QspProperty property{observable->property(propertyName)};
+        oplink::QspProperty property{observable->property(propertyName)};
         if (!property.isNull())
         {
             ret = property->isValidValue();
@@ -110,11 +106,12 @@ bool ObservableService::propertyValue(core::observable::ObservableName observabl
     return ret;
 }
 
-observable::QspProperty ObservableService::property(core::observable::ObservableName observableName, core::observable::PropertyName propertyName)
+oplink::QspProperty ObservableService::property(oplink::ObservableName observableName,
+                                                oplink::PropertyName propertyName)
 {
-    QMutexLocker lock(&m_mtx);
-    observable::QspProperty ret;
-    observable::QspObservable observable{lookupObservable(observableName)};
+    QMutexLocker          lock(&m_mtx);
+    oplink::QspProperty   ret;
+    oplink::QspObservable observable{lookupObservable(observableName)};
 
     if (!observable.isNull())
     {
@@ -124,13 +121,13 @@ observable::QspProperty ObservableService::property(core::observable::Observable
     return ret;
 }
 
-void ObservableService::registerObservables(const core::observable::QspObservableBuildersContainer &loadedObservables)
+void ObservableService::registerObservables(const oplink::QspObservableBuildersContainer& loadedObservables)
 {
     QMutexLocker lock(&m_mtx);
 
-    for(observable::ObservableBuildersContainer::ConstIt it = loadedObservables->begin(); it != loadedObservables->end(); it++)
+    for(oplink::ObservableBuildersContainer::ConstIt it = loadedObservables->begin(); it != loadedObservables->end(); it++)
     {
-        observable::QspObservable obs{(*it).dynamicCast<observable::Observable>()};
+        oplink::QspObservable obs{(*it).dynamicCast<oplink::Observable>()};
         if (!m_registeredObservables.contains(obs->name()))
         {
             pfInfo1(implementation()->logChannel()) << QObject::tr("%1 enregistré pour suivi").arg(obs->name());
@@ -145,10 +142,10 @@ void ObservableService::registerObservables(const core::observable::QspObservabl
 
 QString ObservableService::serviceName()
 {
-    return service::ObservableServiceInterface::serviceName();
+    return oplink::ObservableServiceInterface::serviceName();
 }
 
-observable::QspObservable ObservableService::lookupObservable(const core::observable::ObservableName &name)
+oplink::QspObservable ObservableService::lookupObservable(const oplink::ObservableName& name)
 {
     return m_registeredObservables.value(name);
 }

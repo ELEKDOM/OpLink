@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "temperaturehumiditywidgetview.h"
 #include "ui_temperaturehumiditywidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 TemperatureHumidityWidgetView::TemperatureHumidityWidgetView(QWidget *parent):
     WidgetListView{parent},

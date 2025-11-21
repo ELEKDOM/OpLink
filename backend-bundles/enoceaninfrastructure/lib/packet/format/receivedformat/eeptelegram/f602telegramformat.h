@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef F602TELEGRAMFORMAT_H
 #define F602TELEGRAMFORMAT_H
 
+#include <QSharedPointer>
 #include "f6telegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class F602TelegramFormat : public F6TelegramFormat
 {
@@ -39,9 +32,5 @@ public:
     quint8 statusByte();
     bool buttonState(quint8& channel, bool& value);
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspF602TelegramFormat = QSharedPointer<F602TelegramFormat>;
 #endif // F602TELEGRAMFORMAT_H

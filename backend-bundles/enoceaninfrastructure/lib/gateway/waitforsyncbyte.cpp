@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "gateway/waitforsyncbyte.h"
 #include "packet/esp3packet.h"
 #include "enoceaninfrastructurelogchannel.h"
-
-using namespace elekdom::oplink::enocean;
 
 WaitForSyncByte::WaitForSyncByte(Esp3PacketSerialReceiver& receiver):
     Esp3SerialReceiverState{receiver}

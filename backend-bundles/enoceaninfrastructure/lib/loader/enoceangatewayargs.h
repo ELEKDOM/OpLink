@@ -16,23 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANGATEWAYSARG_H
 #define ENOCEANGATEWAYSARG_H
 
 #include "abstract_infrastructure/area/gatewayargs.h"
 #include "enoceaninfrastructure_forward.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanGatewayArgs : public infrastructure::GatewayArgs
+class EnoceanGatewayArgs : public oplink::GatewayArgs
 {
 public:
     EnoceanGatewayArgs();
@@ -41,9 +31,4 @@ public:
 public:
     virtual void accept(EnoceanGateway& argsVisitor) = 0;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace enocean
-
 #endif // ENOCEANGATEWAYSARG_H

@@ -16,33 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOWCOMMANDPROCESSORMODEL_H
 #define LOWCOMMANDPROCESSORMODEL_H
 
 #include "olcore-backend-lib_export.h"
 #include "commandprocessormodel.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT LowCommandProcessorModel : public CommandProcessorModel
 {
 public:
     LowCommandProcessorModel(const ProcessorModelName& modelName,
-                                const command::CommandName& commandName);
+                             const CommandName& commandName);
     ~LowCommandProcessorModel() override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOWCOMMANDPROCESSORMODEL_H

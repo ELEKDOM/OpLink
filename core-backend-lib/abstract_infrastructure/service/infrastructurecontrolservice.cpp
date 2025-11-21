@@ -16,44 +16,40 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructurecontrolservice.h"
 #include "abstract_infrastructure/infrastructure.h"
 
-using namespace elekdom::oplink::core::infrastructure::service;
-using namespace elekdom::oplink::core::infrastructure;
-
-InfrastructureControlService::InfrastructureControlService(plugframe::core::bundle::BundleImplementation *implementation):
-    plugframe::core::service::ServiceImplementation{implementation}
+oplink::InfrastructureControlService::InfrastructureControlService(plugframe::BundleImplementation *implementation):
+    plugframe::ServiceImplementation{implementation}
 {
 
 }
 
-InfrastructureControlService::~InfrastructureControlService()
+oplink::InfrastructureControlService::~InfrastructureControlService()
 {
 
 }
 
-const QString& InfrastructureControlService::getInfrastructureName()
+const QString& oplink::InfrastructureControlService::getInfrastructureName()
 {
-    bundle::Infrastructure* infra{dynamic_cast<bundle::Infrastructure*>(implementation())};
+    oplink::Infrastructure* infra{dynamic_cast<oplink::Infrastructure*>(implementation())};
     return infra->getInfrastructureName();
 }
 
-bool InfrastructureControlService::startLoadingInfrastructure(plugframe::core::worker::WorkerWatcher *workerWatcher,
-                                                                 InfrastructureControlServiceInterface::OperationalMode mode)
+bool oplink::InfrastructureControlService::startLoadingInfrastructure(plugframe::WorkerWatcher *workerWatcher,
+                                                                      oplink::InfrastructureControlServiceInterface::OperationalMode mode)
 {
-    bundle::Infrastructure* infra{dynamic_cast<bundle::Infrastructure*>(implementation())};
+    oplink::Infrastructure* infra{dynamic_cast<oplink::Infrastructure*>(implementation())};
     return infra->startLoadingInfrastructure(mode, workerWatcher);
 }
 
-bool InfrastructureControlService::loadingFinished()
+bool oplink::InfrastructureControlService::loadingFinished()
 {
-    bundle::Infrastructure* infra{dynamic_cast<bundle::Infrastructure*>(implementation())};
+    oplink::Infrastructure* infra{dynamic_cast<oplink::Infrastructure*>(implementation())};
     return infra->loadingFinished();
 }
 
-QString InfrastructureControlService::serviceName()
+QString oplink::InfrastructureControlService::serviceName()
 {
     return InfrastructureControlServiceInterface::serviceName();
 }

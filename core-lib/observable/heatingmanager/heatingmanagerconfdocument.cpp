@@ -16,35 +16,32 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heatingmanagerconfdocument.h"
 #include "heatingmanagerloaderhook.h"
 #include "scheduler/schedulerelement.h"
 
-using namespace elekdom::oplink::core::heatingmanager;
-
-HeatingManagerConfDocument::HeatingManagerConfDocument(HeatingManagerLoaderHook& browserHook):
-    virtualequipment::VirtualEquipmentConfDocument{browserHook}
+oplink::HeatingManagerConfDocument::HeatingManagerConfDocument(oplink::HeatingManagerLoaderHook& browserHook):
+    oplink::VirtualEquipmentConfDocument{browserHook}
 {
 
 }
 
-HeatingManagerConfDocument::~HeatingManagerConfDocument()
+oplink::HeatingManagerConfDocument::~HeatingManagerConfDocument()
 {
 
 }
 
-QString HeatingManagerConfDocument::rootNodeName()
+QString oplink::HeatingManagerConfDocument::rootNodeName()
 {
     return heatingManagerTag();
 }
 
-HeatingManagerLoaderHook& HeatingManagerConfDocument::hook()
+oplink::HeatingManagerLoaderHook& oplink::HeatingManagerConfDocument::hook()
 {
     return dynamic_cast<HeatingManagerLoaderHook&>(browserHook());
 }
 
-bool HeatingManagerConfDocument::_browse()
+bool oplink::HeatingManagerConfDocument::_browse()
 {
     bool ret{false};
     QDomElement rootElem{documentElement()};
@@ -57,11 +54,11 @@ bool HeatingManagerConfDocument::_browse()
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromHeatingManagerElement(QDomElement& hmElem)
+bool oplink::HeatingManagerConfDocument::extractDataFromHeatingManagerElement(QDomElement& hmElem)
 {
     bool ret{false};
     QString observableName,modelName,title,localisation,controlTypeAttr,idAttr;
-    HeatingManagerLoaderHook::ControlType controlType{HeatingManagerLoaderHook::ControlType::Unknow};
+    oplink::HeatingManagerLoaderHook::ControlType controlType{HeatingManagerLoaderHook::ControlType::Unknow};
     int confId;
 
     observableName = hmElem.attribute(nameAttr());
@@ -73,11 +70,11 @@ bool HeatingManagerConfDocument::extractDataFromHeatingManagerElement(QDomElemen
     controlTypeAttr = hmElem.attribute(controlAttr());
     if (controlType_pw() == controlTypeAttr)
     {
-        controlType = HeatingManagerLoaderHook::ControlType::PW;
+        controlType = oplink::HeatingManagerLoaderHook::ControlType::PW;
     }
     else  if (controlType_pwt() == controlTypeAttr)
     {
-        controlType = HeatingManagerLoaderHook::ControlType::PWT;
+        controlType = oplink::HeatingManagerLoaderHook::ControlType::PWT;
     }
 
     ret = hook().heatingManagerDeclarationBegin(observableName,
@@ -90,7 +87,7 @@ bool HeatingManagerConfDocument::extractDataFromHeatingManagerElement(QDomElemen
     {
         // Control part
         //-------------
-        if (controlType != HeatingManagerLoaderHook::ControlType::Unknow)
+        if (controlType != oplink::HeatingManagerLoaderHook::ControlType::Unknow)
         {
             ret = extractDataFromControlElement(hmElem,observableName,controlType);
 
@@ -108,19 +105,19 @@ bool HeatingManagerConfDocument::extractDataFromHeatingManagerElement(QDomElemen
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromControlElement(QDomElement &hmElem,
-                                                               const QString& observableName,
-                                                               HeatingManagerLoaderHook::ControlType ctrT)
+bool oplink::HeatingManagerConfDocument::extractDataFromControlElement(QDomElement &hmElem,
+                                                                       const QString& observableName,
+                                                                       oplink::HeatingManagerLoaderHook::ControlType ctrT)
 {
     bool ret{false};
     QString tagName;
     QDomNodeList descendants;
 
-    if (ctrT == HeatingManagerLoaderHook::ControlType::PW)
+    if (ctrT == oplink::HeatingManagerLoaderHook::ControlType::PW)
     {
         tagName = pwControlTag();
     }
-    else if (ctrT == HeatingManagerLoaderHook::ControlType::PWT)
+    else if (ctrT == oplink::HeatingManagerLoaderHook::ControlType::PWT)
     {
         tagName = pwtControlTag();
     }
@@ -137,7 +134,7 @@ bool HeatingManagerConfDocument::extractDataFromControlElement(QDomElement &hmEl
         pd = controlElem.attribute(presenceDetectionAttr()) == detection_on();
         modeValue = controlElem.attribute(modeAttr());
 
-        if (ctrT == HeatingManagerLoaderHook::ControlType::PWT)
+        if (ctrT == oplink::HeatingManagerLoaderHook::ControlType::PWT)
         {
             QString tmp;
 
@@ -164,7 +161,7 @@ bool HeatingManagerConfDocument::extractDataFromControlElement(QDomElement &hmEl
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromRoomsElement(QDomElement &hmElem)
+bool oplink::HeatingManagerConfDocument::extractDataFromRoomsElement(QDomElement &hmElem)
 {
     bool ret{true};
     QDomNodeList descendants{hmElem.elementsByTagName(roomsTag())};
@@ -189,7 +186,7 @@ bool HeatingManagerConfDocument::extractDataFromRoomsElement(QDomElement &hmElem
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromRoomElement(QDomElement &roomElem)
+bool oplink::HeatingManagerConfDocument::extractDataFromRoomElement(QDomElement &roomElem)
 {
     bool ret;
     QString roomName{roomElem.attribute(nameAttr())};
@@ -212,7 +209,7 @@ bool HeatingManagerConfDocument::extractDataFromRoomElement(QDomElement &roomEle
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromHeatersElement(QDomElement &roomElem)
+bool oplink::HeatingManagerConfDocument::extractDataFromHeatersElement(QDomElement &roomElem)
 {
     bool ret{true};
     QDomNodeList descendants{roomElem.elementsByTagName(heatersTag())}; // only one heaters element expected
@@ -239,7 +236,7 @@ bool HeatingManagerConfDocument::extractDataFromHeatersElement(QDomElement &room
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromWindowSensorsElement(QDomElement &roomElem)
+bool oplink::HeatingManagerConfDocument::extractDataFromWindowSensorsElement(QDomElement &roomElem)
 {
     bool ret{true};
     QDomNodeList descendants{roomElem.elementsByTagName(windowSensorsTag())}; // only one optionnal windosensors element expected
@@ -266,7 +263,7 @@ bool HeatingManagerConfDocument::extractDataFromWindowSensorsElement(QDomElement
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractDataFromTemperatureSensorsElement(QDomElement &roomElem)
+bool oplink::HeatingManagerConfDocument::extractDataFromTemperatureSensorsElement(QDomElement &roomElem)
 {
     bool ret{true};
     QDomNodeList descendants{roomElem.elementsByTagName(temperatureSensorsTag())}; // only one tempsensors element expected
@@ -293,18 +290,18 @@ bool HeatingManagerConfDocument::extractDataFromTemperatureSensorsElement(QDomEl
     return ret;
 }
 
-bool HeatingManagerConfDocument::extractScheduler(QDomElement &controlElem,
+bool oplink::HeatingManagerConfDocument::extractScheduler(QDomElement &controlElem,
                                                   const QString& observableName)
 {
     bool ret{true};
-    QDomNodeList descendants{controlElem.elementsByTagName(plugframe::core::scheduler::SchedulerElement::schedulerTag())};
+    QDomNodeList descendants{controlElem.elementsByTagName(plugframe::SchedulerElement::schedulerTag())};
     QString schedulerId{observableName + "_scheduler"};
 
     if (descendants.size() == 1) // Only one optional scheduler is expected
     {
         QDomElement elem{descendants.at(0).toElement()};
-        plugframe::core::scheduler::SchedulerElementHook& schedulHook{hook().schedulerDeclarationBegin()};
-        plugframe::core::scheduler::SchedulerElement schedulElem{elem,schedulHook};
+        plugframe::SchedulerElementHook& schedulHook{hook().schedulerDeclarationBegin()};
+        plugframe::SchedulerElement schedulElem{elem,schedulHook};
 
         schedulElem.browse(schedulerId);
 

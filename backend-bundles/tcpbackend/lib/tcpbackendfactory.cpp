@@ -16,14 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "tcpbackendfactory.h"
 #include "tcpbackenddeserializer.h"
 #include "tcpbackendchannelmanager.h"
-
-using namespace elekdom::plugframe::core;
-using namespace elekdom::oplink::tcpbackend::factory;
-using namespace elekdom::oplink::tcpbackend::bundle;
 
 TcpBackendFactory::TcpBackendFactory()
 {
@@ -35,14 +30,14 @@ TcpBackendFactory::~TcpBackendFactory()
 
 }
 
-tcp::TcpChannelDeserializer *TcpBackendFactory::createDeserializer()
+plugframe::TcpChannelDeserializer *TcpBackendFactory::createDeserializer()
 {
     return new TcpBackendDeserializer;
 }
 
-tcp::server::bundle::TcpServerChannelManager *TcpBackendFactory::createChannelManager(tcp::server::bundle::TcpServer &bundle,
-                                                                                      tcp::TcpChannel *channel,
-                                                                                      QObject *parent)
+plugframe::TcpServerChannelManager *TcpBackendFactory::createChannelManager(plugframe::TcpServer &bundle,
+                                                                            plugframe::TcpChannel *channel,
+                                                                            QObject *parent)
 {
     return new TcpBackendChannelManager{bundle,channel,parent};
 }

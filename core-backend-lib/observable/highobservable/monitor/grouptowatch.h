@@ -16,26 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GROUPTOWATCH_H
 #define GROUPTOWATCH_H
 
 #include <QHash>
 #include <QString>
+#include <QSharedPointer>
+#include "observable/highobservable/monitor/grouptowatchalgorithm.h"
+#include "observable/highobservable/monitor/statetowatch.h"
+#include "observable/highobservable/monitor/statetowatchlist.h"
 #include "olcore-backend-lib_export.h"
-#include "service-int/observableserviceinterface.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-namespace monitoring
-{
-
 class OLCORE_BACKEND_LIB_EXPORT GroupToWatch
 {
 public:
@@ -49,7 +42,7 @@ public:
     bool isCategoryEmpty(const QString& categoryName);
     void addMonitoredState(const QString& categoryName, QspMonitoredState monitoredState);
     QspMonitoredStateList category(const QString& categoryName);
-    void initAlgorithm(engine::service::ObservableServiceInterface *observableService);
+    void initAlgorithm(oplink::ObservableServiceInterface *observableService);
     GroupToWatchAlgorithm* algorithm();
     QString reverseLookUp(const QString& reverseInput);
     bool allTrue(const QString& categoryName);
@@ -60,11 +53,6 @@ private:
     QspMonitoredGroupAlgorithm            m_algorithm;
     QString                               m_groupName;
 };
-
-}//namespace monitoring
-}//namespace observable
-}//namespace core
+using QspMonitoredObservableGroup = QSharedPointer<GroupToWatch>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GROUPTOWATCH_H

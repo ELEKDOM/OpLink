@@ -19,9 +19,6 @@
 #include "logger/pflog.h"
 #include "gateway/esp3packetreceiver.h"
 #include "enoceaninfrastructurelogchannel.h"
-#include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3PacketReceiver::Esp3PacketReceiver(QObject *parent) : QObject{parent},
     m_buffer{new Esp3Packet}

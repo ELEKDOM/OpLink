@@ -16,13 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heatingmanagerset.h"
 #include "heatingmanagersetfactory.h"
 #include "heatingmanagersetlogchannel.h"
-
-using namespace elekdom::oplink::heatingmanagerset::bundle;
-using namespace elekdom::oplink::core::virtualequipmentset::bundle;
 
 HeatingManagerSet::HeatingManagerSet():
     VirtualEquipmentSet{s_HeatingManagerSetLogChannel}
@@ -34,7 +30,7 @@ HeatingManagerSet::~HeatingManagerSet()
 
 }
 
-elekdom::plugframe::core::bundle::BundleFactory *HeatingManagerSet::createFactory()
+plugframe::BundleFactory *HeatingManagerSet::createFactory()
 {
-    return new factory::HeatingManagerSetFactory;
+    return new HeatingManagerSetFactory;
 }

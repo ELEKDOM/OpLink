@@ -16,29 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURESTORE_H
 #define INFRASTRUCTURESTORE_H
 
 #include <QString>
+#include "logger/loggable.h"
+#include "abstract_infrastructure/area/gatewayargs.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 #include "pfcore-lib_forward.h"
-#include "logger/loggable.h"
-#include "abstract_infrastructure/area/gatewayargs.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureStore  : public logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureStore  : public plugframe::Loggable
 {
 public:
     InfrastructureStore(const QString& logChannel);
@@ -64,12 +54,7 @@ public:
                            const QString& deviceModelName,
                            const QString& localisation,
                            const DeviceChannelsBinding& deviceChannelsBinding) = 0;
-    virtual worker::WorkerOuts *readFinished(bool readStatus) = 0;
+    virtual plugframe::WorkerOuts *readFinished(bool readStatus) = 0;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace infrastructure
-
 #endif // INFRASTRUCTURESTORE_H

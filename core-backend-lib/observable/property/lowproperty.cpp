@@ -16,22 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "lowproperty.h"
 
-using namespace elekdom::oplink::core::observable;
-
-LowProperty::LowProperty(Observable& observable,
-                               const PropertyName& propertyName,
-                               QVariant::Type valueType):
-    Property{observable,
-                propertyName,
-                valueType}
+oplink::LowProperty::LowProperty(oplink::Observable& observable,
+                                 const oplink::PropertyName& propertyName,
+                                 QMetaType::Type valueType):
+    oplink::Property{observable,
+                     propertyName,
+                     valueType}
 {
 
 }
 
-LowProperty::~LowProperty()
+oplink::LowProperty::~LowProperty()
 {
 
 }

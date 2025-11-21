@@ -16,12 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "tcpbackendplugin.h"
 #include "tcpbackend.h"
-
-using namespace elekdom::plugframe;
-using namespace elekdom::oplink::tcpbackend::plugin;
 
 TcpBackendPlugin::TcpBackendPlugin()
 {
@@ -33,7 +29,9 @@ TcpBackendPlugin::~TcpBackendPlugin()
 
 }
 
-core::bundle::Bundle4PluginInterface *TcpBackendPlugin::createImplementation()
+plugframe::Bundle4PluginInterface *TcpBackendPlugin::createImplementation()
 {
-    return new tcpbackend::bundle::TcpBackend;
+    plugframe::Bundle4PluginInterface *ret{new TcpBackend};
+
+    return ret;
 }

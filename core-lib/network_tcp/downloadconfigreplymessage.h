@@ -16,20 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DOWNLOADCONFIGREPLYMESSAGE_H
 #define DOWNLOADCONFIGREPLYMESSAGE_H
 
 #include <QString>
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT DownloadConfigReplyMessage : public SessionMessage
 {
@@ -43,8 +36,5 @@ public:
 private:
     QString m_xmlConfig;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // DOWNLOADCONFIGREPLYMESSAGE_H

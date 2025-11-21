@@ -16,50 +16,40 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef COMMANDPROCESSOR_H
 #define COMMANDPROCESSOR_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "logger/loggable.h"
 #include "command/command-names.h"
+#include "command/command.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-class OLCORE_BACKEND_LIB_EXPORT CommandProcessor : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT CommandProcessor : public plugframe::Loggable
 {
 public:
     CommandProcessor(const Observable& observable,
-                        const command::CommandName& cmdName);
+                     const CommandName& cmdName);
     ~CommandProcessor() override;
 
 public:
     const Observable& observable() {return m_observable;}
-    command::CommandName cmdName() {return m_cmdName;}
+    CommandName cmdName() {return m_cmdName;}
 
 public:
-    bool acceptCmd(QSharedPointer<command::Command> order);
+    bool acceptCmd(QspCommand order);
 
 protected:
-    bool checkTarget(command::QspCommand& order);
-    virtual void process(command::QspCommand order) = 0;
+    bool checkTarget(QspCommand& order);
+    virtual void process(QspCommand order) = 0;
 
 private:
-    const Observable&    m_observable;
-    command::CommandName m_cmdName;
+    const Observable& m_observable;
+    CommandName       m_cmdName;
 };
-
-}//namespace observable
-}//namespace core
+using QspCommandProcessor = QSharedPointer<CommandProcessor>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // COMMANDPROCESSOR_H

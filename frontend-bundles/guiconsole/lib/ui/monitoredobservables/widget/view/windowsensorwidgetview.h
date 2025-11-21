@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef WINDOWSENSORWIDGETVIEW_H
 #define WINDOWSENSORWIDGETVIEW_H
 
@@ -25,19 +24,6 @@
 namespace Ui {
 class windowSensorWidgetView;
 }
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class WindowSensorWidgetView : public WidgetListView
 {
@@ -55,10 +41,4 @@ private:
     Ui::windowSensorWidgetView *ui;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // WINDOWSENSORWIDGETVIEW_H

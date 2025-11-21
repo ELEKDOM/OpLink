@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201CMD1FORMAT_H
 #define D201CMD1FORMAT_H
 
+#include <QSharedPointer>
 #include "d201commandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 // EnOcean Command 0x01 : Actuator Set Output
 class D201Cmd1Format : public D201CommandFormat
@@ -39,9 +32,5 @@ public:
 public:
     void setOutput(quint8 channel, quint8 val);
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspD201Cmd1Format = QSharedPointer<D201Cmd1Format>;
 #endif // D201CMD1FORMAT_H

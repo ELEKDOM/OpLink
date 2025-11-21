@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef F6TELEGRAMFORMAT_H
 #define F6TELEGRAMFORMAT_H
 
 #include "eeptelegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class F6TelegramFormat : public EepTelegramFormat
 {
@@ -38,9 +30,5 @@ public:
 public:
     quint8 dataByte();
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // F6TELEGRAMFORMAT_H

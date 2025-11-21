@@ -16,15 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "serverenginelistener.h"
 #include "serverengine.h"
 
-using namespace elekdom::oplink::engine::bundle;
-
-ServerEngineListener::ServerEngineListener(plugframe::core::bundle::Bundle &bundle, QObject *parent):
-    plugframe::core::bundle::BundleListener4fws{bundle, parent}
+ServerEngineListener::ServerEngineListener(plugframe::Bundle &bundle, QObject *parent):
+    plugframe::BundleListener4fws{bundle, parent}
 {
 
 }
@@ -34,7 +31,7 @@ ServerEngineListener::~ServerEngineListener()
 
 }
 
-void ServerEngineListener::onFrameworkStartedEvent(plugframe::core::event::FrameworkStartedEvent *evt)
+void ServerEngineListener::onFrameworkStartedEvent(plugframe::FrameworkStartedEvent *evt)
 {
     pfDebug3(getLogBundleName()) << "->GacServerEngineListener::onFrameworkStartedEvent";
     Q_UNUSED(evt)

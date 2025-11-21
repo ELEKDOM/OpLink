@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201statusquery.h"
 #include "command/command.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd3format.h"
 
-using namespace elekdom::oplink::enocean;
-
-D201StatusQuery::D201StatusQuery(const core::infrastructure::QspDevice &device):
+D201StatusQuery::D201StatusQuery(const oplink::QspDevice &device):
     D201CommandProcessor{device, new D201Cmd3Format}
 {
 
@@ -34,7 +31,7 @@ D201StatusQuery::~D201StatusQuery()
 
 }
 
-bool D201StatusQuery::completePacket(core::command::QspCommand order)
+bool D201StatusQuery::completePacket(oplink::QspCommand order)
 {
     // No arg for CMD 0x03 !
     Q_UNUSED(order)

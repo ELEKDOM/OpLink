@@ -23,27 +23,15 @@
 #include "olcore-backend-lib_export.h"
 #include "model/modelnames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ProcessorModelNames
 {
 public:
-    static const oplink::core::model::ProcessorModelName SYNCHRONIZE_OPERATION_DEVICE;
-    static const oplink::core::model::ProcessorModelName SYNCHRONIZE_LOAD;
-    static const oplink::core::model::ProcessorModelName SET_ACTUATOR;
-    static const oplink::core::model::ProcessorModelName SET_LOAD;
+    static const ProcessorModelName SYNCHRONIZE_OPERATION_DEVICE;
+    static const ProcessorModelName SYNCHRONIZE_LOAD;
+    static const ProcessorModelName SET_ACTUATOR;
+    static const ProcessorModelName SET_LOAD;
 };
-
-}//namespace model
-}//namespace core
 }//namespace Oplink
-}//namespace elekdom
-
 #endif // PROCESSORMODELNAMES_H

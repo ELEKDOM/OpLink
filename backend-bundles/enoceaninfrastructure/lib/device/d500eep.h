@@ -16,29 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D500EEP_H
 #define D500EEP_H
 
 #include "d5eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class D500Eep : public D5Eep
 {
 public:
-    D500Eep(const core::infrastructure::DeviceId& id,
-            core::infrastructure::DeviceHook& deviceHook);
+    D500Eep(const oplink::DeviceId& id,
+            oplink::DeviceHook& deviceHook);
     ~D500Eep() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D500EEP_H

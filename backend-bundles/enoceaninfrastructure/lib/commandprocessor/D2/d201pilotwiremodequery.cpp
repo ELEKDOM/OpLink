@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201pilotwiremodequery.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd9format.h"
 
-using namespace elekdom::oplink::enocean;
-
-D201PilotWireModeQuery::D201PilotWireModeQuery(const core::infrastructure::QspDevice& device):
+D201PilotWireModeQuery::D201PilotWireModeQuery(const oplink::QspDevice& device):
     D201CommandProcessor{device, new D201Cmd9Format}
 {}
 
@@ -31,7 +28,7 @@ D201PilotWireModeQuery::~D201PilotWireModeQuery()
 
 }
 
-bool D201PilotWireModeQuery::completePacket(core::command::QspCommand order)
+bool D201PilotWireModeQuery::completePacket(oplink::QspCommand order)
 {
     // No arg for CMD 0x09 !
     Q_UNUSED(order)

@@ -16,49 +16,33 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETFACTORY_H
 #define VIRTUALEQUIPMENTSETFACTORY_H
 
+#include "factory/bundlefactory.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 #include "olcore-lib_forward.h"
-#include "factory/bundlefactory.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-namespace factory
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetFactory : public plugframe::core::bundle::BundleFactory
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetFactory : public plugframe::BundleFactory
 {
 public:
     VirtualEquipmentSetFactory();
     ~VirtualEquipmentSetFactory() override;
 
 public:
-    virtual VirtualEquipmentSetLoader* createVirtualEquipmentSetLoader(virtualequipment::VirtualEquipmentLoader *veLoader);
-    virtual virtualequipment::VirtualEquipmentLoader* createVirtualEquipmentLoader(bundle::VirtualEquipmentSet *veSet) = 0;
-    virtual virtualequipment::VirtualEquipmentConfDocument *createVirtualEquipmentConfDocument(virtualequipment::VirtualEquipmentLoaderHook& hook) = 0;
+    virtual VirtualEquipmentSetLoader* createVirtualEquipmentSetLoader(VirtualEquipmentLoader *veLoader);
+    virtual VirtualEquipmentLoader* createVirtualEquipmentLoader(VirtualEquipmentSet *veSet) = 0;
+    virtual VirtualEquipmentConfDocument *createVirtualEquipmentConfDocument(VirtualEquipmentLoaderHook& hook) = 0;
 
 protected:
-    virtual service::VirtualEquipmentSetService *createVirtualEquipmentSetService(plugframe::core::bundle::BundleImplementation *implementation);
-    plugframe::core::bundle::BundleBuilder *createBuilder(plugframe::core::bundle::Bundle& myBundle) override;
-    plugframe::core::service::ServiceImplementationInterface *createServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation,
-                                                                                          const QString& sName,
-                                                                                          const QString& serviceVersion) override;
+    virtual VirtualEquipmentSetService *createVirtualEquipmentSetService(plugframe::BundleImplementation *implementation);
+    plugframe::BundleBuilder *createBuilder(plugframe::Bundle& myBundle) override;
+    plugframe::ServiceImplementationInterface *createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                           const QString& sName,
+                                                                           const QString& serviceVersion) override;
 };
-
-}//namespace factory
-}//namespace virtualequipmentset
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETFACTORY_H

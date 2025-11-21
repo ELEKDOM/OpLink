@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ACTUATORMODEL_H
 #define ACTUATORMODEL_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "model/modelnames.h"
 #include "model/observable/operationdevicemodel.h"
+#include "observable/observable/observablebuilderscontainer.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ActuatorModel : public OperationDeviceModel
 {
 public:
@@ -42,16 +35,11 @@ public:
 
 protected:
     bool checkBuilderArgs(QspObservableBuilderArgs builderArgs) override;
-    bool buildProperties(observable::QspObservableBuilder observableBuilder,
+    bool buildProperties(QspObservableBuilder observableBuilder,
                          QspObservableBuilderArgs builderArgs) override;
-    bool bindOutputs(observable::QspObservableBuilder actuatorBuilder,
-                     const infrastructure::ActuatorOutputsBinding& actuatorOutputsBinding,
-                     const observable::QspObservableBuildersContainer& loadedObservables);
+    bool bindOutputs(QspObservableBuilder actuatorBuilder,
+                     const ActuatorOutputsBinding& actuatorOutputsBinding,
+                     const QspObservableBuildersContainer& loadedObservables);
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // ACTUATORMODEL_H

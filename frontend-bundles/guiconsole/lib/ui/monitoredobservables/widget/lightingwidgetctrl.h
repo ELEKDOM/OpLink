@@ -16,25 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LIGHTINGWIDGETCTRL_H
 #define LIGHTINGWIDGETCTRL_H
 
 #include <QPixmap>
 #include "monitoredobservablewidgetctrl.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class LightingWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
@@ -59,10 +45,4 @@ private:
     QPixmap m_lightOff;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // LIGHTINGWIDGETCTRL_H

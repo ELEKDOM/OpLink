@@ -16,22 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PROCESSORCLASSNAMES_H
 #define PROCESSORCLASSNAMES_H
 
 #include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ProcessorClassNames
 {
 public:
@@ -40,9 +32,5 @@ public:
     static const ProcessorType LOAD_COMMAND_PROCESSOR_CLASS;
 };
 
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // PROCESSORCLASSNAMES_H

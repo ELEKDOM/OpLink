@@ -16,35 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201SETPILOTWIREMODE_H
 #define D201SETPILOTWIREMODE_H
 
 #include "d201commandprocessor.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 /* EnOcean Command 0x08 : Actuator Set Pilot Wire Mode */
 class D201SetPilotWireMode : public D201CommandProcessor
 {
 public:
-    D201SetPilotWireMode(const core::infrastructure::QspDevice& device);
+    D201SetPilotWireMode(const oplink::QspDevice& device);
     ~D201SetPilotWireMode() override;
 
 protected:
-    bool completePacket(core::command::QspCommand order) override;
+    bool completePacket(oplink::QspCommand order) override;
 
 private:
     void setMode(quint8 mode);
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // D201SETPILOTWIREMODE_H

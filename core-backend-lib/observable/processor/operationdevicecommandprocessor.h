@@ -16,41 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OPERATIONDEVICECOMMANDPROCESSOR_H
 #define OPERATIONDEVICECOMMANDPROCESSOR_H
 
 #include "lowcommandprocessor.h"
-#include "olcore-backend-lib_forward.h"
+#include "abstract_infrastructure/device/devicecommandprocessor.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-class OperationDeviceCommandProcessor : public LowCommandProcessor
+class OLCORE_BACKEND_LIB_EXPORT OperationDeviceCommandProcessor : public LowCommandProcessor
 {
 public:
     OperationDeviceCommandProcessor(const Observable& observable,
-                                       const command::CommandName& cmdName,
-                                       const infrastructure::QspDeviceCommandProcessor& deviceProcessor);
+                                    const CommandName& cmdName,
+                                    const QspDeviceCommandProcessor& deviceProcessor);
     ~OperationDeviceCommandProcessor() override;
 
 protected:
-    void process(command::QspCommand order) override;
-    virtual void setCheckStrategy(command::QspCommand cmd) = 0;
+    void process(QspCommand order) override;
+    virtual void setCheckStrategy(QspCommand cmd) = 0;
 
 private:
-    infrastructure::QspDeviceCommandProcessor m_deviceProcessor;
+    QspDeviceCommandProcessor m_deviceProcessor;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OPERATIONDEVICECOMMANDPROCESSOR_H

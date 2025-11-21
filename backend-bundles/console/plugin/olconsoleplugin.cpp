@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olconsoleplugin.h"
 #include "olconsole.h"
-
-using namespace elekdom::oplink::console::plugin;
 
 OlConsolePlugin::OlConsolePlugin()
 {
@@ -32,9 +29,9 @@ OlConsolePlugin::~OlConsolePlugin()
 
 }
 
-Bundle4PluginInterface *OlConsolePlugin::createImplementation()
+plugframe::Bundle4PluginInterface *OlConsolePlugin::createImplementation()
 {
-    return new bundle::OlConsole;
+    return new OlConsole;
 }
 
 PF_bindServicesImplementations_DEF(OlConsolePlugin)

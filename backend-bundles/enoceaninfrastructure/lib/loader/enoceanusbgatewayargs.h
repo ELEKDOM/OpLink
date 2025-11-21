@@ -16,19 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANUSBGATEWAYARGS_H
 #define ENOCEANUSBGATEWAYARGS_H
 
 #include <QtSerialPort/QSerialPort>
 #include "enoceangatewayargs.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class EnoceanUsbGatewayArgs : public EnoceanGatewayArgs
 {
@@ -50,9 +42,4 @@ public:
     QSerialPort::Parity   m_parity;
     QString               m_dev;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // ENOCEANUSBGATEWAYARGS_H

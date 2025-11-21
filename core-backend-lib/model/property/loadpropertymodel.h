@@ -16,37 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOADPROPERTYMODEL_H
 #define LOADPROPERTYMODEL_H
 
 #include "olcore-backend-lib_export.h"
 #include "model/property/observablepropertymodel.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT LoadPropertyModel : public ObservablePropertyModel
 {
 public:
     LoadPropertyModel(const PropertyModelName& modelName,
-                         const observable::PropertyName& propertyName,
-                         QVariant::Type valueType);
+                      const PropertyName& propertyName,
+                      QMetaType::Type valueType);
     ~LoadPropertyModel() override;
 
 protected:
-    observable::Property *createProperty(observable::Observable& observable) override;
+    Property *createProperty(Observable& observable) override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOADPROPERTYMODEL_H

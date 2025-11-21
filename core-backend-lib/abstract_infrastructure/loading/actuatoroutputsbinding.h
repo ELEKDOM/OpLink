@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ACTUATOROUTPUTSBINDING_H
 #define ACTUATOROUTPUTSBINDING_H
 
@@ -25,15 +24,8 @@
 #include "olcore-backend-lib_export.h"
 #include "actuatoroutput.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ActuatorOutputsBinding
 {
 public:
@@ -43,15 +35,10 @@ public:
 public:
     void append(const ActuatorOutput& newOutput);
     const ActuatorOutput& at(int i) const;
-    int size() const;
+    qsizetype size() const;
 
 private:
     QVector<ActuatorOutput> m_outputs;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // ACTUATOROUTPUTSBINDING_H

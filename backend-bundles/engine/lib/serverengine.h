@@ -16,28 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SERVERENGINE_H
 #define SERVERENGINE_H
 
 #include <QHash>
 #include <QList>
 #include "bundle/bundleimplementation.h"
-#include "olcore-backend-lib_forward.h"
 #include "states/startinginfrastructuresstate.h"
 #include "states/loadingvirtualequipmentsetsstate.h"
 #include "states/startingclientsstate.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-namespace bundle
-{
-
-class ServerEngine: public plugframe::core::bundle::BundleImplementation
+class ServerEngine: public plugframe::BundleImplementation
 {  
 public:
     ServerEngine();
@@ -60,16 +49,16 @@ public: // for states
     void setStartingClientsState();
     void finished();
     void startCurrentState();
-    void registerObservables(const observable::QspObservableBuildersContainer& loadedObservables);
+    void registerObservables(const oplink::QspObservableBuildersContainer& loadedObservables);
 
 #ifndef QT_NO_DEBUG_OUTPUT
     void printRegisteredInfrastructures();
 #endif
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
-    void _start(plugframe::core::bundle::QspBundleContext bundleContext) override;
-    plugframe::core::plugin::ServiceInterface *qtServiceInterface(const QString& sName) override;
+    plugframe::BundleFactory* createFactory() override;
+    void _start(plugframe::QspBundleContext bundleContext) override;
+    plugframe::ServiceInterface *qtServiceInterface(const QString& sName) override;
 
 private:
     List_RegisteredInfras               m_registeredInfrastructures;
@@ -80,10 +69,4 @@ private:
     StartingClientsState                m_startingClientsState;
     ServerStartingState                *m_currentStartingState;
 };
-
-}//namespace bundle
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
-
 #endif // SERVERENGINE_H

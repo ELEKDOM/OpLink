@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "abstract_infrastructure/device/device.h"
 #include "logger/pflog.h"
 #include "enoceaninfrastructurelogchannel.h"
@@ -25,14 +24,12 @@
 #include "gateway/enoceangatewaymode.h"
 #include "device/enoceanequipmentprofile.h"
 
-using namespace elekdom::oplink::enocean;
-
 EnoceanDeviceArea::EnoceanDeviceArea(const QString& logChannel,
                                      const QString& areaName,
                                      QObject *parent):
-    core::infrastructure::Area{logChannel,
-                                  areaName,
-                                  parent},
+    Area{logChannel,
+         areaName,
+         parent},
     m_devicesLoaded{false},
     m_usb300IdRecovered{false}
 {
@@ -44,7 +41,7 @@ EnoceanDeviceArea::~EnoceanDeviceArea()
 
 }
 
-void EnoceanDeviceArea::setGateway(core::infrastructure::AreaGateway *gateway)
+void EnoceanDeviceArea::setGateway(oplink::AreaGateway *gateway)
 {
     Area::setGateway(gateway);
 
@@ -78,7 +75,7 @@ void EnoceanDeviceArea::setGateway(core::infrastructure::AreaGateway *gateway)
     emit initializeUsb300BaseId();
 }
 
-bool EnoceanDeviceArea::addDevice(const core::infrastructure::QspDevice &newDevice)
+bool EnoceanDeviceArea::addDevice(const oplink::QspDevice &newDevice)
 {
     bool ret{Area::addDevice(newDevice)};
 

@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "gateway/usbgatewayport.h"
 #include "enoceaninfrastructurelogchannel.h"
-
-using namespace elekdom::oplink::enocean;
 
 UsbGatewayPort::UsbGatewayPort(const qint32 baudRate,
                                const QSerialPort::DataBits dataBits,

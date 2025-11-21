@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "load.h"
 
-using namespace elekdom::oplink::core::observable;
-
-Load::Load()
+oplink::Load::Load()
 {
 
 }
 
-Load::~Load()
+oplink::Load::~Load()
 {
 
 }

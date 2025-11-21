@@ -16,40 +16,36 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "loadcommandprocessor.h"
 #include "command/command.h"
 #include "observable/property/property.h"
 #include "observable/property/loadproperty.h"
-#include "observable/property/operationdeviceproperty.h"
 #include "observable/observable/observable.h"
 
-using namespace elekdom::oplink::core::observable;
-
-LoadCommandProcessor::LoadCommandProcessor(const Observable& observable,
-                                                 const command::CommandName& cmdName):
+oplink::LoadCommandProcessor::LoadCommandProcessor(const oplink::Observable& observable,
+                                                   const oplink::CommandName& cmdName):
     LowCommandProcessor{observable, cmdName}
 {
 
 }
 
-LoadCommandProcessor::~LoadCommandProcessor()
+oplink::LoadCommandProcessor::~LoadCommandProcessor()
 {
 
 }
 
-void LoadCommandProcessor::process(command::QspCommand order)
+void oplink::LoadCommandProcessor::process(oplink::QspCommand order)
 {
-    PropertyName targetPropertyName{order->property()};
-    const Observable& myObservable{observable()};
+    oplink::PropertyName targetPropertyName{order->property()};
+    const oplink::Observable& myObservable{observable()};
 
-    QspProperty targetProperty{myObservable.property(targetPropertyName)};
-    QspLoadProperty targetLoadProperty{targetProperty.dynamicCast<LoadProperty>()};
+    oplink::QspProperty targetProperty{myObservable.property(targetPropertyName)};
+    oplink::QspLoadProperty targetLoadProperty{targetProperty.dynamicCast<oplink::LoadProperty>()};
 
     if (!targetLoadProperty.isNull())
     {
-        QspOperationDeviceProperty relatedMasterProperty{targetLoadProperty->master()};
+        oplink::QspLowProperty relatedMasterProperty{targetLoadProperty->master()};
         Observable& relatedMasterObservable{relatedMasterProperty->observable()};
 
         //Redirect order

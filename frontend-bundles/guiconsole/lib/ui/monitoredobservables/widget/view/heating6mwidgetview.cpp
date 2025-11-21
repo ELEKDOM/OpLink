@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heating6mwidgetview.h"
 #include "ui_heating6mwidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 Heating6mWidgetView::Heating6mWidgetView(QWidget *parent):
     WidgetListView{parent},

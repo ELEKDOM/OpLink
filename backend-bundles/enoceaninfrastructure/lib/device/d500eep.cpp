@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d500eep.h"
 #include "packet/format/receivedformat/eeptelegram/d500telegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-D500Eep::D500Eep(const core::infrastructure::DeviceId& id,
-                 core::infrastructure::DeviceHook& deviceHook):
+D500Eep::D500Eep(const oplink::DeviceId& id,
+                 oplink::DeviceHook& deviceHook):
     D5Eep{id, deviceHook, new D500TelegramFormat}
 {
 

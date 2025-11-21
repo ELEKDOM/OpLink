@@ -16,27 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "actuatorpropertymodel.h"
 #include "observable/property/operationdeviceproperty.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-ActuatorPropertyModel::ActuatorPropertyModel(const PropertyModelName& modelName,
-                                                   const observable::PropertyName& propertyName,
-                                                   QVariant::Type valueType):
-    OperationDevicePropertyModel{modelName, propertyName, valueType}
+oplink::ActuatorPropertyModel::ActuatorPropertyModel(const oplink::PropertyModelName& modelName,
+                                                     const oplink::PropertyName& propertyName,
+                                                     QMetaType::Type valueType):
+    oplink::OperationDevicePropertyModel{modelName, propertyName, valueType}
 {
 
 }
 
-ActuatorPropertyModel::~ActuatorPropertyModel()
+oplink::ActuatorPropertyModel::~ActuatorPropertyModel()
 {
 
 }
 
-observable::Property *ActuatorPropertyModel::createProperty(observable::Observable& observable)
+oplink::Property *oplink::ActuatorPropertyModel::createProperty(oplink::Observable& observable)
 {
-     return new observable::OperationDeviceProperty{observable, propertyName(), valueType()};
+     return new oplink::OperationDeviceProperty{observable, propertyName(), valueType()};
 }

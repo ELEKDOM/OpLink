@@ -16,41 +16,28 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETLOADEROUTS_H
 #define VIRTUALEQUIPMENTSETLOADEROUTS_H
 
-#include "olcore-backend-lib_export.h"
+#include <QSharedPointer>
 #include "worker/workerouts.h"
 #include "observable/observable/observablebuilderscontainer.h"
+#include "olcore-backend-lib_export.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoaderOuts : public worker::WorkerOuts
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoaderOuts : public plugframe::WorkerOuts
 {
 public:
     VirtualEquipmentSetLoaderOuts(QString virtualEquipmentSetName,
                                   bool loadedFlag,
-                                  observable::QspObservableBuildersContainer loadedVirtualEquipments);
+                                  QspObservableBuildersContainer loadedVirtualEquipments);
     ~VirtualEquipmentSetLoaderOuts() override;
 
 public:
-    QString                                    m_virtualEquipmentSetName;
-    observable::QspObservableBuildersContainer m_loadedVirtualEquipments;
+    QString                        m_virtualEquipmentSetName;
+    QspObservableBuildersContainer m_loadedVirtualEquipments;
 };
-
-}//namespace virtualequipmentset
-}//namespace core
+using QspVirtualEquipmentSetLoaderOuts = QSharedPointer<VirtualEquipmentSetLoaderOuts>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETLOADEROUTS_H

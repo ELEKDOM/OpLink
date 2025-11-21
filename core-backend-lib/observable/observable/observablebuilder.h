@@ -16,27 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEBUILDER_H
 #define OBSERVABLEBUILDER_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "logger/loggable.h"
 #include "observable/observablenames.h"
+#include "observable/property/property.h"
+#include "abstract_infrastructure/device/device.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace observable
 {
 ///
 /// \brief The ObservableBuilder class.
 ///        Defining the construction interface of an observable.
-class OLCORE_BACKEND_LIB_EXPORT ObservableBuilder : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT ObservableBuilder : public plugframe::Loggable
 {
 public:
     ObservableBuilder();
@@ -46,16 +42,14 @@ public:
     virtual void addProperty(Property *newProperty) = 0;
     virtual void addProcessor(CommandProcessor *newProcessor) = 0;
     virtual bool setMandatoryPropertyValue(PropertyName propId, QVariant propValue) = 0;
-    virtual void setDevice(infrastructure::QspDevice device) = 0;
+    virtual void setDevice(QspDevice device) = 0;
     virtual QspProperty property(PropertyName propId) const = 0;
-    virtual infrastructure::QspDevice device(); // Only Sensor and Actuator have device !
+
+public:
+    virtual QspDevice device(); // Only Sensor and Actuator have device !
     virtual void initScheduler(); // Only VirtualEquipment have scheduler !
     Observable& toObservable();
 };
-
-}//namespace observable
-}//namespace core
+using QspObservableBuilder = QSharedPointer<ObservableBuilder>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLEBUILDER_H

@@ -16,35 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loadproperty.h"
-#include "observable/property/operationdeviceproperty.h"
 
-using namespace elekdom::oplink::core::observable;
-
-LoadProperty::LoadProperty(Observable& observable,
-                                 const PropertyName& propertyName,
-                                 QVariant::Type valueType):
-    LowProperty{observable,
-                   propertyName,
-                   valueType}
+oplink::LoadProperty::LoadProperty(oplink::Observable& observable,
+                                   const oplink::PropertyName& propertyName,
+                                   QMetaType::Type valueType):
+    oplink::LowProperty{observable,
+                        propertyName,
+                        valueType}
 {
 
 }
 
-LoadProperty::~LoadProperty()
+oplink::LoadProperty::~LoadProperty()
 {
 
 }
 
-QSharedPointer<OperationDeviceProperty> LoadProperty::master()
+oplink::QspLowProperty oplink::LoadProperty::master()
 {
-    QspLowProperty related{relatedProperty()};
-
-    return related.dynamicCast<OperationDeviceProperty>();
+    return relatedProperty();
 }
 
-void LoadProperty::master(QspOperationDeviceProperty masterProp)
+void oplink::LoadProperty::master(oplink::QspLowProperty masterProp)
 {
     relatedProperty(masterProp);
 }

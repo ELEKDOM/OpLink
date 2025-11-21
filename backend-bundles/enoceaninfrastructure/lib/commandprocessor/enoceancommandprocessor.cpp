@@ -25,11 +25,9 @@
 #include "enoceaninfrastructurelogchannel.h"
 #include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-EnoceanCommandProcessor::EnoceanCommandProcessor(const core::infrastructure::QspDevice &device,
+EnoceanCommandProcessor::EnoceanCommandProcessor(const oplink::QspDevice &device,
                                                  EepCommandFormat *sentCommandFormat):
-    core::infrastructure::DeviceCommandProcessor{s_EnoceanLogChannel, device},
+    oplink::DeviceCommandProcessor{s_EnoceanLogChannel, device},
     m_sentCommandFormat{sentCommandFormat}
 {
 
@@ -40,7 +38,7 @@ EnoceanCommandProcessor::~EnoceanCommandProcessor()
 
 }
 
-void EnoceanCommandProcessor::processDeviceCmd(core::command::QspCommand order)
+void EnoceanCommandProcessor::processDeviceCmd(oplink::QspCommand order)
 {
     m_sentCommandFormat->newPacket();
     if (completePacket(order))
@@ -58,7 +56,7 @@ void EnoceanCommandProcessor::processDeviceCmd(core::command::QspCommand order)
 
 void EnoceanCommandProcessor::sendPacket()
 {
-    const core::infrastructure::QspDevice& Device{device()};
+    const oplink::QspDevice& Device{device()};
     qint32 destinationId{(Device->id()).toInt(nullptr, 16)};
 
     m_sentCommandFormat->insertDestinationId(destinationId);

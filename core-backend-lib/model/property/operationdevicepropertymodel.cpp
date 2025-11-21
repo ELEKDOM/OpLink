@@ -16,20 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "operationdevicepropertymodel.h"
 
-using namespace elekdom::oplink::core::model;
-
-OperationDevicePropertyModel::OperationDevicePropertyModel(const PropertyModelName& modelName,
-                                                                 const observable::PropertyName& propertyName,
-                                                                 QVariant::Type valueType):
-     ObservablePropertyModel{modelName, propertyName, valueType}
+oplink::OperationDevicePropertyModel::OperationDevicePropertyModel(const oplink::PropertyModelName& modelName,
+                                                                   const oplink::PropertyName& propertyName,
+                                                                   QMetaType::Type valueType):
+     oplink::ObservablePropertyModel{modelName, propertyName, valueType}
 {
 
 }
 
-OperationDevicePropertyModel::~OperationDevicePropertyModel()
+oplink::OperationDevicePropertyModel::~OperationDevicePropertyModel()
 {
 
 }

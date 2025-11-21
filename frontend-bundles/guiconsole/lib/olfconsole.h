@@ -16,31 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFCONSOLE_H
 #define OLFCONSOLE_H
 
 #include "guiconsole.h"
 #include "service-int/frontendcontrolserviceinterface.h"
 #include "service-int/frontendclientside.h"
+#include "ui/olflogincontroller.h"
+#include "ui/olfmonitoredobservablescontroller.h"
 #include "olfconsole_forward.h"
 #include "olcore-lib_forward.h"
 
-namespace elekdom
+class OlfConsole : public GuiConsole,
+                   public plugframe::FrontendClientSide
 {
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace bundle
-{
-
-class OlfConsole : public plugframe::guiconsole::bundle::GuiConsole,
-                   public plugframe::frontend::FrontendClientSide
-{
-
 public:
     OlfConsole();
     ~OlfConsole() override;
@@ -55,30 +44,30 @@ public: // for monitored observables controller
     void sendExecCmdToServer(QString cmd);
 
 protected:
-    plugframe::core::bundle::BundleFactory* createFactory() override;
-    void _start(plugframe::core::bundle::QspBundleContext bundleContext) override;
-    void buildControllerViews(plugframe::guidisplay::service::GuiBuilderServiceInterface *builderGuiServiceItf) override;
+    plugframe::BundleFactory* createFactory() override;
+    void _start(plugframe::QspBundleContext bundleContext) override;
+    void buildControllerViews(plugframe::GuiBuilderServiceInterface *builderGuiServiceItf) override;
     QString guiTitle() override;
 
 protected: // client side
     void connectedToServer() override;
     void disconnectedFromServer() override;
-    void messageFromServer(plugframe::core::tcp::TcpChannelMessage *msg) override;
+    void messageFromServer(plugframe::TcpChannelMessage *msg) override;
 
 protected: // messages to server
-    core::tcp::SigninMessage *createSigninMessage(QString identifier,
-                                                  QString password);
-    core::tcp::SignoutMessage *createSignoutMessage();
-    core::tcp::DownloadConfigMessage *createDownLoadConfigMessage();
-    core::tcp::ReadyMessage *createReadyMessage();
-    core::tcp::SubmitOrderMessage *createSubmitOrderMessage(QString order);
+    oplink::SigninMessage *createSigninMessage(QString identifier,
+                                               QString password);
+    oplink::SignoutMessage *createSignoutMessage();
+    oplink::DownloadConfigMessage *createDownLoadConfigMessage();
+    oplink::ReadyMessage *createReadyMessage();
+    oplink::SubmitOrderMessage *createSubmitOrderMessage(QString order);
 
 private: // messages from server
-    void processSiginReplyMessage(core::tcp::SigninReplyMessage* msg);
-    void processSignoutMessage(core::tcp::SignoutMessage* msg);
-    void processSessionStartedMessage(core::tcp::SessionStartedMessage* msg);
-    void processDownloadConfigReplyMessage(core::tcp::DownloadConfigReplyMessage* msg);
-    void processStateValueMessage(core::tcp::StateValueMessage* msg);
+    void processSiginReplyMessage(oplink::SigninReplyMessage* msg);
+    void processSignoutMessage(oplink::SignoutMessage* msg);
+    void processSessionStartedMessage(oplink::SessionStartedMessage* msg);
+    void processDownloadConfigReplyMessage(oplink::DownloadConfigReplyMessage* msg);
+    void processStateValueMessage(oplink::StateValueMessage* msg);
 
 private:
     void readIniFile(QString& serverIpv4,
@@ -90,18 +79,12 @@ private:
     void closeSession(bool disconnectedFromServer);
 
 private:
-    plugframe::frontend::service::FrontendControlServiceInterface *m_frontendTcpService;
+    plugframe::FrontendControlServiceInterface *m_frontendTcpService;
     QspOlfLoginController m_loginCtrl;
     QspOlfMonitoredObservablesController m_monitoredObservablesCtrl;
     QString m_frontendIp;
     QString m_serverIpv4;
     quint16 m_serverPort;
 };
-
-} //namespace bundle
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // OLFCONSOLE_H

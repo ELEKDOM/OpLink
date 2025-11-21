@@ -16,25 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCONSOLEFACTORY_H
 #define OLCONSOLEFACTORY_H
 
 #include "consolefactory.h"
 #include "olconsole_forward.h"
-
-using namespace elekdom::plugframe::console::factory;
-using namespace elekdom::plugframe::console::bundle;
-using namespace elekdom::plugframe::console::cmd;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-namespace factory
-{
 
 class OlConsoleFactory : public ConsoleFactory
 {
@@ -44,16 +30,10 @@ public:
 
 public:
     virtual QspCmdProcessor createSubmitCmdProcessor(const QString& logChannel,
-                                                     bundle::OlConsole& console);
+                                                     OlConsole& console);
     virtual QspCmdProcessor createSubscribeCmdProcessor(const QString& logChannel,
-                                                        bundle::OlConsole& console);
+                                                        OlConsole& console);
     virtual QspCmdProcessor createUnsubscribeCmdProcessor(const QString& logChannel,
-                                                          bundle::OlConsole& console);
+                                                          OlConsole& console);
 };
-
-} //namespace factory
-} //namespace console
-} //namespace gac
-} //namespace elekdom
-
 #endif // OLCONSOLEFACTORY_H

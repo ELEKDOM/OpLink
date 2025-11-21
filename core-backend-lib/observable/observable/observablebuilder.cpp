@@ -16,36 +16,32 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablebuilder.h"
 #include "observable/observablelogchannel.h"
 #include "observable/observable/observable.h"
 
-using namespace elekdom::oplink::core;
-
-observable::ObservableBuilder::ObservableBuilder():
-    plugframe::core::logger::Loggable{s_ObservableLogChannel}
+oplink::ObservableBuilder::ObservableBuilder():
+    plugframe::Loggable{s_ObservableLogChannel}
 {
 
 }
 
-observable::ObservableBuilder::~ObservableBuilder()
+oplink::ObservableBuilder::~ObservableBuilder()
 {
 
 }
 
-QSharedPointer<infrastructure::Device> observable::ObservableBuilder::device()
+oplink::QspDevice oplink::ObservableBuilder::device()
 {
-    return QSharedPointer<infrastructure::Device>(nullptr);
+    return oplink::QspDevice(nullptr);
 }
 
-void observable::ObservableBuilder::initScheduler()
+void oplink::ObservableBuilder::initScheduler()
 {
-
 }
 
-observable::Observable& observable::ObservableBuilder::toObservable()
+oplink::Observable& oplink::ObservableBuilder::toObservable()
 {
-    Observable* ptr{dynamic_cast<Observable*>(this)};
+    oplink::Observable* ptr{dynamic_cast<oplink::Observable*>(this)};
     return *ptr;
 }

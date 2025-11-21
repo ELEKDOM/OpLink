@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201EEP_H
 #define D201EEP_H
 
 #include "d2eep.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
+#include "packet/format/receivedformat/eeptelegram/d201telegramformat.h"
 
 class D201Eep : public D2Eep
 {
 public:
-    D201Eep(const core::infrastructure::DeviceId& id,
-            core::infrastructure::DeviceHook& deviceHook);
+    D201Eep(const oplink::DeviceId& id,
+            oplink::DeviceHook& deviceHook);
     ~D201Eep() override;
 
 protected:
@@ -41,9 +34,5 @@ protected:
     bool msgCmd07(QspD201TelegramFormat& telFormat, bool& processed);// Actuator Measurement Response
     bool msgCmd0A(QspD201TelegramFormat& telFormat, bool& processed);// Actuator Pilot Wire Mode Response
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // D201EEP_H

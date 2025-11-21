@@ -16,25 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLESTATES_H
 #define OBSERVABLESTATES_H
 
+#include <QSharedPointer>
 #include <QHash>
 #include "observable/observable/observablesubscriber.h"
+#include "observable/property/property.h"
 #include "observable/observablenames.h"
-#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace remote
-{
-
-class ObservableStates : public observable::ObservableSubscriber
+class ObservableStates : public ObservableSubscriber
 {
     Q_OBJECT
 
@@ -43,25 +36,21 @@ public:
     ~ObservableStates() override;
 
 public:
-    void addMonitoredProperty(observable::QspProperty property);
-    void reportValidStates(const observable::ObservableName& observableName);
+    void addMonitoredProperty(QspProperty property);
+    void reportValidStates(const ObservableName& observableName);
 
 signals:
-    void stateChange(const observable::ObservableName& observableName,
-                     const observable::PropertyName& propertyName,
+    void stateChange(oplink::ObservableName observableName,
+                     oplink::PropertyName propertyName,
                      QVariant propertyValue);
 
 protected:
-    void onStateChange(const observable::ObservableName& observableName,
-                       const observable::PropertyName& propertyName,
+    void onStateChange(ObservableName observableName,
+                       PropertyName propertyName,
                        QVariant propertyValue) override;
 private:
-    QHash<observable::PropertyName,observable::QspProperty> m_monitoredStates;
+    QHash<PropertyName,QspProperty> m_monitoredStates;
 };
-
-}//namespace remote
-}//namespace core
+using QspObservableStates = QSharedPointer<ObservableStates>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLESTATES_H

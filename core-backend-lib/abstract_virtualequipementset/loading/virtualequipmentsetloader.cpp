@@ -16,28 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetloader.h"
-#include "virtualequipmentloader.h"
 #include "virtualequipmentsetloaderargs.h"
 #include "virtualequipmentsetconfreader.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset;
-
-VirtualEquipmentSetLoader::VirtualEquipmentSetLoader(virtualequipment::VirtualEquipmentLoader *veLoader):
+oplink::VirtualEquipmentSetLoader::VirtualEquipmentSetLoader(oplink::VirtualEquipmentLoader *veLoader):
     m_veLoader{veLoader}
 {
 
 }
 
-VirtualEquipmentSetLoader::~VirtualEquipmentSetLoader()
+oplink::VirtualEquipmentSetLoader::~VirtualEquipmentSetLoader()
 {
 
 }
 
-bool VirtualEquipmentSetLoader::startLoading()
+bool oplink::VirtualEquipmentSetLoader::startLoading()
 {
-    worker::QspWorkerArgs args{createWorkerArgs()};
+    plugframe::QspWorkerArgs args{createWorkerArgs()};
 
     // start worker in a background thread
     startWork(args);
@@ -45,12 +41,12 @@ bool VirtualEquipmentSetLoader::startLoading()
     return true;
 }
 
-worker::WorkerArgs *VirtualEquipmentSetLoader::createWorkerArgs()
+plugframe::WorkerArgs *oplink::VirtualEquipmentSetLoader::createWorkerArgs()
 {
-    return new VirtualEquipmentSetLoaderArgs{m_veLoader};
+    return new oplink::VirtualEquipmentSetLoaderArgs{m_veLoader};
 }
 
-worker::WorkerThread *VirtualEquipmentSetLoader::createWorkerThread(worker::QspWorkerArgs args)
+plugframe::WorkerThread *oplink::VirtualEquipmentSetLoader::createWorkerThread(plugframe::QspWorkerArgs args)
 {
-    return new VirtualEquipmentSetConfReader{this, args};
+    return new oplink::VirtualEquipmentSetConfReader{this, args};
 }

@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "lightingwidgetctrl.h"
 #include "ui/monitoredobservables/widget/view/lightingwidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 LightingWidgetCtrl::LightingWidgetCtrl(QString observableName,
                                        QString observableTitle,

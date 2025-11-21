@@ -16,20 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANGATEWAY_H
 #define ENOCEANGATEWAY_H
 
 #include "abstract_infrastructure/area/areagateway.h"
+#include "packet/format/sentformat/commoncommand/commoncommandformat.h"
+#include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
+#include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
+#include "gateway/esp3packettransmitter.h"
+#include "gateway/esp3packetreceiver.h"
+#include "gateway/usbgatewayport.h"
+#include "gateway/enoceangatewaymode.h"
 #include "enoceaninfrastructure_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-class EnoceanGateway : public core::infrastructure::AreaGateway
+class EnoceanGateway : public oplink::AreaGateway
 {
     Q_OBJECT
 
@@ -63,7 +63,7 @@ private:
     void initializeUsb300BaseId();
 
 private slots:
-    void onSendPacket(elekdom::oplink::enocean::QspEsp3Packet packet);
+    void onSendPacket(QspEsp3Packet packet);
 
 private:
     QspGatewayPort           m_port;
@@ -71,9 +71,4 @@ private:
     QspEsp3PacketTransmitter m_packetTransmitter;
     QspEnoceanGatewayMode    m_mode;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // ENOCEANGATEWAY_H

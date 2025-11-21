@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olconsolefactory.h"
 #include "olconsole.h"
 #include "submitcmdprocessor.h"
 #include "subscribecmdprocessor.h"
 #include "unsubscribecmdprocessor.h"
-
-using namespace elekdom::oplink::console::factory;
 
 OlConsoleFactory::OlConsoleFactory()
 {
@@ -36,20 +33,20 @@ OlConsoleFactory::~OlConsoleFactory()
 }
 
 QspCmdProcessor OlConsoleFactory::createSubmitCmdProcessor(const QString &logChannel,
-                                                           bundle::OlConsole &console)
+                                                           OlConsole &console)
 {
-    CmdProcessor *tmp{new cmd::SubmitCmdProcessor{logChannel, console}};
+    CmdProcessor *tmp{new SubmitCmdProcessor{logChannel, console}};
     return QspCmdProcessor(tmp);
 }
 
 QspCmdProcessor OlConsoleFactory::createSubscribeCmdProcessor(const QString &logChannel,
-                                                              bundle::OlConsole &console)
+                                                              OlConsole &console)
 {
-    return QspCmdProcessor(new cmd::SubscribeCmdProcessor{logChannel, console});
+    return QspCmdProcessor(new SubscribeCmdProcessor{logChannel, console});
 }
 
 QspCmdProcessor OlConsoleFactory::createUnsubscribeCmdProcessor(const QString &logChannel,
-                                                                bundle::OlConsole &console)
+                                                                OlConsole &console)
 {
-    return QspCmdProcessor(new cmd::UnsubscribeCmdProcessor{logChannel, console});
+    return QspCmdProcessor(new UnsubscribeCmdProcessor{logChannel, console});
 }

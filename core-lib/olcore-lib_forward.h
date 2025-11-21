@@ -16,55 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCORELIB_FORWARD_H
 #define OLCORELIB_FORWARD_H
 
-#include <QSharedPointer>
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-    namespace tcp
-    {
-        class SigninMessage;
-        class SigninReplyMessage;
-        class SessionStartedMessage;
-        class SignoutMessage;
-        class DownloadConfigMessage;
-        class ReadyMessage;
-        class DownloadConfigReplyMessage;
-        class StateValueMessage;
-        class SubmitOrderMessage;
-    }
-
-    namespace remote
-    {
-        class SessionConfDocument;
-
-        using QspSessionConfDocument = QSharedPointer<SessionConfDocument>;
-    }
-
-    namespace virtualequipment
-    {
-        class VirtualEquipmentConfDocument;
-        class VirtualEquipmentLoaderHook;
-
-        using QspVirtualEquipmentConfDocument = QSharedPointer<VirtualEquipmentConfDocument>;
-    }
-
-    namespace heatingmanager
-    {
-        class HeatingManagerLoaderHook;
-        class HeatingManagerConfDocument;
-
-        using QspHeatingManagerConfDocument = QSharedPointer<HeatingManagerConfDocument>;
-    }
-
-}//namespace core
-}//namespace oplink
-}//namespace elekdom
+    class VirtualEquipmentLoaderHook;
+    class VirtualEquipmentConfDocument;
+    //
+    class SessionStartedMessage;
+    class DownloadConfigMessage;
+    class DownloadConfigReplyMessage;
+    class StateValueMessage;
+    class SigninMessage;
+    class SigninReplyMessage;
+    class SignoutMessage;
+    class ReadyMessage;
+    class SubmitOrderMessage;
+}
 #endif // OLCORELIB_FORWARD_H

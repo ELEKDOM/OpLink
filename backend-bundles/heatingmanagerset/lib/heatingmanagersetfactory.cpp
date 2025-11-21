@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heatingmanagersetfactory.h"
 #include "heatingmanager/heatingmanagerloader.h"
 #include "observable/heatingmanager/heatingmanagerconfdocument.h"
-
-using namespace elekdom::oplink::heatingmanagerset::factory;
 
 HeatingManagerSetFactory::HeatingManagerSetFactory()
 {
@@ -33,13 +30,13 @@ HeatingManagerSetFactory::~HeatingManagerSetFactory()
 
 }
 
-virtualequipment::VirtualEquipmentLoader *HeatingManagerSetFactory::createVirtualEquipmentLoader(core::virtualequipmentset::bundle::VirtualEquipmentSet *veSet)
+oplink::VirtualEquipmentLoader *HeatingManagerSetFactory::createVirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet)
 {
-    return new heatingmanager::HeatingManagerLoader{veSet};
+    return new HeatingManagerLoader{veSet};
 }
 
-virtualequipment::VirtualEquipmentConfDocument *HeatingManagerSetFactory::createVirtualEquipmentConfDocument(core::virtualequipment::VirtualEquipmentLoaderHook &hook)
+oplink::VirtualEquipmentConfDocument *HeatingManagerSetFactory::createVirtualEquipmentConfDocument(oplink::VirtualEquipmentLoaderHook &hook)
 {
-    core::heatingmanager::HeatingManagerLoaderHook& loaderHook{dynamic_cast<core::heatingmanager::HeatingManagerLoaderHook&>(hook)};
-    return new core::heatingmanager::HeatingManagerConfDocument{loaderHook};
+    oplink::HeatingManagerLoaderHook& loaderHook{dynamic_cast<oplink::HeatingManagerLoaderHook&>(hook)};
+    return new oplink::HeatingManagerConfDocument{loaderHook};
 }

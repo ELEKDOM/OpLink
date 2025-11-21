@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/commoncommand/readidbaseformat.h"
 #include "packet/format/receivedformat/response/commoncommandresponse/readidbaseresponseformat.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 ReadIdBaseFormat::ReadIdBaseFormat():
     CommonCommandFormat{0x00, 0x00, 0x08}

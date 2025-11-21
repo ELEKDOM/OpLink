@@ -16,47 +16,43 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetservice.h"
 #include "abstract_virtualequipementset/virtualequipmentset.h"
 #include "service-int/virtualequipmentsetserviceinterface.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset::service;
-using namespace elekdom::oplink::core::virtualequipmentset;
-
-VirtualEquipmentSetService::VirtualEquipmentSetService(plugframe::core::bundle::BundleImplementation *implementation):
-plugframe::core::service::ServiceImplementation{implementation}
+oplink::VirtualEquipmentSetService::VirtualEquipmentSetService(plugframe::BundleImplementation *implementation):
+    plugframe::ServiceImplementation{implementation}
 {
 
 }
 
-VirtualEquipmentSetService::~VirtualEquipmentSetService()
+oplink::VirtualEquipmentSetService::~VirtualEquipmentSetService()
 {
 
 }
 
-const QString &VirtualEquipmentSetService::getVirtualEquipmentSetName()
+const QString& oplink::VirtualEquipmentSetService::getVirtualEquipmentSetName()
 {
-    bundle::VirtualEquipmentSet* veSet{dynamic_cast<bundle::VirtualEquipmentSet*>(implementation())};
+    oplink::VirtualEquipmentSet* veSet{dynamic_cast<oplink::VirtualEquipmentSet*>(implementation())};
 
     return veSet->getVirtualEquipmentSetName();
 }
 
-bool VirtualEquipmentSetService::startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher)
+bool oplink::VirtualEquipmentSetService::startLoading(plugframe::WorkerWatcher *workerWatcher)
 {
-    bundle::VirtualEquipmentSet* veSet{dynamic_cast<bundle::VirtualEquipmentSet*>(implementation())};
+    oplink::VirtualEquipmentSet* veSet{dynamic_cast<oplink::VirtualEquipmentSet*>(implementation())};
 
     return veSet->startLoading(workerWatcher);
 }
 
-bool VirtualEquipmentSetService::loadingFinished()
+bool oplink::VirtualEquipmentSetService::loadingFinished()
 {
-    bundle::VirtualEquipmentSet* veSet{dynamic_cast<bundle::VirtualEquipmentSet*>(implementation())};
+    oplink::VirtualEquipmentSet* veSet{dynamic_cast<oplink::VirtualEquipmentSet*>(implementation())};
 
     return veSet->isLoadingFinished();
 }
 
-QString VirtualEquipmentSetService::serviceName()
+QString oplink::VirtualEquipmentSetService::serviceName()
 {
     return VirtualEquipmentSetServiceInterface::serviceName();
 }

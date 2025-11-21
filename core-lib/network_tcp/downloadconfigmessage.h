@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DOWNLOADCONFIGMESSAGE_H
 #define DOWNLOADCONFIGMESSAGE_H
 
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT DownloadConfigMessage : public SessionMessage
 {
@@ -36,8 +29,5 @@ public:
     DownloadConfigMessage(quint32 sessionId);
     ~DownloadConfigMessage() override;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // DOWNLOADCONFIGMESSAGE_H

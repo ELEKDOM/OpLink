@@ -16,22 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PAGEVIEWLAYOUTBUILDER_H
 #define PAGEVIEWLAYOUTBUILDER_H
 
+#include <QSharedPointer>
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 #include "olfconsole_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
 
 class PageViewLayoutBuilder
 {
@@ -41,7 +31,7 @@ public:
 
 public:
     virtual void assignWidgetView(OlfMonitoredObservablesController& controller,
-                                  widget::QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
+                                  QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
     void setBuilder(MonitoredObservableBuilder *builder);
 
 protected:
@@ -50,11 +40,5 @@ protected:
 private:
     MonitoredObservableBuilder *m_builder;
 };
-
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
-
+using QspPageViewLayoutBuilder = QSharedPointer<PageViewLayoutBuilder>;
 #endif // PAGEVIEWLAYOUTBUILDER_H

@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QVariant>
 #include "subscribesession.h"
 
-using namespace elekdom::oplink::core::remote;
-
-SubscribeSession::SubscribeSession(quint32 sessionId,
-                                   const QString &filename,
-                                   engine::service::ObservableServiceInterface *oService,
-                                   QObject *parent):
-    ObservableStatesGroup{oService,parent},
+oplink::SubscribeSession::SubscribeSession(quint32 sessionId,
+                                           const QString &filename,
+                                           oplink::ObservableServiceInterface *oService,
+                                           QObject *parent):
+    oplink::ObservableStatesGroup{oService,parent},
     m_sessionId{sessionId},
     xmlFileName{filename},
     m_domDoc{m_confLoader},
@@ -35,12 +32,12 @@ SubscribeSession::SubscribeSession(quint32 sessionId,
 
 }
 
-SubscribeSession::~SubscribeSession()
+oplink::SubscribeSession::~SubscribeSession()
 {
 
 }
 
-bool SubscribeSession::open(qint16 &confId)
+bool oplink::SubscribeSession::open(qint16 &confId)
 {
     bool ret{false};
 
@@ -55,36 +52,36 @@ bool SubscribeSession::open(qint16 &confId)
     return ret;
 }
 
-void SubscribeSession::close()
+void oplink::SubscribeSession::close()
 {
     unsubscribe();
 }
 
-QString SubscribeSession::confContent()
+QString oplink::SubscribeSession::confContent()
 {
     return m_domDoc.toString();
 }
 
-void SubscribeSession::submitOrder(const QString &order)
+void oplink::SubscribeSession::submitOrder(const QString &order)
 {
     orderToObservable(order);
 }
 
-void SubscribeSession::addRemoteMonitoredObservable(const QString& observableName,
-                                                    const QStringList& propertyNames,
-                                                    core::remote::QspObservableStates  remoteMonitored)
+void oplink::SubscribeSession::addRemoteMonitoredObservable(const QString& observableName,
+                                                            const QStringList& propertyNames,
+                                                            oplink::QspObservableStates  remoteMonitored)
 {
     addMonitoredObservable(observableName,propertyNames,remoteMonitored);
 }
 
-void SubscribeSession::enableMonitoring()
+void oplink::SubscribeSession::enableMonitoring()
 {
     subscribe();
 }
 
-void SubscribeSession::onStateChange(const observable::ObservableName& observableName,
-                                     const observable::PropertyName& propertyName,
-                                     QVariant propertyValue)
+void oplink::SubscribeSession::onStateChange(oplink::ObservableName observableName,
+                                             oplink::PropertyName propertyName,
+                                             QVariant propertyValue)
 {
     emit newState(m_sessionId,observableName,propertyName,propertyValue);
 }

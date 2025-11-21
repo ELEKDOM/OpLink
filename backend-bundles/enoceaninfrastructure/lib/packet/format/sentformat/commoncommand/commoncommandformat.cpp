@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/commoncommand/commoncommandformat.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 CommonCommandFormat::CommonCommandFormat(quint16 commonCommandDataSize, quint8 optionalLenght, quint8 cmd):
     Esp3SentPacketFormat(0x01 + commonCommandDataSize, optionalLenght, Esp3Packet::COMMON_COMMAND),

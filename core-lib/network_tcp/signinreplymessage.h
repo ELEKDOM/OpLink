@@ -16,20 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SIGNINREPLYMESSAGE_H
 #define SIGNINREPLYMESSAGE_H
 
 #include <QString>
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT SigninReplyMessage : public SessionMessage
 {
@@ -51,8 +44,5 @@ private:
     QString      m_identifier;
     SigninStatus m_status;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // SIGNINREPLYMESSAGE_H

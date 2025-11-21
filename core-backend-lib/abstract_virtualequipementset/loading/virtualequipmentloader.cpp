@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentloader.h"
 #include "abstract_virtualequipementset/virtualequipmentset.h"
 #include "observable/virtualequipment/virtualequipmentconfdocument.h"
@@ -25,25 +24,22 @@
 #include "observable/observable/observable.h"
 #include "observable/highobservable/monitor/statetowatch.h"
 
-using namespace elekdom::oplink::core;
-using namespace elekdom::oplink::core::virtualequipment;
-
-VirtualEquipmentLoader::VirtualEquipmentLoader(virtualequipmentset::bundle::VirtualEquipmentSet *veSet) :
+oplink::VirtualEquipmentLoader::VirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet) :
     m_veSet{veSet}
 {
 }
 
-VirtualEquipmentLoader::~VirtualEquipmentLoader()
+oplink::VirtualEquipmentLoader::~VirtualEquipmentLoader()
 {
 
 }
 
-void VirtualEquipmentLoader::confDocument(virtualequipment::VirtualEquipmentConfDocument *confDoc)
+void oplink::VirtualEquipmentLoader::confDocument(oplink::VirtualEquipmentConfDocument *confDoc)
 {
     m_confDoc.reset(confDoc);
 }
 
-void VirtualEquipmentLoader::load(QString fileName)
+void oplink::VirtualEquipmentLoader::load(QString fileName)
 {
     m_newlyVirtualEquipment.reset();
     m_confDoc->load(fileName);
@@ -57,111 +53,113 @@ void VirtualEquipmentLoader::load(QString fileName)
     }
 }
 
-observable::QspObservable VirtualEquipmentLoader::newly()
+oplink::QspObservable oplink::VirtualEquipmentLoader::newly()
 {
     return m_newlyVirtualEquipment;
 }
 
-void VirtualEquipmentLoader::newly(observable::Observable *newve)
+void oplink::VirtualEquipmentLoader::newly(oplink::Observable *newve)
 {
     m_newlyVirtualEquipment.reset(newve);
 }
 
-bool VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableName,
-                                                      const QString& modelName,
-                                                      const QString& localisation,
-                                                      int confId)
+bool oplink::VirtualEquipmentLoader::buildMandatoryProperties(const QString& observableName,
+                                                              const QString& modelName,
+                                                              const QString& localisation,
+                                                              int confId)
 {
     bool ret{true};
-    observable::Property *prop;
-    observable::ObservableBuilder *obsBuilder{dynamic_cast<observable::ObservableBuilder*>(m_newlyVirtualEquipment.data())};
+    oplink::Property *prop;
+    oplink::ObservableBuilder *obsBuilder{dynamic_cast<oplink::ObservableBuilder*>(m_newlyVirtualEquipment.data())};
 
     // Name
     //-----
-    prop = new observable::Property{*m_newlyVirtualEquipment,
-                                    observable::PropertyId::P_NAME,
-                                    QVariant::String};
+    prop = new oplink::Property{*m_newlyVirtualEquipment,
+                                oplink::PropertyId::P_NAME,
+                                QMetaType::QString};
     obsBuilder->addProperty(prop);
-    obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_NAME,observableName);
+    obsBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_NAME,observableName);
 
     // Model Name
     //-----------
-    prop = new observable::Property{*m_newlyVirtualEquipment,
-                                    observable::PropertyId::P_MODEL,
-                                    QVariant::String};
+    prop = new oplink::Property{*m_newlyVirtualEquipment,
+                                oplink::PropertyId::P_MODEL,
+                                QMetaType::QString};
     prop->value(modelName);
     obsBuilder->addProperty(prop);
-    obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_MODEL,modelName);
-
+    obsBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_MODEL,modelName);
 
     // Localisation
     //-------------
-    prop = new observable::Property{*m_newlyVirtualEquipment,
-                                    observable::PropertyId::P_LOCALISATION,
-                                    QVariant::String};
+    prop = new oplink::Property{*m_newlyVirtualEquipment,
+                                oplink::PropertyId::P_LOCALISATION,
+                                QMetaType::QString};
     obsBuilder->addProperty(prop);
-    obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_LOCALISATION,localisation);
+    obsBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_LOCALISATION,localisation);
 
     // Conf Id
     //--------
-    prop = new observable::Property{*m_newlyVirtualEquipment,
-                                    observable::PropertyId::P_CONF,
-                                    QVariant::Int};
+    prop = new oplink::Property{*m_newlyVirtualEquipment,
+                                oplink::PropertyId::P_CONF,
+                                QMetaType::Int};
     obsBuilder->addProperty(prop);
-    obsBuilder->setMandatoryPropertyValue(observable::PropertyId::P_CONF,confId);
+    obsBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_CONF,confId);
 
     // Mode (assigned later)
     //----------------------
-    prop = new observable::Property{*m_newlyVirtualEquipment,
-                                    observable::PropertyId::P_MODE,
-                                    QVariant::String};
+    prop = new oplink::Property{*m_newlyVirtualEquipment,
+                                oplink::PropertyId::P_MODE,
+                                QMetaType::QString};
     obsBuilder->addProperty(prop);
 
     return ret;
 }
 
-void VirtualEquipmentLoader::modeValue(const QString &val)
+void oplink::VirtualEquipmentLoader::modeValue(const QString &val)
 {
-    observable::QspProperty property{m_newlyVirtualEquipment->property(observable::PropertyId::P_MODE)};
+    oplink::QspProperty property{m_newlyVirtualEquipment->property(oplink::PropertyId::P_MODE)};
 
     property->value(val);
 }
 
 
-void VirtualEquipmentLoader::addProperty(const observable::PropertyName &propertyName, QVariant::Type valueType)
+void oplink::VirtualEquipmentLoader::addProperty(const oplink::PropertyName &propertyName,
+                                                 QMetaType::Type valueType)
 {
-    observable::Property *prop;
-    observable::ObservableBuilder *obsBuilder{dynamic_cast<observable::ObservableBuilder*>(m_newlyVirtualEquipment.data())};
+    oplink::Property *prop;
+    oplink::ObservableBuilder *obsBuilder{dynamic_cast<oplink::ObservableBuilder*>(m_newlyVirtualEquipment.data())};
 
-    prop = new observable::Property{*m_newlyVirtualEquipment,
-                                    propertyName,
-                                    valueType};
+    prop = new oplink::Property{*m_newlyVirtualEquipment,
+                                propertyName,
+                                valueType};
     obsBuilder->addProperty(prop);
 }
 
-void VirtualEquipmentLoader::addGroupProperty(const QString &groupName, const observable::PropertyName &propertyName, QVariant::Type valueType)
+void oplink::VirtualEquipmentLoader::addGroupProperty(const QString &groupName,
+                                                      const oplink::PropertyName &propertyName,
+                                                      QMetaType::Type valueType)
 {
-    addProperty(observable::PropertyId::groupPropertyName(groupName, propertyName),
+    addProperty(oplink::PropertyId::groupPropertyName(groupName, propertyName),
                 valueType);
 }
 
 
 
-observable::monitoring::StateToWatch *VirtualEquipmentLoader::createStateToWatch(const observable::ObservableName &observableName,
-                                                                                 const observable::PropertyName &propertyName)
+oplink::StateToWatch *oplink::VirtualEquipmentLoader::createStateToWatch(const oplink::ObservableName &observableName,
+                                                                         const oplink::PropertyName &propertyName)
 {
-    observable::monitoring::StateToWatch *ret{nullptr};
-    engine::service::ObservableServiceInterface* os;
+    oplink::StateToWatch *ret{nullptr};
+    oplink::ObservableServiceInterface* os;
 
     os = veSet()->observableService();
     if (os)
     {
-        core::observable::QspProperty property;
+        oplink::QspProperty property;
 
         property = os->property(observableName,propertyName);
         if (!property.isNull())
         {
-            ret = new observable::monitoring::StateToWatch(property);
+            ret = new oplink::StateToWatch(property);
         }
     }
 

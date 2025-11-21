@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "actuatoroutput.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-ActuatorOutput::ActuatorOutput(const observable::PropertyName& actuatorPropertyName,
-                                     const observable::ObservableName& loadName,
-                                     const observable::PropertyName& loadPropertyName):
+oplink::ActuatorOutput::ActuatorOutput(const oplink::PropertyName& actuatorPropertyName,
+                                       const oplink::ObservableName& loadName,
+                                       const oplink::PropertyName& loadPropertyName):
     m_actuatorPropertyName{actuatorPropertyName},
     m_loadName{loadName},
     m_loadPropertyName{loadPropertyName}

@@ -16,23 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "propertyid.h"
 
-using namespace elekdom::oplink::core::observable;
+const oplink::PropertyName oplink::PropertyId::P_NAME {"p_name"};
+const oplink::PropertyName oplink::PropertyId::P_MODEL {"p_model"};
+const oplink::PropertyName oplink::PropertyId::P_LOCALISATION {"p_localisation"};
+const oplink::PropertyName oplink::PropertyId::P_CONF {"p_conf"};
+const oplink::PropertyName oplink::PropertyId::P_MODE {"p_mode"};
+const oplink::PropertyName oplink::PropertyId::P_ORDER{"p_order"};
+const oplink::PropertyName oplink::PropertyId::P_DEROGATED{"p_derogated"};
+const oplink::PropertyName oplink::PropertyId::P_DEROGATED_ORDER{"p_derogated_order"};
+const oplink::PropertyName oplink::PropertyId::P_WCLOSED{"p_wclosed"};
+const oplink::PropertyName oplink::PropertyId::P_TEMPERATURE{"p_temperature"};
 
-const PropertyName PropertyId::P_NAME {"p_name"};
-const PropertyName PropertyId::P_MODEL {"p_model"};
-const PropertyName PropertyId::P_LOCALISATION {"p_localisation"};
-const PropertyName PropertyId::P_CONF {"p_conf"};
-const PropertyName PropertyId::P_MODE {"p_mode"};
-const PropertyName PropertyId::P_ORDER{"p_order"};
-const PropertyName PropertyId::P_DEROGATED{"p_derogated"};
-const PropertyName PropertyId::P_DEROGATED_ORDER{"p_derogated_order"};
-const PropertyName PropertyId::P_WCLOSED{"p_wclosed"};
-const PropertyName PropertyId::P_TEMPERATURE{"p_temperature"};
-
-QString PropertyId::groupPropertyName(const QString &groupName, const PropertyName &propertyName)
+QString oplink::PropertyId::groupPropertyName(const QString &groupName, const PropertyName &propertyName)
 {
     return (groupName+ '_' + propertyName);
 }

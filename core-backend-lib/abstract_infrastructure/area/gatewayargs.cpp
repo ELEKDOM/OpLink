@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "gatewayargs.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-GatewayArgs::GatewayArgs()
+oplink::GatewayArgs::GatewayArgs()
 {
 
 }
 
-GatewayArgs::~GatewayArgs()
+oplink::GatewayArgs::~GatewayArgs()
 {
 
 }

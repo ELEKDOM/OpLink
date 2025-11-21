@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATING6MWIDGETVIEW_H
 #define HEATING6MWIDGETVIEW_H
 
@@ -25,19 +24,6 @@
 namespace Ui {
 class heating6mWidgetView;
 }
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class Heating6mWidgetView : public WidgetListView
 {
@@ -63,12 +49,5 @@ private:
     Ui::heating6mWidgetView *ui;
     int     m_pwmIdx;
 };
-
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // HEATING6MWIDGETVIEW_H

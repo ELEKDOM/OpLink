@@ -16,15 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "pageviewlistlayoutbuilder.h"
 #include "ui/olfmonitoredobservablescontroller.h"
 #include "ui/monitoredobservables/pageview/pageviewlistlayout.h"
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 #include "ui/monitoredobservables/widget/view/widgetlistview.h"
 #include "ui/monitoredobservables/pageview/viewlistlayout.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable;
 
 PageViewListLayoutBuilder::PageViewListLayoutBuilder() {}
 
@@ -34,7 +31,7 @@ PageViewListLayoutBuilder::~PageViewListLayoutBuilder()
 }
 
 void PageViewListLayoutBuilder::assignWidgetView(OlfMonitoredObservablesController &controller,
-                                                 widget::QspMonitoredObservableWidgetCtrl &widgetCtrl)
+                                                 QspMonitoredObservableWidgetCtrl &widgetCtrl)
 {
     QString viewName,listLayoutTitle;
     OlfMonitoredObservablesView *pageView;
@@ -57,8 +54,8 @@ void PageViewListLayoutBuilder::assignWidgetView(OlfMonitoredObservablesControll
     }
 
     // Add a new widgetview into the list
-    widget::MonitoredObservableWidgetView *wv{widgetCtrl->createView(getLayoutType())};
-    widget::WidgetListView *widgetView{dynamic_cast<widget::WidgetListView*>(wv)};
+    MonitoredObservableWidgetView *wv{widgetCtrl->createView(getLayoutType())};
+    WidgetListView *widgetView{dynamic_cast<WidgetListView*>(wv)};
 
     if (widgetView)
     {
@@ -66,7 +63,7 @@ void PageViewListLayoutBuilder::assignWidgetView(OlfMonitoredObservablesControll
     }
 }
 
-elekdom::oplink::frontend::guiconsole::OlfMonitoredObservablesView *PageViewListLayoutBuilder::createMonitoredObservablesView(QString pageName)
+OlfMonitoredObservablesView *PageViewListLayoutBuilder::createMonitoredObservablesView(QString pageName)
 {
     return new PageViewListLayout(pageName);
 }

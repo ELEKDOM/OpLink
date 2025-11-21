@@ -16,22 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PAGEVIEWLISTLAYOUTBUILDER_H
 #define PAGEVIEWLISTLAYOUTBUILDER_H
 
 #include "pageviewlayoutbuilder.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
 
 class PageViewListLayoutBuilder : public PageViewLayoutBuilder
 {
@@ -41,18 +29,12 @@ public:
 
 protected:
     void assignWidgetView(OlfMonitoredObservablesController& controller,
-                          widget::QspMonitoredObservableWidgetCtrl& widgetCtrl) override;
-    virtual QString getViewName(widget::QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
-    virtual QString getListLayoutName(widget::QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
+                          QspMonitoredObservableWidgetCtrl& widgetCtrl) override;
+    virtual QString getViewName(QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
+    virtual QString getListLayoutName(QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
     virtual quint8 getLayoutType() = 0;
     virtual OlfMonitoredObservablesView *createMonitoredObservablesView(QString pageName);
 
 };
-
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // PAGEVIEWLISTLAYOUTBUILDER_H

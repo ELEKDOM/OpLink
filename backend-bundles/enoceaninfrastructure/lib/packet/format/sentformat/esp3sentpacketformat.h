@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3SENTPACKETFORMAT_H
 #define ESP3SENTPACKETFORMAT_H
 
+#include <QSharedPointer>
 #include "packet/format/esp3packetformat.h"
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
+#include "packet/format/receivedformat/response/responseformat.h"
 
 class Esp3SentPacketFormat : public Esp3PacketFormat
 {
@@ -52,9 +45,5 @@ private:
     quint8  m_optionalLenght;
     quint8  m_packetType;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspEsp3SentPacketFormat = QSharedPointer<Esp3SentPacketFormat>;
 #endif // ESP3SENTPACKETFORMAT_H

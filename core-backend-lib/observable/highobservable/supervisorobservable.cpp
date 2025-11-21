@@ -16,25 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "supervisorobservable.h"
 #include "observable/property/property.h"
 #include "observable/highobservable/monitor/grouptowatch.h"
 
-using namespace elekdom::oplink::core::observable;
-
-SupervisorObservable::SupervisorObservable()
+oplink::SupervisorObservable::SupervisorObservable()
 {
 
 }
 
-SupervisorObservable::~SupervisorObservable()
+oplink::SupervisorObservable::~SupervisorObservable()
 {
 
 }
 
-void SupervisorObservable::addMonitoredObservableGroup(const QString &groupName,
-                                                       monitoring::QspMonitoredObservableGroup ptrGroup)
+void oplink::SupervisorObservable::addMonitoredObservableGroup(const QString &groupName,
+                                                               oplink::QspMonitoredObservableGroup ptrGroup)
 {
     if (!m_monitoredObservableGroups.contains(groupName))
     {
@@ -42,12 +39,12 @@ void SupervisorObservable::addMonitoredObservableGroup(const QString &groupName,
     }
 }
 
-void SupervisorObservable::init(engine::service::ObservableServiceInterface *observableService)
+void oplink::SupervisorObservable::init(oplink::ObservableServiceInterface *observableService)
 {
     specificInit(observableService);
 }
 
-QVariant SupervisorObservable::propertyValue(PropertyName propId)
+QVariant oplink::SupervisorObservable::propertyValue(oplink::PropertyName propId)
 {
     QVariant ret;
     QspProperty p{property(propId)};
@@ -60,13 +57,13 @@ QVariant SupervisorObservable::propertyValue(PropertyName propId)
     return ret;
 }
 
-void SupervisorObservable::initGroupAlgotithms(engine::service::ObservableServiceInterface *observableService)
+void oplink::SupervisorObservable::initGroupAlgotithms(oplink::ObservableServiceInterface *observableService)
 {
-    QHash<QString,monitoring::QspMonitoredObservableGroup>::const_iterator i = m_monitoredObservableGroups.constBegin();
+    QHash<QString,oplink::QspMonitoredObservableGroup>::const_iterator i = m_monitoredObservableGroups.constBegin();
 
     while (i != m_monitoredObservableGroups.constEnd())
     {
-        monitoring::QspMonitoredObservableGroup monitoredGroup{i.value()};
+        oplink::QspMonitoredObservableGroup monitoredGroup{i.value()};
 
         monitoredGroup->initAlgorithm(observableService);
         ++i;

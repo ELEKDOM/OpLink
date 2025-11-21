@@ -16,23 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PROCESSORSMODELLOADINGEVENT_H
 #define PROCESSORSMODELLOADINGEVENT_H
 
 #include <QString>
 #include "event/loopevent.h"
 
-using namespace elekdom::plugframe::core::event;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-
-class ProcessorsModelLoadingEvent : public LoopEvent
+class ProcessorsModelLoadingEvent : public plugframe::LoopEvent
 {
 
 public:
@@ -42,9 +32,5 @@ public:
 public:
     static const QString s_typeId;
 };
-
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
 
 #endif // PROCESSORSMODELLOADINGEVENT_H

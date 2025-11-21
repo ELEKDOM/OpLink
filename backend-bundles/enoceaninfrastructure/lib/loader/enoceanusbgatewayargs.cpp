@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loader/enoceanusbgatewayargs.h"
 #include "gateway/enoceangateway.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanUsbGatewayArgs::EnoceanUsbGatewayArgs(qint32 baudRate,
                                              QSerialPort::DataBits dataBits,

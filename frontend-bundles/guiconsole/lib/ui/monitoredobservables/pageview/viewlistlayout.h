@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIEWLISTLAYOUT_H
 #define VIEWLISTLAYOUT_H
 
@@ -28,17 +27,6 @@ namespace Ui {
 class viewListLayout;
 }
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-
 class ViewListLayout  : public QWidget
 {
     Q_OBJECT
@@ -48,7 +36,7 @@ public:
     ~ViewListLayout() override;
 
 public:
-    void addWidget(widget::WidgetListView* widget);
+    void addWidget(WidgetListView* widget);
     void pushUpWidgets();
 
 private slots:
@@ -60,11 +48,5 @@ private:
     QIcon   m_plusIcon;
     QIcon   m_minusIcon;
 };
-
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // VIEWLISTLAYOUT_H

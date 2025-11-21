@@ -16,40 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOWPROPERTY_H
 #define LOWPROPERTY_H
 
+#include <QSharedPointer>
 #include "property.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT LowProperty : public Property
 {
-private:
-    QspLowProperty m_relatedProperty;
-
 public:
     LowProperty(Observable& observable,
-                   const PropertyName& propertyName,
-                   QVariant::Type valueType);
+                const PropertyName& propertyName,
+                QMetaType::Type valueType);
     ~LowProperty() override;
 
 protected:
-    QspLowProperty relatedProperty() {return m_relatedProperty;}
-    void relatedProperty(QspLowProperty relatedProp) {m_relatedProperty = relatedProp;}
+    QSharedPointer<LowProperty> relatedProperty() {return m_relatedProperty;}
+    void relatedProperty(QSharedPointer<LowProperty> relatedProp) {m_relatedProperty = relatedProp;}
+
+private:
+    QSharedPointer<LowProperty> m_relatedProperty;
 };
-
-}//namespace observable
-}//namespace core
+using QspLowProperty = QSharedPointer<LowProperty>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOWPROPERTY_H

@@ -16,55 +16,42 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSET_H
 #define VIRTUALEQUIPMENTSET_H
 
 #include "bundle/bundleimplementation.h"
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "service-int/observableserviceinterface.h"
+#include "observable/observable/observablebuilderscontainer.h"
+#include "abstract_virtualequipementset/loading/virtualequipmentsetloader.h"
+#include "olcore-backend-lib_export.h"
+//#include "olcore-backend-lib_forward.h"
+#include "pfcore-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-namespace bundle
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSet : public plugframe::core::bundle::BundleImplementation
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSet : public plugframe::BundleImplementation
 {
 public:
     VirtualEquipmentSet(QString logBundleName);
-    ~VirtualEquipmentSet()  override;
+    ~VirtualEquipmentSet() override;
 
 public:
     void setVirtualEquipmentSetLoader(VirtualEquipmentSetLoader *virtualEquipmentSetLoader);
     const QString& getVirtualEquipmentSetName();
     QStringList fileList();
-    observable::QspObservableBuildersContainer getLoadedVirtualEquipments();
+    QspObservableBuildersContainer getLoadedVirtualEquipments();
     void loadingFinished() {m_loadingFinished = true;}
     bool isLoadingFinished() {return m_loadingFinished;}
-    engine::service::ObservableServiceInterface* observableService();
-    bool startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher);
+    ObservableServiceInterface* observableService();
+    bool startLoading(plugframe::WorkerWatcher *workerWatcher);
 
 protected:
-    plugframe::core::plugin::ServiceInterface *qtServiceInterface(const QString& sName) override;
+    plugframe::ServiceInterface *qtServiceInterface(const QString& sName) override;
 
 private:
-    QspVirtualEquipmentSetLoader               m_virtualEquipmentSetLoader;
-    observable::QspObservableBuildersContainer m_loadedVirtualEquipments;
-    bool                                       m_loadingFinished;
+    QspVirtualEquipmentSetLoader   m_virtualEquipmentSetLoader;
+    QspObservableBuildersContainer m_loadedVirtualEquipments;
+    bool                           m_loadingFinished;
 };
-
-}//namespace bundle
-}//namespace virtualequipmentset
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSET_H

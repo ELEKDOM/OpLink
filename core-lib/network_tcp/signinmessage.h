@@ -16,20 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SIGNINMESSAGE_H
 #define SIGNINMESSAGE_H
 
 #include <QString>
 #include "message.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT SigninMessage : public Message
 {
@@ -52,8 +45,5 @@ private:
     QString m_identifier;
     QString m_password;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // SIGNINMESSAGE_H

@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef READIDBASEFORMAT_H
 #define READIDBASEFORMAT_H
 
+#include <QSharedPointer>
 #include "commoncommandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 // EnOcean Command Command 0x08 : CO_RD_IDBASE
 class ReadIdBaseFormat : public CommonCommandFormat
@@ -39,9 +32,5 @@ public:
 protected:
     QspResponseFormat getExpectedResponseFormat(const QspEsp3Packet& responsePacket) override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspReadIdBaseFormat = QSharedPointer<ReadIdBaseFormat>;
 #endif // READIDBASEFORMAT_H

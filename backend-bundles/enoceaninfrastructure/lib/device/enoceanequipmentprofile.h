@@ -16,25 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANEQUIPMENTPROFILE_H
 #define ENOCEANEQUIPMENTPROFILE_H
 
+#include <QSharedPointer>
 #include "abstract_infrastructure/device/device.h"
+#include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
+#include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
 #include "enoceaninfrastructure_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanEquipmentProfile : public core::infrastructure::Device
+class EnoceanEquipmentProfile : public oplink::Device
 {
 public:
-    EnoceanEquipmentProfile(const core::infrastructure::DeviceId& id,
-                            core::infrastructure::DeviceHook& deviceHook,
+    EnoceanEquipmentProfile(const oplink::DeviceId& id,
+                            oplink::DeviceHook& deviceHook,
                             EepTelegramFormat *msgFormat);
     ~EnoceanEquipmentProfile() override;
 
@@ -51,9 +46,5 @@ private:
     QspEepTelegramFormat m_msgFormat;
     EnoceanGateway      *m_gateway;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
-
+using QspEnoceanEquipmentProfile = QSharedPointer<EnoceanEquipmentProfile>;
 #endif // ENOCEANEQUIPMENTPROFILE_H

@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef A504TELEGRAMFORMAT_H
 #define A504TELEGRAMFORMAT_H
 
+#include <QSharedPointer>
 #include "a5telegramformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class A504TelegramFormat : public A5TelegramFormat
 {
@@ -35,9 +28,5 @@ public:
     A504TelegramFormat();
     ~A504TelegramFormat() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspA504TelegramFormat = QSharedPointer<A504TelegramFormat>;
 #endif // A504TELEGRAMFORMAT_H

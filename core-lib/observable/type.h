@@ -16,21 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef CORELIBTYPE_H
 #define CORELIBTYPE_H
 
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_LIB_EXPORT Type
 {
 public:
@@ -53,10 +45,5 @@ public:
     static QString PW_ELECTRIC_HEATING_MEASUREMENT;
     static QString ONOFF_LIGHTING;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // CORELIBTYPE_H

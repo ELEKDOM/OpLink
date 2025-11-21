@@ -16,26 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURELOADERARGS_H
 #define INFRASTRUCTURELOADERARGS_H
 
 #include <QString>
-#include "olcore-backend-lib_export.h"
+#include <QSharedPointer>
 #include "worker/workerargs.h"
+#include "olcore-backend-lib_export.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureLoaderArgs : public worker::WorkerArgs
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureLoaderArgs : public plugframe::WorkerArgs
 {
 public:
     InfrastructureLoaderArgs(const QString& configFile);
@@ -44,10 +35,6 @@ public:
 public:
     QString m_configFile;
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspDeviceInfrastructureLoaderArgs = QSharedPointer<InfrastructureLoaderArgs>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTURELOADERARGS_H

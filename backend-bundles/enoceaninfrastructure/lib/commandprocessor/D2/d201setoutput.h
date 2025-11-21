@@ -16,35 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201SETOUTPUT_H
 #define D201SETOUTPUT_H
 
 #include "d201commandprocessor.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 // EnOcean Command 0x01 : Actuator Set Output
 class D201SetOutput : public D201CommandProcessor
 {
 public:
-    D201SetOutput(const core::infrastructure::QspDevice& device);
+    D201SetOutput(const oplink::QspDevice& device);
     ~D201SetOutput() override;
 
 protected:
-    bool completePacket(core::command::QspCommand order) override;
+    bool completePacket(oplink::QspCommand order) override;
 
 private:
     void setOutput(quint8 channel, quint8 val);
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // D201SETOUTPUT_H

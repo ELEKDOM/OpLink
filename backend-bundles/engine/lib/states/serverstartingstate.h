@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SERVERSTARTINGSTATE_H
 #define SERVERSTARTINGSTATE_H
 
@@ -24,31 +23,19 @@
 #include "service-int/backendcontrolserviceinterface.h"
 #include "service-int/infrastructurecontrolserviceinterface.h"
 #include "service-int/virtualequipmentsetserviceinterface.h"
-#include "olcore-backend-lib_forward.h"
+#include "observable/observable/observablebuilderscontainer.h"
 #include "serverengine_forward.h"
 
-using namespace elekdom::plugframe::core;
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-namespace bundle
-{
-
-using List_RegisteredInfras = QList<infrastructure::service::InfrastructureControlServiceInterface*>;
+using List_RegisteredInfras = QList<oplink::InfrastructureControlServiceInterface*>;
 using ConstIt_RegisteredInfras = List_RegisteredInfras::const_iterator;
 
-using List_RegisteredVirtualEquipmentSet = QList<virtualequipmentset::service::VirtualEquipmentSetServiceInterface*>;
+using List_RegisteredVirtualEquipmentSet = QList<oplink::VirtualEquipmentSetServiceInterface*>;
 using ConstIt_RegisteredVirtualEquipmentSets =  List_RegisteredVirtualEquipmentSet::const_iterator;
 
-using List_RegisteredFrontendItfs = QList<plugframe::frontenditf::service::BackendControlServiceInterface*>;
+using List_RegisteredFrontendItfs = QList<plugframe::BackendControlServiceInterface*>;
 using ConstIt_RegisteredFrontendItfs = List_RegisteredFrontendItfs::const_iterator;
 
-class ServerStartingState : public worker::WorkerWatcher
+class ServerStartingState : public plugframe::WorkerWatcher
 {
 public:
     ServerStartingState(ServerEngine& engine);
@@ -58,8 +45,8 @@ public:
     virtual void starting() = 0;
 
 protected:
-    void onWorkFinished(worker::QspWorkerOuts outs) override;
-    virtual void doProcessing(const worker::QspWorkerOuts& outs) = 0;
+    void onWorkFinished(plugframe::QspWorkerOuts outs) override;
+    virtual void doProcessing(const plugframe::QspWorkerOuts& outs) = 0;
     virtual bool test4transition() = 0;
     virtual void transition() = 0;
 
@@ -74,7 +61,7 @@ protected:
     ConstIt_RegisteredFrontendItfs FrontendItfsBegin();
     ConstIt_RegisteredFrontendItfs FrontendItfsEnd();
     int nbFrontendItfs();
-    void registerObservables(const observable::QspObservableBuildersContainer& loadedObservables);
+    void registerObservables(const oplink::QspObservableBuildersContainer& loadedObservables);
     void setLoadingVirtualEquipmentSetsState();
     void setStartingClientsState();
     void finished();
@@ -85,10 +72,4 @@ protected:
 protected:
     ServerEngine& m_engine;
 };
-
-}//namespace bundle
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
-
 #endif // SERVERSTARTINGSTATE_H

@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SESSIONMESSAGE_H
 #define SESSIONMESSAGE_H
 
 #include "message.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT SessionMessage : public Message
 {
@@ -42,8 +35,5 @@ public:
 private:
     quint32 m_sessionId;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // SESSIONMESSAGE_H

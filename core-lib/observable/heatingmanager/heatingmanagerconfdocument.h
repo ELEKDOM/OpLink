@@ -16,23 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERCONFDOCUMENT_H
 #define HEATINGMANAGERCONFDOCUMENT_H
 
 #include "observable/virtualequipment/virtualequipmentconfdocument.h"
 #include "observable/heatingmanager/heatingmanagerloaderhook.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace heatingmanager
-{
-
-class OLCORE_LIB_EXPORT HeatingManagerConfDocument : public virtualequipment::VirtualEquipmentConfDocument
+class OLCORE_LIB_EXPORT HeatingManagerConfDocument : public oplink::VirtualEquipmentConfDocument
 {
 private:
     static QString heatingManagerTag() {return QStringLiteral("heating-manager");}
@@ -79,9 +71,5 @@ protected:
 private:
     bool extractScheduler(QDomElement& controlElemconst,const QString& observableName);
 };
-
-}//namespace heatingmanager
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // HEATINGMANAGERCONFDOCUMENT_H

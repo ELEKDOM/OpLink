@@ -16,22 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFCONSOLEVIEW_H
 #define OLFCONSOLEVIEW_H
 
 #include "gui/guipageview.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-
-class OlfConsoleView : public plugframe::core::gui::GuiPageView
+class OlfConsoleView : public plugframe::GuiPageView
 {
     Q_OBJECT
 
@@ -39,10 +29,5 @@ public:
     explicit OlfConsoleView(QString toolActionName,QWidget *parent = nullptr);
     ~OlfConsoleView() override;
 };
-
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // OLFCONSOLEVIEW_H

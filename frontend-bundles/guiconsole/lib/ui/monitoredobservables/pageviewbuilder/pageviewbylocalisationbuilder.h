@@ -16,22 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PAGEVIEWBYLOCALISATIONBUILDER_H
 #define PAGEVIEWBYLOCALISATIONBUILDER_H
 
 #include "pageviewlistlayoutbuilder.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
 
 class PageViewByLocalisationBuilder : public PageViewListLayoutBuilder
 {
@@ -40,15 +28,9 @@ public:
     ~PageViewByLocalisationBuilder() override;
 
 protected:
-    QString getViewName(widget::QspMonitoredObservableWidgetCtrl& widgetCtrl) override;
-    QString getListLayoutName(widget::QspMonitoredObservableWidgetCtrl& widgetCtrl) override;
+    QString getViewName(QspMonitoredObservableWidgetCtrl& widgetCtrl) override;
+    QString getListLayoutName(QspMonitoredObservableWidgetCtrl& widgetCtrl) override;
     quint8 getLayoutType() override;
 };
-
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // PAGEVIEWBYLOCALISATIONBUILDER_H

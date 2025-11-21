@@ -16,43 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ACTUATOROUTPUT_H
 #define ACTUATOROUTPUT_H
 
-#include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ActuatorOutput
 {
 public:
-    ActuatorOutput(const observable::PropertyName& actuatorPropertyName,
-                      const observable::ObservableName& loadName,
-                      const observable::PropertyName& loadPropertyName);
+    ActuatorOutput(const oplink::PropertyName& actuatorPropertyName,
+                   const oplink::ObservableName& loadName,
+                   const oplink::PropertyName& loadPropertyName);
 
 public:
-    const observable::PropertyName& actuatorPropertyName() {return m_actuatorPropertyName;}
-    const observable::ObservableName& loadName() {return m_loadName;}
-    const observable::PropertyName& loadPropertyName() {return m_loadPropertyName;}
+    const oplink::PropertyName& actuatorPropertyName() {return m_actuatorPropertyName;}
+    const oplink::ObservableName& loadName() {return m_loadName;}
+    const oplink::PropertyName& loadPropertyName() {return m_loadPropertyName;}
 
 public:
-    observable::PropertyName   m_actuatorPropertyName;
-    observable::ObservableName m_loadName;
-    observable::PropertyName   m_loadPropertyName;
+    oplink::PropertyName   m_actuatorPropertyName;
+    oplink::ObservableName m_loadName;
+    oplink::PropertyName   m_loadPropertyName;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // ACTUATOROUTPUT_H

@@ -16,29 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERLOADER_H
 #define HEATINGMANAGERLOADER_H
 
+#include "scheduler/schedulerbuilder.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
+#include "observable/highobservable/monitor/grouptowatch.h"
 #include "observable/heatingmanager/heatingmanagerloaderhook.h"
 #include "heatingmanagerset_forward.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanager
-{
-
-class HeatingManagerLoader : public core::virtualequipment::VirtualEquipmentLoader,
-                             public core::heatingmanager::HeatingManagerLoaderHook
+class HeatingManagerLoader : public oplink::VirtualEquipmentLoader,
+                             public oplink::HeatingManagerLoaderHook
 {
 
 public:
-    HeatingManagerLoader(virtualequipmentset::bundle::VirtualEquipmentSet *veSet);
+    HeatingManagerLoader(oplink::VirtualEquipmentSet *veSet);
     ~HeatingManagerLoader() override;
 
 protected:// Hook
@@ -57,7 +49,7 @@ protected:// Hook
                                  double threshold,
                                  double maxTemp) override;
     bool controlDeclarationEnd() override;
-    plugframe::core::scheduler::SchedulerElementHook& schedulerDeclarationBegin() override;
+    plugframe::SchedulerElementHook& schedulerDeclarationBegin() override;
     bool schedulerDeclarationEnd() override;
     bool roomsDeclarationBegin() override;
     bool roomsDeclarationEnd() override;
@@ -71,10 +63,11 @@ protected:// Hook
     bool windowSensorRefDeclaration(const QString& windowSensorName,const QString& windowSensorPropertyName) override;
     bool temperatureSensorsDeclarationBegin() override;
     bool temperatureSensorsDeclarationEnd() override;
-    bool temperatureSensorRefDeclaration(const QString& temperatureSensorName,const QString& temperatureSensorPropertyName) override;
+    bool temperatureSensorRefDeclaration(const QString& temperatureSensorName,
+                                         const QString& temperatureSensorPropertyName) override;
 
 protected: // Loader
-    virtualequipment::VirtualEquipmentLoaderHook& loaderHook() override;
+    oplink::VirtualEquipmentLoaderHook& loaderHook() override;
 
 protected:
     virtual HeatingManager *createHeatingManager();
@@ -82,18 +75,14 @@ protected:
 
 private:
     void buildRoomProperties(const QString& roomName,
-                             observable::monitoring::QspMonitoredObservableGroup roomGroup);
+                             oplink::QspMonitoredObservableGroup roomGroup);
 private:
-    heatingmanager::HeatingManager                     *m_newHeatingManager;
-    plugframe::core::scheduler::QspSchedulerBuilder     m_schedulerBuilder;
-    observable::monitoring::QspMonitoredObservableGroup m_monitoredRoom;
-    ControlType                                         m_ctrT;
-    bool                                                m_wo_detection ,m_p_detection;
-    double                                              m_max_temp, m_threshold;
+    HeatingManager                     *m_newHeatingManager;
+    plugframe::QspSchedulerBuilder      m_schedulerBuilder;
+    oplink::QspMonitoredObservableGroup m_monitoredRoom;
+    ControlType                         m_ctrT;
+    bool                                m_wo_detection ,m_p_detection;
+    double                              m_max_temp, m_threshold;
 };
-
-}//namespace heatingmanager
-}//namespace oplink
-}//namespace elekdom
 
 #endif // HEATINGMANAGERLOADER_H

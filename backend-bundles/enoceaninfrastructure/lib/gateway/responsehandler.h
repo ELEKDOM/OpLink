@@ -16,19 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef RESPONSEHANDLER_H
 #define RESPONSEHANDLER_H
 
 #include <QObject>
 #include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class ResponseHandler : public QObject
 {
@@ -46,9 +38,5 @@ public:
     virtual void visit(CommonCommandResponseFormat& response) = 0;
     virtual void visit(ReadIdBaseResponseFormat& response) = 0;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // RESPONSEHANDLER_H

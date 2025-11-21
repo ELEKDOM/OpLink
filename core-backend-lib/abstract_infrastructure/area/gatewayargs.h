@@ -16,31 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GATEWAYARGS_H
 #define GATEWAYARGS_H
 
 #include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
 class OLCORE_BACKEND_LIB_EXPORT GatewayArgs
 {
 public:
     GatewayArgs();
     virtual ~GatewayArgs();
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GATEWAYARGS_H

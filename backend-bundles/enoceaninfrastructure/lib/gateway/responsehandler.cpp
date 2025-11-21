@@ -16,13 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "gateway/responsehandler.h"
-#include "packet/format/receivedformat/response/eepcommandresponseformat.h"
-#include "packet/format/receivedformat/response/commoncommandresponse/commoncommandresponseformat.h"
-#include "packet/format/receivedformat/response/commoncommandresponse/readidbaseresponseformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 ResponseHandler::ResponseHandler(QObject *parent) : QObject(parent)
 {

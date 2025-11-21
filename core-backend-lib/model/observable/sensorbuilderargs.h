@@ -16,39 +16,28 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SENSORBUILDERARGS_H
 #define SENSORBUILDERARGS_H
 
+#include <QSharedPointer>
+#include "model/observable/operationdevicebuilderargs.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "model/observable/operationdevicebuilderargs.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SensorBuilderArgs : public OperationDeviceBuilderArgs
 {
 public:
-    SensorBuilderArgs(const observable::ObservableName& observableName,
-                         const ObservableModelName& observableModelName,
-                         const observable::LocalisationName& observableLocalisation,
-                         const infrastructure::DeviceId& deviceId,
-                         const infrastructure::DeviceModelName& deviceModelName,
-                         const infrastructure::QspDeviceBuilder& deviceBuilder,
-                         const infrastructure::DeviceChannelsBinding& deviceChannelsBinding);
+    SensorBuilderArgs(const ObservableName& observableName,
+                      const ObservableModelName& observableModelName,
+                      const LocalisationName& observableLocalisation,
+                      const DeviceId& deviceId,
+                      const DeviceModelName& deviceModelName,
+                      const QspDeviceBuilder& deviceBuilder,
+                      const DeviceChannelsBinding& deviceChannelsBinding);
     ~SensorBuilderArgs() override;
 };
-
-}//namespace model
-}//namespace core
+using QspSensorBuilderArgs = QSharedPointer<SensorBuilderArgs>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SENSORBUILDERARGS_H

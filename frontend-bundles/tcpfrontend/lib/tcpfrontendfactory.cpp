@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "tcpfrontendfactory.h"
 #include "tcpfrontenddeserializer.h"
-
-using namespace elekdom::oplink::tcpfrontend::factory;
 
 TcpFrontendFactory::TcpFrontendFactory()
 {
@@ -32,8 +29,8 @@ TcpFrontendFactory::~TcpFrontendFactory()
 
 }
 
-elekdom::plugframe::core::tcp::TcpChannelDeserializer *TcpFrontendFactory::createDeserializer()
+plugframe::TcpChannelDeserializer *TcpFrontendFactory::createDeserializer()
 {
-    return new bundle::TcpFrontendDeserializer;
+    return new TcpFrontendDeserializer;
 }
 

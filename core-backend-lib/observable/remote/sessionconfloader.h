@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SESSIONCONFLOADER_H
 #define SESSIONCONFLOADER_H
 
 #include <QStringList>
+#include "observable/remote/sessionconfhook.h"
+#include "observable/remote/observablestates.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "observable/remote/sessionconfhook.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace remote
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SessionConfLoader : public SessionConfHook
 {
 public:
@@ -56,10 +49,5 @@ private:
     QString             m_curObservableName;
     QStringList         m_curPropertyNames;
 };
-
-}//namespace remote
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SESSIONCONFLOADER_H

@@ -16,22 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "operationdevicebuilderargs.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"
 
-using namespace elekdom::oplink::core::model;
-
-OperationDeviceBuilderArgs::OperationDeviceBuilderArgs(const observable::ObservableName& observableName,
-                                                             const ObservableModelName& observableModelName,
-                                                             const observable::LocalisationName& observableLocalisation,
-                                                             const infrastructure::DeviceId& deviceId,
-                                                             const infrastructure::DeviceModelName& deviceModelName,
-                                                             const infrastructure::QspDeviceBuilder& deviceBuilder,
-                                                             const infrastructure::DeviceChannelsBinding& deviceChannelsBinding):
+oplink::OperationDeviceBuilderArgs::OperationDeviceBuilderArgs(const oplink::ObservableName& observableName,
+                                                               const oplink::ObservableModelName& observableModelName,
+                                                               const oplink::LocalisationName& observableLocalisation,
+                                                               const oplink::DeviceId& deviceId,
+                                                               const oplink::DeviceModelName& deviceModelName,
+                                                               const oplink::QspDeviceBuilder& deviceBuilder,
+                                                               const oplink::DeviceChannelsBinding& deviceChannelsBinding):
     ObservableBuilderArgs{observableName,
-                            observableModelName,
-                            observableLocalisation},
+                          observableModelName,
+                          observableLocalisation},
     m_deviceId{deviceId},
     m_deviceModelName{deviceModelName},
     m_deviceBuilder{deviceBuilder},
@@ -40,7 +37,7 @@ OperationDeviceBuilderArgs::OperationDeviceBuilderArgs(const observable::Observa
 
 }
 
-OperationDeviceBuilderArgs::~OperationDeviceBuilderArgs()
+oplink::OperationDeviceBuilderArgs::~OperationDeviceBuilderArgs()
 {
 
 }

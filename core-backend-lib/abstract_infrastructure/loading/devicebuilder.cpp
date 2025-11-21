@@ -16,28 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "devicebuilder.h"
-#include "abstract_infrastructure/loading/deviceprocessorbuilder.h"
-#include "abstract_infrastructure/device/device.h"
-#include "abstract_infrastructure/device/devicecommandprocessor.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-DeviceBuilder::DeviceBuilder(const QspDeviceProcessorBuilder& processorBuilder):
+oplink::DeviceBuilder::DeviceBuilder(const oplink::QspDeviceProcessorBuilder& processorBuilder):
     m_processorBuilder{processorBuilder}
 {
 
 }
 
-DeviceBuilder::~DeviceBuilder()
+oplink::DeviceBuilder::~DeviceBuilder()
 {
 
 }
 
-QspDeviceCommandProcessor DeviceBuilder::createDeviceProcessor(const command::CommandName &commandName,
-                                                                     const DeviceModelName &deviceModelName,
-                                                                     const QspDevice &device)
+oplink::QspDeviceCommandProcessor oplink::DeviceBuilder::createDeviceProcessor(const oplink::CommandName &commandName,
+                                                                               const oplink::DeviceModelName &deviceModelName,
+                                                                               const oplink::QspDevice &device)
 {
     return QspDeviceCommandProcessor{m_processorBuilder->createDeviceProcessor(commandName, deviceModelName, device)};
 }

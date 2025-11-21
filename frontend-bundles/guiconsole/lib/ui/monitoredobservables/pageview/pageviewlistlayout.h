@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PAGEVIEWLISTLAYOUT_H
 #define PAGEVIEWLISTLAYOUT_H
 
@@ -26,17 +25,6 @@
 namespace Ui {
 class pageViewListLayout;
 }
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
 
 class PageViewListLayout : public OlfMonitoredObservablesView
 {
@@ -48,18 +36,13 @@ public:
 
 protected:
     void pushUpWidgets() override;
-    monitoredobservable::ViewListLayout *addListView(const QString& listName) override;
+    ViewListLayout *addListView(const QString& listName) override;
 
 private:
-    void addWidget(monitoredobservable::ViewListLayout *w);
+    void addWidget(ViewListLayout *w);
 
 private:
     Ui::pageViewListLayout *ui;
 };
 
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // PAGEVIEWLISTLAYOUT_H

@@ -16,20 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SUBMITORDERMESSAGE_H
 #define SUBMITORDERMESSAGE_H
 
 #include <QString>
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT SubmitOrderMessage : public SessionMessage
 {
@@ -42,8 +35,5 @@ public:
 private:
     QString m_order;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // SUBMITORDERMESSAGE_H

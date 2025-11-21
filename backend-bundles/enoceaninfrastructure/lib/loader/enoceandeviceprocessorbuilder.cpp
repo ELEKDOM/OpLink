@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loader/enoceandeviceprocessorbuilder.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanDeviceProcessorBuilder::EnoceanDeviceProcessorBuilder()
 {

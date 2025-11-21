@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCORELIB_EXPORT_H
 #define OLCORELIB_EXPORT_H
 

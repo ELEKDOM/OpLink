@@ -16,33 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D2010EEEP_H
 #define D2010EEEP_H
 
 #include "d201eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class D2010EEep : public D201Eep
 {
 public:
-    D2010EEep(const core::infrastructure::DeviceId& id,
-              core::infrastructure::DeviceHook& deviceHook);
+    D2010EEep(const oplink::DeviceId& id,
+              oplink::DeviceHook& deviceHook);
     ~D2010EEep() override;
 
 protected:
     bool processTelegram() override;
 
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D2010EEEP_H

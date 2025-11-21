@@ -16,25 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef WINDOWSENSORWIDGETCTRL_H
 #define WINDOWSENSORWIDGETCTRL_H
 
 #include <QPixmap>
 #include "monitoredobservablewidgetctrl.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class WindowSensorWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
@@ -59,10 +45,4 @@ private:
     QPixmap m_closed;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // WINDOWSENSORWIDGETCTRL_H

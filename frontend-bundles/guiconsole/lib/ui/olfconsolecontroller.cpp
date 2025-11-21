@@ -16,13 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olfconsolecontroller.h"
 
-using namespace elekdom::oplink::frontend::guiconsole;
-using namespace elekdom::plugframe::core::gui;
-
-OlfConsoleController::OlfConsoleController(bundle::OlfConsole& console,
+OlfConsoleController::OlfConsoleController(OlfConsole& console,
                                            const QString& ctrlName,
                                            QStringList menusNames,
                                            QObject *parent):

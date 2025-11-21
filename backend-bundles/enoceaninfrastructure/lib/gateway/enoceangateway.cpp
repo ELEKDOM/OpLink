@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QByteArray>
+#include "enoceangateway.h"
 #include "logger/pflog.h"
 #include "enoceaninfrastructurelogchannel.h"
-#include "gateway/enoceangateway.h"
-#include "gateway/enoceangatewaymode.h"
-#include "gateway/usbgatewayport.h"
 #include "gateway/esp3packetserialreceiver.h"
 #include "gateway/esp3packettransmitter.h"
 #include "loader/enoceanusbgatewayargs.h"
@@ -33,12 +30,10 @@
 #include "packet/format/receivedformat/response/responseformat.h"
 #include "packet/esp3packet.h"
 
-using namespace elekdom::oplink::enocean;
-
 EnoceanGateway::EnoceanGateway(const QString& logChannel,
                                EnoceanGatewayMode *mode,
                                QObject *parent):
-    infrastructure::AreaGateway{logChannel, parent},
+    AreaGateway{logChannel, parent},
     m_mode{mode}
 {
     m_mode->setParent(this);
@@ -189,7 +184,7 @@ void EnoceanGateway::initializeUsb300BaseId()
     sendCommonCommand(readIdFormat);
 }
 
-void EnoceanGateway::onSendPacket(elekdom::oplink::enocean::QspEsp3Packet packet)
+void EnoceanGateway::onSendPacket(QspEsp3Packet packet)
 {
     m_port->write(packet->dataFrame());
 }

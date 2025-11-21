@@ -5,7 +5,7 @@ TEMPLATE = lib
 CONFIG  += staticlib
 
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = oplinkB-tcpbackend-qt5-$${BUNDLE_VERSION}
+TARGET = oplinkB-tcpbackend-qt6-$${BUNDLE_VERSION}
 
 SOURCES += \
          tcpbackend.cpp \

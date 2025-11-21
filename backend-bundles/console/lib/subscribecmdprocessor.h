@@ -16,40 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SUBSCRIBECMDPROCESSOR_H
 #define SUBSCRIBECMDPROCESSOR_H
 
 #include "olcmdprocessor.h"
-#include "observable/observable/observablesubscriber.h"
+#include "observable/observablenames.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-namespace cmd
-{
-
-class SubscribeCmdProcessor : public OlCmdProcessor,
-                              public core::observable::ObservableSubscriber
+class SubscribeCmdProcessorHook;
+class SubscribeCmdProcessor : public OlCmdProcessor
 {
 public:
     SubscribeCmdProcessor(const QString& logChannel,
-                          bundle::OlConsole& console);
+                          OlConsole& console);
     ~SubscribeCmdProcessor() override;
 
+public:
+    oplink::ObservableSubscriber *observableSubscriber();
+    void stateChange(const oplink::ObservableName& observableName,
+                     const oplink::PropertyName& propertyName,
+                     QVariant propertyValue);
 protected:
     bool exec(const RawCmd& cmd) override;
-    void onStateChange(const elekdom::oplink::core::observable::ObservableName& observableName,
-                       const elekdom::oplink::core::observable::PropertyName& propertyName,
-                       QVariant propertyValue) override;
+
+private:
+    SubscribeCmdProcessorHook *m_hook;
 };
-
-} //namespace cmd
-} //namespace console
-} //namespace gac
-} //namespace elekdom
-
 #endif // SUBSCRIBECMDPROCESSOR_H

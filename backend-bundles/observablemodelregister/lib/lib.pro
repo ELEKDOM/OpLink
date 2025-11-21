@@ -4,7 +4,7 @@ TEMPLATE = lib
 CONFIG  += staticlib
 
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = oplinkB-observablemodelregister-qt5-$${BUNDLE_VERSION}
+TARGET = oplinkB-observablemodelregister-qt6-$${BUNDLE_VERSION}
 
 SOURCES +=  \
             modelregisterservice.cpp \

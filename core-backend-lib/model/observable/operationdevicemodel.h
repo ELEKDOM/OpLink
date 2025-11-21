@@ -16,24 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OPERATIONDEVICEMODEL_H
 #define OPERATIONDEVICEMODEL_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "model/modelnames.h"
 #include "model/observable/observablemodel.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT OperationDeviceModel : public ObservableModel
 {
 public:
@@ -41,15 +32,10 @@ public:
     ~OperationDeviceModel() override;
 
 protected:
-    observable::ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) override;
-    void postBuild(observable::QspObservableBuilder observableBuilder,
+    ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) override;
+    void postBuild(QspObservableBuilder observableBuilder,
                    QspObservableBuilderArgs builderArgs) override;
-    virtual observable::ObservableBuilder *createObservable();
+    virtual ObservableBuilder *createObservable();
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OPERATIONDEVICEMODEL_H

@@ -16,33 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QFile>
 #include "sessionconfdocument.h"
 #include "sessionconfhook.h"
 
-using namespace elekdom::oplink::core::remote;
-
-SessionConfDocument::SessionConfDocument(plugframe::core::xmldom::BrowserHook& browserHook):
-    plugframe::core::xmldom::Document{browserHook}
+oplink::SessionConfDocument::SessionConfDocument(plugframe::XmlBrowserHook& browserHook):
+    plugframe::XmlDocument{browserHook}
 {
 
 }
 
-SessionConfDocument::~SessionConfDocument()
+oplink::SessionConfDocument::~SessionConfDocument()
 {
 
 }
 
-QString SessionConfDocument::rootNodeName()
+QString oplink::SessionConfDocument::rootNodeName()
 {
     return QStringLiteral("remotemonitoring");
 }
 
-bool SessionConfDocument::_browse()
+bool oplink::SessionConfDocument::_browse()
 {
     bool                      ret{true};
-    SessionConfHook& loader{dynamic_cast<SessionConfHook&>(browserHook())};
+    oplink::SessionConfHook& loader{dynamic_cast<oplink::SessionConfHook&>(browserHook())};
     QDomNodeList              monitoredObservableNodes{elementsByTagName(QStringLiteral("monitoredObservable"))};
     int                       l{monitoredObservableNodes.length()};
 

@@ -16,31 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HIGHOBSERVABLE_H
 #define HIGHOBSERVABLE_H
 
 #include "observable/observable/observable.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT HighObservable : public Observable
 {
 public:
     HighObservable();
     ~HighObservable() override;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // HIGHOBSERVABLE_H

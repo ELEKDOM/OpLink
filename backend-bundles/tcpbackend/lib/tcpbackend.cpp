@@ -16,18 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "bundle/bundlecontext.h"
 #include "tcpbackend.h"
 #include "tcpbackendfactory.h"
 #include "tcpbackendlogchannel.h"
 
-using namespace elekdom::plugframe::core;
-using namespace elekdom::plugframe::core::tcp;
-using namespace elekdom::oplink::tcpbackend::bundle;
-
 TcpBackend::TcpBackend():
-    server::bundle::TcpServer{s_TcpBackendLogChannel}
+    plugframe::TcpServer{s_TcpBackendLogChannel}
 {
 
 }
@@ -37,24 +32,24 @@ TcpBackend::~TcpBackend()
 
 }
 
-elekdom::plugframe::users::service::LoginServiceInterface *TcpBackend::loginService()
+plugframe::LoginServiceInterface *TcpBackend::loginService()
 {
-    elekdom::plugframe::users::service::LoginServiceInterface *ret;
+    plugframe::LoginServiceInterface *ret;
 
-    ret = bundleContext()->getService<elekdom::plugframe::users::service::LoginServiceInterface>(elekdom::plugframe::users::service::LoginServiceInterface::serviceName());
+    ret = bundleContext()->getService<plugframe::LoginServiceInterface>(plugframe::LoginServiceInterface::serviceName());
     return ret;
 }
 
-elekdom::oplink::engine::service::ObservableServiceInterface *TcpBackend::observableService()
+oplink::ObservableServiceInterface *TcpBackend::observableService()
 {
-    elekdom::oplink::engine::service::ObservableServiceInterface *ret;
+    oplink::ObservableServiceInterface *ret;
 
-    ret = bundleContext()->getService<elekdom::oplink::engine::service::ObservableServiceInterface>(elekdom::oplink::engine::service::ObservableServiceInterface::serviceName());
+    ret = bundleContext()->getService<oplink::ObservableServiceInterface>(oplink::ObservableServiceInterface::serviceName());
     return ret;
 }
 
-bundle::BundleFactory *TcpBackend::createFactory()
+plugframe::BundleFactory *TcpBackend::createFactory()
 {
-    return new factory::TcpBackendFactory;
+    return new TcpBackendFactory;
 }
 

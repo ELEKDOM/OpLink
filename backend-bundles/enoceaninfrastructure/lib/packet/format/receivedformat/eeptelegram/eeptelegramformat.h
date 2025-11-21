@@ -16,19 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef EEPTELEGRAMFORMAT_H
 #define EEPTELEGRAMFORMAT_H
 
+#include <QSharedPointer>
 #include "packet/format/receivedformat/esp3receivedpacketformat.h"
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class EepTelegramFormat : public Esp3ReceivedPacketFormat
 {
@@ -51,9 +43,5 @@ public:
     static const quint8 RORG_A5 = 0xA5;
     static const quint8 RORG_F6 = 0xF6;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspEepTelegramFormat = QSharedPointer<EepTelegramFormat>;
 #endif // EEPTELEGRAMFORMAT_H

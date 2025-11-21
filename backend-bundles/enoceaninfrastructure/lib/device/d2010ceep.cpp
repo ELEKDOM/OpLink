@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QVariant>
 #include "d2010ceep.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd9format.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd6format.h"
 #include "packet/format/receivedformat/eeptelegram/d201telegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-D2010CEep::D2010CEep(const core::infrastructure::DeviceId &id,
-                     core::infrastructure::DeviceHook &deviceHook):
+D2010CEep::D2010CEep(const oplink::DeviceId &id,
+                     oplink::DeviceHook &deviceHook):
     D201Eep{id, deviceHook}
 {
 

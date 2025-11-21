@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D2COMMANDFORMAT_H
 #define D2COMMANDFORMAT_H
 
 #include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class D2CommandFormat : public EepCommandFormat
 {
@@ -41,9 +33,5 @@ protected:
 private:
     quint8 m_cmd;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D2COMMANDFORMAT_H

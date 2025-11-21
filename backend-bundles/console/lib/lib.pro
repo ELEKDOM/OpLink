@@ -4,7 +4,7 @@ TEMPLATE = lib
 CONFIG  += staticlib
 
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = oplinkB-console-qt5-$${BUNDLE_VERSION}
+TARGET = oplinkB-console-qt6-$${BUNDLE_VERSION}
 
 SOURCES +=  \
             olcmdprocessor.cpp \
@@ -12,6 +12,7 @@ SOURCES +=  \
             olconsolefactory.cpp \
             submitcmdprocessor.cpp \
             subscribecmdprocessor.cpp \
+            subscribecmdprocessorhook.cpp \
             unsubscribecmdprocessor.cpp
 
 HEADERS +=  \
@@ -21,6 +22,7 @@ HEADERS +=  \
             olconsolefactory.h \
             submitcmdprocessor.h \
             subscribecmdprocessor.h \
+            subscribecmdprocessorhook.h \
             unsubscribecmdprocessor.h
 
 INCLUDEPATH += \

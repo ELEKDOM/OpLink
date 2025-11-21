@@ -16,26 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MODELNAMES_H
 #define MODELNAMES_H
 
 #include <QString>
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace model
 {
     using ObservableModelName = QString;
     using PropertyModelName = QString;
     using ProcessorModelName = QString;
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // MODELNAMES_H

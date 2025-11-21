@@ -16,26 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef MODELREGISTERSERVICEINTERFACE_H
 #define MODELREGISTERSERVICEINTERFACE_H
 
 #include "service-int/serviceinterface.h"
-#include "olcore-backend-lib_forward.h"
 #include "model/modelnames.h"
+#include "model/observable/observablemodel.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace observablemodelregister
-{
-namespace service
-{
-
-class ModelRegisterServiceInterface : public plugframe::core::plugin::ServiceInterface
+class ModelRegisterServiceInterface : public plugframe::ServiceInterface
 {
 public:
     static QString serviceName() {return QStringLiteral("ModelRegisterServiceInterface");}
@@ -44,19 +34,15 @@ public:
     ~ModelRegisterServiceInterface() override {}
 
 public:
-    virtual bool addPropertyModel(core::model::QspObservablePropertyModel model) = 0;
-    virtual core::model::QspObservablePropertyModel getPropertyModel(core::model::PropertyModelName id) = 0;
-    virtual bool addProcessorModel(core::model::QspCommandProcessorModel model) = 0;
-    virtual core::model::QspCommandProcessorModel getProcessorModel(core::model::ProcessorModelName id) = 0;
-    virtual bool addObservableModel(core::model::QspObservableModel model) = 0;
+    virtual bool addPropertyModel(oplink::QspObservablePropertyModel model) = 0;
+    virtual oplink::QspObservablePropertyModel getPropertyModel(oplink::PropertyModelName id) = 0;
+    virtual bool addProcessorModel(oplink::QspCommandProcessorModel model) = 0;
+    virtual oplink::QspCommandProcessorModel getProcessorModel(oplink::ProcessorModelName id) = 0;
+    virtual bool addObservableModel(oplink::QspObservableModel model) = 0;
 };
-
-}//service
-}//namespace observablemodelregister
 }//namespace oplink
-}//namespace elekdom
 
-#define QspModelRegisterService_iid "elekdom.oplink.observablemodelregister.service.ModelRegisterServiceInterface"
-Q_DECLARE_INTERFACE(elekdom::oplink::observablemodelregister::service::ModelRegisterServiceInterface, QspModelRegisterService_iid)
+#define QspModelRegisterService_iid "oplink.ModelRegisterServiceInterface"
+Q_DECLARE_INTERFACE(oplink::ModelRegisterServiceInterface, QspModelRegisterService_iid)
 
 #endif // MODELREGISTERSERVICEINTERFACE_H

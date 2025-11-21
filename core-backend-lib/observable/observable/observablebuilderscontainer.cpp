@@ -16,23 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablebuilderscontainer.h"
 #include "observable/observable/observablebuilder.h"
 
-using namespace elekdom::oplink::core::observable;
-
-ObservableBuildersContainer::ObservableBuildersContainer()
+oplink::ObservableBuildersContainer::ObservableBuildersContainer()
 {
 
 }
 
-ObservableBuildersContainer::~ObservableBuildersContainer()
+oplink::ObservableBuildersContainer::~ObservableBuildersContainer()
 {
     m_observables.clear();
 }
 
-bool ObservableBuildersContainer::insert(const ObservableName &name, const QspObservableBuilder &observable)
+bool oplink::ObservableBuildersContainer::insert(const oplink::ObservableName &name,
+                                                 const oplink::QspObservableBuilder &observable)
 {
     bool ret{!m_observables.contains(name)};
 
@@ -44,7 +42,8 @@ bool ObservableBuildersContainer::insert(const ObservableName &name, const QspOb
     return ret;
 }
 
-bool ObservableBuildersContainer::find(const ObservableName &name, QspObservableBuilder &observable)
+bool oplink::ObservableBuildersContainer::find(const ObservableName &name,
+                                               oplink::QspObservableBuilder &observable)
 {
     bool ret{m_observables.contains(name)};
 
@@ -56,17 +55,17 @@ bool ObservableBuildersContainer::find(const ObservableName &name, QspObservable
     return ret;
 }
 
-bool ObservableBuildersContainer::contains(const ObservableName &name) const
+bool oplink::ObservableBuildersContainer::contains(const ObservableName &name) const
 {
     return m_observables.contains(name);
 }
 
-ObservableBuildersContainer::ConstIt ObservableBuildersContainer::begin()
+oplink::ObservableBuildersContainer::ConstIt oplink::ObservableBuildersContainer::begin()
 {
     return m_observables.constBegin();
 }
 
-ObservableBuildersContainer::ConstIt ObservableBuildersContainer::end()
+oplink::ObservableBuildersContainer::ConstIt oplink::ObservableBuildersContainer::end()
 {
     return m_observables.constEnd();
 }

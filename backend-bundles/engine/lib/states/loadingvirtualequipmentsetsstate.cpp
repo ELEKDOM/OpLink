@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loadingvirtualequipmentsetsstate.h"
 #include "serverengine.h"
 #include "logger/pflog.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentsetloaderouts.h"
 #include "observable/observable/observablebuilder.h"
-
-using namespace elekdom::oplink::engine::bundle;
 
 LoadingVirtualEquipmentSetsState::LoadingVirtualEquipmentSetsState(ServerEngine& engine):
     ServerStartingState{engine},
@@ -60,10 +57,10 @@ void LoadingVirtualEquipmentSetsState::starting()
     }
 }
 
-void LoadingVirtualEquipmentSetsState::doProcessing(const worker::QspWorkerOuts &outs)
+void LoadingVirtualEquipmentSetsState::doProcessing(const plugframe::QspWorkerOuts &outs)
 {
-    worker::QspWorkerOuts qspouts(outs);
-    virtualequipmentset::QspVirtualEquipmentSetLoaderOuts loaderOuts(qspouts.dynamicCast<virtualequipmentset::VirtualEquipmentSetLoaderOuts>());
+    plugframe::QspWorkerOuts qspouts(outs);
+    oplink::QspVirtualEquipmentSetLoaderOuts loaderOuts(qspouts.dynamicCast<oplink::VirtualEquipmentSetLoaderOuts>());
 
     pfInfo1(logChannel()) << tr("Fin de chargement pour ") << loaderOuts->m_virtualEquipmentSetName << ", loadedFlag = " << loaderOuts->m_ret;
 
@@ -99,11 +96,11 @@ void LoadingVirtualEquipmentSetsState::transition()
     setStartingClientsState();
 }
 
-void LoadingVirtualEquipmentSetsState::initScheduler(observable::QspObservableBuildersContainer loadedVirtualEquipments)
+void LoadingVirtualEquipmentSetsState::initScheduler(oplink::QspObservableBuildersContainer loadedVirtualEquipments)
 {
-    for(observable::ObservableBuildersContainer::ConstIt it = loadedVirtualEquipments->begin(); it != loadedVirtualEquipments->end(); it++)
+    for(oplink::ObservableBuildersContainer::ConstIt it = loadedVirtualEquipments->begin(); it != loadedVirtualEquipments->end(); it++)
     {
-        observable::QspObservableBuilder ve{*it};
+        oplink::QspObservableBuilder ve{*it};
 
         ve->initScheduler();
     }

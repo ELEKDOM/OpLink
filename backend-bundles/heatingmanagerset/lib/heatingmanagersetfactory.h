@@ -16,35 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATINGMANAGERSETFACTORY_H
 #define HEATINGMANAGERSETFACTORY_H
 
 #include "abstract_virtualequipementset/virtualequipmentsetfactory.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanagerset
-{
-namespace factory
-{
-
-class HeatingManagerSetFactory : public core::virtualequipmentset::factory::VirtualEquipmentSetFactory
+class HeatingManagerSetFactory : public oplink::VirtualEquipmentSetFactory
 {
 public:
     HeatingManagerSetFactory();
     virtual ~HeatingManagerSetFactory();
 
 protected:
-    core::virtualequipment::VirtualEquipmentLoader *createVirtualEquipmentLoader(core::virtualequipmentset::bundle::VirtualEquipmentSet *veSet) override;
-    core::virtualequipment::VirtualEquipmentConfDocument *createVirtualEquipmentConfDocument(core::virtualequipment::VirtualEquipmentLoaderHook& hook) override;
+    oplink::VirtualEquipmentLoader *createVirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet) override;
+    oplink::VirtualEquipmentConfDocument *createVirtualEquipmentConfDocument(oplink::VirtualEquipmentLoaderHook& hook) override;
 };
-
-}//namespace factory
-}//namespace heatingmanagerset
-}//namespace oplink
-}//namespace elekdom
 
 #endif // HEATINGMANAGERSETFACTORY_H

@@ -16,38 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETLOADERARGS_H
 #define VIRTUALEQUIPMENTSETLOADERARGS_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "worker/workerargs.h"
+#include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
+#include "olcore-backend-lib_export.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoaderArgs : public worker::WorkerArgs
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoaderArgs : public plugframe::WorkerArgs
 {
 public:
-    VirtualEquipmentSetLoaderArgs(virtualequipment::QspVirtualEquipmentLoader veLoader);
+    VirtualEquipmentSetLoaderArgs(QspVirtualEquipmentLoader veLoader);
     ~VirtualEquipmentSetLoaderArgs();
 
 public:
-    virtualequipment::QspVirtualEquipmentLoader m_veLoader;
+    QspVirtualEquipmentLoader m_veLoader;
 };
-
-}//namespace virtualequipmentset
-}//namespace core
+using QspVirtualEquipmentSetLoaderArgs = QSharedPointer<VirtualEquipmentSetLoaderArgs>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETLOADERARGS_H

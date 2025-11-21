@@ -16,31 +16,27 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "command.h"
 
-using namespace elekdom::oplink::core::command;
-using namespace elekdom::oplink::core;
+const int oplink::Command::COMMAND_NAME_IDX = 0;
+const int oplink::Command::TARGET_OBSERVABLE_IDX = 1;
+const int oplink::Command::TARGET_PROPERTY_IDX = 2;
+const int oplink::Command::TARGET_VALUE_IDX = 3;
 
-const int Command::COMMAND_NAME_IDX = 0;
-const int Command::TARGET_OBSERVABLE_IDX = 1;
-const int Command::TARGET_PROPERTY_IDX = 2;
-const int Command::TARGET_VALUE_IDX = 3;
-
-Command::Command(StrOrder cmdStr)
+oplink::Command::Command(StrOrder cmdStr)
 {
-    StrOrder order{cmdStr.toLower()};
+    oplink::StrOrder order{cmdStr.toLower()};
     m_args = order.split(' ');
 }
 
-Command::~Command()
+oplink::Command::~Command()
 {
 
 }
 
-const CommandName Command::name()
+const oplink::CommandName oplink::Command::name()
 {
-    CommandName ret;
+    oplink::CommandName ret;
 
     if (m_args.size() > COMMAND_NAME_IDX)
     {
@@ -49,9 +45,9 @@ const CommandName Command::name()
     return ret;
 }
 
-const observable::ObservableName Command::observable()
+const oplink::ObservableName oplink::Command::observable()
 {
-    observable::ObservableName ret;
+    oplink::ObservableName ret;
 
     if (m_args.size() > TARGET_OBSERVABLE_IDX)
     {
@@ -60,9 +56,9 @@ const observable::ObservableName Command::observable()
     return ret;
 }
 
-const observable::PropertyName Command::property()
+const oplink::PropertyName oplink::Command::property()
 {
-    observable::PropertyName ret;
+    oplink::PropertyName ret;
 
     if (m_args.size() > TARGET_PROPERTY_IDX)
     {
@@ -71,7 +67,7 @@ const observable::PropertyName Command::property()
     return ret;
 }
 
-QVariant Command::value()
+QVariant oplink::Command::value()
 {
     QVariant ret;
 
@@ -82,7 +78,7 @@ QVariant Command::value()
     return ret;
 }
 
-void Command::replaceTarget(const observable::ObservableName &oname, const observable::PropertyName &pname)
+void oplink::Command::replaceTarget(const oplink::ObservableName &oname,const oplink::PropertyName &pname)
 {
     m_args[TARGET_OBSERVABLE_IDX] = oname;
     m_args[TARGET_PROPERTY_IDX] = pname;

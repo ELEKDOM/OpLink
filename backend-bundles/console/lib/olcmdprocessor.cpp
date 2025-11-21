@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olcmdprocessor.h"
 #include "olconsole.h"
 
-using namespace elekdom::oplink::console::cmd;
-
 OlCmdProcessor::OlCmdProcessor(const QString &logChannel,
-                               bundle::OlConsole &console,
+                               OlConsole &console,
                                QString cmdName,
                                QString description):
     CmdProcessor{logChannel,

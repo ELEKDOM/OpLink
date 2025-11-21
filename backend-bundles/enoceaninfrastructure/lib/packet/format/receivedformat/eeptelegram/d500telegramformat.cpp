@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d500telegramformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 D500TelegramFormat::D500TelegramFormat() {}
 

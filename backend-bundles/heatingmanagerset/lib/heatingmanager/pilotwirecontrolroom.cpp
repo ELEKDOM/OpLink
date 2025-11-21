@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "pilotwirecontrolroom.h"
 #include "heatingmanager.h"
 #include "observable/highobservable/monitor/grouptowatch.h"
@@ -25,11 +24,8 @@
 #include "observable/values.h"
 #include "command/command-names.h"
 
-using namespace elekdom::oplink::heatingmanager;
-using namespace elekdom::oplink::core;
-
-PilotWireControlRoom::PilotWireControlRoom(core::observable::SupervisorObservable& manager,bool wod,bool pd):
-    core::observable::monitoring::GroupToWatchAlgorithm{manager},
+PilotWireControlRoom::PilotWireControlRoom(oplink::SupervisorObservable& manager,bool wod,bool pd):
+    oplink::GroupToWatchAlgorithm{manager},
     m_wod{wod},
     m_pd{pd},
     m_roomClosed{true}
@@ -42,11 +38,11 @@ PilotWireControlRoom::~PilotWireControlRoom()
 
 void PilotWireControlRoom::orderForHeaters(const QString &order)
 {
-    observable::monitoring::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
+    oplink::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
 
     for(int i = 0; i < heatersCategory->size(); i++)
     {
-        observable::monitoring::QspMonitoredState ms{heatersCategory->at(i)};
+        oplink::QspMonitoredState ms{heatersCategory->at(i)};
 
         pwmHeater(ms->observableName(),ms->propertyName(),order);
     }
@@ -54,7 +50,7 @@ void PilotWireControlRoom::orderForHeaters(const QString &order)
 
 void PilotWireControlRoom::initAlgo()
 {  
-    observable::monitoring::GroupToWatch *myRoom{group()};
+    oplink::GroupToWatch *myRoom{group()};
 
     // subscribe to all objects monitored by the group
     //------------------------------------------------
@@ -72,8 +68,8 @@ void PilotWireControlRoom::initAlgo()
     }
 }
 
-void PilotWireControlRoom::onStateChange(const core::observable::ObservableName& observableName,
-                                         const core::observable::PropertyName& propertyName,
+void PilotWireControlRoom::onStateChange(oplink::ObservableName observableName,
+                                         oplink::PropertyName propertyName,
                                          QVariant propertyValue)
 {
     QString reverseInput{observableName+propertyName};
@@ -100,8 +96,8 @@ void PilotWireControlRoom::onStateChange(const core::observable::ObservableName&
     }
 }
 
-void PilotWireControlRoom::onStateChangeFromHeaters(const core::observable::ObservableName&  observableName,
-                                                    const core::observable::PropertyName& propertyName,
+void PilotWireControlRoom::onStateChangeFromHeaters(const oplink::ObservableName&  observableName,
+                                                    const oplink::PropertyName& propertyName,
                                                     QVariant propertyValue)
 {
     quint8 val;
@@ -109,10 +105,10 @@ void PilotWireControlRoom::onStateChangeFromHeaters(const core::observable::Obse
     val = propertyValue.toUInt();
     if (m_wod && !m_roomClosed)
     {
-        if (val != observable::Values::PW_MODE_STOP)
+        if (val != oplink::Values::PW_MODE_STOP)
         {
             // Force stop, windows are open !
-            pwmHeater(observableName,propertyName,command::CommandArgs::OFF);
+            pwmHeater(observableName,propertyName,oplink::CommandArgs::OFF);
         }
     }
     else
@@ -123,8 +119,8 @@ void PilotWireControlRoom::onStateChangeFromHeaters(const core::observable::Obse
     }
 }
 
-void PilotWireControlRoom::onStateChangeFromWindowSensors(const core::observable::ObservableName& observableName,
-                                                          const core::observable::PropertyName& propertyName,
+void PilotWireControlRoom::onStateChangeFromWindowSensors(const oplink::ObservableName& observableName,
+                                                          const oplink::PropertyName& propertyName,
                                                           QVariant propertyValue)
 {
     Q_UNUSED(observableName)
@@ -148,8 +144,8 @@ void PilotWireControlRoom::onStateChangeFromWindowSensors(const core::observable
     }
 }
 
-void PilotWireControlRoom::onStateChangeFromTemperatureSensors(const core::observable::ObservableName& observableName,
-                                                               const core::observable::PropertyName& propertyName,
+void PilotWireControlRoom::onStateChangeFromTemperatureSensors(const oplink::ObservableName& observableName,
+                                                               const oplink::PropertyName& propertyName,
                                                                QVariant propertyValue)
 {
     Q_UNUSED(observableName)
@@ -157,8 +153,8 @@ void PilotWireControlRoom::onStateChangeFromTemperatureSensors(const core::obser
     Q_UNUSED(propertyValue)
 }
 
-void PilotWireControlRoom::onStateChangeFromUnknownCategory(const core::observable::ObservableName& observableName,
-                                                            const core::observable::PropertyName& propertyName,
+void PilotWireControlRoom::onStateChangeFromUnknownCategory(const oplink::ObservableName& observableName,
+                                                            const oplink::PropertyName& propertyName,
                                                             QVariant propertyValue)
 {
     Q_UNUSED(observableName)
@@ -169,18 +165,18 @@ void PilotWireControlRoom::onStateChangeFromUnknownCategory(const core::observab
 void PilotWireControlRoom::pwmHeater(const QString &oname,const QString &pname,const QString &pwm)
 {
     QString format("%1 %2 %3 %4");
-    command::StrOrder order(format.arg(command::CommandNames::SET,oname,pname,pwm));
+    oplink::StrOrder order(format.arg(oplink::CommandNames::SET,oname,pname,pwm));
 
     observableService()->submitOrder(order);
 }
 
 void PilotWireControlRoom::turnLastOrderHeaters()
 {
-    observable::monitoring::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
+    oplink::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
 
-    for(int i = 0; i < heatersCategory->size(); i++)
+    for(qsizetype i = 0; i < heatersCategory->size(); i++)
     {
-        observable::monitoring::QspMonitoredState ms{heatersCategory->at(i)};
+        oplink::QspMonitoredState ms{heatersCategory->at(i)};
         QVariant lastOrder{ms->value()};
 
         if (lastOrder.isValid())
@@ -197,23 +193,23 @@ void PilotWireControlRoom::turnLastOrderHeaters()
 
 void PilotWireControlRoom::turnComfortHeaters()
 {
-    observable::monitoring::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
+    oplink::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
 
-    for(int i = 0; i < heatersCategory->size(); i++)
+    for(qsizetype i = 0; i < heatersCategory->size(); i++)
     {
-        observable::monitoring::QspMonitoredState ms{heatersCategory->at(i)};
-        pwmHeater(ms->observableName(),ms->propertyName(),command::CommandArgs::COMFORT);
+        oplink::QspMonitoredState ms{heatersCategory->at(i)};
+        pwmHeater(ms->observableName(),ms->propertyName(),oplink::CommandArgs::COMFORT);
     }
 }
 
 void PilotWireControlRoom::turnOffHeaters()
 {
-    observable::monitoring::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
+    oplink::QspMonitoredStateList heatersCategory(group()->category(HeatingManager::heaterCategory()));
 
-    for(int i = 0; i < heatersCategory->size(); i++)
+    for(qsizetype i = 0; i < heatersCategory->size(); i++)
     {
-        observable::monitoring::QspMonitoredState ms{heatersCategory->at(i)};
-        pwmHeater(ms->observableName(),ms->propertyName(),command::CommandArgs::OFF);
+        oplink::QspMonitoredState ms{heatersCategory->at(i)};
+        pwmHeater(ms->observableName(),ms->propertyName(),oplink::CommandArgs::OFF);
     }
 }
 
@@ -221,29 +217,29 @@ QString PilotWireControlRoom::convertPWM2str(quint8 pwm)
 {
     QString ret;
 
-    if (pwm == observable::Values::PW_MODE_COMFORT)
+    if (pwm == oplink::Values::PW_MODE_COMFORT)
     {
-        ret = command::CommandArgs::COMFORT;
+        ret = oplink::CommandArgs::COMFORT;
     }
-    else if(pwm == observable::Values::PW_MODE_COMFORT_1)
+    else if(pwm == oplink::Values::PW_MODE_COMFORT_1)
     {
-        ret = command::CommandArgs::COMFORT_1;
+        ret = oplink::CommandArgs::COMFORT_1;
     }
-    else if(pwm == observable::Values::PW_MODE_COMFORT_2)
+    else if(pwm == oplink::Values::PW_MODE_COMFORT_2)
     {
-        ret = command::CommandArgs::COMFORT_2;
+        ret = oplink::CommandArgs::COMFORT_2;
     }
-    else if(pwm == observable::Values::PW_MODE_ECO)
+    else if(pwm == oplink::Values::PW_MODE_ECO)
     {
-        ret = command::CommandArgs::ECO;
+        ret = oplink::CommandArgs::ECO;
     }
-    else if(pwm == observable::Values::PW_MODE_ANTI_FREEZE)
+    else if(pwm == oplink::Values::PW_MODE_ANTI_FREEZE)
     {
-        ret = command::CommandArgs::NOFROST;
+        ret = oplink::CommandArgs::NOFROST;
     }
     else
     {
-        ret = command::CommandArgs::OFF;
+        ret = oplink::CommandArgs::OFF;
     }
 
     return ret;

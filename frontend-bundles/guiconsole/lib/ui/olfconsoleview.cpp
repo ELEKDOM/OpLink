@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olfconsoleview.h"
 
-using namespace elekdom::oplink::frontend::guiconsole;
-
 OlfConsoleView::OlfConsoleView(QString toolActionName, QWidget *parent):
-GuiPageView(toolActionName,parent)
+    GuiPageView(toolActionName,parent)
 {
 
 }

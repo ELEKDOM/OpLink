@@ -16,33 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef F6EEP_H
 #define F6EEP_H
 
 #include "enoceanequipmentprofile.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class F6Eep : public EnoceanEquipmentProfile
 {
 public:
-    F6Eep(const core::infrastructure::DeviceId& id,
-          core::infrastructure::DeviceHook& deviceHook,
+    F6Eep(const oplink::DeviceId& id,
+          oplink::DeviceHook& deviceHook,
           EepTelegramFormat *msgFormat);
     ~F6Eep() override;
 
 protected:
     void recoverState() override;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // F6EEP_H

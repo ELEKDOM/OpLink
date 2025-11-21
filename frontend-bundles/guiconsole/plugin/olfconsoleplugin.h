@@ -22,22 +22,11 @@
 
 #include "plugin/plugin.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace plugin
-{
-
-class OlfConsolePlugin : public plugframe::core::plugin::Plugin
+class OlfConsolePlugin : public plugframe::Plugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "elekdom.oplink.frontend.guiconsole.plugin" FILE "../oplinkF-guiconsolebundle.json")
-    Q_INTERFACES(elekdom::plugframe::core::plugin::BundleInterface)
+    Q_PLUGIN_METADATA(IID "oplink.frontend.guiconsole.plugin" FILE "../oplinkF-guiconsolebundle.json")
+    Q_INTERFACES(plugframe::BundleInterface)
 
 private:
     // m_ServiceImpl;
@@ -47,14 +36,8 @@ public:
     ~OlfConsolePlugin() override;
 
 protected: // PLugin
-    plugframe::core::bundle::Bundle4PluginInterface *createImplementation() override;
+    plugframe::Bundle4PluginInterface *createImplementation() override;
     PF_bindServicesImplementations_DECL
 };
-
-} //namespace plugin
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // OLFCONSOLEPLUGIN_H

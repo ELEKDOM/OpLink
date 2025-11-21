@@ -20,33 +20,7 @@
 #ifndef OBSERVABLEMODELLOADER_FORWARD_H
 #define OBSERVABLEMODELLOADER_FORWARD_H
 
-#include <QSharedPointer>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-    class MandatoryPropertiesModelLoadingEvent;
-    class SpecificPropertiesModelLoadingEvent;
-    class ProcessorsModelLoadingEvent;
-    class ObservableModelsLoadingEvent;
-
-    namespace bundle
-    {
-        class ObservableModelLoader;
-        class ObservableModelLoaderEmitter;
-
-        using QspObservableModelLoaderEmitter = QSharedPointer<ObservableModelLoaderEmitter>;
-    }
-
-    namespace factory
-    {
-        class ObservableModelLoaderFactory;
-    }
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
+class ObservableModelLoaderFactory;
+class ObservableModelLoader;
 
 #endif // OBSERVABLEMODELLOADER_FORWARD_H

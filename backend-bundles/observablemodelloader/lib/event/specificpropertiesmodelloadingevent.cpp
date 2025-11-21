@@ -16,15 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "specificpropertiesmodelloadingevent.h"
-
-using namespace elekdom::oplink::observablemodelloader;
 
 const QString SpecificPropertiesModelLoadingEvent::s_typeId {"OpLink.SpecificProperties.LoadingEvent"};
 
 SpecificPropertiesModelLoadingEvent::SpecificPropertiesModelLoadingEvent(unsigned short cpt):
-    LoopEvent{s_typeId, cpt}
+    plugframe::LoopEvent{s_typeId, cpt}
 {
 
 }

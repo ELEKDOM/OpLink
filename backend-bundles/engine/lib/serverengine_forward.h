@@ -16,32 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SERVERENGINE_FORWARD_H
 #define SERVERENGINE_FORWARD_H
 
-#include <QSharedPointer>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-    namespace bundle
-    {
-        class ServerEngine;
-
-        using QspServerEngine = QSharedPointer<ServerEngine>;
-    }
-    namespace service
-    {
-        class ObservableService;
-
-        using QspObservableService = QSharedPointer<ObservableService>;
-    }
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
+class ServerEngine;
 
 #endif // SERVERENGINE_FORWARD_H

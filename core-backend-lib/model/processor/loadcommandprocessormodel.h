@@ -16,37 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOADCOMMANDPROCESSORMODEL_H
 #define LOADCOMMANDPROCESSORMODEL_H
 
-#include "olcore-backend-lib_export.h"
 #include "lowcommandprocessormodel.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT LoadCommandProcessorModel : public LowCommandProcessorModel
 {
 public:
     LoadCommandProcessorModel(const ProcessorModelName& modelName,
-                                 const command::CommandName& commandName);
+                              const CommandName& commandName);
     ~LoadCommandProcessorModel() override;
 
 public:
-    observable::CommandProcessor *createProcessor(const observable::Observable& parent,
-                                                     QspObservableBuilderArgs builderArgs) override;
+    CommandProcessor *createProcessor(const Observable& parent,
+                                      QspObservableBuilderArgs builderArgs) override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOADCOMMANDPROCESSORMODEL_H

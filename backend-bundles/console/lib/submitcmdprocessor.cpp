@@ -16,17 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QTextStream>
 #include "submitcmdprocessor.h"
 #include "command/command-names.h"
 #include "olconsole.h"
 
-using namespace elekdom::oplink::console::cmd;
-using namespace elekdom::oplink::core::command;
-
 SubmitCmdProcessor::SubmitCmdProcessor(const QString &logChannel,
-                                       bundle::OlConsole &console):
+                                       OlConsole &console):
     OlCmdProcessor{logChannel,
                     console,
                     "submit",
@@ -43,8 +39,8 @@ SubmitCmdProcessor::~SubmitCmdProcessor()
 bool SubmitCmdProcessor::exec(const RawCmd &cmd)
 {
     Q_UNUSED(cmd)
-    QTextStream stream(stdin);
-    StrOrder     order;
+    QTextStream      stream(stdin);
+    oplink::StrOrder order;
 
     console().print(QObject::tr("Format d'une commande : order observable_name [property_name value]\n"));
     console().print(QObject::tr("<Entrée> pour quitter ce mode\n"));

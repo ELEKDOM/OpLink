@@ -16,22 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GACPROPERTYMODELNAME_H
 #define GACPROPERTYMODELNAME_H
 
-#include "olcore-backend-lib_export.h"
 #include "model/modelnames.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT  PropertyModelNames
 {
 public:
@@ -39,10 +31,6 @@ public:
     static const PropertyModelName MODEL_P_OMODEL;
     static const PropertyModelName MODEL_P_LOCALISATION;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 
 #endif // GACPROPERTYMODELNAME_H

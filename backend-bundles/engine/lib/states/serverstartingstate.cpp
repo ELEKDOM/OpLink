@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "serverstartingstate.h"
 #include "worker/workerouts.h"
 #include "observable/observable/observablebuilderscontainer.h"
 #include "serverengine.h"
-
-using namespace elekdom::oplink::engine::bundle;
 
 ServerStartingState::ServerStartingState(ServerEngine& engine):
     m_engine{engine}
@@ -35,7 +32,7 @@ ServerStartingState::~ServerStartingState()
 
 }
 
-void ServerStartingState::onWorkFinished(worker::QspWorkerOuts outs)
+void ServerStartingState::onWorkFinished(plugframe::QspWorkerOuts outs)
 {
     doProcessing(outs);
     if (test4transition())
@@ -94,7 +91,7 @@ int ServerStartingState::nbFrontendItfs()
     return m_engine.nbFrontendItfs();
 }
 
-void ServerStartingState::registerObservables(const observable::QspObservableBuildersContainer &loadedObservables)
+void ServerStartingState::registerObservables(const oplink::QspObservableBuildersContainer &loadedObservables)
 {
     m_engine.registerObservables(loadedObservables);
 }

@@ -16,21 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFMONITOREDOBSERVABLESVIEW_H
 #define OLFMONITOREDOBSERVABLESVIEW_H
 
 #include "olfconsoleview.h"
 #include "olfconsole_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
 
 class OlfMonitoredObservablesView : public OlfConsoleView
 {
@@ -40,12 +30,7 @@ public:
 
 public:
     virtual void pushUpWidgets();
-    virtual monitoredobservable::ViewListLayout *addListView(const QString& listName);
+    virtual ViewListLayout *addListView(const QString& listName);
 };
-
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // OLFMONITOREDOBSERVABLESVIEW_H

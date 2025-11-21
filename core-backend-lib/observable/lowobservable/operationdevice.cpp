@@ -16,46 +16,42 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "operationdevice.h"
 #include "logger/pflog.h"
 #include "observable/property/operationdeviceproperty.h"
 #include "abstract_infrastructure/loading/devicechannelsbinding.h"
 
-using namespace elekdom::oplink::core::observable;
-using namespace elekdom::oplink::core;
-
-OperationDevice::OperationDevice()
+oplink::OperationDevice::OperationDevice()
 {
 
 }
 
-OperationDevice::~OperationDevice()
+oplink::OperationDevice::~OperationDevice()
 {
 
 }
 
-void OperationDevice::setDevice(QSharedPointer<infrastructure::Device> device)
+void oplink::OperationDevice::setDevice(QSharedPointer<oplink::Device> device)
 {
     m_device = device;
 }
 
-QSharedPointer<infrastructure::Device> OperationDevice::device()
+oplink::QspDevice oplink::OperationDevice::device()
 {
     return m_device;
 }
 
-void OperationDevice::bindChannels(const infrastructure::DeviceChannelsBinding &deviceChannelsBinding)
+void oplink::OperationDevice::bindChannels(const oplink::DeviceChannelsBinding &deviceChannelsBinding)
 {
-    for (int i = 0; i < deviceChannelsBinding.size(); i++)
+    for (qsizetype i = 0; i < deviceChannelsBinding.size(); i++)
     {
         bindChannel(i, deviceChannelsBinding.at(i));
     }
 }
 
-void OperationDevice::setChannelValue(int idx, QVariant value)
+void oplink::OperationDevice::setChannelValue(int idx, QVariant value)
 {
-    QspOperationDeviceProperty pro{m_channels[idx]};
+    oplink::QspOperationDeviceProperty pro{m_channels[idx]};
 
     if (pro.isNull())
     {
@@ -67,7 +63,7 @@ void OperationDevice::setChannelValue(int idx, QVariant value)
     }
 }
 
-bool OperationDevice::getChannelIdx(const PropertyName &propertyName, int &idx)
+bool oplink::OperationDevice::getChannelIdx(const oplink::PropertyName &propertyName, int &idx)
 {
     bool ret{m_reverseChannels.contains(propertyName)};
 
@@ -79,14 +75,14 @@ bool OperationDevice::getChannelIdx(const PropertyName &propertyName, int &idx)
     return ret;
 }
 
-bool OperationDevice::hasChannel(int idx)
+bool oplink::OperationDevice::hasChannel(int idx)
 {
     return idx < m_channels.size();
 }
 
-void OperationDevice::bindChannel(int index, const PropertyName &pname)
+void oplink::OperationDevice::bindChannel(int index, const PropertyName &pname)
 {
-    QspProperty prop{property(pname)};
+    oplink::QspProperty prop{property(pname)};
 
     if (prop.isNull())
     {
@@ -94,7 +90,7 @@ void OperationDevice::bindChannel(int index, const PropertyName &pname)
     }
     else
     {
-        QspOperationDeviceProperty odProp{prop.dynamicCast<OperationDeviceProperty>()};
+        oplink::QspOperationDeviceProperty odProp{prop.dynamicCast<OperationDeviceProperty>()};
 
         if (odProp.isNull())
         {

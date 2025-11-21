@@ -16,22 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PROPERTYCLASSNAMES_H
 #define PROPERTYCLASSNAMES_H
 
 #include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT PropertyClassNames
 {
 public:
@@ -40,10 +32,5 @@ public:
     static const PropertyType ACTUATOR_PROPERTY_CLASS;
     static const PropertyType SENSOR_PROPERTY_CLASS;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // PROPERTYCLASSNAMES_H

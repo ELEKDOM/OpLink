@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "pageviewlayoutbuilder.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable;
 
 PageViewLayoutBuilder::PageViewLayoutBuilder():
     m_builder{nullptr}

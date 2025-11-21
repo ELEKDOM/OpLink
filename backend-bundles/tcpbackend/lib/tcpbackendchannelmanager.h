@@ -16,65 +16,53 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPBACKENDCHANNELMANAGER_H
 #define TCPBACKENDCHANNELMANAGER_H
 
 #include <QHash>
+#include "service-int/observableserviceinterface.h"
+#include "service-int/loginserviceinterface.h"
+#include "observable/remote/subscribesession.h"
 #include "abstract_network_tcp/server/tcpserverchannelmanager.h"
 #include "network_tcp/signinreplymessage.h"
-#include "network_tcp/sessionstartedmessage.h"
-#include "network_tcp/downloadconfigreplymessage.h"
-#include "network_tcp/statevaluemessage.h"
-#include "olcore-lib_forward.h"
-#include "olcore-backend-lib_forward.h"
-#include "tcpbackend.h"
 #include "tcpbackend_forward.h"
+#include "olcore-lib_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpbackend
-{
-namespace bundle
-{
-
-class TcpBackendChannelManager : public plugframe::core::tcp::server::bundle::TcpServerChannelManager
+class TcpBackendChannelManager : public plugframe::TcpServerChannelManager
 {
     Q_OBJECT
 
 public:
-    TcpBackendChannelManager(plugframe::core::tcp::server::bundle::TcpServer& bundle,
-                             plugframe::core::tcp::TcpChannel *channel,
+    TcpBackendChannelManager(plugframe::TcpServer& bundle,
+                             plugframe::TcpChannel *channel,
                              QObject *parent = nullptr);
     ~TcpBackendChannelManager() override;
 
 protected:
     TcpBackend& tcpBackendBundle();
-    void processMessage(plugframe::core::tcp::TcpChannelMessage *input) override;
-    virtual core::tcp::SigninReplyMessage *createSigninSuccessMessage(const QString& identifier,
-                                                                      const quint32& sessionId);
-    virtual core::tcp::SigninReplyMessage *createSigninFailedMessage(const QString& identifier,
-                                                                     const core::tcp::SigninReplyMessage::SigninStatus& status);
-    virtual core::tcp::SessionStartedMessage *createSessionStartedMessage(const quint32 &sessionId,
-                                                                          const qint16& confId,
-                                                                          const QString& profil);
-    virtual core::tcp::DownloadConfigReplyMessage *createDownloadConfigReplyMessage(const quint32 &sessionId,
-                                                                                    const QString& confContent);
-    virtual core::tcp::StateValueMessage *createStateValueMessage(const quint32& sessionId,
-                                                                  const QString& observableName,
-                                                                  const QString& propertyName,
-                                                                  const QVariant& value);
-    virtual core::remote::SubscribeSession *createRemoteMonitoringSession(const quint32 &sessionId,
-                                                                          const QString& fileName,
-                                                                          engine::service::ObservableServiceInterface *observableService);
+    void processMessage(plugframe::TcpChannelMessage *input) override;
+    virtual oplink::SigninReplyMessage *createSigninSuccessMessage(const QString& identifier,
+                                                                   const quint32& sessionId);
+    virtual oplink::SigninReplyMessage *createSigninFailedMessage(const QString& identifier,
+                                                                  const oplink::SigninReplyMessage::SigninStatus& status);
+    virtual oplink::SessionStartedMessage *createSessionStartedMessage(const quint32 &sessionId,
+                                                                       const qint16& confId,
+                                                                       const QString& profil);
+    virtual oplink::DownloadConfigReplyMessage *createDownloadConfigReplyMessage(const quint32 &sessionId,
+                                                                                 const QString& confContent);
+    virtual oplink::StateValueMessage *createStateValueMessage(const quint32& sessionId,
+                                                               const QString& observableName,
+                                                               const QString& propertyName,
+                                                               const QVariant& value);
+    virtual oplink::SubscribeSession *createRemoteMonitoringSession(const quint32 &sessionId,
+                                                                    const QString& fileName,
+                                                                    oplink::ObservableServiceInterface *observableService);
      void onDisconnectedFromClient() override;
 
 protected slots:
     void onNewState(quint32 sessionId,
-                    elekdom::oplink::core::observable::ObservableName observableName,
-                    elekdom::oplink::core::observable::PropertyName propertyName,
+                    oplink::ObservableName observableName,
+                    oplink::PropertyName propertyName,
                     QVariant propertyValue);
 
 signals:
@@ -84,15 +72,15 @@ private slots:
     void onDelayedOpenSession(quint32 sessionId,QString profil);
 
 private:
-    void processSiginMessage(core::tcp::SigninMessage* msg);
-    void processSignoutMessage(core::tcp::SignoutMessage* msg);
-    void processDownloadConfigMessage(core::tcp::DownloadConfigMessage* msg);
-    void processReadyMessage(core::tcp::ReadyMessage* msg);
-    void processSubmitOrderMessage(core::tcp::SubmitOrderMessage* msg);
-    plugframe::users::service::LoginServiceInterface *loginService();
+    void processSiginMessage(oplink::SigninMessage* msg);
+    void processSignoutMessage(oplink::SignoutMessage* msg);
+    void processDownloadConfigMessage(oplink::DownloadConfigMessage* msg);
+    void processReadyMessage(oplink::ReadyMessage* msg);
+    void processSubmitOrderMessage(oplink::SubmitOrderMessage* msg);
+    plugframe::LoginServiceInterface *loginService();
     bool openSession(const quint32& sessionId,
                      const QString& profil,
-                     elekdom::plugframe::users::service::LoginServiceInterface *lService,
+                     plugframe::LoginServiceInterface *lService,
                      qint16& confId);
     void enableSession(const quint32& sessionId);
     void closeAllSessions();
@@ -101,12 +89,7 @@ private:
     void submitOrderToSession(const quint32& sessionId,const QString& order);
 
 private:
-    QHash<quint32, oplink::core::remote::QspSubscribeSession> m_remoteMonitoringSessions;
+    QHash<quint32, oplink::QspSubscribeSession> m_remoteMonitoringSessions;
 };
-
-} //namespace bundle
-} //namespace tcpbackend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPBACKENDCHANNELMANAGER_H

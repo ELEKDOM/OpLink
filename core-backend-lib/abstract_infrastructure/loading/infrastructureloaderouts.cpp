@@ -16,21 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "infrastructureloaderouts.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-InfrastructureLoaderOuts::InfrastructureLoaderOuts(InfrastructureName infrastructureName,
-                                                         bool loadedFlag,
-                                                         observable::QspObservableBuildersContainer loadedObservables):
-    InfrastructureWorkerOuts{infrastructureName, loadedFlag},
+oplink::InfrastructureLoaderOuts::InfrastructureLoaderOuts(oplink::InfrastructureName infrastructureName,
+                                                           bool loadedFlag,
+                                                           oplink::QspObservableBuildersContainer loadedObservables):
+    oplink::InfrastructureWorkerOuts{infrastructureName, loadedFlag},
     m_loadedObservables{loadedObservables}
 {
 
 }
 
-InfrastructureLoaderOuts::~InfrastructureLoaderOuts()
+oplink::InfrastructureLoaderOuts::~InfrastructureLoaderOuts()
 {
 
 }

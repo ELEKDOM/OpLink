@@ -16,29 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef A504EEP_H
 #define A504EEP_H
 
 #include "a5eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class A504Eep : public A5Eep
 {
 public:
-    A504Eep(const core::infrastructure::DeviceId& id,
-            core::infrastructure::DeviceHook& deviceHook);
+    A504Eep(const oplink::DeviceId& id,
+            oplink::DeviceHook& deviceHook);
     ~A504Eep() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // A504EEP_H

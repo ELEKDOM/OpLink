@@ -16,30 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANDEVICEPROCESSORBUILDER_H
 #define ENOCEANDEVICEPROCESSORBUILDER_H
 
 #include "abstract_infrastructure/loading/deviceprocessorbuilder.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
-class EnoceanDeviceProcessorBuilder : public infrastructure::DeviceProcessorBuilder
+class EnoceanDeviceProcessorBuilder : public oplink::DeviceProcessorBuilder
 {
 public:
     EnoceanDeviceProcessorBuilder();
     ~EnoceanDeviceProcessorBuilder() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ENOCEANDEVICEPROCESSORBUILDER_H

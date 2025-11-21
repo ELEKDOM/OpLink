@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "monitoredobservablewidgetctrl.h"
 #include "ui/monitoredobservables/widget/view/monitoredobservablewidgetview.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable::widget;
 
 MonitoredObservableWidgetCtrl::MonitoredObservableWidgetCtrl(QString observableName,
                                                              QString observableTitle,

@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "highobservable.h"
 
-using namespace elekdom::oplink::core::observable;
-
-HighObservable::HighObservable()
+oplink::HighObservable::HighObservable()
 {
 
 }
 
-HighObservable::~HighObservable()
+oplink::HighObservable::~HighObservable()
 {
 
 }

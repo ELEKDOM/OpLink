@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/receivedformat/response/eepcommandresponseformat.h"
 #include "packet/esp3packet.h"
 #include "gateway/responsehandler.h"
-
-using namespace elekdom::oplink::enocean;
 
 EepCommandResponseFormat::EepCommandResponseFormat()
 {

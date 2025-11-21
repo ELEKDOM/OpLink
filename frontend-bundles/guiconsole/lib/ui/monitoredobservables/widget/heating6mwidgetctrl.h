@@ -16,25 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef HEATING6MWIDGETCTRL_H
 #define HEATING6MWIDGETCTRL_H
 
 #include <QPixmap>
 #include "monitoredobservablewidgetctrl.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class Heating6mWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
@@ -65,10 +51,4 @@ private:
     QPixmap m_pwmStop;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // HEATING6MWIDGETCTRL_H

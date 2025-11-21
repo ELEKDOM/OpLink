@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observableclassnames.h"
 
-using namespace elekdom::oplink::core::observable;
-
-const ObservableType ObservableClassNames::ACTUATOR_CLASS {"actuator_class"};
-const ObservableType ObservableClassNames::SENSOR_CLASS {"sensor_class"};
-const ObservableType ObservableClassNames::LOAD_CLASS {"load_class"};
+const oplink::ObservableType oplink::ObservableClassNames::ACTUATOR_CLASS {"actuator_class"};
+const oplink::ObservableType oplink::ObservableClassNames::SENSOR_CLASS {"sensor_class"};
+const oplink::ObservableType oplink::ObservableClassNames::LOAD_CLASS {"load_class"};

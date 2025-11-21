@@ -16,33 +16,44 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QTextStream>
 #include "subscribecmdprocessor.h"
 #include "olconsole.h"
-
-using namespace elekdom::oplink::console::cmd;
+#include "subscribecmdprocessorhook.h"
 
 SubscribeCmdProcessor::SubscribeCmdProcessor(const QString &logChannel,
-                                             bundle::OlConsole &console):
+                                             OlConsole &console):
     OlCmdProcessor{logChannel,
                     console,
                     "subscribe",
-                    "S'abonne aux changements d'états d'un observable"}
+                    "S'abonne aux changements d'états d'un observable"},
+    m_hook{new SubscribeCmdProcessorHook(*this)}
 {
 
 }
 
 SubscribeCmdProcessor::~SubscribeCmdProcessor()
 {
+    delete m_hook;
+}
 
+oplink::ObservableSubscriber *SubscribeCmdProcessor::observableSubscriber()
+{
+    return m_hook;
+}
+
+void SubscribeCmdProcessor::stateChange(const oplink::ObservableName &observableName,
+                                        const oplink::PropertyName &propertyName,
+                                        QVariant propertyValue)
+{
+    console().print(QObject::tr("notification de changement d'état : %1 %2 %3\n").arg(observableName, propertyName, propertyValue.toString()));
 }
 
 bool SubscribeCmdProcessor::exec(const RawCmd &cmd)
 {
     Q_UNUSED(cmd)
     QTextStream                         stream(stdin);
-    core::observable::ObservableName name;
+    oplink::ObservableName name;
 
     console().print(QObject::tr("Format d'une commande : observable_name\n"));
     console().print(QObject::tr("<Entrée> pour quitter ce mode\n"));
@@ -61,11 +72,4 @@ bool SubscribeCmdProcessor::exec(const RawCmd &cmd)
     }while(!name.isEmpty());
 
     return true;
-}
-
-void SubscribeCmdProcessor::onStateChange(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                          const elekdom::oplink::core::observable::PropertyName& propertyName,
-                                          QVariant propertyValue)
-{
-    console().print(QObject::tr("notification de changement d'état : %1 %2 %3\n").arg(observableName, propertyName, propertyValue.toString()));
 }

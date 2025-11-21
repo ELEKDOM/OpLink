@@ -16,23 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "signinmessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-SigninMessage::SigninMessage(QString frontendItf,
+oplink::SigninMessage::SigninMessage(QString frontendItf,
                              QString frontendIp,
                              QString identifier,
                              QString password):
-    Message{static_cast<quint16>(MessageType::Signin)},
+    oplink::Message{static_cast<quint16>(oplink::MessageType::Signin)},
     m_frontendItf{frontendItf},
     m_frontendIp{frontendIp},
     m_identifier{identifier},
     m_password{password}
 {}
 
-SigninMessage::~SigninMessage()
+oplink::SigninMessage::~SigninMessage()
 {
 
 }

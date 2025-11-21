@@ -16,23 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFCONSOLECONTROLLER_H
 #define OLFCONSOLECONTROLLER_H
 
 #include "gui/guipagecontroller.h"
 #include "olfconsole_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-
-class OlfConsoleController : public plugframe::core::gui::GuiPageController
+class OlfConsoleController : public plugframe::GuiPageController
 {
     Q_OBJECT
 
@@ -50,7 +40,7 @@ protected:
     static inline QString monitoringMenuName() {return tr("&Monitoring");}
 
 public:
-    OlfConsoleController(bundle::OlfConsole& console,
+    OlfConsoleController(OlfConsole& console,
                          const QString& ctrlName,
                          QStringList menusNames = QStringList(),
                          QObject *parent = nullptr);
@@ -61,19 +51,14 @@ public:
 
 protected:
     void buildViews() override;
-    bundle::OlfConsole& bundle() {return m_bundle;}
+    OlfConsole& bundle() {return m_bundle;}
 
 protected:
     void state(State val) {m_curState = val;}
 
 private:
-    bundle::OlfConsole& m_bundle;
-    State               m_curState;
+    OlfConsole& m_bundle;
+    State       m_curState;
 };
-
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // OLFCONSOLECONTROLLER_H

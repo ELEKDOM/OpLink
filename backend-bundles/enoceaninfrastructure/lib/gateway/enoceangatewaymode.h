@@ -16,19 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANGATEWAYMODE_H
 #define ENOCEANGATEWAYMODE_H
 
 #include <QSharedPointer>
 #include "gateway/responsehandler.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 class EnoceanGatewayMode : public ResponseHandler
 {
     Q_OBJECT
@@ -51,9 +44,5 @@ protected:
 private:
     quint32 m_usb300BaseId;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspEnoceanGatewayMode = QSharedPointer<EnoceanGatewayMode>;
 #endif // ENOCEANGATEWAYMODE_H

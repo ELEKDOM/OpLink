@@ -16,26 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef GACINFRASTRUCTURENAMES_H
 #define GACINFRASTRUCTURENAMES_H
 
 #include <QString>
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace infrastructure
 {
     using InfrastructureName = QString;
     using DeviceId = QString;
     using DeviceModelName = QString;
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // GACINFRASTRUCTURENAMES_H

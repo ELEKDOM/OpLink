@@ -16,19 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "sensorbuilderargs.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"
 
-using namespace elekdom::oplink::core::model;
-
-SensorBuilderArgs::SensorBuilderArgs(const observable::ObservableName &observableName,
-                                           const ObservableModelName& observableModelName,
-                                           const observable::LocalisationName &observableLocalisation,
-                                           const infrastructure::DeviceId &deviceId,
-                                           const infrastructure::DeviceModelName &deviceModelName,
-                                           const infrastructure::QspDeviceBuilder &deviceBuilder,
-                                           const infrastructure::DeviceChannelsBinding& deviceChannelsBinding):
+oplink::SensorBuilderArgs::SensorBuilderArgs(const oplink::ObservableName &observableName,
+                                             const oplink::ObservableModelName& observableModelName,
+                                             const oplink::LocalisationName &observableLocalisation,
+                                             const oplink::DeviceId &deviceId,
+                                             const oplink::DeviceModelName &deviceModelName,
+                                             const oplink::QspDeviceBuilder &deviceBuilder,
+                                             const oplink::DeviceChannelsBinding& deviceChannelsBinding):
     OperationDeviceBuilderArgs{observableName,
                                  observableModelName,
                                  observableLocalisation,
@@ -40,7 +37,7 @@ SensorBuilderArgs::SensorBuilderArgs(const observable::ObservableName &observabl
 
 }
 
-SensorBuilderArgs::~SensorBuilderArgs()
+oplink::SensorBuilderArgs::~SensorBuilderArgs()
 {
 
 }

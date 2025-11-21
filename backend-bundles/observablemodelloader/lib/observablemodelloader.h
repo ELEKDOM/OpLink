@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELLOADER_H
 #define OBSERVABLEMODELLOADER_H
 
@@ -26,49 +25,37 @@
 #include "model/modelnames.h"
 #include "observable/observablenames.h"
 #include "command/command-names.h"
-#include "observablemodelloader_forward.h"
-#include "pfcore-lib_forward.h"
+#include "observablemodelloaderemitter.h"
 
-using namespace elekdom::plugframe::core::bundle;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-namespace bundle
-{
-
-class ObservableModelLoader : public plugframe::core::bundle::LongStartBundleImplementation
+class ObservableModelLoader : public plugframe::LongStartBundleImplementation
 {
 public:
     ObservableModelLoader();
     ~ObservableModelLoader() override;
 
 public:
-    QSharedPointer<ObservableModelLoaderEmitter> emitter();
-    observablemodelregister::service::ModelRegisterServiceInterface *modelRegisterService();
+    QspObservableModelLoaderEmitter emitter();
+    oplink::ModelRegisterServiceInterface *modelRegisterService();
 
 public:
     bool nextPropertyModelDeclaration(quint16 idx,
-                                      core::model::PropertyModelName& modelName,
-                                      core::observable::PropertyName& propertyName,
-                                      core::observable::PropertyType& propertyClassName,
-                                      QVariant::Type& valueType);
+                                      oplink::PropertyModelName& modelName,
+                                      oplink::PropertyName& propertyName,
+                                      oplink::PropertyType& propertyClassName,
+                                      QMetaType::Type& valueType);
     bool nextProcessorModelDeclaration(quint16 idx,
-                                       core::model::ProcessorModelName& modelName,
-                                       core::command::CommandName& commandName,
-                                       core::observable::ProcessorType& processorClassName);
+                                       oplink::ProcessorModelName& modelName,
+                                       oplink::CommandName& commandName,
+                                       oplink::ProcessorType& processorClassName);
     bool nextObservableModelDeclaration(quint16 idx,
-                                        core::model::ObservableModelName& modelName,
-                                        core::observable::ObservableType& observableClassName,
+                                        oplink::ObservableModelName& modelName,
+                                        oplink::ObservableType& observableClassName,
                                         QStringList& propertyModelRefs,
                                         QStringList& processorModelRefs);
 
 protected:
-    BundleFactory* createFactory() override;
-    void _start(QspBundleContext bundleContext) override;
+    plugframe::BundleFactory* createFactory() override;
+    void _start(plugframe::QspBundleContext bundleContext) override;
     PF_qtServiceInterface_DECL
 
 private:
@@ -81,10 +68,5 @@ private:
     QDomNodeList m_processorModelNodes;
     QDomNodeList m_observableModelNodes;
 };
-
-}//namespace bundle
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
 
 #endif // OBSERVABLEMODELLOADER_H

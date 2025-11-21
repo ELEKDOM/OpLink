@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "a504telegramformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 A504TelegramFormat::A504TelegramFormat() {}
 

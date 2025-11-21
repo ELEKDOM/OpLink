@@ -16,35 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "area.h"
-#include "areagateway.h"
 #include "logger/pflog.h"
-#include "abstract_infrastructure/device/device.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-Area::Area(const QString& logChannel,
-                 const QString& areaName,
-                 QObject *parent):
+oplink::Area::Area(const QString& logChannel,
+                   const QString& areaName,
+                   QObject *parent):
     QObject{parent},
-    plugframe::core::logger::Loggable{logChannel},
+    plugframe::Loggable{logChannel},
     m_areaName{areaName}
 {
 
 }
 
-Area::~Area()
+oplink::Area::~Area()
 {
 
 }
 
-void Area::setGateway(AreaGateway *gateway)
+void oplink::Area::setGateway(oplink::AreaGateway *gateway)
 {
     m_gateway.reset(gateway);
 }
 
-bool Area::addDevice(const QspDevice &newDevice)
+bool oplink::Area::addDevice(const oplink::QspDevice &newDevice)
 {
     bool ret{false};
 
@@ -61,9 +56,9 @@ bool Area::addDevice(const QspDevice &newDevice)
     return ret;
 }
 
-QspDevice Area::getDevice(const DeviceId &id)
+oplink::QspDevice oplink::Area::getDevice(const oplink::DeviceId &id)
 {
-    QspDevice ret;
+    oplink::QspDevice ret;
 
     if (m_devices.contains(id))
     {
@@ -72,9 +67,9 @@ QspDevice Area::getDevice(const DeviceId &id)
     return ret;
 }
 
-void Area::recoverDevicesState()
+void oplink::Area::recoverDevicesState()
 {
-    foreach (QspDevice device, m_devices)
+    foreach (oplink::QspDevice device, m_devices)
     {
         device->recoverState();
     }

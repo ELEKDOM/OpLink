@@ -16,23 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SENSORMODEL_H
 #define SENSORMODEL_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "operationdevicemodel.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SensorModel : public OperationDeviceModel
 {
 public:
@@ -42,10 +33,5 @@ public:
 protected:
     bool checkBuilderArgs(QspObservableBuilderArgs builderArgs) override;
 };
-
-}//namespace model
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SENSORMODEL_H

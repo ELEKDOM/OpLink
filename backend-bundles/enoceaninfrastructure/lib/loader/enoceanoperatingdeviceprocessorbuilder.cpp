@@ -16,7 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
+#include <QObject>
 #include "logger/pflog.h"
 #include "command/command-names.h"
 #include "abstract_infrastructure/device/device.h"
@@ -30,8 +30,6 @@
 #include "commandprocessor/D2/d201measurementenergyquery.h"
 #include "commandprocessor/D2/d201measurementpowerquery.h"
 
-using namespace elekdom::oplink::enocean;
-
 EnoceanOperatingDeviceProcessorBuilder::EnoceanOperatingDeviceProcessorBuilder()
 {
 
@@ -42,57 +40,57 @@ EnoceanOperatingDeviceProcessorBuilder::~EnoceanOperatingDeviceProcessorBuilder(
 
 }
 
-infrastructure::DeviceCommandProcessor *EnoceanOperatingDeviceProcessorBuilder::createDeviceProcessor(const command::CommandName &commandName,
-                                                                                                         const infrastructure::DeviceModelName &deviceModelName,
-                                                                                                         const infrastructure::QspDevice &device)
+oplink::DeviceCommandProcessor *EnoceanOperatingDeviceProcessorBuilder::createDeviceProcessor(const oplink::CommandName &commandName,
+                                                                                              const oplink::DeviceModelName &deviceModelName,
+                                                                                              const oplink::QspDevice &device)
 {
-    infrastructure::DeviceCommandProcessor *ret{nullptr};
+    oplink::DeviceCommandProcessor *ret{nullptr};
 
     if (EnoceanDeviceBuilder::D20112_EEP == deviceModelName)
     {
-        if ( core::command::CommandNames::SYNCHRONIZE == commandName)
+        if ( oplink::CommandNames::SYNCHRONIZE == commandName)
         {
             ret = createSynchronizeD20112processor(device);
         }
-        else if (core::command::CommandNames::SET == commandName)
+        else if (oplink::CommandNames::SET == commandName)
         {
             ret = createSetD20112processor(device);
         }
     }
     else if(EnoceanDeviceBuilder::D2010C_EEP == deviceModelName)
     {
-        if ( core::command::CommandNames::SYNCHRONIZE == commandName)
+        if ( oplink::CommandNames::SYNCHRONIZE == commandName)
         {
             ret = createSynchronizeD2010Cprocessor(device);
         }
-        else if (core::command::CommandNames::SET == commandName)
+        else if (oplink::CommandNames::SET == commandName)
         {
             ret = createSetD2010Cprocessor(device);
         }
-        else if (core::command::CommandNames::ENERGY == commandName)
+        else if (oplink::CommandNames::ENERGY == commandName)
         {
             ret = createEnergyD2010Cprocessor(device);
         }
-        else if (core::command::CommandNames::POWER == commandName)
+        else if (oplink::CommandNames::POWER == commandName)
         {
             ret = createPowerD2010Cprocessor(device);
         }
     }
     else if(EnoceanDeviceBuilder::D2010E_EEP == deviceModelName)
     {
-        if ( core::command::CommandNames::SYNCHRONIZE == commandName)
+        if ( oplink::CommandNames::SYNCHRONIZE == commandName)
         {
             ret = createSynchronizeD2010Eprocessor(device);
         }
-        else if (core::command::CommandNames::SET == commandName)
+        else if (oplink::CommandNames::SET == commandName)
         {
             ret = createSetD2010Eprocessor(device);
         }
-        else if (core::command::CommandNames::ENERGY == commandName)
+        else if (oplink::CommandNames::ENERGY == commandName)
         {
             ret = createEnergyD2010Eprocessor(device);
         }
-        else if (core::command::CommandNames::POWER == commandName)
+        else if (oplink::CommandNames::POWER == commandName)
         {
             ret = createPowerD2010Eprocessor(device);
         }
@@ -106,52 +104,52 @@ infrastructure::DeviceCommandProcessor *EnoceanOperatingDeviceProcessorBuilder::
     return ret;
 }
 
-D201StatusQuery *EnoceanOperatingDeviceProcessorBuilder::createSynchronizeD20112processor(const infrastructure::QspDevice& device)
+D201StatusQuery *EnoceanOperatingDeviceProcessorBuilder::createSynchronizeD20112processor(const oplink::QspDevice& device)
 {
     return new D201StatusQuery{device};
 }
 
-D201SetOutput *EnoceanOperatingDeviceProcessorBuilder::createSetD20112processor(const infrastructure::QspDevice& device)
+D201SetOutput *EnoceanOperatingDeviceProcessorBuilder::createSetD20112processor(const oplink::QspDevice& device)
 {
     return new D201SetOutput{device};
 }
 
-D201PilotWireModeQuery *EnoceanOperatingDeviceProcessorBuilder::createSynchronizeD2010Cprocessor(const infrastructure::QspDevice &device)
+D201PilotWireModeQuery *EnoceanOperatingDeviceProcessorBuilder::createSynchronizeD2010Cprocessor(const oplink::QspDevice &device)
 {
     return new D201PilotWireModeQuery{device};
 }
 
-D201SetPilotWireMode *EnoceanOperatingDeviceProcessorBuilder::createSetD2010Cprocessor(const infrastructure::QspDevice &device)
+D201SetPilotWireMode *EnoceanOperatingDeviceProcessorBuilder::createSetD2010Cprocessor(const oplink::QspDevice &device)
 {
     return new D201SetPilotWireMode{device};
 }
 
-D201MeasurementEnergyQuery *EnoceanOperatingDeviceProcessorBuilder::createEnergyD2010Cprocessor(const infrastructure::QspDevice &device)
+D201MeasurementEnergyQuery *EnoceanOperatingDeviceProcessorBuilder::createEnergyD2010Cprocessor(const oplink::QspDevice &device)
 {
     return new D201MeasurementEnergyQuery{device};
 }
 
-D201MeasurementPowerQuery *EnoceanOperatingDeviceProcessorBuilder::createPowerD2010Cprocessor(const infrastructure::QspDevice &device)
+D201MeasurementPowerQuery *EnoceanOperatingDeviceProcessorBuilder::createPowerD2010Cprocessor(const oplink::QspDevice &device)
 {
     return new D201MeasurementPowerQuery{device};
 }
 
-D201StatusQuery *EnoceanOperatingDeviceProcessorBuilder::createSynchronizeD2010Eprocessor(const infrastructure::QspDevice &device)
+D201StatusQuery *EnoceanOperatingDeviceProcessorBuilder::createSynchronizeD2010Eprocessor(const oplink::QspDevice &device)
 {
     return new D201StatusQuery{device};
 }
 
-D201SetOutput *EnoceanOperatingDeviceProcessorBuilder::createSetD2010Eprocessor(const infrastructure::QspDevice &device)
+D201SetOutput *EnoceanOperatingDeviceProcessorBuilder::createSetD2010Eprocessor(const oplink::QspDevice &device)
 {
     return new D201SetOutput{device};
 }
 
-D201MeasurementEnergyQuery *EnoceanOperatingDeviceProcessorBuilder::createEnergyD2010Eprocessor(const infrastructure::QspDevice &device)
+D201MeasurementEnergyQuery *EnoceanOperatingDeviceProcessorBuilder::createEnergyD2010Eprocessor(const oplink::QspDevice &device)
 {
     return new D201MeasurementEnergyQuery{device};
 }
 
-D201MeasurementPowerQuery *EnoceanOperatingDeviceProcessorBuilder::createPowerD2010Eprocessor(const infrastructure::QspDevice &device)
+D201MeasurementPowerQuery *EnoceanOperatingDeviceProcessorBuilder::createPowerD2010Eprocessor(const oplink::QspDevice &device)
 {
     return new D201MeasurementPowerQuery{device};
 }

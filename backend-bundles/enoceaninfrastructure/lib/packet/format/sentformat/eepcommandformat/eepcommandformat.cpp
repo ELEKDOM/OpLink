@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/eepcommandformat/eepcommandformat.h"
 #include "packet/format/receivedformat/response/eepcommandresponseformat.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 EepCommandFormat::EepCommandFormat(quint16 dataPayload, quint8 optionalLenght, quint8 rorg):
     Esp3SentPacketFormat(6 + dataPayload, optionalLenght, Esp3Packet::RADIO_ERP1),

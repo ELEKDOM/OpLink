@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QMutexLocker>
 #include "logger/pflog.h"
 #include "gateway/esp3packettransmitter.h"
@@ -24,8 +23,6 @@
 #include "packet/format/receivedformat/response/responseformat.h"
 #include "packet/esp3packet.h"
 #include "enoceaninfrastructurelogchannel.h"
-
-using namespace elekdom::oplink::enocean;
 
 Esp3PacketTransmitter::Esp3PacketTransmitter(QObject *parent):
     QObject{parent},

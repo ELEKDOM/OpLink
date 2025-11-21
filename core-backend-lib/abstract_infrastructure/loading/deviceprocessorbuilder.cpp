@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "deviceprocessorbuilder.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-DeviceProcessorBuilder::DeviceProcessorBuilder()
+oplink::DeviceProcessorBuilder::DeviceProcessorBuilder()
 {
 
 }
 
-DeviceProcessorBuilder::~DeviceProcessorBuilder()
+oplink::DeviceProcessorBuilder::~DeviceProcessorBuilder()
 {
 
 }

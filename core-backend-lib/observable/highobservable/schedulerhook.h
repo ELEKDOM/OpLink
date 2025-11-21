@@ -16,25 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SCHEDULERHOOK_H
 #define SCHEDULERHOOK_H
 
 #include <QObject>
-#include "pfcore-lib_forward.h"
+#include "scheduler/scheduler.h"
 #include "olcore-backend-lib_forward.h"
 
-using namespace elekdom::plugframe::core::scheduler;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class SchedulerHook : public QObject
 {
     Q_OBJECT
@@ -44,20 +34,15 @@ public:
     ~SchedulerHook() override;
 
 public:
-    void setScheduler(Scheduler *schedul);
+    void setScheduler(plugframe::Scheduler *schedul);
     void initScheduler();
 
 private slots:
     void onSchedulerEvt(QString evt);
 
 private:
-    SchedulableObservable& m_myVe;
-    QspScheduler m_scheduler;
+    SchedulableObservable&  m_myVe;
+    plugframe::QspScheduler m_scheduler;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SCHEDULERHOOK_H

@@ -16,18 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QVariant>
 #include "heatingmanager.h"
 #include "pilotwirecontrolroom.h"
 #include "observable/property/propertyid.h"
 #include "observable/property/property.h"
 #include "observable/highobservable/monitor/grouptowatch.h"
-#include "observable/highobservable/monitor/grouptowatchalgorithm.h"
 #include "logger/pflog.h"
-
-using namespace elekdom::oplink::core;
-using namespace elekdom::oplink::heatingmanager;
 
 HeatingManager::HeatingManager() {}
 
@@ -43,9 +38,9 @@ bool HeatingManager::windowSensorState(const QString &roomName, bool allClosed)
     if (ret)
     {
         // Notify property update
-        QString pName {observable::PropertyId::groupPropertyName(roomName,
-                                                                 observable::PropertyId::P_WCLOSED)};
-        observable::QspProperty prop{property(pName)};
+        QString pName {oplink::PropertyId::groupPropertyName(roomName,
+                       oplink::PropertyId::P_WCLOSED)};
+        oplink::QspProperty prop{property(pName)};
 
         if (!prop.isNull())
         {
@@ -81,7 +76,7 @@ void HeatingManager::heaterState(const QString &roomName, QString pwm)
     pfDebug3(logChannel()) << "<-HeatingManager::heaterState";
 }
 
-void HeatingManager::specificInit(engine::service::ObservableServiceInterface *observableService)
+void HeatingManager::specificInit(oplink::ObservableServiceInterface *observableService)
 {
     // initialization depends on the mode value
     QString modeValStr{mode()};
@@ -115,7 +110,7 @@ const QString HeatingManager::managerOrder()
 {
     QString ret;
 
-    observable::QspProperty prop{property(observable::PropertyId::P_ORDER)};
+    oplink::QspProperty prop{property(oplink::PropertyId::P_ORDER)};
 
     if (!prop.isNull())
     {
@@ -129,7 +124,7 @@ void HeatingManager::managerOrder(const QString &order)
 {
     pfDebug3(logChannel()) << "->HeatingManager::managerOrder, order = " << order;
 
-    observable::QspProperty prop{property(observable::PropertyId::P_ORDER)};
+    oplink::QspProperty prop{property(oplink::PropertyId::P_ORDER)};
 
     prop->changeValue(order);
 
@@ -163,9 +158,9 @@ void HeatingManager::managerDerogated()
 const QString HeatingManager::roomOrder(const QString &roomName)
 {
     QString ret;
-    QString propId{observable::PropertyId::groupPropertyName(roomName,
-                                                             observable::PropertyId::P_DEROGATED_ORDER)};
-    observable::QspProperty prop{property(propId)};
+    QString propId{oplink::PropertyId::groupPropertyName(roomName,
+                                                         oplink::PropertyId::P_DEROGATED_ORDER)};
+    oplink::QspProperty prop{property(propId)};
 
     if (!prop.isNull())
     {
@@ -177,9 +172,9 @@ const QString HeatingManager::roomOrder(const QString &roomName)
 
 void HeatingManager::roomOrder(const QString &roomName, const QString &order)
 {
-    QString propId{observable::PropertyId::groupPropertyName(roomName,
-                                                             observable::PropertyId::P_DEROGATED_ORDER)};
-    observable::QspProperty prop{property(propId)};
+    QString propId{oplink::PropertyId::groupPropertyName(roomName,
+                                                         oplink::PropertyId::P_DEROGATED_ORDER)};
+    oplink::QspProperty prop{property(propId)};
     QVariant val(order);
 
     prop->changeValue(val);
@@ -187,9 +182,9 @@ void HeatingManager::roomOrder(const QString &roomName, const QString &order)
 
 bool HeatingManager::roomDerogated(const QString &roomName)
 {
-    QString propId{observable::PropertyId::groupPropertyName(roomName,
-                                                             observable::PropertyId::P_DEROGATED)};
-    observable::QspProperty prop{property(propId)};
+    QString propId{oplink::PropertyId::groupPropertyName(roomName,
+                                                         oplink::PropertyId::P_DEROGATED)};
+    oplink::QspProperty prop{property(propId)};
     QVariant val;
 
     val = prop->value();
@@ -201,9 +196,9 @@ void HeatingManager::roomDerogated(const QString &roomName, bool flag)
 {
     pfDebug3(logChannel()) << "->HeatingManager::roomDerogated, roomName = " << roomName << " flag = " << flag;
 
-    QString propId{observable::PropertyId::groupPropertyName(roomName,
-                                                             observable::PropertyId::P_DEROGATED)};
-    observable::QspProperty prop{property(propId)};
+    QString propId{oplink::PropertyId::groupPropertyName(roomName,
+                                                         oplink::PropertyId::P_DEROGATED)};
+    oplink::QspProperty prop{property(propId)};
     QVariant val(flag);
 
     prop->changeValue(val);

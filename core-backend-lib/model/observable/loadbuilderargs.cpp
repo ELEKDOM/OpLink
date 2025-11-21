@@ -16,22 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "loadbuilderargs.h"
 
-using namespace elekdom::oplink::core::model;
-
-LoadBuilderArgs::LoadBuilderArgs(const observable::ObservableName &observableName,
-                                       const ObservableModelName& observableModelName,
-                                       const observable::LocalisationName &observableLocalisation):
-    ObservableBuilderArgs{observableName,
-                            observableModelName,
-                            observableLocalisation}
+oplink::LoadBuilderArgs::LoadBuilderArgs(const oplink::ObservableName &observableName,
+                                         const oplink::ObservableModelName& observableModelName,
+                                         const oplink::LocalisationName &observableLocalisation):
+    oplink::ObservableBuilderArgs{observableName,
+                                  observableModelName,
+                                  observableLocalisation}
 {
 
 }
 
-LoadBuilderArgs::~LoadBuilderArgs()
+oplink::LoadBuilderArgs::~LoadBuilderArgs()
 {
 
 }

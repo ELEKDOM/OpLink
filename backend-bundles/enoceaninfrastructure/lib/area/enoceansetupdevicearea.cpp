@@ -16,11 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "area/enoceansetupdevicearea.h"
-#include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanSetupDeviceArea::EnoceanSetupDeviceArea(const QString& logChannel,
                                                const QString& areaName,
@@ -39,6 +35,7 @@ EnoceanSetupDeviceArea::~EnoceanSetupDeviceArea()
 
 void EnoceanSetupDeviceArea::onErp1PacketReceived(QspEepTelegramFormat erp1PacketFormat)
 {
+    Q_UNUSED(erp1PacketFormat)
     // TODO
     // ...
 }

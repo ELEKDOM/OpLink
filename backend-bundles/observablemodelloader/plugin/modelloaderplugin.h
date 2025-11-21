@@ -16,25 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
+#ifndef MODELLOADERPLUGIN_H
+#define MODELLOADERPLUGIN_H
 
-#include "gacmodelloaderplugin.h"
-#include "observablemodelloader.h"
+#include "plugin/plugin.h"
 
-using namespace elekdom::oplink::observablemodelloader::plugin;
-
-GacModelLoaderPlugin::GacModelLoaderPlugin()
+class ModelLoaderPlugin : public plugframe::Plugin
 {
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "oplink.modelloader.plugin" FILE "../oplinkB-observablemodelloaderbundle.json")
+    Q_INTERFACES(plugframe::BundleInterface)
 
-}
+public:
+    ModelLoaderPlugin();
+    ~ModelLoaderPlugin() override;
 
-GacModelLoaderPlugin::~GacModelLoaderPlugin()
-{
+protected: // SmfPlugin
+    plugframe::Bundle4PluginInterface *createImplementation() override;
+    PF_bindServicesImplementations_DECL
+};
 
-}
-
-elekdom::plugframe::core::bundle::Bundle4PluginInterface *GacModelLoaderPlugin::createImplementation()
-{
-    return new bundle::ObservableModelLoader;
-}
-
-PF_bindServicesImplementations_DEF(GacModelLoaderPlugin)
+#endif // MODELLOADERPLUGIN_H

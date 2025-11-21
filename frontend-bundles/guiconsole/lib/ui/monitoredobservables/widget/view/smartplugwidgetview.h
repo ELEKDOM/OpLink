@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SMARTPLUGWIDGETVIEW_H
 #define SMARTPLUGWIDGETVIEW_H
 
@@ -25,19 +24,6 @@
 namespace Ui {
     class smartPlugWidgetView;
 }
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class SmartPlugWidgetView : public WidgetListView
 {
@@ -64,10 +50,4 @@ private:
     Ui::smartPlugWidgetView *ui;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // SMARTPLUGWIDGETVIEW_H

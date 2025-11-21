@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "a504eep.h"
 #include "packet/format/receivedformat/eeptelegram/a504telegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-A504Eep::A504Eep(const core::infrastructure::DeviceId &id,
-                 core::infrastructure::DeviceHook &deviceHook):
+A504Eep::A504Eep(const oplink::DeviceId &id,
+                 oplink::DeviceHook &deviceHook):
     A5Eep{id, deviceHook, new A504TelegramFormat}
 {
 

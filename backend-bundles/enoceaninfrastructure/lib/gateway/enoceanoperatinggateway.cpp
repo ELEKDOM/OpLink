@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "enoceaninfrastructurelogchannel.h"
 #include "gateway/enoceanoperatinggateway.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanOperatingGateway::EnoceanOperatingGateway()
 {

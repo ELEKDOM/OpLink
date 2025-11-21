@@ -16,33 +16,25 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef PILOTWIRETHERMOSTATCONTROLROOM_H
 #define PILOTWIRETHERMOSTATCONTROLROOM_H
 
 #include "pilotwirecontrolroom.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace heatingmanager
-{
-
 class PilotWireThermostatControlRoom : public PilotWireControlRoom
 {
 public:
-    PilotWireThermostatControlRoom(core::observable::SupervisorObservable& manager,bool wod,bool pd,double max_temp,double threshold);
+    PilotWireThermostatControlRoom(oplink::SupervisorObservable& manager,bool wod,bool pd,double max_temp,double threshold);
     ~PilotWireThermostatControlRoom() override;
 
 protected:
     void initAlgo() override;
     void orderForHeaters(const QString &order) override;
-    void onStateChangeFromHeaters(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                  const elekdom::oplink::core::observable::PropertyName& propertyName,
+    void onStateChangeFromHeaters(const oplink::ObservableName& observableName,
+                                  const oplink::PropertyName& propertyName,
                                   QVariant propertyValue) override;
-    void onStateChangeFromTemperatureSensors(const elekdom::oplink::core::observable::ObservableName& observableName,
-                                             const elekdom::oplink::core::observable::PropertyName& propertyName,
+    void onStateChangeFromTemperatureSensors(const oplink::ObservableName& observableName,
+                                             const oplink::PropertyName& propertyName,
                                              QVariant propertyValue) override;
 private:
     void regulHeaters();
@@ -54,9 +46,5 @@ private:
     double m_last_temp;
     quint8 m_last_regulation_order;
 };
-
-}//namespace heatingmanager
-}//namespace oplink
-}//namespace elekdom
 
 #endif // PILOTWIRETHERMOSTATCONTROLROOM_H

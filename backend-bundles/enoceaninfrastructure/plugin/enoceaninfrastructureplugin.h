@@ -16,40 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANINFRASTRUCTUREPLUGIN_H
 #define ENOCEANINFRASTRUCTUREPLUGIN_H
 
 #include "abstract_infrastructure/plugin/infrastructureplugin.h"
-#include "service-int/infrastructurecontrolserviceinterface.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-namespace plugin
-{
-
-class EnoceanInfrastructurePlugin : public oplink::core::infrastructure::plugin::InfrastructurePlugin
+class EnoceanInfrastructurePlugin : public oplink::InfrastructurePlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "elekdom.oplink.enocean.plugin" FILE "../oplinkB-enoceaninfrastructurebundle.json")
-    Q_INTERFACES(elekdom::plugframe::core::plugin::BundleInterface
-                 elekdom::oplink::core::infrastructure::service::InfrastructureControlServiceInterface)
+    Q_PLUGIN_METADATA(IID "oplink.enocean.plugin" FILE "../oplinkB-enoceaninfrastructurebundle.json")
+    Q_INTERFACES(plugframe::BundleInterface
+                 oplink::InfrastructureControlServiceInterface)
 
 public:
     EnoceanInfrastructurePlugin();
     virtual ~EnoceanInfrastructurePlugin();
 
 protected:
-    virtual plugframe::core::bundle::Bundle4PluginInterface *createImplementation();
+    virtual plugframe::Bundle4PluginInterface *createImplementation();
 };
-
-}//namespace plugin
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ENOCEANINFRASTRUCTUREPLUGIN_H

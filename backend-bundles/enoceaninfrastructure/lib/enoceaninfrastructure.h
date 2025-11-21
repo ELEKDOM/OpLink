@@ -16,37 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANINFRASTRUCTURE_H
 #define ENOCEANINFRASTRUCTURE_H
 
 #include "abstract_infrastructure/infrastructure.h"
 
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-namespace bundle
-{
-
-class EnoceanInfrastructure: public infrastructure::bundle::Infrastructure
+class EnoceanInfrastructure: public oplink::Infrastructure
 {
 public:
     EnoceanInfrastructure();
     ~EnoceanInfrastructure() override;
 
 protected:
-    infrastructure::InfrastructureLoader *createOperatingLoader(const QString& logChannel) override;
-    infrastructure::InfrastructureLoader *createSetupLoader(const QString& logChannel) override;
+    oplink::InfrastructureLoader *createOperatingLoader(const QString& logChannel) override;
+    oplink::InfrastructureLoader *createSetupLoader(const QString& logChannel) override;
 };
-
-}//namespace bundle
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // ENOCEANINFRASTRUCTURE_H

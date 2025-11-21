@@ -16,12 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olfconsoleplugin.h"
 #include "olfconsole.h"
-
-using namespace elekdom::plugframe;
-using namespace elekdom::oplink::frontend::guiconsole::plugin;
 
 OlfConsolePlugin::OlfConsolePlugin()
 {
@@ -33,9 +29,9 @@ OlfConsolePlugin::~OlfConsolePlugin()
 
 }
 
-core::bundle::Bundle4PluginInterface *OlfConsolePlugin::createImplementation()
+plugframe::Bundle4PluginInterface *OlfConsolePlugin::createImplementation()
 {
-    return new oplink::frontend::guiconsole::bundle::OlfConsole;
+    return new OlfConsole;
 }
 
 PF_bindServicesImplementations_DEF(OlfConsolePlugin)

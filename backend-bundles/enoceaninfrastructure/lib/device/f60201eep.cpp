@@ -16,15 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
+#include <QVariant>
 #include "logger/pflog.h"
 #include "device/f60201eep.h"
 #include "packet/format/receivedformat/eeptelegram/f602telegramformat.h"
 
-using namespace elekdom::oplink::enocean;
-
-F60201Eep::F60201Eep(const core::infrastructure::DeviceId& id,
-                     core::infrastructure::DeviceHook& deviceHook):
+F60201Eep::F60201Eep(const oplink::DeviceId& id,
+                     oplink::DeviceHook& deviceHook):
     F602Eep{id, deviceHook, new F602TelegramFormat}
 {
 

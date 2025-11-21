@@ -16,19 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANSETUPDEVICEAREA_H
 #define ENOCEANSETUPDEVICEAREA_H
 
 #include "enoceandevicearea.h"
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class EnoceanSetupDeviceArea : public EnoceanDeviceArea
 {
@@ -41,9 +32,5 @@ public:
 protected:
     void onErp1PacketReceived(QspEepTelegramFormat erp1PacketFormat) override;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // ENOCEANSETUPDEVICEAREA_H

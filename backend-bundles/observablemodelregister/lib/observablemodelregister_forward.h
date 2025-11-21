@@ -16,34 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELREGISTER_FORWARD_H
 #define OBSERVABLEMODELREGISTER_FORWARD_H
 
-#include <QSharedPointer>
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-    namespace bundle
-    {
-        class ObservableModelRegister;
-    }
-
-    namespace service
-    {
-        class ModelRegisterService;
-        class ObservableBuilderService;
-
-        using QspModelRegisterService = QSharedPointer<ModelRegisterService>;
-        using QspObservableBuilderService = QSharedPointer<ObservableBuilderService>;
-    }
-
-}//namespace observablemodelregister
-}//namespace oplink
-}//namespace elekdom
+class ObservableModelRegister;
+class ModelRegisterService;
+class ObservableBuilderService;
 
 #endif // OBSERVABLEMODELREGISTER_FORWARD_H

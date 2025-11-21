@@ -16,44 +16,27 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTUREFACTORY_H
 #define INFRASTRUCTUREFACTORY_H
 
 #include <QString>
+#include "factory/bundlefactory.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "factory/bundlefactory.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-namespace factory
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureFactory : public plugframe::core::bundle::BundleFactory
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureFactory : public plugframe::BundleFactory
 {
 public:
     InfrastructureFactory();
     ~InfrastructureFactory() override;
 
 protected:
-    virtual service::InfrastructureControlService *createDeviceInfrastructureControlService(plugframe::core::bundle::BundleImplementation *implementation);
-    plugframe::core::service::ServiceImplementationInterface *createServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation,
-                                                                         const QString& sName,
-                                                                         const QString& serviceVersion) override;
-
+    virtual InfrastructureControlService *createDeviceInfrastructureControlService(plugframe::BundleImplementation *implementation);
+    plugframe::ServiceImplementationInterface *createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                           const QString& sName,
+                                                                           const QString& serviceVersion) override;
 };
-
-}//namespace factory
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTUREFACTORY_H

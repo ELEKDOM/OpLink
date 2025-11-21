@@ -16,21 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOWOBSERVABLE_H
 #define LOWOBSERVABLE_H
 
 #include "observable/observable/observable.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 ///
 /// \brief The LowObservable class.
 ///        Base class for any observable whose state is returned via an infrastructure
@@ -40,10 +32,5 @@ public:
     LowObservable();
     ~LowObservable() override;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOWOBSERVABLE_H

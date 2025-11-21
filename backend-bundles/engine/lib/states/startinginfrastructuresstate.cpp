@@ -16,15 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "startinginfrastructuresstate.h"
 #include "serverengine.h"
 #include "logger/pflog.h"
 #include "worker/workerouts.h"
 #include "abstract_infrastructure/loading/infrastructureloaderouts.h"
-
-using namespace elekdom::oplink::engine::bundle;
-using namespace elekdom::oplink::core;
 
 StartingInfrastructuresState::StartingInfrastructuresState(ServerEngine& engine):
     ServerStartingState{engine},
@@ -61,10 +57,10 @@ void StartingInfrastructuresState::starting()
     }
 }
 
-void StartingInfrastructuresState::doProcessing(const worker::QspWorkerOuts &outs)
+void StartingInfrastructuresState::doProcessing(const plugframe::QspWorkerOuts &outs)
 {
-    worker::QspWorkerOuts qspouts(outs);
-    infrastructure::QspInfrastructureLoaderOuts loaderOuts(qspouts.dynamicCast<infrastructure::InfrastructureLoaderOuts>());
+    plugframe::QspWorkerOuts qspouts(outs);
+    oplink::QspInfrastructureLoaderOuts loaderOuts(qspouts.dynamicCast<oplink::InfrastructureLoaderOuts>());
 
     pfInfo1(logChannel()) << tr("Fin de chargement pour ") << loaderOuts->m_infrastructureName << ", loadedFlag = " << loaderOuts->m_ret;
 

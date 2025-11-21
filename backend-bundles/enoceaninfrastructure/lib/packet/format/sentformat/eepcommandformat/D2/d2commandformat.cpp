@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/eepcommandformat/D2/d2commandformat.h"
 #include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 D2CommandFormat::D2CommandFormat(quint16 dataPayload, quint8 cmd):
     EepCommandFormat{dataPayload, 7, EepTelegramFormat::RORG_D2},

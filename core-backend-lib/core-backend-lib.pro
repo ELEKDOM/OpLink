@@ -1,13 +1,14 @@
+
+QT += core xml
 QT -= gui
-QT += xml
 
 TEMPLATE = lib
 DEFINES += OLCORE_BACKEND_LIBRARY
 
-CONFIG += c++11
+CONFIG += c++17
 
 OL_BACKEND_LIB_VERSION = $$cat(olcore-backend-lib.ver)
-TARGET = oplink-core-backend-qt5-$${OL_BACKEND_LIB_VERSION}
+TARGET = oplink-core-backend-qt6-$${OL_BACKEND_LIB_VERSION}
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

@@ -16,43 +16,37 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "operationdeviceproperty.h"
-#include "observable/property/loadproperty.h"
 
-using namespace elekdom::oplink::core::observable;
-
-OperationDeviceProperty::OperationDeviceProperty(Observable& observable,
-                                                       const PropertyName& propertyName,
-                                                       QVariant::Type valueType):
-    LowProperty{observable,
-                   propertyName,
-                   valueType}
+oplink::OperationDeviceProperty::OperationDeviceProperty(oplink::Observable& observable,
+                                                         const oplink::PropertyName& propertyName,
+                                                         QMetaType::Type valueType):
+    oplink::LowProperty{observable,
+                        propertyName,
+                        valueType}
 {
 
 }
 
-OperationDeviceProperty::~OperationDeviceProperty()
+oplink::OperationDeviceProperty::~OperationDeviceProperty()
 {
 
 }
 
-void OperationDeviceProperty::slave(QspLoadProperty slaveProp)
+void oplink::OperationDeviceProperty::slave(oplink::QspLowProperty slaveProp)
 {
     relatedProperty(slaveProp);
 }
 
-QSharedPointer<LoadProperty> OperationDeviceProperty::slave()
+oplink::QspLowProperty oplink::OperationDeviceProperty::slave()
 {
-    QspLowProperty related{relatedProperty()};
-
-    return related.dynamicCast<LoadProperty>();
+    return relatedProperty();
 }
 
-void OperationDeviceProperty::changeValue(const QVariant &val)
+void oplink::OperationDeviceProperty::changeValue(const QVariant &val)
 {
-    LowProperty::changeValue(val);
-    QSharedPointer<LoadProperty> lp{slave()};
+    oplink::LowProperty::changeValue(val);
+    oplink::QspLowProperty lp{slave()};
     if (!lp.isNull())
     {
         lp->changeValue(val);

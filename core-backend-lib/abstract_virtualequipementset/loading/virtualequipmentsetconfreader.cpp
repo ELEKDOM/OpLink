@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetconfreader.h"
 #include "virtualequipmentsetloaderargs.h"
 #include "virtualequipmentsetloaderouts.h"
@@ -24,24 +23,22 @@
 #include "abstract_virtualequipementset/virtualequipmentset.h"
 #include "observable/observable/observable.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset;
-
-VirtualEquipmentSetConfReader::VirtualEquipmentSetConfReader(worker::WorkerSignal *wSignal,
-                                                             const worker::QspWorkerArgs& args):
-    worker::WorkerThread{wSignal, args}
+oplink::VirtualEquipmentSetConfReader::VirtualEquipmentSetConfReader(plugframe::WorkerSignal *wSignal,
+                                                                     const plugframe::QspWorkerArgs& args):
+    plugframe::WorkerThread{wSignal, args}
 {
 
 }
 
-VirtualEquipmentSetConfReader::~VirtualEquipmentSetConfReader()
+oplink::VirtualEquipmentSetConfReader::~VirtualEquipmentSetConfReader()
 {
 
 }
 
-bool VirtualEquipmentSetConfReader::execWork(worker::QspWorkerArgs args)
+bool oplink::VirtualEquipmentSetConfReader::execWork(plugframe::QspWorkerArgs args)
 {
     bool ret{true};
-    QSpVirtualEquipmentSetLoaderArgs wArgs{args.dynamicCast<VirtualEquipmentSetLoaderArgs>()};
+    oplink::QspVirtualEquipmentSetLoaderArgs wArgs{args.dynamicCast<oplink::VirtualEquipmentSetLoaderArgs>()};
     QStringList fileList;
 
     m_veSet = wArgs->m_veLoader->veSet();
@@ -62,9 +59,9 @@ bool VirtualEquipmentSetConfReader::execWork(worker::QspWorkerArgs args)
     return ret;
 }
 
-worker::WorkerOuts *VirtualEquipmentSetConfReader::getWorkerOuts()
+plugframe::WorkerOuts *oplink::VirtualEquipmentSetConfReader::getWorkerOuts()
 {
-    return new VirtualEquipmentSetLoaderOuts{m_veSet->getVirtualEquipmentSetName(),
-                                             m_ret,
-                                             m_veSet->getLoadedVirtualEquipments()};
+    return new oplink::VirtualEquipmentSetLoaderOuts{m_veSet->getVirtualEquipmentSetName(),
+                                                     m_ret,
+                                                     m_veSet->getLoadedVirtualEquipments()};
 }

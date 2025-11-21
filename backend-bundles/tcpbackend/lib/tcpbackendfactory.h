@@ -16,37 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPBACKENDFACTORY_H
 #define TCPBACKENDFACTORY_H
 
 #include "abstract_network_tcp/server/tcpserverfactory.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpbackend
-{
-namespace factory
-{
-
-class TcpBackendFactory : public plugframe::core::tcp::server::factory::TcpServerFactory
+class TcpBackendFactory : public plugframe::TcpServerFactory
 {
 public:
     TcpBackendFactory();
     ~TcpBackendFactory() override;
 
 protected:
-    plugframe::core::tcp::TcpChannelDeserializer *createDeserializer() override;
-    plugframe::core::tcp::server::bundle::TcpServerChannelManager *createChannelManager(plugframe::core::tcp::server::bundle::TcpServer& bundle,
-                                                                                        plugframe::core::tcp::TcpChannel *channel,
-                                                                                        QObject *parent = nullptr) override;
+    plugframe::TcpChannelDeserializer *createDeserializer() override;
+    plugframe::TcpServerChannelManager *createChannelManager(plugframe::TcpServer& bundle,
+                                                             plugframe::TcpChannel *channel,
+                                                             QObject *parent = nullptr) override;
 };
-
-} //namespace factory
-} //namespace tcpbackend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // TCPBACKENDFACTORY_H

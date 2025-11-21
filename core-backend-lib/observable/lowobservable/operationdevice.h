@@ -16,39 +16,32 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OPERATIONDEVICE_H
 #define OPERATIONDEVICE_H
 
 #include <QVector>
 #include <QHash>
+#include "observable/lowobservable/lowobservable.h"
+#include "observable/property/operationdeviceproperty.h"
+#include "abstract_infrastructure/device/devicehook.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "observable/lowobservable/lowobservable.h"
-#include "abstract_infrastructure/device/devicehook.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 ///
 /// \brief The OperationDevice class.
 ///        Base class of an object associated with an architecture (sensor, actuator, etc).
-class OLCORE_BACKEND_LIB_EXPORT OperationDevice : public LowObservable, public infrastructure::DeviceHook
+class OLCORE_BACKEND_LIB_EXPORT OperationDevice : public LowObservable, public DeviceHook
 {
 public:
     OperationDevice();
     ~OperationDevice() override;
 
 protected:
-    void setDevice(infrastructure::QspDevice device) override;
-    infrastructure::QspDevice device() override;
-    void bindChannels(const infrastructure::DeviceChannelsBinding& deviceChannelsBinding) override;
+    void setDevice(QspDevice device) override;
+    QspDevice device() override;
+    void bindChannels(const DeviceChannelsBinding& deviceChannelsBinding) override;
     void setChannelValue(int idx, QVariant value) override;
     bool getChannelIdx(const PropertyName& propertyName, int& idx) override;
     bool hasChannel(int idx) override;
@@ -57,14 +50,9 @@ private:
     void bindChannel(int index, const PropertyName& pname);
 
 private:
-    infrastructure::QspDevice           m_device;
+    QspDevice                           m_device;
     QVector<QspOperationDeviceProperty> m_channels;
     QHash<PropertyName, int>            m_reverseChannels;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OPERATIONDEVICE_H

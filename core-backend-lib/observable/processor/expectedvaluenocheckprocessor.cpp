@@ -16,27 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "expectedvaluenocheckprocessor.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "command/command.h"
 
-using namespace elekdom::oplink::core::observable;
-
-ExpectedValueNoCheckProcessor::ExpectedValueNoCheckProcessor(const Observable& observable,
-                                                                 const command::CommandName& cmdName,
-                                                                 const infrastructure::QspDeviceCommandProcessor& deviceProcessor):
-    OperationDeviceCommandProcessor{observable, cmdName, deviceProcessor}
+oplink::ExpectedValueNoCheckProcessor::ExpectedValueNoCheckProcessor(const oplink::Observable& observable,
+                                                                     const oplink::CommandName& cmdName,
+                                                                     const oplink::QspDeviceCommandProcessor& deviceProcessor):
+    oplink::OperationDeviceCommandProcessor{observable, cmdName, deviceProcessor}
 {
 
 }
 
-ExpectedValueNoCheckProcessor::~ExpectedValueNoCheckProcessor()
+oplink::ExpectedValueNoCheckProcessor::~ExpectedValueNoCheckProcessor()
 {
 
 }
 
-void ExpectedValueNoCheckProcessor::setCheckStrategy(command::QspCommand cmd)
+void oplink::ExpectedValueNoCheckProcessor::setCheckStrategy(oplink::QspCommand cmd)
 {
     Q_UNUSED(cmd)
     // NOOP!

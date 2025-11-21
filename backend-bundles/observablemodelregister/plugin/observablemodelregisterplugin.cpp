@@ -16,18 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablemodelregisterplugin.h"
 #include "observablemodelregister.h"
-#include "observablebuilderservice.h"
-#include "modelregisterservice.h"
 #include "model/property/observablepropertymodel.h"
 #include "model/processor/commandprocessormodel.h"
 #include "model/observable/observablemodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "observable/observable/observablebuilder.h"
-
-using namespace elekdom::oplink::observablemodelregister::plugin;
 
 ObservableModelRegisterPlugin::ObservableModelRegisterPlugin()
 {
@@ -39,48 +34,48 @@ ObservableModelRegisterPlugin::~ObservableModelRegisterPlugin()
 
 }
 
-bundle::Bundle4PluginInterface *ObservableModelRegisterPlugin::createImplementation()
+plugframe::Bundle4PluginInterface *ObservableModelRegisterPlugin::createImplementation()
 {
-    return new observablemodelregister::bundle::ObservableModelRegister;
+    return new ObservableModelRegister;
 }
 
 void ObservableModelRegisterPlugin::bindServicesImplementations()
 {
-    plugframe::core::service::QspServiceImplementationInterface serviceImplementationItf;
+    plugframe::QspServiceImplementationInterface serviceImplementationItf;
 
     serviceImplementationItf = implementation()->getServiceImplementation(ModelRegisterServiceInterface::serviceName());
-    m_modelRegisterServiceImpl = serviceImplementationItf.dynamicCast<service::ModelRegisterService>();
+    m_modelRegisterServiceImpl = serviceImplementationItf.dynamicCast<ModelRegisterService>();
 
     serviceImplementationItf = implementation()->getServiceImplementation(ObservableBuilderServiceInterface::serviceName());
-    m_observableBuilderServiceImpl = serviceImplementationItf.dynamicCast<service::ObservableBuilderService>();
+    m_observableBuilderServiceImpl = serviceImplementationItf.dynamicCast<ObservableBuilderService>();
 }
 
-bool ObservableModelRegisterPlugin::addPropertyModel(core::model::QspObservablePropertyModel model)
+bool ObservableModelRegisterPlugin::addPropertyModel(oplink::QspObservablePropertyModel model)
 {
     return m_modelRegisterServiceImpl->addPropertyModel(model);
 }
 
-elekdom::oplink::core::model::QspObservablePropertyModel ObservableModelRegisterPlugin::getPropertyModel(core::model::PropertyModelName id)
+oplink::QspObservablePropertyModel ObservableModelRegisterPlugin::getPropertyModel(oplink::PropertyModelName id)
 {
     return m_modelRegisterServiceImpl->getPropertyModel(id);
 }
 
-bool ObservableModelRegisterPlugin::addProcessorModel(core::model::QspCommandProcessorModel model)
+bool ObservableModelRegisterPlugin::addProcessorModel(oplink::QspCommandProcessorModel model)
 {
     return m_modelRegisterServiceImpl->addProcessorModel(model);
 }
 
-elekdom::oplink::core::model::QspCommandProcessorModel ObservableModelRegisterPlugin::getProcessorModel(core::model::ProcessorModelName id)
+oplink::QspCommandProcessorModel ObservableModelRegisterPlugin::getProcessorModel(oplink::ProcessorModelName id)
 {
     return m_modelRegisterServiceImpl->getProcessorModel(id);
 }
 
-bool ObservableModelRegisterPlugin::addObservableModel(core::model::QspObservableModel model)
+bool ObservableModelRegisterPlugin::addObservableModel(oplink::QspObservableModel model)
 {
     return m_modelRegisterServiceImpl->addObservableModel(model);
 }
 
-elekdom::oplink::core::observable::QspObservableBuilder ObservableModelRegisterPlugin::buildObservable(core::model::QspObservableBuilderArgs builderargs)
+oplink::QspObservableBuilder ObservableModelRegisterPlugin::buildObservable(oplink::QspObservableBuilderArgs builderargs)
 {
     return m_observableBuilderServiceImpl->buildObservable(builderargs);
 }

@@ -16,40 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEBUILDERARGS_H
 #define OBSERVABLEBUILDERARGS_H
 
-#include "olcore-backend-lib_export.h"
+#include <QSharedPointer>
 #include "observable/observablenames.h"
 #include "model/modelnames.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ObservableBuilderArgs
 {
 public:
-    ObservableBuilderArgs(const observable::ObservableName& observableName,
-                             const model::ObservableModelName& observableModelName,
-                             const observable::LocalisationName& observableLocalisation);
+    ObservableBuilderArgs(const ObservableName& observableName,
+                          const ObservableModelName& observableModelName,
+                          const LocalisationName& observableLocalisation);
     virtual ~ObservableBuilderArgs();
 
 public:
-    const observable::ObservableName&   m_observableName;
-    const ObservableModelName&          m_observableModelName;
-    const observable::LocalisationName& m_observableLocalisation;
+    const ObservableName&      m_observableName;
+    const ObservableModelName& m_observableModelName;
+    const LocalisationName&    m_observableLocalisation;
 };
-
-}//namespace model
+using QspObservableBuilderArgs = QSharedPointer<ObservableBuilderArgs>;
 }//namespace oplink
-}//namespace core
-}//namespace model
-
 #endif // OBSERVABLEBUILDERARGS_H

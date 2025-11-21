@@ -16,32 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "actuatoroutputsbinding.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-ActuatorOutputsBinding::ActuatorOutputsBinding()
+oplink::ActuatorOutputsBinding::ActuatorOutputsBinding()
 {
 
 }
 
-ActuatorOutputsBinding::~ActuatorOutputsBinding()
+oplink::ActuatorOutputsBinding::~ActuatorOutputsBinding()
 {
     m_outputs.clear();
 }
 
-void ActuatorOutputsBinding::append(const ActuatorOutput &newOutput)
+void oplink::ActuatorOutputsBinding::append(const oplink::ActuatorOutput &newOutput)
 {
     m_outputs.append(newOutput);
 }
 
-const ActuatorOutput &ActuatorOutputsBinding::at(int i) const
+const oplink::ActuatorOutput& oplink::ActuatorOutputsBinding::at(int i) const
 {
     return m_outputs.at(i);
 }
 
-int ActuatorOutputsBinding::size() const
+qsizetype oplink::ActuatorOutputsBinding::size() const
 {
      return m_outputs.size();
 }

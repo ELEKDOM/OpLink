@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFLOGINVIEW_H
 #define OLFLOGINVIEW_H
 
@@ -25,15 +24,6 @@
 namespace Ui {
 class loginView;
 }
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
 
 class OlfLoginView : public OlfConsoleView
 {
@@ -62,8 +52,4 @@ private:
     Ui::loginView *ui;
 };
 
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // OLFLOGINVIEW_H

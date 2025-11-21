@@ -16,34 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOADBUILDERARGS_H
 #define LOADBUILDERARGS_H
 
-#include "olcore-backend-lib_export.h"
+#include <QSharedPointer>
 #include "model/observable/observablebuilderargs.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT LoadBuilderArgs : public ObservableBuilderArgs
 {
 public:
-    LoadBuilderArgs(const observable::ObservableName& observableName,
-                       const model::ObservableModelName& observableModelName,
-                       const observable::LocalisationName& observableLocalisation);
+    LoadBuilderArgs(const oplink::ObservableName& observableName,
+                    const oplink::ObservableModelName& observableModelName,
+                    const oplink::LocalisationName& observableLocalisation);
     ~LoadBuilderArgs() override;
 };
-
-}//namespace model
-}//namespace core
+using QspLoadBuilderArgs = QSharedPointer<LoadBuilderArgs>;
 }//namespace oplink
-}//namespace edserver
-
 #endif // LOADBUILDERARGS_H

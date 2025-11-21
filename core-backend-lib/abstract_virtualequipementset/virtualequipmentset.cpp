@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QDir>
 #include "virtualequipmentset.h"
 #include "virtualequipmentsetfactory.h"
@@ -27,34 +26,30 @@
 #include "abstract_virtualequipementset/loading/virtualequipmentsetloader.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
 
-using namespace elekdom::oplink;
-using namespace elekdom::oplink::core::virtualequipmentset::bundle;
-using namespace elekdom::oplink::core::virtualequipmentset;
-
-VirtualEquipmentSet::VirtualEquipmentSet(QString logBundleName):
-    plugframe::core::bundle::BundleImplementation{logBundleName},
-    m_loadedVirtualEquipments{new observable::ObservableBuildersContainer},
+oplink::VirtualEquipmentSet::VirtualEquipmentSet(QString logBundleName):
+    plugframe::BundleImplementation{logBundleName},
+    m_loadedVirtualEquipments{new oplink::ObservableBuildersContainer},
     m_loadingFinished{false}
 {
 
 }
 
-VirtualEquipmentSet::~VirtualEquipmentSet()
+oplink::VirtualEquipmentSet::~VirtualEquipmentSet()
 {
 
 }
 
-void VirtualEquipmentSet::setVirtualEquipmentSetLoader(VirtualEquipmentSetLoader *virtualEquipmentSetLoader)
+void oplink::VirtualEquipmentSet::setVirtualEquipmentSetLoader(oplink::VirtualEquipmentSetLoader *virtualEquipmentSetLoader)
 {
     m_virtualEquipmentSetLoader.reset(virtualEquipmentSetLoader);
 }
 
-const QString& VirtualEquipmentSet::getVirtualEquipmentSetName()
+const QString& oplink::VirtualEquipmentSet::getVirtualEquipmentSetName()
 {
     return getLogBundleName();
 }
 
-QStringList VirtualEquipmentSet::fileList()
+QStringList oplink::VirtualEquipmentSet::fileList()
 {
     QStringList namesFilter{"*.xml"};
     QStringList filenames;
@@ -71,19 +66,19 @@ QStringList VirtualEquipmentSet::fileList()
     return ret;
 }
 
-core::observable::QspObservableBuildersContainer VirtualEquipmentSet::getLoadedVirtualEquipments()
+oplink::QspObservableBuildersContainer oplink::VirtualEquipmentSet::getLoadedVirtualEquipments()
 {
     return m_loadedVirtualEquipments;
 }
 
-engine::service::ObservableServiceInterface *VirtualEquipmentSet::observableService()
+oplink::ObservableServiceInterface *oplink::VirtualEquipmentSet::observableService()
 {
-    engine::service::ObservableServiceInterface *obsService;
-    obsService = bundleContext()->getService<engine::service::ObservableServiceInterface>(engine::service::ObservableServiceInterface::serviceName());
+    oplink::ObservableServiceInterface *obsService;
+    obsService = bundleContext()->getService<oplink::ObservableServiceInterface>(oplink::ObservableServiceInterface::serviceName());
     return obsService;
 }
 
-bool VirtualEquipmentSet::startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher)
+bool oplink::VirtualEquipmentSet::startLoading(plugframe::WorkerWatcher *workerWatcher)
 {
     bool ret{false};
 
@@ -95,13 +90,13 @@ bool VirtualEquipmentSet::startLoading(plugframe::core::worker::WorkerWatcher *w
     return ret;
 }
 
-plugin::ServiceInterface *VirtualEquipmentSet::qtServiceInterface(const QString &sName)
+plugframe::ServiceInterface *oplink::VirtualEquipmentSet::qtServiceInterface(const QString &sName)
 {
-    plugframe::core::plugin::ServiceInterface *ret{nullptr};
+    plugframe::ServiceInterface *ret{nullptr};
 
-    if (service::VirtualEquipmentSetServiceInterface::serviceName() == sName)
+    if (oplink::VirtualEquipmentSetServiceInterface::serviceName() == sName)
     {
-        ret = qobject_cast<service::VirtualEquipmentSetServiceInterface*>(getQplugin());
+        ret = qobject_cast<oplink::VirtualEquipmentSetServiceInterface*>(getQplugin());
     }
 
     return ret;

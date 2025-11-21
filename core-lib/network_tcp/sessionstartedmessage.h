@@ -16,20 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SESSIONSTARTEDMESSAGE_H
 #define SESSIONSTARTEDMESSAGE_H
 
 #include <QString>
 #include "sessionmessage.h"
 
-namespace elekdom
-{
 namespace oplink
-{
-namespace core
-{
-namespace tcp
 {
 class OLCORE_LIB_EXPORT SessionStartedMessage : public SessionMessage
 {
@@ -45,8 +38,5 @@ private:
     quint16 m_confId;
     QString m_profile;
 };
-}//namespace tcp
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
 #endif // SESSIONSTARTEDMESSAGE_H

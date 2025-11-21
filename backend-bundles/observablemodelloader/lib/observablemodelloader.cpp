@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QFile>
 #include "logger/pflog.h"
 #include "bundle/bundlecontext.h"
@@ -25,10 +24,8 @@
 #include "observablemodelloaderfactory.h"
 #include "service-int/modelregisterserviceinterface.h"
 
-using namespace elekdom::oplink::observablemodelloader::bundle;
-
 ObservableModelLoader::ObservableModelLoader():
-    plugframe::core::bundle::LongStartBundleImplementation{"ObservableModelLoader"}
+    plugframe::LongStartBundleImplementation{"ObservableModelLoader"}
 {
 
 }
@@ -43,20 +40,20 @@ QspObservableModelLoaderEmitter ObservableModelLoader::emitter()
     return getEmitter().dynamicCast<ObservableModelLoaderEmitter>();
 }
 
-elekdom::oplink::observablemodelregister::service::ModelRegisterServiceInterface *ObservableModelLoader::modelRegisterService()
+oplink::ModelRegisterServiceInterface *ObservableModelLoader::modelRegisterService()
 {
-    return bundleContext()->getService<elekdom::oplink::observablemodelregister::service::ModelRegisterServiceInterface>(elekdom::oplink::observablemodelregister::service::ModelRegisterServiceInterface::serviceName());
+    return bundleContext()->getService<oplink::ModelRegisterServiceInterface>(oplink::ModelRegisterServiceInterface::serviceName());
 }
 
 bool ObservableModelLoader::nextPropertyModelDeclaration(quint16 idx,
-                                                            core::model::PropertyModelName &modelName,
-                                                            core::observable::PropertyName &propertyName,
-                                                            core::observable::PropertyType &propertyClassName,
-                                                            QVariant::Type &valueType)
+                                                         oplink::PropertyModelName &modelName,
+                                                         oplink::PropertyName &propertyName,
+                                                         oplink::PropertyType &propertyClassName,
+                                                         QMetaType::Type &valueType)
 {
     bool ret{false};
 
-    if ((idx >= 0) && (idx <  m_propertyModelNodes.size()))
+    if (idx <  m_propertyModelNodes.size())
     {
         QDomNode    node{m_propertyModelNodes.at(idx)};
         QDomElement modelElem{node.toElement()};
@@ -70,23 +67,23 @@ bool ObservableModelLoader::nextPropertyModelDeclaration(quint16 idx,
 
         if (QStringLiteral("bool") == ptype)
         {
-            valueType = QVariant::Bool;
+            valueType = QMetaType::Bool;
         }
         else if (QStringLiteral("uchar") == ptype)
         {
-            valueType = QVariant::UInt;
+            valueType = QMetaType::UInt;
         }
         else if (QStringLiteral("uint") == ptype)
         {
-            valueType = QVariant::UInt;
+            valueType = QMetaType::UInt;
         }
         else if (QStringLiteral("double") == ptype)
         {
-            valueType = QVariant::Double;
+            valueType = QMetaType::Double;
         }
         else if (QStringLiteral("string") == ptype)
         {
-            valueType = QVariant::String;
+            valueType = QMetaType::QString;
         }
         else
         {
@@ -99,13 +96,13 @@ bool ObservableModelLoader::nextPropertyModelDeclaration(quint16 idx,
 }
 
 bool ObservableModelLoader::nextProcessorModelDeclaration(quint16 idx,
-                                                             core::model::ProcessorModelName &modelName,
-                                                             core::command::CommandName &commandName,
-                                                             core::observable::ProcessorType &processorClassName)
+                                                          oplink::ProcessorModelName &modelName,
+                                                          oplink::CommandName &commandName,
+                                                          oplink::ProcessorType &processorClassName)
 {
     bool ret{false};
 
-    if ((idx >= 0) && (idx <  m_processorModelNodes.size()))
+    if (idx <  m_processorModelNodes.size())
     {
         QDomNode    node{m_processorModelNodes.at(idx)};
         QDomElement modelElem{node.toElement()};
@@ -120,14 +117,14 @@ bool ObservableModelLoader::nextProcessorModelDeclaration(quint16 idx,
 }
 
 bool ObservableModelLoader::nextObservableModelDeclaration(quint16 idx,
-                                                              core::model::ObservableModelName &modelName,
-                                                              core::observable::ObservableType &observableClassName,
-                                                              QStringList &propertyModelRefs,
-                                                              QStringList &processorModelRefs)
+                                                           oplink::ObservableModelName &modelName,
+                                                           oplink::ObservableType &observableClassName,
+                                                           QStringList &propertyModelRefs,
+                                                           QStringList &processorModelRefs)
 {
     bool ret{false};
 
-    if ((idx >= 0) && (idx <  m_observableModelNodes.size()))
+    if (idx <  m_observableModelNodes.size())
     {
         QDomNode     node{m_observableModelNodes.at(idx)};
         QDomElement  modelElem{node.toElement()};
@@ -156,14 +153,14 @@ bool ObservableModelLoader::nextObservableModelDeclaration(quint16 idx,
     return ret;
 }
 
-BundleFactory *ObservableModelLoader::createFactory()
+plugframe::BundleFactory *ObservableModelLoader::createFactory()
 {
-    return new factory::ObservableModelLoaderFactory;
+    return new ObservableModelLoaderFactory;
 }
 
-void ObservableModelLoader::_start(QspBundleContext bundleContext)
+void ObservableModelLoader::_start(plugframe::QspBundleContext bundleContext)
 {
-    plugframe::core::bundle::LongStartBundleImplementation::_start(bundleContext);
+    plugframe::LongStartBundleImplementation::_start(bundleContext);
 
     // Start models building and registering
     startModelsLoading();
@@ -195,7 +192,9 @@ bool ObservableModelLoader::loadModelDeclarations()
     ret = file.open(QIODevice::ReadOnly);
     if (ret)
     {
-        ret = m_modelDeclarations.setContent(&file);
+        QDomDocument::ParseResult noErr{m_modelDeclarations.setContent(&file)};
+
+        ret = bool(noErr);
         file.close();
 
         if (ret)

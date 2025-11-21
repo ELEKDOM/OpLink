@@ -16,23 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLENOTIFIER_H
 #define OBSERVABLENOTIFIER_H
 
+#include <QSharedPointer>
 #include <QObject>
 #include "observablesubscriber.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class ObservableNotifier : public QObject
 {
     Q_OBJECT
@@ -43,21 +36,17 @@ public:
 
 signals:
 
-    void stateChange(const elekdom::oplink::core::observable::ObservableName& observableName,
-                     const elekdom::oplink::core::observable::PropertyName& propertyName,
+    void stateChange(oplink::ObservableName observableName,
+                     oplink::PropertyName propertyName,
                      QVariant propertyValue);
 
 public:
     bool subscribe(ObservableSubscriber *subscriber);
     bool unsubscribe(ObservableSubscriber *subscriber);
-    void notifyPropertyValueChange(const ObservableName& observableName,
-                                   const PropertyName& propertyName,
+    void notifyPropertyValueChange(ObservableName observableName,
+                                   PropertyName propertyName,
                                    QVariant propertyValue);
 };
-
-}//namespace observable
-}//namespace core
+using QspObservableNotifier = QSharedPointer<ObservableNotifier>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLENOTIFIER_H

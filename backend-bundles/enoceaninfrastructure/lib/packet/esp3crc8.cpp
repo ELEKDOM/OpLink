@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/esp3crc8.h"
-
-using namespace elekdom::oplink::enocean;
 
 quint8 Esp3Crc8::s_crc8Table[256]= {
     0x00, 0x07, 0x0e, 0x09, 0x1c, 0x1b, 0x12, 0x15,

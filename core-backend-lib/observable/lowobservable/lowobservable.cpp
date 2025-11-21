@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "lowobservable.h"
 
-using namespace elekdom::oplink::core::observable;
-
-LowObservable::LowObservable()
+oplink::LowObservable::LowObservable()
 {
 
 }
 
-LowObservable::~LowObservable()
+oplink::LowObservable::~LowObservable()
 {
 
 }

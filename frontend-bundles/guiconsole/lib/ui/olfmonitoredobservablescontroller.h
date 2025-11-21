@@ -16,22 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFMONITOREDOBSERVABLESCONTROLLER_H
 #define OLFMONITOREDOBSERVABLESCONTROLLER_H
 
 #include <QHash>
+#include <QSharedPointer>
+#include "observable/remote/sessionconfdocument.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
+#include "ui/monitoredobservables/pageviewbuilder/pageviewlayoutbuilder.h"
+#include "ui/monitoredobservables/pageviewbuilder/monitoredobservablebuilder.h"
 #include "olfconsolecontroller.h"
-#include "olcore-lib_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
+#include "olfconsole_forward.h"
 
 enum class PageViewLayout : quint8 {LocalisationListLayout,TypeListLayout};
 
@@ -44,7 +39,9 @@ private:
     static inline QString StatesPageCtrlName() {return QStringLiteral("Monitoring");}
 
 public:
-    OlfMonitoredObservablesController(bundle::OlfConsole& console,PageViewLayout monitoringViewLayout,QObject *parent = nullptr);
+    OlfMonitoredObservablesController(OlfConsole& console,
+                                      PageViewLayout monitoringViewLayout,
+                                      QObject *parent = nullptr);
     ~OlfMonitoredObservablesController() override;
 
 public slots:
@@ -58,7 +55,7 @@ public:
                                       const QString& observableName,
                                       const QString& propertyName,
                                       const QVariant& value);
-    void addMonitoredObservable(monitoredobservable::widget::QspMonitoredObservableWidgetCtrl newly);
+    void addMonitoredObservable(QspMonitoredObservableWidgetCtrl newly);
     void endOfLoadingViews();
     void closeSession();
     const quint32& sessionId() {return m_sessionIdOnServer;}
@@ -68,31 +65,26 @@ public:
     void addMonitoredObservablesView(OlfMonitoredObservablesView *pageView);
 
 protected:
-    virtual monitoredobservable::MonitoredObservableBuilder *buildWidgetBuilder();
-    virtual monitoredobservable::MonitoredObservableBuilder *createMonitoredObservableBuilder(monitoredobservable::PageViewLayoutBuilder *viewsBuilder);
-    virtual monitoredobservable::PageViewLayoutBuilder *createLayoutByTypeBuilder();
-    virtual monitoredobservable::PageViewLayoutBuilder *createLayoutByLocalisationBuilder();
-    virtual core::remote::SessionConfDocument *createProfileConfBrowser(monitoredobservable::MonitoredObservableBuilder& hook);
+    virtual MonitoredObservableBuilder *buildWidgetBuilder();
+    virtual MonitoredObservableBuilder *createMonitoredObservableBuilder(PageViewLayoutBuilder *viewsBuilder);
+    virtual PageViewLayoutBuilder *createLayoutByTypeBuilder();
+    virtual PageViewLayoutBuilder *createLayoutByLocalisationBuilder();
+    virtual oplink::SessionConfDocument *createProfileConfBrowser(MonitoredObservableBuilder& hook);
 
 private:
     bool profileFileExists(const QString& profile);
     void loadConfFile();
     void needDownload();
     bool saveConfFile(const QString& xmlConfig);
-    monitoredobservable::widget::QspMonitoredObservableWidgetCtrl monitoredObservable(QString name);
+    QspMonitoredObservableWidgetCtrl monitoredObservable(QString name);
 
 private:
-    PageViewLayout                                                               m_monitoringViewLayout;
-    quint32                                                                      m_sessionIdOnServer;
-    QString                                                                      m_fullProfileFileName;
-    core::remote::QspSessionConfDocument                                         m_profileConfBrowser;
-    monitoredobservable::QspMonitoredObservableBuilder                           m_widgetBuilder;
-    QHash<QString,monitoredobservable::widget::QspMonitoredObservableWidgetCtrl> m_monitoredObservables;
+    PageViewLayout                                  m_monitoringViewLayout;
+    quint32                                         m_sessionIdOnServer;
+    QString                                         m_fullProfileFileName;
+    oplink::QspSessionConfDocument                  m_profileConfBrowser;
+    QspMonitoredObservableBuilder                   m_widgetBuilder;
+    QHash<QString,QspMonitoredObservableWidgetCtrl> m_monitoredObservables;
 };
-
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
-
+using QspOlfMonitoredObservablesController = QSharedPointer<OlfMonitoredObservablesController>;
 #endif // OLFMONITOREDOBSERVABLESCONTROLLER_H

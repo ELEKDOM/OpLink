@@ -4,7 +4,7 @@ TEMPLATE = lib
 CONFIG  += staticlib
 
 BUNDLE_VERSION = $$cat(../bundle.ver)
-TARGET = oplinkB-engine-qt5-$${BUNDLE_VERSION}
+TARGET = oplinkB-engine-qt6-$${BUNDLE_VERSION}
 
 SOURCES +=  \
             observableservice.cpp \

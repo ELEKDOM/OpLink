@@ -16,41 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFCONSOLEFACTORY_H
 #define OLFCONSOLEFACTORY_H
 
 #include "guiconsolefactory.h"
 #include "olfconsole_forward.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace factory
-{
-
-class OlfConsoleFactory : public plugframe::guiconsole::factory::GuiConsoleFactory
+class OlfConsoleFactory : public GuiConsoleFactory
 {
 public:
     OlfConsoleFactory();
     ~OlfConsoleFactory() override;
 
 public:
-    virtual OlfLoginController *createOlfLoginController(bundle::OlfConsole& console,
+    virtual OlfLoginController *createOlfLoginController(OlfConsole& console,
                                                          int maxLoginAttempts);
-    virtual OlfMonitoredObservablesController *createOlfMonitoredObservablesController(bundle::OlfConsole& console,
+    virtual OlfMonitoredObservablesController *createOlfMonitoredObservablesController(OlfConsole& console,
                                                                                        PageViewLayout monitoringViewLayout);
 };
-
-} //namespace factory
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 
 #endif // OLFCONSOLEFACTORY_H

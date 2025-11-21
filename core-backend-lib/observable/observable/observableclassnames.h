@@ -16,22 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLECLASSNAMES_H
 #define OBSERVABLECLASSNAMES_H
 
 #include "olcore-backend-lib_export.h"
 #include "observable/observablenames.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
 class OLCORE_BACKEND_LIB_EXPORT ObservableClassNames
 {
 public:
@@ -39,10 +31,5 @@ public:
     static const ObservableType SENSOR_CLASS;
     static const ObservableType LOAD_CLASS;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLECLASSNAMES_H

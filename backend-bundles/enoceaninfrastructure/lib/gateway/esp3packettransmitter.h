@@ -16,21 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ESP3PACKETTRANSMITTER_H
 #define ESP3PACKETTRANSMITTER_H
 
 #include <QQueue>
 #include <QTimer>
 #include <QMutex>
-#include "enoceaninfrastructure_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
+#include <QSharedPointer>
+#include "packet/esp3packet.h"
+#include "packet/format/sentformat/esp3sentpacketformat.h"
 
 class Esp3PacketTransmitter : public QObject
 {
@@ -41,8 +35,8 @@ public:
     ~Esp3PacketTransmitter() override;
 
 signals:
-    void sendPacket(elekdom::oplink::enocean::QspEsp3Packet paquet);
-    void sendRequest(elekdom::oplink::enocean::QspEsp3SentPacketFormat packet2sendFormat);
+    void sendPacket(QspEsp3Packet paquet);
+    void sendRequest(QspEsp3SentPacketFormat packet2sendFormat);
 
 public:
     void sendPaquetRequest(QspEsp3SentPacketFormat packet2sendFormat);
@@ -53,7 +47,7 @@ public slots:
 
 private slots:
     void onTimeOut();
-    void onSendRequest(elekdom::oplink::enocean::QspEsp3SentPacketFormat packet2sendFormat);
+    void onSendRequest(QspEsp3SentPacketFormat packet2sendFormat);
 
 private:
     void startWatchDog();
@@ -69,9 +63,5 @@ private:
     QTimer                         *m_watchDog;
     QMutex                          m_mutex;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace enocean
-
+using QspEsp3PacketTransmitter = QSharedPointer<Esp3PacketTransmitter>;
 #endif // ESP3PACKETTRANSMITTER_H

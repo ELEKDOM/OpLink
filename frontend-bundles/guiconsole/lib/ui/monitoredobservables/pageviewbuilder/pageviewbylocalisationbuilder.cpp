@@ -16,13 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "pageviewbylocalisationbuilder.h"
 #include "monitoredobservablebuilder.h"
 #include "ui/olfmonitoredobservablescontroller.h"
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
-
-using namespace elekdom::oplink::frontend::guiconsole::monitoredobservable;
 
 PageViewByLocalisationBuilder::PageViewByLocalisationBuilder()
 {}
@@ -32,12 +29,12 @@ PageViewByLocalisationBuilder::~PageViewByLocalisationBuilder()
 
 }
 
-QString PageViewByLocalisationBuilder::getViewName(widget::QspMonitoredObservableWidgetCtrl &widgetCtrl)
+QString PageViewByLocalisationBuilder::getViewName(QspMonitoredObservableWidgetCtrl &widgetCtrl)
 {
     return widgetCtrl->observableLocalisation();
 }
 
-QString PageViewByLocalisationBuilder::getListLayoutName(widget::QspMonitoredObservableWidgetCtrl &widgetCtrl)
+QString PageViewByLocalisationBuilder::getListLayoutName(QspMonitoredObservableWidgetCtrl &widgetCtrl)
 {
     return builder()->getFamilyName(widgetCtrl->observableType());
 }

@@ -16,11 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd1format.h"
 #include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 D201Cmd1Format::D201Cmd1Format():
     D201CommandFormat{3, 0x01}

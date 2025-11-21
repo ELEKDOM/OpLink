@@ -16,27 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SUBSCRIBESESSION_H
 #define SUBSCRIBESESSION_H
 
 #include <QString>
 #include <QStringList>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "observable/remote/observablestatesgroup.h"
 #include "observable/remote/sessionconfdocument.h"
 #include "observable/remote/sessionconfloader.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace remote
-{
-
 class OLCORE_BACKEND_LIB_EXPORT SubscribeSession : public ObservableStatesGroup
 {
     Q_OBJECT
@@ -44,7 +37,7 @@ class OLCORE_BACKEND_LIB_EXPORT SubscribeSession : public ObservableStatesGroup
 public:
     SubscribeSession(quint32 sessionId,
                      const QString& filename,
-                     engine::service::ObservableServiceInterface *oService,
+                     ObservableServiceInterface *oService,
                      QObject *parent = nullptr);
 
     ~SubscribeSession() override;
@@ -56,17 +49,17 @@ public:
     void submitOrder(const QString &order);
     void addRemoteMonitoredObservable(const QString& observableName,
                                       const QStringList& propertyNames,
-                                      core::remote::QspObservableStates remoteMonitored);
+                                      QspObservableStates remoteMonitored);
     void enableMonitoring();
 
 signals:
     void newState(quint32 sessionId,
-                  const elekdom::oplink::core::observable::ObservableName& observableName,
-                  const elekdom::oplink::core::observable::PropertyName& propertyName,
+                  oplink::ObservableName observableName,
+                  oplink::PropertyName propertyName,
                   QVariant propertyValue);
 protected:
-    void onStateChange(const observable::ObservableName& observableName,
-                       const observable::PropertyName& propertyName,
+    void onStateChange(ObservableName observableName,
+                       PropertyName propertyName,
                        QVariant propertyValue) override;
 private:
     quint32             m_sessionId;
@@ -74,10 +67,6 @@ private:
     SessionConfDocument m_domDoc;
     SessionConfLoader   m_confLoader;
 };
-
-}//namespace remotemonitoring
-}//namespace core
+using QspSubscribeSession = QSharedPointer<SubscribeSession>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SUBSCRIBESESSION_H

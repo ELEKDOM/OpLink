@@ -16,42 +16,39 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QCoreApplication>
 #include "grouptowatchalgorithm.h"
 #include "grouptowatch.h"
 #include "statetowatchlist.h"
 
-using namespace elekdom::oplink::core::observable::monitoring;
-
-GroupToWatchAlgorithm::GroupToWatchAlgorithm(SupervisorObservable& manager, QObject *parent):
-    ObservableSubscriber{parent},
+oplink::GroupToWatchAlgorithm::GroupToWatchAlgorithm(oplink::SupervisorObservable& manager, QObject *parent):
+    oplink::ObservableSubscriber{parent},
     m_manager{manager},
     m_group{nullptr}
 {
     moveToThread(QCoreApplication::instance()->thread());
 }
 
-GroupToWatchAlgorithm::~GroupToWatchAlgorithm()
+oplink::GroupToWatchAlgorithm::~GroupToWatchAlgorithm()
 {
 
 }
 
-void GroupToWatchAlgorithm::initAlgorithm(engine::service::ObservableServiceInterface *observableService)
+void oplink::GroupToWatchAlgorithm::initAlgorithm(oplink::ObservableServiceInterface *observableService)
 {
     m_observableService = observableService;
     initAlgo();
 }
 
-void GroupToWatchAlgorithm::subscribeToCategory(const QString &category,
-                                                monitoring::GroupToWatch *myRoom,
-                                                engine::service::ObservableServiceInterface *observableService)
+void oplink::GroupToWatchAlgorithm::subscribeToCategory(const QString &category,
+                                                        oplink::GroupToWatch *myRoom,
+                                                        oplink::ObservableServiceInterface *observableService)
 {
-    observable::monitoring::QspMonitoredStateList monitoredList{myRoom->category(category)};
+    oplink::QspMonitoredStateList monitoredList{myRoom->category(category)};
 
-    for (int i = 0 ; i < monitoredList->size(); i++)
+    for (qsizetype i = 0 ; i < monitoredList->size(); i++)
     {
-        observable::monitoring::QspMonitoredState monitoredState{monitoredList->at(i)};
+        oplink::QspMonitoredState monitoredState{monitoredList->at(i)};
 
         observableService->subscribe(monitoredState->observableName(), this);
     }

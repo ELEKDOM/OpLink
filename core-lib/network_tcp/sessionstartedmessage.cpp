@@ -16,20 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "sessionstartedmessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-SessionStartedMessage::SessionStartedMessage(quint32 sessionId, quint16 confId,const QString& profile):
-    SessionMessage{static_cast<quint16>(MessageType::SessionStarted),sessionId},
+oplink::SessionStartedMessage::SessionStartedMessage(quint32 sessionId, quint16 confId,const QString& profile):
+    SessionMessage{static_cast<quint16>(oplink::MessageType::SessionStarted),sessionId},
     m_confId{confId},
     m_profile{profile}
 {
 
 }
 
-SessionStartedMessage::~SessionStartedMessage()
+oplink::SessionStartedMessage::~SessionStartedMessage()
 {
 
 }

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "heatingmanager/heatingmanagerloader.h"
 #include "heatingmanager/heatingmanager.h"
 #include "heatingmanager/pilotwirecontrolroom.h"
@@ -28,15 +27,10 @@
 #include "scheduler/schedulerbuilder.h"
 #include "heatingmanagersetlogchannel.h"
 
-using namespace elekdom::plugframe::core::scheduler;
-using namespace elekdom::oplink;
-using namespace elekdom::oplink::core;
-using namespace elekdom::oplink::heatingmanager;
-
-HeatingManagerLoader::HeatingManagerLoader(virtualequipmentset::bundle::VirtualEquipmentSet *veSet):
-    core::virtualequipment::VirtualEquipmentLoader{veSet},
+HeatingManagerLoader::HeatingManagerLoader(oplink::VirtualEquipmentSet *veSet):
+    oplink::VirtualEquipmentLoader{veSet},
     m_newHeatingManager{nullptr},
-    m_schedulerBuilder{new SchedulerBuilder(s_HeatingManagerSetLogChannel)}
+    m_schedulerBuilder{new plugframe::SchedulerBuilder(s_HeatingManagerSetLogChannel)}
 {}
 
 HeatingManagerLoader::~HeatingManagerLoader()
@@ -58,7 +52,7 @@ bool HeatingManagerLoader::heatingManagerDeclarationBegin(const QString& observa
                                                           const QString& modelName,
                                                           const QString& title,
                                                           const QString& localisation,
-                                                          HeatingManagerLoaderHook::ControlType controlType,
+                                                          oplink::HeatingManagerLoaderHook::ControlType controlType,
                                                           int confId)
 {
     bool ret{false};
@@ -79,7 +73,7 @@ bool HeatingManagerLoader::heatingManagerDeclarationBegin(const QString& observa
         buildMandatoryProperties(observableName,modelName,localisation,confId);
 
         // Heating manager's specific property
-        addProperty(observable::PropertyId::P_ORDER, QVariant::String);
+        addProperty(oplink::PropertyId::P_ORDER, QMetaType::QString);
     }
 
     return ret;
@@ -116,7 +110,7 @@ bool HeatingManagerLoader::controlDeclarationEnd()
     return true;
 }
 
-SchedulerElementHook &HeatingManagerLoader::schedulerDeclarationBegin()
+plugframe::SchedulerElementHook &HeatingManagerLoader::schedulerDeclarationBegin()
 {
     return *m_schedulerBuilder;
 }
@@ -133,14 +127,14 @@ bool HeatingManagerLoader::roomsDeclarationBegin()
 {
     bool ret{true};
 
-    return true;
+    return ret;
 }
 
 bool HeatingManagerLoader::roomsDeclarationEnd()
 {
     bool ret{true};
 
-    return true;
+    return ret;
 }
 
 bool HeatingManagerLoader::roomDeclarationBegin(const QString &roomName)
@@ -150,11 +144,11 @@ bool HeatingManagerLoader::roomDeclarationBegin(const QString &roomName)
     ret = !roomName.isEmpty();
     if (ret)
     {
-        observable::monitoring::QspMonitoredGroupAlgorithm ptrAlgo{createControlRoom()};
+        oplink::QspMonitoredGroupAlgorithm ptrAlgo{createControlRoom()};
         ret = !ptrAlgo.isNull();
         if (ret)
         {
-            m_monitoredRoom.reset(new observable::monitoring::GroupToWatch{ptrAlgo});
+            m_monitoredRoom.reset(new oplink::GroupToWatch{ptrAlgo});
             m_monitoredRoom->groupName(roomName);
         }
     }
@@ -180,7 +174,7 @@ bool HeatingManagerLoader::heatersDeclarationBegin()
 {
     bool ret{true};
 
-    m_monitoredRoom->addCategory(heatingmanager::HeatingManager::heaterCategory());
+    m_monitoredRoom->addCategory(HeatingManager::heaterCategory());
 
     return ret;
 }
@@ -199,9 +193,9 @@ bool HeatingManagerLoader::heaterRefDeclaration(const QString &heaterName, const
     ret = !heaterName.isEmpty() && !heaterPropertyName.isEmpty();
     if (ret)
     {
-        observable::monitoring::QspMonitoredState monitoredState{createStateToWatch(heaterName,heaterPropertyName)};
+        oplink::QspMonitoredState monitoredState{createStateToWatch(heaterName,heaterPropertyName)};
 
-        m_monitoredRoom->addMonitoredState(heatingmanager::HeatingManager::heaterCategory(),
+        m_monitoredRoom->addMonitoredState(HeatingManager::heaterCategory(),
                                            monitoredState);
     }
     return ret;
@@ -213,7 +207,7 @@ bool HeatingManagerLoader::windowSensorsDeclarationBegin()
 
     if (ret)
     {
-        m_monitoredRoom->addCategory(heatingmanager::HeatingManager::windowSensorCategory());
+        m_monitoredRoom->addCategory(HeatingManager::windowSensorCategory());
     }
 
     return ret;
@@ -236,9 +230,9 @@ bool HeatingManagerLoader::windowSensorRefDeclaration(const QString& windowSenso
         ret = !windowSensorName.isEmpty() && !windowSensorPropertyName.isEmpty();
         if (ret)
         {
-            observable::monitoring::QspMonitoredState monitoredState{createStateToWatch(windowSensorName,windowSensorPropertyName)};
+            oplink::QspMonitoredState monitoredState{createStateToWatch(windowSensorName,windowSensorPropertyName)};
 
-            m_monitoredRoom->addMonitoredState(heatingmanager::HeatingManager::windowSensorCategory(),
+            m_monitoredRoom->addMonitoredState(HeatingManager::windowSensorCategory(),
                                                monitoredState);
         }
     }
@@ -252,7 +246,7 @@ bool HeatingManagerLoader::temperatureSensorsDeclarationBegin()
 
     if (ret)
     {
-        m_monitoredRoom->addCategory(heatingmanager::HeatingManager::temperatureSensorCategory());
+        m_monitoredRoom->addCategory(HeatingManager::temperatureSensorCategory());
     }
 
     return ret;
@@ -265,7 +259,8 @@ bool HeatingManagerLoader::temperatureSensorsDeclarationEnd()
     return ret;
 }
 
-bool HeatingManagerLoader::temperatureSensorRefDeclaration(const QString &temperatureSensorName, const QString &temperatureSensorPropertyName)
+bool HeatingManagerLoader::temperatureSensorRefDeclaration(const QString &temperatureSensorName,
+                                                           const QString &temperatureSensorPropertyName)
 {
     bool ret{m_ctrT == ControlType::PWT};
 
@@ -274,9 +269,9 @@ bool HeatingManagerLoader::temperatureSensorRefDeclaration(const QString &temper
         ret = !temperatureSensorName.isEmpty() && !temperatureSensorPropertyName.isEmpty();
         if (ret)
         {
-            observable::monitoring::QspMonitoredState monitoredState{createStateToWatch(temperatureSensorName,temperatureSensorPropertyName)};
+            oplink::QspMonitoredState monitoredState{createStateToWatch(temperatureSensorName,temperatureSensorPropertyName)};
 
-            m_monitoredRoom->addMonitoredState(heatingmanager::HeatingManager::temperatureSensorCategory(),
+            m_monitoredRoom->addMonitoredState(HeatingManager::temperatureSensorCategory(),
                                                monitoredState);
         }
     }
@@ -284,7 +279,7 @@ bool HeatingManagerLoader::temperatureSensorRefDeclaration(const QString &temper
     return ret;
 }
 
-virtualequipment::VirtualEquipmentLoaderHook &HeatingManagerLoader::loaderHook()
+oplink::VirtualEquipmentLoaderHook &HeatingManagerLoader::loaderHook()
 {
     return *this;
 }
@@ -296,37 +291,37 @@ HeatingManager *HeatingManagerLoader::createHeatingManager()
 
 PilotWireControlRoom *HeatingManagerLoader::createControlRoom()
 {
-    heatingmanager::PilotWireControlRoom *ret{nullptr};
+    PilotWireControlRoom *ret{nullptr};
 
     if (ControlType::PW == m_ctrT)
     {
-        ret = new heatingmanager::PilotWireControlRoom{*m_newHeatingManager,
-                                                       m_wo_detection,
-                                                       m_p_detection};
+        ret = new PilotWireControlRoom{*m_newHeatingManager,
+                                        m_wo_detection,
+                                        m_p_detection};
     }
     else if (ControlType::PWT == m_ctrT)
     {
-        ret = new heatingmanager::PilotWireThermostatControlRoom{*m_newHeatingManager,
-                                                                 m_wo_detection,
-                                                                 m_p_detection,
-                                                                 m_max_temp,
-                                                                 m_threshold};
+        ret = new PilotWireThermostatControlRoom{*m_newHeatingManager,
+                                                  m_wo_detection,
+                                                  m_p_detection,
+                                                  m_max_temp,
+                                                  m_threshold};
     }
 
     return ret;
 }
 
 void HeatingManagerLoader::buildRoomProperties(const QString &roomName,
-                                               observable::monitoring::QspMonitoredObservableGroup roomGroup)
+                                               oplink::QspMonitoredObservableGroup roomGroup)
 {
-    addGroupProperty(roomName,observable::PropertyId::P_DEROGATED,QVariant::Bool);
-    addGroupProperty(roomName,observable::PropertyId::P_DEROGATED_ORDER,QVariant::String);
-    if (!roomGroup->isCategoryEmpty(heatingmanager::HeatingManager::windowSensorCategory()))
+    addGroupProperty(roomName,oplink::PropertyId::P_DEROGATED,QMetaType::Bool);
+    addGroupProperty(roomName,oplink::PropertyId::P_DEROGATED_ORDER,QMetaType::QString);
+    if (!roomGroup->isCategoryEmpty(HeatingManager::windowSensorCategory()))
     {
-        addGroupProperty(roomName,observable::PropertyId::P_WCLOSED,QVariant::Bool);
+        addGroupProperty(roomName,oplink::PropertyId::P_WCLOSED,QMetaType::Bool);
     }
-    if (!roomGroup->isCategoryEmpty(heatingmanager::HeatingManager::temperatureSensorCategory()))
+    if (!roomGroup->isCategoryEmpty(HeatingManager::temperatureSensorCategory()))
     {
-        addGroupProperty(roomName,observable::PropertyId::P_TEMPERATURE,QVariant::Double);
+        addGroupProperty(roomName,oplink::PropertyId::P_TEMPERATURE,QMetaType::Double);
     }
 }

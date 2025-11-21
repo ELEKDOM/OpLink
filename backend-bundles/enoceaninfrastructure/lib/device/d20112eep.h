@@ -16,33 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D20112EEP_H
 #define D20112EEP_H
 
 #include "d201eep.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 /* Actuator 2 Outputs Module */
 class D20112Eep : public D201Eep
 {
 public:
-    D20112Eep(const core::infrastructure::DeviceId& id,
-              core::infrastructure::DeviceHook& deviceHook);
+    D20112Eep(const oplink::DeviceId& id,
+              oplink::DeviceHook& deviceHook);
     ~D20112Eep() override;
 
 protected:
     bool processTelegram() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D20112EEP_H

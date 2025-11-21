@@ -16,22 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetloaderouts.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset;
-
-VirtualEquipmentSetLoaderOuts::VirtualEquipmentSetLoaderOuts(QString virtualEquipmentSetName,
-                                                             bool loadedFlag,
-                                                             observable::QspObservableBuildersContainer loadedVirtualEquipments):
-    worker::WorkerOuts{loadedFlag},
+oplink::VirtualEquipmentSetLoaderOuts::VirtualEquipmentSetLoaderOuts(QString virtualEquipmentSetName,
+                                                                     bool loadedFlag,
+                                                                     oplink::QspObservableBuildersContainer loadedVirtualEquipments):
+    plugframe::WorkerOuts{loadedFlag},
     m_virtualEquipmentSetName{virtualEquipmentSetName},
     m_loadedVirtualEquipments{loadedVirtualEquipments}
 {
 
 }
 
-VirtualEquipmentSetLoaderOuts::~VirtualEquipmentSetLoaderOuts()
+oplink::VirtualEquipmentSetLoaderOuts::~VirtualEquipmentSetLoaderOuts()
 {
 
 }

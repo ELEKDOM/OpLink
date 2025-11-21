@@ -16,40 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SERVERENGINEFACTORY_H
 #define SERVERENGINEFACTORY_H
 
 #include "factory/bundlefactory.h"
 #include "observableservice.h"
-#include "serverengine.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-namespace factory
-{
-
-class ServerEngineFactory : public plugframe::core::bundle::BundleFactory
+class ServerEngineFactory : public plugframe::BundleFactory
 {
 public:
     ServerEngineFactory();
     ~ServerEngineFactory() override;
 
 protected:
-    plugframe::core::service::ServiceImplementationInterface *createServiceImplementation(plugframe::core::bundle::BundleImplementation *implementation,
-                                                                         const QString& sName,
-                                                                         const QString& serviceVersion) override;
-    plugframe::core::bundle::BundleListener *createBundleListener(plugframe::core::bundle::Bundle& myBundle) override;
-    virtual service::ObservableService *createObservableService(plugframe::core::bundle::BundleImplementation *implementation);
+    plugframe::ServiceImplementationInterface *createServiceImplementation(plugframe::BundleImplementation *implementation,
+                                                                           const QString& sName,
+                                                                           const QString& serviceVersion) override;
+    plugframe::BundleListener *createBundleListener(plugframe::Bundle& myBundle) override;
+    virtual ObservableService *createObservableService(plugframe::BundleImplementation *implementation);
 };
-
-}//namespace factory
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
-
 #endif // SERVERENGINEFACTORY_H

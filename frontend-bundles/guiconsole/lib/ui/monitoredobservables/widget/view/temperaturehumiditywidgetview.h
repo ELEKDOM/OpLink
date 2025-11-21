@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TEMPERATUREHUMIDITYWIDGETVIEW_H
 #define TEMPERATUREHUMIDITYWIDGETVIEW_H
 
@@ -25,19 +24,6 @@
 namespace Ui {
 class temperatureHumidityWidgetView;
 }
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
-namespace monitoredobservable
-{
-namespace widget
-{
 
 class TemperatureHumidityWidgetView : public WidgetListView
 {
@@ -55,10 +41,4 @@ private:
     Ui::temperatureHumidityWidgetView *ui;
 };
 
-} //namespace widget
-} //namespace monitoredobservable
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
 #endif // TEMPERATUREHUMIDITYWIDGETVIEW_H

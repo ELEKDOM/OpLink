@@ -16,28 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "expectedvaluenocheckcommandprocessormodel.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "observable/processor/expectedvaluenocheckprocessor.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-ExpectedValueNoCheckCommandProcessorModel::ExpectedValueNoCheckCommandProcessorModel(const ProcessorModelName& modelName,
-                                                                                           const command::CommandName& commandName):
-    OperationDeviceCommandProcessorModel{modelName, commandName}
+oplink::ExpectedValueNoCheckCommandProcessorModel::ExpectedValueNoCheckCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                                             const oplink::CommandName& commandName):
+    oplink::OperationDeviceCommandProcessorModel{modelName, commandName}
 {
 
 }
 
-ExpectedValueNoCheckCommandProcessorModel::~ExpectedValueNoCheckCommandProcessorModel()
+oplink::ExpectedValueNoCheckCommandProcessorModel::~ExpectedValueNoCheckCommandProcessorModel()
 {
 
 }
 
-observable::OperationDeviceCommandProcessor *ExpectedValueNoCheckCommandProcessorModel::createInstance(const observable::Observable &parent,
-                                                                                                             infrastructure::QspDeviceCommandProcessor deviceProcessor)
+oplink::OperationDeviceCommandProcessor *oplink::ExpectedValueNoCheckCommandProcessorModel::createInstance(const oplink::Observable &parent,
+                                                                                                           oplink::QspDeviceCommandProcessor deviceProcessor)
 {
-    return new observable::ExpectedValueNoCheckProcessor{parent, commandName(), deviceProcessor};
+    return new oplink::ExpectedValueNoCheckProcessor{parent, commandName(), deviceProcessor};
 }

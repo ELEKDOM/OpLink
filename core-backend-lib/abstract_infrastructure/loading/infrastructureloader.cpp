@@ -16,23 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QFile>
 #include "infrastructureloader.h"
-#include "abstract_infrastructure/loading/deviceprocessorbuilder.h"
 #include "abstract_infrastructure/loading/infrastructureloadingoperations.h"
 #include "abstract_infrastructure/loading/infrastructureloaderargs.h"
 #include "abstract_infrastructure/loading/infrastructureloaderouts.h"
-#include "abstract_infrastructure/loading/devicebuilder.h"
 #include "abstract_infrastructure/area/area.h"
 #include "observable/observable/observablebuilder.h"
-#include "observable/observable/observablebuilderscontainer.h"
 #include "worker/workerargs.h"
 #include "logger/pflog.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-InfrastructureLoader::InfrastructureLoader(const QString& logChannel,
+oplink::InfrastructureLoader::InfrastructureLoader(const QString& logChannel,
                                                  InfrastructureLoadingOperations& infrastructure):
     InfrastructureStore{logChannel},
     m_infrastructure{infrastructure}
@@ -40,18 +34,18 @@ InfrastructureLoader::InfrastructureLoader(const QString& logChannel,
 
 }
 
-InfrastructureLoader::~InfrastructureLoader()
+oplink::InfrastructureLoader::~InfrastructureLoader()
 {
 
 }
 
-void InfrastructureLoader::buildDeviceBuilder()
+void oplink::InfrastructureLoader::buildDeviceBuilder()
 {
     QspDeviceProcessorBuilder processorBuilder{createDeviceProcessorBuilder()};
     m_deviceBuilder.reset(createDeviceBuilder(processorBuilder));
 }
 
-bool InfrastructureLoader::startLoadingInfrastructure(const QString &confFileName)
+bool oplink::InfrastructureLoader::startLoadingInfrastructure(const QString &confFileName)
 {
     bool ret{false};
     QFile cf{confFileName};
@@ -59,9 +53,9 @@ bool InfrastructureLoader::startLoadingInfrastructure(const QString &confFileNam
     ret = cf.exists();
     if (ret)
     {
-        worker::QspWorkerArgs args{createLoaderWorkerArgs(confFileName)};
+        plugframe::QspWorkerArgs args{createLoaderWorkerArgs(confFileName)};
 
-        m_loadedObservables.reset(new observable::ObservableBuildersContainer);
+        m_loadedObservables.reset(new oplink::ObservableBuildersContainer);
 
         // start worker in a background thread
         startWork(args);
@@ -74,13 +68,13 @@ bool InfrastructureLoader::startLoadingInfrastructure(const QString &confFileNam
     return ret;
 }
 
-bool InfrastructureLoader::checkInfrastructureName(const QString &name)
+bool oplink::InfrastructureLoader::checkInfrastructureName(const QString &name)
 {
     m_infrastructureName = name;
     return m_infrastructure.checkInfrastructureName(m_infrastructureName);
 }
 
-bool InfrastructureLoader::addArea(const QString &areaName)
+bool oplink::InfrastructureLoader::addArea(const QString &areaName)
 {
     bool found{false};
     QListIterator<QspArea> i(m_loadedAreas);
@@ -99,7 +93,7 @@ bool InfrastructureLoader::addArea(const QString &areaName)
     return !found;
 }
 
-bool InfrastructureLoader::addGateway(GatewayArgs& gatewayArgs)
+bool oplink::InfrastructureLoader::addGateway(GatewayArgs& gatewayArgs)
 {
     bool ret{m_curArea && m_curArea->haveNoGateway()};
 
@@ -111,7 +105,7 @@ bool InfrastructureLoader::addGateway(GatewayArgs& gatewayArgs)
     return ret;
 }
 
-bool InfrastructureLoader::addLoad(const QString &loadName,
+bool oplink::InfrastructureLoader::addLoad(const QString &loadName,
                                            const QString &observableModelName,
                                            const QString &localisation)
 {
@@ -120,9 +114,9 @@ bool InfrastructureLoader::addLoad(const QString &loadName,
     ret = !m_loadedObservables->contains(loadName);
     if (ret)
     {
-        observable::QspObservableBuilder load{m_infrastructure.buildLoadInstance(loadName,
-                                                                                    observableModelName,
-                                                                                    localisation)};
+        oplink::QspObservableBuilder load{m_infrastructure.buildLoadInstance(loadName,
+                                                                             observableModelName,
+                                                                             localisation)};
         ret = !load.isNull();
         if (ret)
         {
@@ -133,28 +127,28 @@ bool InfrastructureLoader::addLoad(const QString &loadName,
     return ret;
 }
 
-bool InfrastructureLoader::addActuator(const QString &actuatorName,
-                                                const QString &observableModelName,
-                                                const QString &deviceId,
-                                                const QString &deviceModelName,
-                                                const QString &localisation,
-                                                const ActuatorOutputsBinding &outputsBinding,
-                                                const DeviceChannelsBinding& deviceChannelsBinding)
+bool oplink::InfrastructureLoader::addActuator(const QString &actuatorName,
+                                               const QString &observableModelName,
+                                               const QString &deviceId,
+                                               const QString &deviceModelName,
+                                               const QString &localisation,
+                                               const ActuatorOutputsBinding &outputsBinding,
+                                               const DeviceChannelsBinding& deviceChannelsBinding)
 {
     bool            ret;
 
     ret = !m_loadedObservables->contains(actuatorName);
     if (ret)
     {
-        observable::QspObservableBuilder actuator{m_infrastructure.buildActuatorInstance(actuatorName,
-                                                                                            observableModelName,
-                                                                                            deviceId,
-                                                                                            deviceModelName,
-                                                                                            localisation,
-                                                                                            m_deviceBuilder,
-                                                                                            deviceChannelsBinding,
-                                                                                            outputsBinding,
-                                                                                            m_loadedObservables)};
+        oplink::QspObservableBuilder actuator{m_infrastructure.buildActuatorInstance(actuatorName,
+                                                                                     observableModelName,
+                                                                                     deviceId,
+                                                                                     deviceModelName,
+                                                                                     localisation,
+                                                                                     m_deviceBuilder,
+                                                                                     deviceChannelsBinding,
+                                                                                     outputsBinding,
+                                                                                     m_loadedObservables)};
 
         ret = !actuator.isNull();
         if (ret)
@@ -167,25 +161,25 @@ bool InfrastructureLoader::addActuator(const QString &actuatorName,
     return ret;
 }
 
-bool InfrastructureLoader::addSensor(const QString &sensorName,
-                                              const QString &observableModelName,
-                                              const QString &deviceId,
-                                              const QString &deviceModelName,
-                                              const QString &localisation,
-                                              const DeviceChannelsBinding& deviceChannelsBinding)
+bool oplink::InfrastructureLoader::addSensor(const QString &sensorName,
+                                             const QString &observableModelName,
+                                             const QString &deviceId,
+                                             const QString &deviceModelName,
+                                             const QString &localisation,
+                                             const oplink::DeviceChannelsBinding& deviceChannelsBinding)
 {
     bool            ret;
 
     ret = !m_loadedObservables->contains(sensorName);
     if (ret)
     {
-        observable::QspObservableBuilder sensor{m_infrastructure.buildSensorInstance(sensorName,
-                                                                                        observableModelName,
-                                                                                        deviceId,
-                                                                                        deviceModelName,
-                                                                                        localisation,
-                                                                                        m_deviceBuilder,
-                                                                                        deviceChannelsBinding)};
+        oplink::QspObservableBuilder sensor{m_infrastructure.buildSensorInstance(sensorName,
+                                                                                 observableModelName,
+                                                                                 deviceId,
+                                                                                 deviceModelName,
+                                                                                 localisation,
+                                                                                 m_deviceBuilder,
+                                                                                 deviceChannelsBinding)};
 
         ret = !sensor.isNull();
         if (ret)
@@ -198,12 +192,12 @@ bool InfrastructureLoader::addSensor(const QString &sensorName,
     return ret;
 }
 
-worker::WorkerOuts *InfrastructureLoader::readFinished(bool readStatus)
+plugframe::WorkerOuts *oplink::InfrastructureLoader::readFinished(bool readStatus)
 {
     if (readStatus)
     {
         // Add Areas into Infrastructure
-        QListIterator<QspArea> i(m_loadedAreas);
+        QListIterator<oplink::QspArea> i(m_loadedAreas);
 
         m_curArea.reset();
         while (i.hasNext())
@@ -221,14 +215,14 @@ worker::WorkerOuts *InfrastructureLoader::readFinished(bool readStatus)
     return createLoaderWorkerOuts();
 }
 
-worker::WorkerArgs *InfrastructureLoader::createLoaderWorkerArgs(const QString &confFileName)
+plugframe::WorkerArgs *oplink::InfrastructureLoader::createLoaderWorkerArgs(const QString &confFileName)
 {
-    return new InfrastructureLoaderArgs{confFileName};
+    return new oplink::InfrastructureLoaderArgs{confFileName};
 }
 
-worker::WorkerOuts *InfrastructureLoader::createLoaderWorkerOuts()
+plugframe::WorkerOuts *oplink::InfrastructureLoader::createLoaderWorkerOuts()
 {
-    return new  InfrastructureLoaderOuts(m_infrastructureName,
-                                            m_infrastructure.isLoaded(),
-                                            m_loadedObservables);
+    return new oplink::InfrastructureLoaderOuts(m_infrastructureName,
+                                                m_infrastructure.isLoaded(),
+                                                m_loadedObservables);
 }

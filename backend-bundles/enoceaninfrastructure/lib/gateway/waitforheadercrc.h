@@ -16,18 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef WAITFORHEADERCRC_H
 #define WAITFORHEADERCRC_H
 
 #include "esp3serialreceiverstate.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class WaitForHeaderCrc : public Esp3SerialReceiverState
 {
@@ -38,9 +30,5 @@ public:
 protected:
    void input(quint8 byte) override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // WAITFORHEADERCRC_H

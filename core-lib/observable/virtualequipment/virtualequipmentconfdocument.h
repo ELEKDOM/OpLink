@@ -16,24 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTCONFDOCUMENT_H
 #define VIRTUALEQUIPMENTCONFDOCUMENT_H
 
-#include "xmldom/document.h"
+#include <QSharedPointer>
+#include "xmldom/xmldocument.h"
 #include "olcore-lib_forward.h"
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipment
-{
-
-class OLCORE_LIB_EXPORT VirtualEquipmentConfDocument : public plugframe::core::xmldom::Document
+class OLCORE_LIB_EXPORT VirtualEquipmentConfDocument : public plugframe::XmlDocument
 {
 protected:
     static QString nameAttr() {return QStringLiteral("name");}
@@ -46,10 +39,6 @@ public:
     VirtualEquipmentConfDocument(VirtualEquipmentLoaderHook& browserHook);
     ~VirtualEquipmentConfDocument() override;
 };
-
-}//namespace virtualequipment
-}//namespace core
+using QspVirtualEquipmentConfDocument = QSharedPointer<VirtualEquipmentConfDocument>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTCONFDOCUMENT_H

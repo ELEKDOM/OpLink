@@ -16,20 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "signinreplymessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-
-SigninReplyMessage::SigninReplyMessage(quint32 sessionId, QString identifier, SigninStatus status):
-    SessionMessage{static_cast<quint16>(MessageType::SiginReply),sessionId},
+oplink::SigninReplyMessage::SigninReplyMessage(quint32 sessionId, QString identifier, SigninStatus status):
+    oplink::SessionMessage{static_cast<quint16>(oplink::MessageType::SiginReply),sessionId},
     m_identifier{identifier},
     m_status{status}
 {
 
 }
 
-SigninReplyMessage::~SigninReplyMessage()
+oplink::SigninReplyMessage::~SigninReplyMessage()
 {
 
 }

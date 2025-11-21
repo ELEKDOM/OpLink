@@ -16,27 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELLOADEREMITTER_H
 #define OBSERVABLEMODELLOADEREMITTER_H
 
+#include <QSharedPointer>
 #include "bundle/bundleemitter.h"
 
-using namespace elekdom::plugframe::core::bundle;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelloader
-{
-namespace bundle
-{
-
-class ObservableModelLoaderEmitter : public BundleEmitter
+class ObservableModelLoaderEmitter : public plugframe::BundleEmitter
 {
 public:
-    ObservableModelLoaderEmitter(Bundle& bundle, QObject *parent = nullptr);
+    ObservableModelLoaderEmitter(plugframe::Bundle& bundle, QObject *parent = nullptr);
     ~ObservableModelLoaderEmitter() override;
 
 public:
@@ -46,10 +35,5 @@ public:
     void processorModelEventLoop(unsigned short cpt);
     void observableModelsEventLoop(unsigned short cpt);
 };
-
-}//namespace bundle
-}//namespace observablemodelloader
-}//namespace oplink
-}//namespace elekdom
-
+using QspObservableModelLoaderEmitter = QSharedPointer<ObservableModelLoaderEmitter>;
 #endif // OBSERVABLEMODELLOADEREMITTER_H

@@ -16,16 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "d201setoutput.h"
 #include "command/command-names.h"
 #include "command/command.h"
 #include "abstract_infrastructure/device/device.h"
 #include "packet/format/sentformat/eepcommandformat/D2/d201cmd1format.h"
 
-using namespace elekdom::oplink::enocean;
-
-D201SetOutput::D201SetOutput(const core::infrastructure::QspDevice &device):
+D201SetOutput::D201SetOutput(const oplink::QspDevice &device):
     D201CommandProcessor{device, new D201Cmd1Format}
 {
 
@@ -36,10 +33,10 @@ D201SetOutput::~D201SetOutput()
 
 }
 
-bool D201SetOutput::completePacket(core::command::QspCommand order)
+bool D201SetOutput::completePacket(oplink::QspCommand order)
 {
     bool ret;
-    const core::observable::PropertyName& pname{order->property()};
+    const oplink::PropertyName& pname{order->property()};
     int idx;
     quint8 valOutput;
 
@@ -53,11 +50,11 @@ bool D201SetOutput::completePacket(core::command::QspCommand order)
         {
             QString state{val.toString()};
 
-            if (state == core::command::CommandArgs::ON)
+            if (state == oplink::CommandArgs::ON)
             {
                 valOutput = 0x64;
             }
-            else if (state == core::command::CommandArgs::OFF)
+            else if (state == oplink::CommandArgs::OFF)
             {
                 valOutput = 0x00;
             }

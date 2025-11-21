@@ -16,61 +16,47 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLESERVICE_H
 #define OBSERVABLESERVICE_H
 
 #include <QHash>
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "service/serviceimplementation.h"
-#include "observable/observablenames.h"
+#include "observable/observable/observable.h"
+#include "observable/observable/observablebuilderscontainer.h"
 #include "command/command-names.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace engine
-{
-namespace service
-{
-using Hash_RegisteredObs = QHash<core::observable::ObservableName, core::observable::QspObservable>;
+using Hash_RegisteredObs = QHash<oplink::ObservableName, oplink::QspObservable>;
 
-class ObservableService : public plugframe::core::service::ServiceImplementation
+class ObservableService : public plugframe::ServiceImplementation
 {
 public:
-    ObservableService(plugframe::core::bundle::BundleImplementation *implementation);
+    ObservableService(plugframe::BundleImplementation *implementation);
     ~ObservableService() override;
 
 public:
-    bool submitOrder(core::command::StrOrder command);
-    bool subscribe(core::observable::ObservableName observableName,
-                   core::observable::ObservableSubscriber *subscriber);
-    bool unsubscribe(core::observable::ObservableName observableName,
-                     core::observable::ObservableSubscriber *subscriber);
-    bool propertyValue(core::observable::ObservableName observableName,
-                       core::observable::PropertyName propertyName,
+    bool submitOrder(oplink::StrOrder command);
+    bool subscribe(oplink::ObservableName observableName,
+                   oplink::ObservableSubscriber *subscriber);
+    bool unsubscribe(oplink::ObservableName observableName,
+                     oplink::ObservableSubscriber *subscriber);
+    bool propertyValue(oplink::ObservableName observableName,
+                       oplink::PropertyName propertyName,
                        QVariant& value);
-    core::observable::QspProperty property(core::observable::ObservableName observableName,
-                                           core::observable::PropertyName propertyName);
+    oplink::QspProperty property(oplink::ObservableName observableName,
+                                 oplink::PropertyName propertyName);
 
 public:
-    void registerObservables(const core::observable::QspObservableBuildersContainer& loadedObservables);
+    void registerObservables(const oplink::QspObservableBuildersContainer& loadedObservables);
 
 protected:
     QString serviceName() override;
 
 private:
-    core::observable::QspObservable lookupObservable(const core::observable::ObservableName& name);
+    oplink::QspObservable lookupObservable(const oplink::ObservableName& name);
 
 private:
     Hash_RegisteredObs m_registeredObservables;
-
 };
-
-}//namespace service
-}//namespace engine
-}//namespace oplink
-}//namespace elekdom
-
+using QspObservableService = QSharedPointer<ObservableService>;
 #endif // OBSERVABLESERVICE_H

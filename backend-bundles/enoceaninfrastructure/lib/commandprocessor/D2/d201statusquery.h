@@ -16,32 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201STATUSQUERY_H
 #define D201STATUSQUERY_H
 
 #include "d201commandprocessor.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 // EnOcean Command 0x03 : Actuator Status Query
 class D201StatusQuery : public D201CommandProcessor
 {
 public:
-    D201StatusQuery(const core::infrastructure::QspDevice& device);
+    D201StatusQuery(const oplink::QspDevice& device);
     virtual ~D201StatusQuery() override;
 
 protected:
-    bool completePacket(core::command::QspCommand order) override;
+    bool completePacket(oplink::QspCommand order) override;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // D201STATUSQUERY_H

@@ -16,26 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "observablestatesgroup.h"
 #include "observablestates.h"
 
-using namespace elekdom::oplink::core::remote;
-
-ObservableStatesGroup::ObservableStatesGroup(engine::service::ObservableServiceInterface *oService,
-                                             QObject *parent):
+oplink::ObservableStatesGroup::ObservableStatesGroup(oplink::ObservableServiceInterface *oService,
+                                                     QObject *parent):
     QObject{parent},
     m_observableService{oService}
 {
 
 }
 
-ObservableStatesGroup::~ObservableStatesGroup()
+oplink::ObservableStatesGroup::~ObservableStatesGroup()
 {
 
 }
 
-void ObservableStatesGroup::orderToObservable(const QString &order)
+void oplink::ObservableStatesGroup::orderToObservable(const QString &order)
 {
     if (m_observableService != nullptr)
     {
@@ -43,17 +40,17 @@ void ObservableStatesGroup::orderToObservable(const QString &order)
     }
 }
 
-void ObservableStatesGroup::addMonitoredObservable(const QString& observableName,
-                                                   const QStringList& propertyNames,
-                                                   core::remote::QspObservableStates remoteMonitored)
+void oplink::ObservableStatesGroup::addMonitoredObservable(const QString& observableName,
+                                                           const QStringList& propertyNames,
+                                                           oplink::QspObservableStates remoteMonitored)
 {
     if (m_observableService != nullptr)
     {
         //  find the properties to monitor (monitored states)
-        for (int i = 0; i < propertyNames.size(); ++i)
+        for (qsizetype i = 0; i < propertyNames.size(); ++i)
         {
             QString propertyName{propertyNames.at(i)};
-            observable::QspProperty property;
+            oplink::QspProperty property;
 
             property = m_observableService->property(observableName,propertyName);
             if (!property.isNull())
@@ -68,17 +65,17 @@ void ObservableStatesGroup::addMonitoredObservable(const QString& observableName
 
     // connect to states change
     connect(remoteMonitored.data(),
-            SIGNAL(stateChange(const observable::ObservableName&,const observable::PropertyName&,QVariant)),
-            SLOT(onStateChange(const observable::ObservableName&,const observable::PropertyName&,QVariant)));
+            SIGNAL(stateChange(oplink::ObservableName,oplink::PropertyName,QVariant)),
+            SLOT(onStateChange(oplink::ObservableName,oplink::PropertyName,QVariant)));
 }
 
 ///
 /// \brief ObservableStatesGroup::subscribe
 ///        subscribes to state changes and reports initial values
-void ObservableStatesGroup::subscribe()
+void oplink::ObservableStatesGroup::subscribe()
 {
-    QHash<observable::ObservableName,core::remote::QspObservableStates>::Iterator it{m_monitoredObservables.begin()};
-    core::remote::QspObservableStates curMonitored;
+    QHash<oplink::ObservableName,oplink::QspObservableStates>::Iterator it{m_monitoredObservables.begin()};
+    oplink::QspObservableStates curMonitored;
     QString observableName;
 
     if (m_observableService != nullptr)
@@ -100,10 +97,10 @@ void ObservableStatesGroup::subscribe()
     }
 }
 
-void ObservableStatesGroup::unsubscribe()
+void oplink::ObservableStatesGroup::unsubscribe()
 {
-    QHash<observable::ObservableName,core::remote::QspObservableStates>::Iterator it{m_monitoredObservables.begin()};
-    core::remote::QspObservableStates curMonitored;
+    QHash<oplink::ObservableName,oplink::QspObservableStates>::Iterator it{m_monitoredObservables.begin()};
+    oplink::QspObservableStates curMonitored;
     QString observableName;
 
     if (m_observableService != nullptr)

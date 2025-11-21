@@ -16,12 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "propertyclassnames.h"
 
-using namespace elekdom::oplink::core::observable;
-
-const PropertyType PropertyClassNames::PROPERTY_CLASS {"property_class"};
-const PropertyType PropertyClassNames::LOAD_PROPERTY_CLASS{"load_property_class"};
-const PropertyType PropertyClassNames::ACTUATOR_PROPERTY_CLASS{"actuator_property_class"};
-const PropertyType PropertyClassNames::SENSOR_PROPERTY_CLASS{"sensor_property_class"};
+const oplink::PropertyType oplink::PropertyClassNames::PROPERTY_CLASS {"property_class"};
+const oplink::PropertyType oplink::PropertyClassNames::LOAD_PROPERTY_CLASS{"load_property_class"};
+const oplink::PropertyType oplink::PropertyClassNames::ACTUATOR_PROPERTY_CLASS{"actuator_property_class"};
+const oplink::PropertyType oplink::PropertyClassNames::SENSOR_PROPERTY_CLASS{"sensor_property_class"};

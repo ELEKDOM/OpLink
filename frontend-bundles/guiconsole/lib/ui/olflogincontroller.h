@@ -16,21 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLFLOGINCONTROLLER_H
 #define OLFLOGINCONTROLLER_H
 
+#include <QSharedPointer>
 #include "olfconsolecontroller.h"
 #include "olfconsole_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace frontend
-{
-namespace guiconsole
-{
 
 class OlfLoginController : public OlfConsoleController
 {
@@ -41,7 +32,7 @@ private:
     static inline QString LoginPageCtrlName() {return QStringLiteral("Login");}   
 
 public:
-    OlfLoginController(bundle::OlfConsole& console,
+    OlfLoginController(OlfConsole& console,
                        int maxLoginAttempts,
                        QObject *parent = nullptr);
     ~OlfLoginController() override;
@@ -71,10 +62,5 @@ private:
     int     m_siginAttempsNumber;
     QString m_identifier;
 };
-
-} //namespace guiconsole
-} //namespace frontend
-} //namespace oplink
-} //namespace elekdom
-
+using QspOlfLoginController = QSharedPointer<OlfLoginController>;
 #endif // OLFLOGINCONTROLLER_H

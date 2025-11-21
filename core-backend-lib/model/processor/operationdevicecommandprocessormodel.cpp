@@ -16,36 +16,33 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "operationdevicecommandprocessormodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "model/observable/operationdevicebuilderargs.h"
+#include "observable/processor/operationdevicecommandprocessor.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"
-#include "observable/processor/operationdevicecommandprocessor.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-OperationDeviceCommandProcessorModel::OperationDeviceCommandProcessorModel(const ProcessorModelName& modelName,
-                                                                                 const command::CommandName& commandName):
+oplink::OperationDeviceCommandProcessorModel::OperationDeviceCommandProcessorModel(const oplink::ProcessorModelName& modelName,
+                                                                                   const oplink::CommandName& commandName):
     LowCommandProcessorModel{modelName, commandName}
 {
 
 }
 
-OperationDeviceCommandProcessorModel::~OperationDeviceCommandProcessorModel()
+oplink::OperationDeviceCommandProcessorModel::~OperationDeviceCommandProcessorModel()
 {
 
 }
 
-observable::CommandProcessor *OperationDeviceCommandProcessorModel::createProcessor(const observable::Observable &parent,
-                                                                                          QspObservableBuilderArgs builderArgs)
+oplink::CommandProcessor *oplink::OperationDeviceCommandProcessorModel::createProcessor(const oplink::Observable &parent,
+                                                                                        oplink::QspObservableBuilderArgs builderArgs)
 {
-    model::QspOperationDeviceBuilderArgs operationDeviceBuilderArgs{builderArgs.dynamicCast<OperationDeviceBuilderArgs>()};
-    infrastructure::QspDeviceCommandProcessor deviceCommandProcessor{operationDeviceBuilderArgs->m_deviceBuilder->createDeviceProcessor(commandName(),
-                                                                                                                                           operationDeviceBuilderArgs->m_deviceModelName,
-                                                                                                                                           operationDeviceBuilderArgs->m_device)};
-
-    return createInstance(parent, deviceCommandProcessor);
+    OperationDeviceCommandProcessor *ret;
+    oplink::QspOperationDeviceBuilderArgs operationDeviceBuilderArgs{builderArgs.dynamicCast<oplink::OperationDeviceBuilderArgs>()};
+    oplink::QspDeviceCommandProcessor deviceCommandProcessor{operationDeviceBuilderArgs->m_deviceBuilder->createDeviceProcessor(commandName(),
+                                                                                                                                operationDeviceBuilderArgs->m_deviceModelName,
+                                                                                                                                operationDeviceBuilderArgs->m_device)};
+    ret = createInstance(parent, deviceCommandProcessor);
+    return ret;
 }

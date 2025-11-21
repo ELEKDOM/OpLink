@@ -16,53 +16,41 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OPERATIONDEVICEBUILDERARGS_H
 #define OPERATIONDEVICEBUILDERARGS_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "model/observable/observablebuilderargs.h"
 #include "observable/observablenames.h"
 #include "model/modelnames.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "abstract_infrastructure/loading/devicebuilder.h"
+#include "olcore-backend-lib_export.h"
 
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace model
-{
-
 class OLCORE_BACKEND_LIB_EXPORT OperationDeviceBuilderArgs : public ObservableBuilderArgs
 {
 public:
-    OperationDeviceBuilderArgs(const observable::ObservableName& observableName,
-                                  const ObservableModelName& observableModelName,
-                                  const observable::LocalisationName& observableLocalisation,
-                                  const infrastructure::DeviceId& deviceId,
-                                  const infrastructure::DeviceModelName& deviceModelName,
-                                  const infrastructure::QspDeviceBuilder& deviceBuilder,
-                                  const infrastructure::DeviceChannelsBinding& deviceChannelsBinding);
+    OperationDeviceBuilderArgs(const ObservableName& observableName,
+                               const ObservableModelName& observableModelName,
+                               const LocalisationName& observableLocalisation,
+                               const DeviceId& deviceId,
+                               const DeviceModelName& deviceModelName,
+                               const QspDeviceBuilder& deviceBuilder,
+                               const DeviceChannelsBinding& deviceChannelsBinding);
     ~OperationDeviceBuilderArgs() override;
 
 public:
-    void setDevice(const infrastructure::QspDevice& device) {m_device = device;}
+    void setDevice(const QspDevice& device) {m_device = device;}
 
 public:
-    const infrastructure::DeviceId&              m_deviceId;
-    const infrastructure::DeviceModelName&       m_deviceModelName;
-    const infrastructure::QspDeviceBuilder&      m_deviceBuilder;
-    infrastructure::QspDevice                    m_device;
-    const infrastructure::DeviceChannelsBinding& m_deviceChannelsBinding;
+    const DeviceId&              m_deviceId;
+    const DeviceModelName&       m_deviceModelName;
+    const QspDeviceBuilder&      m_deviceBuilder;
+    QspDevice                    m_device;
+    const DeviceChannelsBinding& m_deviceChannelsBinding;
 };
-
-}//namespace model
-}//namespace core
+using QspOperationDeviceBuilderArgs = QSharedPointer<OperationDeviceBuilderArgs>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OPERATIONDEVICEBUILDERARGS_H

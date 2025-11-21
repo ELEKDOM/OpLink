@@ -16,39 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTUREWORKEROUTS_H
 #define INFRASTRUCTUREWORKEROUTS_H
 
-#include "olcore-backend-lib_export.h"
 #include "worker/workerouts.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "olcore-backend-lib_export.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureWorkerOuts : public worker::WorkerOuts
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureWorkerOuts : public plugframe::WorkerOuts
 {
 public:
     InfrastructureName m_infrastructureName;
 
 public:
     InfrastructureWorkerOuts(InfrastructureName infrastructureName,
-                                bool retFlag);
+                             bool retFlag);
     ~InfrastructureWorkerOuts() override;
 };
-
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTUREWORKEROUTS_H

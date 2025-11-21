@@ -16,28 +16,26 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "commandprocessor.h"
 #include "observable/observablelogchannel.h"
 #include "command/command.h"
 #include "observable/observable/observable.h"
 
-using namespace elekdom::oplink::core::observable;
-
-CommandProcessor::CommandProcessor(const Observable& observable, const command::CommandName& cmdName):
-    plugframe::core::logger::Loggable{s_ObservableLogChannel},
+oplink::CommandProcessor::CommandProcessor(const oplink::Observable& observable,
+                                           const oplink::CommandName& cmdName):
+    plugframe::Loggable{s_ObservableLogChannel},
     m_observable{observable},
     m_cmdName{cmdName}
 {
 
 }
 
-CommandProcessor::~CommandProcessor()
+oplink::CommandProcessor::~CommandProcessor()
 {
 
 }
 
-bool CommandProcessor::acceptCmd(command::QspCommand order)
+bool oplink::CommandProcessor::acceptCmd(oplink::QspCommand order)
 {
     bool ret{checkTarget(order)};
 
@@ -49,7 +47,7 @@ bool CommandProcessor::acceptCmd(command::QspCommand order)
     return ret;
 }
 
-bool CommandProcessor::checkTarget(command::QspCommand &order)
+bool oplink::CommandProcessor::checkTarget(oplink::QspCommand &order)
 {
     bool ret;
 

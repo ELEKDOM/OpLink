@@ -16,36 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef LOADCOMMANDPROCESSOR_H
 #define LOADCOMMANDPROCESSOR_H
 
 #include "lowcommandprocessor.h"
-#include "olcore-backend-lib_forward.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-class LoadCommandProcessor : public LowCommandProcessor
+class OLCORE_BACKEND_LIB_EXPORT LoadCommandProcessor : public LowCommandProcessor
 {
 public:
     LoadCommandProcessor(const Observable& observable,
-                            const command::CommandName& cmdName);
+                         const CommandName& cmdName);
     ~LoadCommandProcessor() override;
 
 protected:
-    void process(command::QspCommand order) override;
+    void process(QspCommand order) override;
 };
-
-}//namespace observable
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // LOADCOMMANDPROCESSOR_H

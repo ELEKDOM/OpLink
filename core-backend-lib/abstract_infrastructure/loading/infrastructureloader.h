@@ -16,33 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTURELOADER_H
 #define INFRASTRUCTURELOADER_H
 
 #include <QList>
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "worker/worker.h"
 #include "abstract_infrastructure/loading/infrastructurestore.h"
+#include "abstract_infrastructure/loading/deviceprocessorbuilder.h"
+#include "abstract_infrastructure/loading/devicebuilder.h"
+#include "abstract_infrastructure/area/area.h"
 #include "abstract_infrastructure/infrastructure-names.h"
+#include "observable/observable/observablebuilderscontainer.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructureLoader : public worker::Worker, public InfrastructureStore
+class OLCORE_BACKEND_LIB_EXPORT InfrastructureLoader : public plugframe::Worker, public InfrastructureStore
 {
     Q_OBJECT
 
 public:
     InfrastructureLoader(const QString& logChannel,
-                            InfrastructureLoadingOperations& infrastructure);
+                         InfrastructureLoadingOperations& infrastructure);
     virtual ~InfrastructureLoader();
 
 public:
@@ -73,28 +70,24 @@ protected: // Store
                            const QString& deviceModelName,
                            const QString& localisation,
                            const DeviceChannelsBinding& deviceChannelsBinding);
-    virtual worker::WorkerOuts *readFinished(bool readStatus);
+    virtual plugframe::WorkerOuts *readFinished(bool readStatus);
 
 protected:
     virtual Area *createArea(const QString& areaName) = 0;
     virtual AreaGateway *createGateway(GatewayArgs &gatewayArgs) = 0;
 
 private: // Worker
-    worker::WorkerArgs *createLoaderWorkerArgs(const QString &confFileName);
-    worker::WorkerOuts *createLoaderWorkerOuts();
+    plugframe::WorkerArgs *createLoaderWorkerArgs(const QString &confFileName);
+    plugframe::WorkerOuts *createLoaderWorkerOuts();
 
 private:
-    InfrastructureLoadingOperations&    m_infrastructure;
-    QspDeviceBuilder                    m_deviceBuilder;
-    observable::QspObservableBuildersContainer m_loadedObservables;
-    QList<QspArea>                      m_loadedAreas;
-    QspArea                             m_curArea; // keeps the area in loading progress
-    InfrastructureName                  m_infrastructureName;
+    InfrastructureLoadingOperations& m_infrastructure;
+    QspDeviceBuilder                 m_deviceBuilder;
+    QspObservableBuildersContainer   m_loadedObservables;
+    QList<QspArea>                   m_loadedAreas;
+    QspArea                          m_curArea; // keeps the area in loading progress
+    InfrastructureName               m_infrastructureName;
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspInfrastructureLoader = QSharedPointer<InfrastructureLoader>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTURELOADER_H

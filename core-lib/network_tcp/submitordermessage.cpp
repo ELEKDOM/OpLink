@@ -16,18 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "submitordermessage.h"
+#include "messagetype.h"
 
-using namespace elekdom::oplink::core::tcp;
-SubmitOrderMessage::SubmitOrderMessage(quint32 sessionId, QString order):
-    SessionMessage{static_cast<quint16>(MessageType::SubmitOrder),sessionId},
+oplink::SubmitOrderMessage::SubmitOrderMessage(quint32 sessionId, QString order):
+    oplink::SessionMessage{static_cast<quint16>(oplink::MessageType::SubmitOrder),sessionId},
     m_order{order}
 {
 
 }
 
-SubmitOrderMessage::~SubmitOrderMessage()
+oplink::SubmitOrderMessage::~SubmitOrderMessage()
 {
 
 }

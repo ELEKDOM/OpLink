@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef COMMONCOMMANDFORMAT_H
 #define COMMONCOMMANDFORMAT_H
 
+#include <QSharedPointer>
 #include "packet/format/sentformat/esp3sentpacketformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class CommonCommandFormat : public Esp3SentPacketFormat
 {
@@ -41,9 +34,5 @@ public:
 protected:
     void fillInData() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspCommonCommandFormat = QSharedPointer<CommonCommandFormat>;
 #endif // COMMONCOMMANDFORMAT_H

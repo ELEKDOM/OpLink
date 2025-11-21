@@ -16,23 +16,15 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef SESSIONCONFHOOK_H
 #define SESSIONCONFHOOK_H
 
-#include "xmldom/browserhook.h"
+#include "xmldom/xmlbrowserhook.h"
 #include "olcore-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace remote
-{
-
-class OLCORE_LIB_EXPORT SessionConfHook : public plugframe::core::xmldom::BrowserHook
+class OLCORE_LIB_EXPORT SessionConfHook : public plugframe::XmlBrowserHook
 {
 public:
     ~SessionConfHook() override {}
@@ -45,10 +37,5 @@ public:
     virtual void endObservableDeclaration() = 0;
     virtual void propertyDeclaration(QString propertyName) = 0;
 };
-
-}//namespace remote
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // SESSIONCONFHOOK_H

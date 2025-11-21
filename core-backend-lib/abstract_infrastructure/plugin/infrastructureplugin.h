@@ -16,28 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef INFRASTRUCTUREPLUGIN_H
 #define INFRASTRUCTUREPLUGIN_H
 
 #include "plugin/plugin.h"
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
 #include "service-int/infrastructurecontrolserviceinterface.h"
+#include "abstract_infrastructure/service/infrastructurecontrolservice.h"
+#include "olcore-backend-lib_export.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-namespace plugin
-{
-
-class OLCORE_BACKEND_LIB_EXPORT InfrastructurePlugin : public plugframe::core::plugin::Plugin,
-                                                       public infrastructure::service::InfrastructureControlServiceInterface
+class OLCORE_BACKEND_LIB_EXPORT InfrastructurePlugin : public plugframe::Plugin,
+                                                       public InfrastructureControlServiceInterface
 {
 public:
     InfrastructurePlugin();
@@ -48,18 +38,12 @@ protected: // Plugin
 
 protected: // InfrastructureControlServiceInterface
     const InfrastructureName& getInfrastructureName() override;
-    bool startLoadingInfrastructure(plugframe::core::worker::WorkerWatcher *workerWatcher,
+    bool startLoadingInfrastructure(plugframe::WorkerWatcher *workerWatcher,
                                     OperationalMode mode = OperationalMode::Operating) override;
     bool loadingFinished() override;
 
 private:
-    infrastructure::service::QspInfrastructureControlService m_controlServiceImpl;
+    QspInfrastructureControlService m_controlServiceImpl;
 };
-
-}//namespace plugin
-}//namespace infrastructure
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // INFRASTRUCTUREPLUGIN_H

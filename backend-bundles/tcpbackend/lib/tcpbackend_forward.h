@@ -16,22 +16,9 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef TCPBACKEND_FORWARD_H
 #define TCPBACKEND_FORWARD_H
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace tcpbackend
-{
-    namespace bundle
-    {
-        class TcpBackend;
-    }
+class TcpBackend;
 
-} //namespace tcpbackend
-} //namespace oplink
-} //namespace elekdom
 #endif // TCPBACKEND_FORWARD_H

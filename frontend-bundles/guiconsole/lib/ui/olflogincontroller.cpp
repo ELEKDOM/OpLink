@@ -16,14 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "olflogincontroller.h"
 #include "olfloginview.h"
 #include "olfconsole.h"
 
-using namespace elekdom::oplink::frontend::guiconsole;
-
-OlfLoginController::OlfLoginController(bundle::OlfConsole& console,
+OlfLoginController::OlfLoginController(OlfConsole& console,
                                        int maxLoginAttempts,
                                        QObject *parent):
     OlfConsoleController{console,

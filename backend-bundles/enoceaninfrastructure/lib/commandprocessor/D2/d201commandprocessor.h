@@ -16,30 +16,17 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201COMMANDPROCESSOR_H
 #define D201COMMANDPROCESSOR_H
 
 #include "d2commandprocessor.h"
-#include "olcore-backend-lib_forward.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class D201CommandProcessor : public D2CommandProcessor
 {
 public:
-    D201CommandProcessor(const core::infrastructure::QspDevice& device,
+    D201CommandProcessor(const oplink::QspDevice& device,
                          EepCommandFormat *sentCommandFormat);
     ~D201CommandProcessor() override;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
 
 #endif // D201COMMANDPROCESSOR_H

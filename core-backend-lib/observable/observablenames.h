@@ -16,31 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLENAMES_H
 #define OBSERVABLENAMES_H
 
 #include <QString>
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace observable
-{
-
-using ObservableName = QString;
-using ObservableType = QString;
-using LocalisationName = QString;
-using PropertyName = QString;
-using PropertyType = QString;
-using ProcessorType = QString;
-
-}//namespace observable
-}//namespace core
+    using ObservableName = QString;
+    using ObservableType = QString;
+    using LocalisationName = QString;
+    using PropertyName = QString;
+    using PropertyType = QString;
+    using ProcessorType = QString;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // OBSERVABLENAMES_H

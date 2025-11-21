@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D5EEP_H
 #define D5EEP_H
 
@@ -24,18 +23,11 @@
 #include "abstract_infrastructure/device/devicehook.h"
 #include "enoceanequipmentprofile.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class D5Eep : public EnoceanEquipmentProfile
 {
 public:
-    D5Eep(const core::infrastructure::DeviceId& id,
-          core::infrastructure::DeviceHook& deviceHook,
+    D5Eep(const oplink::DeviceId& id,
+          oplink::DeviceHook& deviceHook,
           EepTelegramFormat *msgFormat);
     ~D5Eep() override;
 
@@ -43,9 +35,5 @@ protected:
     void recoverState() override;
     bool processTelegram() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // D5EEP_H

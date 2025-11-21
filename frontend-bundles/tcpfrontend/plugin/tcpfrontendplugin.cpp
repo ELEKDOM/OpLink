@@ -16,12 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "tcpfrontendplugin.h"
 #include "tcpfrontend.h"
-
-using namespace elekdom::plugframe;
-using namespace elekdom::oplink::tcpfrontend::plugin;
 
 TcpFrontendPlugin::TcpFrontendPlugin()
 {
@@ -33,7 +29,7 @@ TcpFrontendPlugin::~TcpFrontendPlugin()
 
 }
 
-core::bundle::Bundle4PluginInterface *TcpFrontendPlugin::createImplementation()
+plugframe::Bundle4PluginInterface *TcpFrontendPlugin::createImplementation()
 {
-    return new tcpfrontend::bundle::TcpFrontend;
+    return new TcpFrontend;
 }

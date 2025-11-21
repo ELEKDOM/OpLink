@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "packet/format/receivedformat/eeptelegram/f602telegramformat.h"
-
-using namespace elekdom::oplink::enocean;
 
 F602TelegramFormat::F602TelegramFormat()
 {

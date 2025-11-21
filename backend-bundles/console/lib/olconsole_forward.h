@@ -16,23 +16,10 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OLCONSOLE_FORWARD_H
 #define OLCONSOLE_FORWARD_H
 
-#include <QSharedPointer>
+class OlConsole;
+class SubscribeCmdProcessor;
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace console
-{
-    namespace bundle
-    {
-        class OlConsole;
-    }
-}//namespace console
-}//namespace oplink
-}//namespace elekdom
 #endif // OLCONSOLE_FORWARD_H

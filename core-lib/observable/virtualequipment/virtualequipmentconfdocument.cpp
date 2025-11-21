@@ -16,17 +16,14 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentconfdocument.h"
 #include "virtualequipmentloaderhook.h"
 
-using namespace elekdom::oplink::core::virtualequipment;
-
-VirtualEquipmentConfDocument::VirtualEquipmentConfDocument(VirtualEquipmentLoaderHook& browserHook) :
-    plugframe::core::xmldom::Document{browserHook}
+oplink::VirtualEquipmentConfDocument::VirtualEquipmentConfDocument(oplink::VirtualEquipmentLoaderHook& browserHook) :
+    plugframe::XmlDocument{browserHook}
 {}
 
-VirtualEquipmentConfDocument::~VirtualEquipmentConfDocument()
+oplink::VirtualEquipmentConfDocument::~VirtualEquipmentConfDocument()
 {
 
 }

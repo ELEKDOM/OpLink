@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "actuatormodel.h"
 #include "model/observable/observablebuilderargs.h"
 #include "model/observable/actuatorbuilderargs.h"
@@ -28,31 +27,28 @@
 #include "abstract_infrastructure/loading/actuatoroutput.h"
 #include "abstract_infrastructure/loading/actuatoroutputsbinding.h"
 
-using namespace elekdom::oplink::core::model;
-using namespace elekdom::oplink::core;
-
-ActuatorModel::ActuatorModel(const ObservableModelName &name) :
+oplink::ActuatorModel::ActuatorModel(const ObservableModelName &name) :
     OperationDeviceModel{name}
 {
 
 }
 
-ActuatorModel::~ActuatorModel()
+oplink::ActuatorModel::~ActuatorModel()
 {
 
 }
 
-bool ActuatorModel::checkBuilderArgs(QspObservableBuilderArgs builderArgs)
+bool oplink::ActuatorModel::checkBuilderArgs(oplink::QspObservableBuilderArgs builderArgs)
 {
-    QspActuatorBuilderArgs actuatorArgs{builderArgs.dynamicCast<ActuatorBuilderArgs>()};
+    oplink::QspActuatorBuilderArgs actuatorArgs{builderArgs.dynamicCast<oplink::ActuatorBuilderArgs>()};
     return !actuatorArgs.isNull();
 }
 
-bool ActuatorModel::buildProperties(observable::QspObservableBuilder observableBuilder,
-                                      QspObservableBuilderArgs builderArgs)
+bool oplink::ActuatorModel::buildProperties(oplink::QspObservableBuilder observableBuilder,
+                                            oplink::QspObservableBuilderArgs builderArgs)
 {
     bool ret{false};
-    QspActuatorBuilderArgs actuatorBuilderArgs{builderArgs.dynamicCast<ActuatorBuilderArgs>()};
+    oplink::QspActuatorBuilderArgs actuatorBuilderArgs{builderArgs.dynamicCast<ActuatorBuilderArgs>()};
 
     if (!actuatorBuilderArgs.isNull())
     {
@@ -68,25 +64,25 @@ bool ActuatorModel::buildProperties(observable::QspObservableBuilder observableB
     return ret;
 }
 
-bool ActuatorModel::bindOutputs(observable::QspObservableBuilder actuatorBuilder,
-                                  const infrastructure::ActuatorOutputsBinding& actuatorOutputsBinding,
-                                  const observable::QspObservableBuildersContainer &loadedObservables)
+bool oplink::ActuatorModel::bindOutputs(oplink::QspObservableBuilder actuatorBuilder,
+                                  const oplink::ActuatorOutputsBinding& actuatorOutputsBinding,
+                                  const oplink::QspObservableBuildersContainer &loadedObservables)
 {
     bool ret{true};
 
-    for (int i = 0; i < actuatorOutputsBinding.size() && ret; i++)
+    for (qsizetype i = 0; i < actuatorOutputsBinding.size() && ret; i++)
     {
-        const infrastructure::ActuatorOutput&  binding{actuatorOutputsBinding.at(i)};
-        observable::QspProperty                property;
-        observable::QspOperationDeviceProperty actuatorProperty;
-        observable::QspLoadProperty            loadProperty;
-        observable::QspObservableBuilder       loadBuilder;
+        const oplink::ActuatorOutput&  binding{actuatorOutputsBinding.at(i)};
+        oplink::QspProperty                property;
+        oplink::QspOperationDeviceProperty actuatorProperty;
+        oplink::QspLoadProperty            loadProperty;
+        oplink::QspObservableBuilder       loadBuilder;
 
         property = actuatorBuilder->property(binding.m_actuatorPropertyName);
-        actuatorProperty = property.dynamicCast<observable::OperationDeviceProperty>();
+        actuatorProperty = property.dynamicCast<oplink::OperationDeviceProperty>();
         loadedObservables->find(binding.m_loadName, loadBuilder);
         property = loadBuilder->property(binding.m_loadPropertyName);
-        loadProperty = property.dynamicCast<observable::LoadProperty>();
+        loadProperty = property.dynamicCast<oplink::LoadProperty>();
 
         // create links between properties
         ret = !actuatorProperty.isNull() && !loadProperty.isNull();

@@ -16,23 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANOPERATINGDEVICEPROCESSORBUILDER_H
 #define ENOCEANOPERATINGDEVICEPROCESSORBUILDER_H
 
 #include "enoceandeviceprocessorbuilder.h"
-#include "enoceaninfrastructure_forward.h"
 #include "command/command-names.h"
 #include "abstract_infrastructure/infrastructure-names.h"
-
-using namespace elekdom::oplink::core;
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
+#include "enoceaninfrastructure_forward.h"
 
 class EnoceanOperatingDeviceProcessorBuilder : public EnoceanDeviceProcessorBuilder
 {
@@ -41,23 +31,19 @@ public:
     ~EnoceanOperatingDeviceProcessorBuilder() override;
 
 protected:
-    infrastructure::DeviceCommandProcessor *createDeviceProcessor(const command::CommandName& commandName,
-                                                                     const infrastructure::DeviceModelName& deviceModelName,
-                                                                     const infrastructure::QspDevice& device) override;
-    virtual D201StatusQuery *createSynchronizeD20112processor(const infrastructure::QspDevice& device);
-    virtual D201SetOutput *createSetD20112processor(const infrastructure::QspDevice& device);
-    virtual D201PilotWireModeQuery *createSynchronizeD2010Cprocessor(const infrastructure::QspDevice& device);
-    virtual D201SetPilotWireMode *createSetD2010Cprocessor(const infrastructure::QspDevice& device);
-    virtual D201MeasurementEnergyQuery *createEnergyD2010Cprocessor(const infrastructure::QspDevice& device);
-    virtual D201MeasurementPowerQuery *createPowerD2010Cprocessor(const infrastructure::QspDevice& device);
-    virtual D201StatusQuery *createSynchronizeD2010Eprocessor(const infrastructure::QspDevice& device);
-    virtual D201SetOutput *createSetD2010Eprocessor(const infrastructure::QspDevice& device);
-    virtual D201MeasurementEnergyQuery *createEnergyD2010Eprocessor(const infrastructure::QspDevice& device);
-    virtual D201MeasurementPowerQuery *createPowerD2010Eprocessor(const infrastructure::QspDevice& device);
+    oplink::DeviceCommandProcessor *createDeviceProcessor(const oplink::CommandName& commandName,
+                                                          const oplink::DeviceModelName& deviceModelName,
+                                                          const oplink::QspDevice& device) override;
+    virtual D201StatusQuery *createSynchronizeD20112processor(const oplink::QspDevice& device);
+    virtual D201SetOutput *createSetD20112processor(const oplink::QspDevice& device);
+    virtual D201PilotWireModeQuery *createSynchronizeD2010Cprocessor(const oplink::QspDevice& device);
+    virtual D201SetPilotWireMode *createSetD2010Cprocessor(const oplink::QspDevice& device);
+    virtual D201MeasurementEnergyQuery *createEnergyD2010Cprocessor(const oplink::QspDevice& device);
+    virtual D201MeasurementPowerQuery *createPowerD2010Cprocessor(const oplink::QspDevice& device);
+    virtual D201StatusQuery *createSynchronizeD2010Eprocessor(const oplink::QspDevice& device);
+    virtual D201SetOutput *createSetD2010Eprocessor(const oplink::QspDevice& device);
+    virtual D201MeasurementEnergyQuery *createEnergyD2010Eprocessor(const oplink::QspDevice& device);
+    virtual D201MeasurementPowerQuery *createPowerD2010Eprocessor(const oplink::QspDevice& device);
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
 
 #endif // ENOCEANOPERATINGDEVICEPROCESSORBUILDER_H

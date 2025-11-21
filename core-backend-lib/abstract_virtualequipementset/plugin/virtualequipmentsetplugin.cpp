@@ -16,42 +16,39 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "virtualequipmentsetplugin.h"
 #include "bundle/bundle4plugininterface.h"
 #include "abstract_virtualequipementset/service/virtualequipmentsetservice.h"
 
-using namespace elekdom::oplink::core::virtualequipmentset::plugin;
-
-VirtualEquipmentSetPlugin::VirtualEquipmentSetPlugin()
+oplink::VirtualEquipmentSetPlugin::VirtualEquipmentSetPlugin()
 {
 
 }
 
-VirtualEquipmentSetPlugin::~VirtualEquipmentSetPlugin()
+oplink::VirtualEquipmentSetPlugin::~VirtualEquipmentSetPlugin()
 {
 
 }
 
-void VirtualEquipmentSetPlugin::bindServicesImplementations()
+void oplink::VirtualEquipmentSetPlugin::bindServicesImplementations()
 {
-    plugframe::core::service::QspServiceImplementationInterface serviceImplementationItf;
+    plugframe::QspServiceImplementationInterface serviceImplementationItf;
 
-    serviceImplementationItf = implementation()->getServiceImplementation(VirtualEquipmentSetServiceInterface::serviceName());
-    m_virtualEquipmentSetServiceImpl = serviceImplementationItf.dynamicCast<service::VirtualEquipmentSetService>();
+    serviceImplementationItf = implementation()->getServiceImplementation(oplink::VirtualEquipmentSetServiceInterface::serviceName());
+    m_virtualEquipmentSetServiceImpl = serviceImplementationItf.dynamicCast<oplink::VirtualEquipmentSetService>();
 }
 
-const QString &VirtualEquipmentSetPlugin::getVirtualEquipmentSetName()
+const QString& oplink::VirtualEquipmentSetPlugin::getVirtualEquipmentSetName()
 {
     return m_virtualEquipmentSetServiceImpl->getVirtualEquipmentSetName();
 }
 
-bool VirtualEquipmentSetPlugin::startLoading(plugframe::core::worker::WorkerWatcher *workerWatcher)
+bool oplink::VirtualEquipmentSetPlugin::startLoading(plugframe::WorkerWatcher *workerWatcher)
 {
     return m_virtualEquipmentSetServiceImpl->startLoading(workerWatcher);
 }
 
-bool VirtualEquipmentSetPlugin::loadingFinished()
+bool oplink::VirtualEquipmentSetPlugin::loadingFinished()
 {
     return m_virtualEquipmentSetServiceImpl->loadingFinished();
 }

@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QSettings>
 #include <QScopedPointer>
 #include <QCryptographicHash>
@@ -25,6 +24,7 @@
 #include "bundle/bundlecontext.h"
 #include "ui/olflogincontroller.h"
 #include "ui/olfmonitoredobservablescontroller.h"
+#include "network_tcp/messagetype.h"
 #include "network_tcp/signinmessage.h"
 #include "network_tcp/signinreplymessage.h"
 #include "network_tcp/signoutmessage.h"
@@ -35,11 +35,6 @@
 #include "network_tcp/statevaluemessage.h"
 #include "network_tcp/submitordermessage.h"
 #include "logger/pflog.h"
-
-using namespace elekdom::plugframe::core::bundle;
-using namespace elekdom::plugframe::guidisplay::service;
-using namespace elekdom::oplink::core::tcp;
-using namespace elekdom::oplink::frontend::guiconsole::bundle;
 
 OlfConsole::OlfConsole():
     m_frontendTcpService{nullptr}
@@ -54,7 +49,7 @@ OlfConsole::~OlfConsole()
 
 void OlfConsole::sendSigninToServer(QString identifier, QString passwd)
 {
-    QScopedPointer<Message> msg;
+    QScopedPointer<oplink::Message> msg;
     QString cryptedPwd;
 
     // crypt
@@ -69,7 +64,7 @@ void OlfConsole::sendSigninToServer(QString identifier, QString passwd)
 
 void OlfConsole::logOut()
 {
-    QScopedPointer<Message> msg;
+    QScopedPointer<oplink::Message> msg;
 
     // message for server
     msg.reset(createSignoutMessage());
@@ -83,7 +78,7 @@ void OlfConsole::logOut()
 
 void OlfConsole::sendDownloadConfToServer()
 {
-    QScopedPointer<Message> msg;
+    QScopedPointer<oplink::Message> msg;
 
     // message for server
     msg.reset(createDownLoadConfigMessage());
@@ -94,7 +89,7 @@ void OlfConsole::sendDownloadConfToServer()
 
 void OlfConsole::sendReadyToServer()
 {
-    QScopedPointer<Message> msg;
+    QScopedPointer<oplink::Message> msg;
 
     // message for server
     msg.reset(createReadyMessage());
@@ -105,7 +100,7 @@ void OlfConsole::sendReadyToServer()
 
 void OlfConsole::sendExecCmdToServer(QString cmd)
 {
-    QScopedPointer<Message> msg;
+    QScopedPointer<oplink::Message> msg;
 
     // message for server
     msg.reset(createSubmitOrderMessage(cmd));
@@ -114,21 +109,21 @@ void OlfConsole::sendExecCmdToServer(QString cmd)
     m_frontendTcpService->sendMessageToServer(*msg);
 }
 
-BundleFactory *OlfConsole::createFactory()
+plugframe::BundleFactory *OlfConsole::createFactory()
 {
-    return new factory::OlfConsoleFactory;
+    return new OlfConsoleFactory;
 }
 
-void OlfConsole::_start(plugframe::core::bundle::QspBundleContext bundleContext)
+void OlfConsole::_start(plugframe::QspBundleContext bundleContext)
 {
-    plugframe::guiconsole::bundle::GuiConsole::_start(bundleContext);
+    GuiConsole::_start(bundleContext);
     connectToServer();
 }
 
-void OlfConsole::buildControllerViews(plugframe::guidisplay::service::GuiBuilderServiceInterface *builderGuiServiceItf)
+void OlfConsole::buildControllerViews(plugframe::GuiBuilderServiceInterface *builderGuiServiceItf)
 {
-    factory::OlfConsoleFactory &factory{dynamic_cast<factory::OlfConsoleFactory&>(getFactory())};
-    plugframe::core::gui::QspGuiPageController qspCtrl;
+    OlfConsoleFactory &factory{dynamic_cast<OlfConsoleFactory&>(getFactory())};
+    plugframe::QspGuiPageController qspCtrl;
     int maxLoginAttempts;
     PageViewLayout monitoringViewLayout;
 
@@ -137,11 +132,11 @@ void OlfConsole::buildControllerViews(plugframe::guidisplay::service::GuiBuilder
     m_loginCtrl.reset(factory.createOlfLoginController(*this,maxLoginAttempts));
     m_monitoredObservablesCtrl.reset(factory.createOlfMonitoredObservablesController(*this,monitoringViewLayout));
 
-    qspCtrl = m_monitoredObservablesCtrl.dynamicCast<plugframe::core::gui::GuiPageController>();
+    qspCtrl = m_monitoredObservablesCtrl.dynamicCast<plugframe::GuiPageController>();
     qspCtrl->buildViews();
     builderGuiServiceItf->addGuiController(qspCtrl);
 
-    qspCtrl = m_loginCtrl.dynamicCast<plugframe::core::gui::GuiPageController>();
+    qspCtrl = m_loginCtrl.dynamicCast<plugframe::GuiPageController>();
     qspCtrl->buildViews();
     builderGuiServiceItf->addGuiController(qspCtrl);
     qspCtrl->currentCtrl();
@@ -164,19 +159,19 @@ void OlfConsole::disconnectedFromServer()
     closeSession(true);
 }
 
-void OlfConsole::messageFromServer(plugframe::core::tcp::TcpChannelMessage *msg)
+void OlfConsole::messageFromServer(plugframe::TcpChannelMessage *msg)
 {
     if (msg)
     {
         quint16 msgType{msg->msgType()};
 
-        // message types accepted from trhe server
+        // message types accepted from the server
         switch(msgType)
         {
-            case static_cast<quint16>(core::tcp::MessageType::SiginReply) :
+            case static_cast<quint16>(oplink::MessageType::SiginReply) :
                 if (m_loginCtrl->state() == OlfConsoleController::State::WaitingForUserLogin)
                 {
-                    processSiginReplyMessage(dynamic_cast<core::tcp::SigninReplyMessage*>(msg));
+                    processSiginReplyMessage(dynamic_cast<oplink::SigninReplyMessage*>(msg));
                 }
                 else
                 {
@@ -184,10 +179,10 @@ void OlfConsole::messageFromServer(plugframe::core::tcp::TcpChannelMessage *msg)
                 }
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::Signout) :
+            case static_cast<quint16>(oplink::MessageType::Signout) :
                 if (m_loginCtrl->state() == OlfConsoleController::State::UserLogged)
                 {
-                    processSignoutMessage(dynamic_cast<core::tcp::SignoutMessage*>(msg));
+                    processSignoutMessage(dynamic_cast<oplink::SignoutMessage*>(msg));
                 }
                 else
                 {
@@ -195,24 +190,24 @@ void OlfConsole::messageFromServer(plugframe::core::tcp::TcpChannelMessage *msg)
                 }
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::SessionStarted) :
+            case static_cast<quint16>(oplink::MessageType::SessionStarted) :
                 if (m_monitoredObservablesCtrl->state() == OlfConsoleController::State::WaitingForSessionStarted)
                 {
-                    processSessionStartedMessage(dynamic_cast<core::tcp::SessionStartedMessage*>(msg));
+                    processSessionStartedMessage(dynamic_cast<oplink::SessionStartedMessage*>(msg));
                 }
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::DownloadConfigReply) :
+            case static_cast<quint16>(oplink::MessageType::DownloadConfigReply) :
                 if (m_monitoredObservablesCtrl->state() == OlfConsoleController::State::WaitingForConfUpdate)
                 {
-                    processDownloadConfigReplyMessage(dynamic_cast<core::tcp::DownloadConfigReplyMessage*>(msg));
+                    processDownloadConfigReplyMessage(dynamic_cast<oplink::DownloadConfigReplyMessage*>(msg));
                 }
             break;
 
-            case static_cast<quint16>(core::tcp::MessageType::StateValue) :
+            case static_cast<quint16>(oplink::MessageType::StateValue) :
                 if (m_monitoredObservablesCtrl->state() == OlfConsoleController::State::SessionInProgress)
                 {
-                    processStateValueMessage(dynamic_cast<core::tcp::StateValueMessage*>(msg));
+                    processStateValueMessage(dynamic_cast<oplink::StateValueMessage*>(msg));
                 }
             break;
 
@@ -222,49 +217,49 @@ void OlfConsole::messageFromServer(plugframe::core::tcp::TcpChannelMessage *msg)
     }
 }
 
-SigninMessage *OlfConsole::createSigninMessage(QString identifier, QString password)
+oplink::SigninMessage *OlfConsole::createSigninMessage(QString identifier, QString password)
 {
-    return new SigninMessage(QStringLiteral("GuiQtDesktop"),
-                             m_frontendIp,
-                             identifier,
-                             password);
+    return new oplink::SigninMessage(QStringLiteral("GuiQtDesktop"),
+                                     m_frontendIp,
+                                     identifier,
+                                     password);
 }
 
-SignoutMessage *OlfConsole::createSignoutMessage()
+oplink::SignoutMessage *OlfConsole::createSignoutMessage()
 {
-    return new SignoutMessage(m_monitoredObservablesCtrl->sessionId());
+    return new oplink::SignoutMessage(m_monitoredObservablesCtrl->sessionId());
 }
 
-DownloadConfigMessage *OlfConsole::createDownLoadConfigMessage()
+oplink::DownloadConfigMessage *OlfConsole::createDownLoadConfigMessage()
 {
-    return new DownloadConfigMessage(m_monitoredObservablesCtrl->sessionId());
+    return new oplink::DownloadConfigMessage(m_monitoredObservablesCtrl->sessionId());
 }
 
-ReadyMessage *OlfConsole::createReadyMessage()
+oplink::ReadyMessage *OlfConsole::createReadyMessage()
 {
-    return new ReadyMessage(m_monitoredObservablesCtrl->sessionId());
+    return new oplink::ReadyMessage(m_monitoredObservablesCtrl->sessionId());
 }
 
-SubmitOrderMessage *OlfConsole::createSubmitOrderMessage(QString order)
+oplink::SubmitOrderMessage *OlfConsole::createSubmitOrderMessage(QString order)
 {
-    return new SubmitOrderMessage(m_monitoredObservablesCtrl->sessionId(),order);
+    return new oplink::SubmitOrderMessage(m_monitoredObservablesCtrl->sessionId(),order);
 }
 
-void OlfConsole::processSiginReplyMessage(core::tcp::SigninReplyMessage *msg)
+void OlfConsole::processSiginReplyMessage(oplink::SigninReplyMessage *msg)
 {
     bool ok;
 
-    ok = msg->status() == core::tcp::SigninReplyMessage::SigninStatus::Ok;
+    ok = msg->status() == oplink::SigninReplyMessage::SigninStatus::Ok;
     m_loginCtrl->siginResult(ok,msg->identifier());
 }
 
-void OlfConsole::processSignoutMessage(core::tcp::SignoutMessage *msg)
+void OlfConsole::processSignoutMessage(oplink::SignoutMessage *msg)
 {
     Q_UNUSED(msg)
     closeSession(false);
 }
 
-void OlfConsole::processSessionStartedMessage(core::tcp::SessionStartedMessage *msg)
+void OlfConsole::processSessionStartedMessage(oplink::SessionStartedMessage *msg)
 {
     pfInfo1(getLogBundleName()) << QObject::tr("session started on server. SessionId = ") << msg->sessionId() << ", ConfId = " << msg->confId() << ", Profil = " << msg->profile();
     m_monitoredObservablesCtrl->sessionStartedOnServer(msg->sessionId(),
@@ -272,14 +267,14 @@ void OlfConsole::processSessionStartedMessage(core::tcp::SessionStartedMessage *
                                                        msg->confId());
 }
 
-void OlfConsole::processDownloadConfigReplyMessage(core::tcp::DownloadConfigReplyMessage *msg)
+void OlfConsole::processDownloadConfigReplyMessage(oplink::DownloadConfigReplyMessage *msg)
 {
     pfInfo1(getLogBundleName()) << QObject::tr("Conf downloaded from server");
     m_monitoredObservablesCtrl->confDownloadedFromServer(msg->sessionId(),
                                                          msg->xmlConfig());
 }
 
-void OlfConsole::processStateValueMessage(core::tcp::StateValueMessage *msg)
+void OlfConsole::processStateValueMessage(oplink::StateValueMessage *msg)
 {
     pfDebug4(getLogBundleName()) << QObject::tr("New observable state from server : ") << msg->sessionId() << "," << msg->observableName() << "," << msg->propertyName() << "," << msg->value();
     m_monitoredObservablesCtrl->newObservableStateFromServer(msg->sessionId(),
@@ -319,7 +314,7 @@ void OlfConsole::readIniFile(QString& serverIpv4,
 
 void OlfConsole::connectToServer()
 {
-    m_frontendTcpService = bundleContext()->getService<plugframe::frontend::service::FrontendControlServiceInterface>(plugframe::frontend::service::FrontendControlServiceInterface::serviceName());
+    m_frontendTcpService = bundleContext()->getService<plugframe::FrontendControlServiceInterface>(plugframe::FrontendControlServiceInterface::serviceName());
     if (m_frontendTcpService)
     {
         m_frontendTcpService->connectToHost(this,m_serverIpv4,m_serverPort);
@@ -344,11 +339,11 @@ QString OlfConsole::cryptPassword(QString &password)
 
 void OlfConsole::closeSession(bool disconnectedFromServer)
 {
-    plugframe::guidisplay::service::GuiBuilderServiceInterface *builderGuiServiceItf{bundleContext()->getService<GuiBuilderServiceInterface>(GuiBuilderServiceInterface::serviceName())};
-    plugframe::core::gui::QspGuiPageController qspCtrl;
+    plugframe::GuiBuilderServiceInterface *builderGuiServiceItf{bundleContext()->getService<plugframe::GuiBuilderServiceInterface>(plugframe::GuiBuilderServiceInterface::serviceName())};
+    plugframe::QspGuiPageController qspCtrl;
 
     // update GUI
-    qspCtrl = m_monitoredObservablesCtrl.dynamicCast<plugframe::core::gui::GuiPageController>();
+    qspCtrl = m_monitoredObservablesCtrl.dynamicCast<plugframe::GuiPageController>();
     builderGuiServiceItf->removeAllPages(qspCtrl);
 
     // update console

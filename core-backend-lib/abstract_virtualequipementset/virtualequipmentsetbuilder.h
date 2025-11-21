@@ -16,40 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef VIRTUALEQUIPMENTSETBUILDER_H
 #define VIRTUALEQUIPMENTSETBUILDER_H
 
 #include "olcore-backend-lib_export.h"
 #include "bundle/bundlebuilder.h"
 
-using namespace elekdom::plugframe::core;
-
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace virtualequipmentset
-{
-namespace builder
-{
-
-class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetBuilder : public plugframe::core::bundle::BundleBuilder
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetBuilder : public plugframe::BundleBuilder
 {
 public:
-    VirtualEquipmentSetBuilder(plugframe::core::bundle::Bundle4BuilderInterface& myBundle);
+    VirtualEquipmentSetBuilder(plugframe::Bundle4BuilderInterface& myBundle);
     ~VirtualEquipmentSetBuilder() override;
 
 protected:
     void specificBuild() override;
 };
-
-}//namespace builder
-}//namespace virtualequipmentset
-}//namespace core
 }//namespace oplink
-}//namespace elekdom
-
 #endif // VIRTUALEQUIPMENTSETBUILDER_H

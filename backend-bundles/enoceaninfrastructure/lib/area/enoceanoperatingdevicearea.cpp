@@ -16,15 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "abstract_infrastructure/device/device.h"
 #include "area/enoceanoperatingdevicearea.h"
 #include "device/enoceanequipmentprofile.h"
 #include "packet/format/receivedformat/eeptelegram/eeptelegramformat.h"
-#include "packet/esp3packet.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanOperatingDeviceArea::EnoceanOperatingDeviceArea(const QString& logChannel,
                                                        const QString& areaName,
@@ -44,7 +40,7 @@ EnoceanOperatingDeviceArea::~EnoceanOperatingDeviceArea()
 void EnoceanOperatingDeviceArea::onErp1PacketReceived(QspEepTelegramFormat erp1PacketFormat)
 {
     QString idStr{erp1PacketFormat->getSenderId()};
-    core::infrastructure::QspDevice device{getDevice(idStr)};
+    oplink::QspDevice device{getDevice(idStr)};
 
     if (!device.isNull())
     {

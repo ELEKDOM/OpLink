@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef EEPCOMMANDFORMAT_H
 #define EEPCOMMANDFORMAT_H
 
+#include <QSharedPointer>
 #include "packet/format/sentformat/esp3sentpacketformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 class EepCommandFormat : public Esp3SentPacketFormat
 {
@@ -47,9 +40,5 @@ private:
     quint16 m_dataPayload;
     quint8 m_rorg;
 };
-
-}//namespace bundleTemplate
-}//namespace oplink
-}//namespace enocean
-
+using QspEepCommandFormat = QSharedPointer<EepCommandFormat>;
 #endif // EEPCOMMANDFORMAT_H

@@ -16,16 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include <QCoreApplication>
 #include "schedulerhook.h"
 #include "schedulableobservable.h"
 #include "scheduler/scheduler.h"
 
-
-using namespace elekdom::oplink::core::observable;
-
-SchedulerHook::SchedulerHook(SchedulableObservable& myVe, QObject *parent)
+oplink::SchedulerHook::SchedulerHook(oplink::SchedulableObservable& myVe, QObject *parent)
     : QObject{parent},
     m_myVe{myVe}
 {
@@ -33,18 +29,18 @@ SchedulerHook::SchedulerHook(SchedulableObservable& myVe, QObject *parent)
     moveToThread(QCoreApplication::instance()->thread());
 }
 
-SchedulerHook::~SchedulerHook()
+oplink::SchedulerHook::~SchedulerHook()
 {
 
 }
 
-void SchedulerHook::setScheduler(Scheduler *schedul)
+void oplink::SchedulerHook::setScheduler(plugframe::Scheduler *schedul)
 {
     m_scheduler.reset(schedul);
     connect(m_scheduler.data(), SIGNAL(trigger(QString)), SLOT(onSchedulerEvt(QString)));
 }
 
-void SchedulerHook::initScheduler()
+void oplink::SchedulerHook::initScheduler()
 {
     if(!m_scheduler.isNull())
     {
@@ -52,7 +48,7 @@ void SchedulerHook::initScheduler()
     }
 }
 
-void SchedulerHook::onSchedulerEvt(QString evt)
+void oplink::SchedulerHook::onSchedulerEvt(QString evt)
 {
     m_myVe.onSchedulerEvt(evt);
 }

@@ -16,60 +16,45 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef OBSERVABLEMODELREGISTERPLUGIN_H
 #define OBSERVABLEMODELREGISTERPLUGIN_H
 
 #include "plugin/plugin.h"
 #include "service-int/modelregisterserviceinterface.h"
 #include "service-int/observablebuilderserviceinterface.h"
-#include "observablemodelregister_forward.h"
-#include "olcore-backend-lib_forward.h"
+#include "modelregisterservice.h"
+#include "observablebuilderservice.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace observablemodelregister
-{
-namespace plugin
-{
-
-class ObservableModelRegisterPlugin : public plugframe::core::plugin::Plugin,
-                                         public service::ModelRegisterServiceInterface,
-                                         public service::ObservableBuilderServiceInterface
+class ObservableModelRegisterPlugin : public plugframe::Plugin,
+                                      public oplink::ModelRegisterServiceInterface,
+                                      public oplink::ObservableBuilderServiceInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "elekdom.oplink.observablemodelregister.plugin" FILE "../oplinkB-observablemodelregisterbundle.json")
-    Q_INTERFACES(elekdom::plugframe::core::plugin::BundleInterface
-                 elekdom::oplink::observablemodelregister::service::ModelRegisterServiceInterface
-                 elekdom::oplink::observablemodelregister::service::ObservableBuilderServiceInterface)
-
+    Q_INTERFACES(plugframe::BundleInterface
+                 oplink::ModelRegisterServiceInterface
+                 oplink::ObservableBuilderServiceInterface)
 public:
     ObservableModelRegisterPlugin();
     ~ObservableModelRegisterPlugin() override;
 
-protected: // SmfPlugin
-    plugframe::core::bundle::Bundle4PluginInterface *createImplementation() override;
+protected: // Plugin
+    plugframe::Bundle4PluginInterface *createImplementation() override;
     void bindServicesImplementations() override;
 
-protected: // QspModelRegisterServiceInterface
-    bool addPropertyModel(core::model::QspObservablePropertyModel model) override;
-    core::model::QspObservablePropertyModel getPropertyModel(core::model::PropertyModelName id) override;
-    bool addProcessorModel(core::model::QspCommandProcessorModel model) override;
-    core::model::QspCommandProcessorModel getProcessorModel(core::model::ProcessorModelName id) override;
-    bool addObservableModel(core::model::QspObservableModel model) override;
+protected: // ModelRegisterServiceInterface
+    bool addPropertyModel(oplink::QspObservablePropertyModel model) override;
+    oplink::QspObservablePropertyModel getPropertyModel(oplink::PropertyModelName id) override;
+    bool addProcessorModel(oplink::QspCommandProcessorModel model) override;
+    oplink::QspCommandProcessorModel getProcessorModel(oplink::ProcessorModelName id) override;
+    bool addObservableModel(oplink::QspObservableModel model) override;
 
-protected: // GacObservableBuilderServiceInterface
-    core::observable::QspObservableBuilder buildObservable(core::model::QspObservableBuilderArgs builderargs) override;
+protected: // ObservableBuilderServiceInterface
+    oplink::QspObservableBuilder buildObservable(oplink::QspObservableBuilderArgs builderargs) override;
 
 private:
-    service::QspModelRegisterService     m_modelRegisterServiceImpl;
-    service::QspObservableBuilderService m_observableBuilderServiceImpl;
+    QspModelRegisterService     m_modelRegisterServiceImpl;
+    QspObservableBuilderService m_observableBuilderServiceImpl;
 };
 
-}//plugin
-}//observablemodelregister
-}//gac
-}//elekdom
 #endif // OBSERVABLEMODELREGISTERPLUGIN_H

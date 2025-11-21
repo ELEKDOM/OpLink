@@ -16,34 +16,21 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANINFRASTRUCTUREOPERATINGLOADER_H
 #define ENOCEANINFRASTRUCTUREOPERATINGLOADER_H
 
 #include "enoceaninfrastructureloader.h"
 
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
-
 class EnoceanInfrastructureOperatingLoader : public EnoceanInfrastructureLoader
 {
 public:
     EnoceanInfrastructureOperatingLoader(const QString& logChannel,
-                                         infrastructure::InfrastructureLoadingOperations& infrastructure);
+                                         oplink::InfrastructureLoadingOperations& infrastructure);
     ~EnoceanInfrastructureOperatingLoader() override;
 
 protected:
-    infrastructure::DeviceProcessorBuilder *createDeviceProcessorBuilder() override;
-    infrastructure::Area *createArea(const QString& areaName) override;
+    oplink::DeviceProcessorBuilder *createDeviceProcessorBuilder() override;
+    oplink::Area *createArea(const QString& areaName) override;
     EnoceanGatewayMode *createGatewayMode() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
 #endif // ENOCEANINFRASTRUCTUREOPERATINGLOADER_H

@@ -16,26 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "olcore-backend-lib_export.h"
-#include "olcore-backend-lib_forward.h"
+#include <QSharedPointer>
 #include "logger/loggable.h"
 #include "abstract_infrastructure/infrastructure-names.h"
 #include "observable/observablenames.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
-namespace elekdom
-{
 namespace oplink
 {
-namespace core
-{
-namespace infrastructure
-{
-
-class OLCORE_BACKEND_LIB_EXPORT Device : public plugframe::core::logger::Loggable
+class OLCORE_BACKEND_LIB_EXPORT Device : public plugframe::Loggable
 {
 private:
     DeviceId    m_id;
@@ -43,24 +36,20 @@ private:
 
 public:
     Device(const QString& logChannel,
-              const DeviceId& id,
-              DeviceHook& deviceHook);
+           const DeviceId& id,
+           DeviceHook& deviceHook);
 
     ~Device() override;
 
 public:
     const DeviceId& id() {return m_id;}
     void setChannelValue(int idx, QVariant value);
-    bool getChannelIdx(const observable::PropertyName& propertyName, int& idx);
+    bool getChannelIdx(const oplink::PropertyName& propertyName, int& idx);
     bool hasChannel(int idx);
 
 public:
     virtual void recoverState() = 0;
 };
-
-}//namespace infrastructure
-}//namespace core
+using QspDevice = QSharedPointer<Device>;
 }//namespace oplink
-}//namespace elekdom
-
 #endif // DEVICE_H

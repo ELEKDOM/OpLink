@@ -16,7 +16,6 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef ENOCEANINFRASTRUCTURELOGCHANNEL_H
 #define ENOCEANINFRASTRUCTURELOGCHANNEL_H
 

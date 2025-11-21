@@ -16,10 +16,7 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "gateway/gatewayport.h"
-
-using namespace elekdom::oplink::enocean;
 
 GatewayPort::GatewayPort(QObject *parent) : QObject{parent}
 {

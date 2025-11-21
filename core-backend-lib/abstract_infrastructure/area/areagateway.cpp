@@ -16,19 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "areagateway.h"
 
-using namespace elekdom::oplink::core::infrastructure;
-
-AreaGateway::AreaGateway(const QString& logChannel, QObject *parent) :
+oplink::AreaGateway::AreaGateway(const QString& logChannel, QObject *parent) :
     QObject{parent},
-    plugframe::core::logger::Loggable{logChannel}
+    plugframe::Loggable{logChannel}
 {
 
 }
 
-AreaGateway::~AreaGateway()
+oplink::AreaGateway::~AreaGateway()
 {
 
 }

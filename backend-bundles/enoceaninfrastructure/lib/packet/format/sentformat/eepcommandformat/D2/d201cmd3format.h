@@ -16,18 +16,11 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #ifndef D201CMD3FORMAT_H
 #define D201CMD3FORMAT_H
 
+#include <QSharedPointer>
 #include "d201commandformat.h"
-
-namespace elekdom
-{
-namespace oplink
-{
-namespace enocean
-{
 
 // EnOcean Command 0x03 : Actuator Status Query
 class D201Cmd3Format : public D201CommandFormat
@@ -39,9 +32,5 @@ public:
 protected:
     void fillInData() override;
 };
-
-}//namespace enocean
-}//namespace oplink
-}//namespace elekdom
-
+using QspD201Cmd3Format = QSharedPointer<D201Cmd3Format>;
 #endif // D201CMD3FORMAT_H

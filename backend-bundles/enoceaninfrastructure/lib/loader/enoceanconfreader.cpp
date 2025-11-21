@@ -16,23 +16,19 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "logger/pflog.h"
 #include "worker/workerargs.h"
 #include "abstract_infrastructure/loading/confreadererror.h"
 #include "abstract_infrastructure/loading/infrastructurestore.h"
 #include "loader/enoceanconfreader.h"
 #include "loader/enoceanusbgatewayargs.h"
-#include "loader/enoceantcpgatewayargs.h"
-
-using namespace elekdom::oplink::enocean;
 
 EnoceanConfReader::EnoceanConfReader(const QString& logChannel,
-                                     infrastructure::InfrastructureStore& store,
-                                     worker::WorkerSignal *wSignal,
-                                     const worker::QspWorkerArgs& args,
+                                     oplink::InfrastructureStore& store,
+                                     plugframe::WorkerSignal *wSignal,
+                                     const plugframe::QspWorkerArgs& args,
                                      QObject *parent):
-    InfrastructureConfReader{logChannel,
+    oplink::InfrastructureConfReader{logChannel,
                                       store,
                                       wSignal,
                                       args,
@@ -46,7 +42,7 @@ EnoceanConfReader::~EnoceanConfReader()
 
 }
 
-void EnoceanConfReader::extractDataFromGateway(infrastructure::LoadingError& err)
+void EnoceanConfReader::extractDataFromGateway(oplink::LoadingError& err)
 {
     if (m_xmlReader.readNextStartElement())
     {
@@ -69,7 +65,7 @@ void EnoceanConfReader::extractDataFromGateway(infrastructure::LoadingError& err
 
             if (!m_store.addGateway(gatewayArgs))
             {
-                err = infrastructure::LoadingError::StructuralError;
+                err = oplink::LoadingError::StructuralError;
                 pfWarning1(logChannel()) << QObject::tr("Echec de création de la passerelle USB EnOcean (baudrate %1 databits %2 stopbits %3 parity %4 dev %5)").arg(baudrateAtt,
                                                                                                                                                                   dataBitsAtt,
                                                                                                                                                                   stopBitsAtt,
@@ -79,22 +75,22 @@ void EnoceanConfReader::extractDataFromGateway(infrastructure::LoadingError& err
         }
         else if (m_xmlReader.name() == tcpStickNode())
         {
-            err = infrastructure::LoadingError::XmlError;
+            err = oplink::LoadingError::XmlError;
             pfErr(logChannel()) << QObject::tr("La passerelle EnOcean de type TCP n'est pas implémentée");
         }
         else
         {
-            err = infrastructure::LoadingError::XmlError;
+            err = oplink::LoadingError::XmlError;
             pfErr(logChannel()) << QObject::tr("Il faut définir une passerelle EnOcean de type USB ou TCP");
         }
-        if (infrastructure::LoadingError::NoError == err)
+        if (oplink::LoadingError::NoError == err)
         {
             m_xmlReader.readNextStartElement(); // go back to gateway node
         }
     } // if (m_xmlReader.readNextStartElement())
     else
     {
-        err = infrastructure::LoadingError::XmlError;
+        err = oplink::LoadingError::XmlError;
         pfWarning1(logChannel()) <<  QObject::tr("Les paramètres de la passerelle EnOcean ne sont pas définis");
     }
 }
