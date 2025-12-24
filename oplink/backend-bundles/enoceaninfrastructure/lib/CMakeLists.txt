@@ -1,0 +1,198 @@
+# Bundle implementation Sources
+set(SOURCES
+    area/enoceandevicearea.cpp
+    area/enoceanoperatingdevicearea.cpp
+    area/enoceansetupdevicearea.cpp
+    commandprocessor/D2/d201commandprocessor.cpp
+    commandprocessor/D2/d201measurementenergyquery.cpp
+    commandprocessor/D2/d201measurementpowerquery.cpp
+    commandprocessor/D2/d201pilotwiremodequery.cpp
+    commandprocessor/D2/d201setoutput.cpp
+    commandprocessor/D2/d201setpilotwiremode.cpp
+    commandprocessor/D2/d201statusquery.cpp
+    commandprocessor/D2/d2commandprocessor.cpp
+    commandprocessor/enoceancommandprocessor.cpp
+    device/a50401eep.cpp
+    device/a504eep.cpp
+    device/a5eep.cpp
+    device/d2010ceep.cpp
+    device/d2010eeep.cpp
+    device/d20112eep.cpp
+    device/d201eep.cpp
+    device/d2eep.cpp
+    device/d50001eep.cpp
+    device/d500eep.cpp
+    device/d5eep.cpp
+    device/enoceanequipmentprofile.cpp
+    device/f60101eep.cpp
+    device/f601eep.cpp
+    device/f60201eep.cpp
+    device/f602eep.cpp
+    device/f6eep.cpp
+    enoceaninfrastructure.cpp
+    gateway/enoceangateway.cpp
+    gateway/enoceangatewaymode.cpp
+    gateway/enoceanoperatinggateway.cpp
+    gateway/esp3packetreceiver.cpp
+    gateway/esp3packetserialreceiver.cpp
+    gateway/esp3packettransmitter.cpp
+    gateway/esp3serialreceiverstate.cpp
+    gateway/gatewayport.cpp
+    gateway/responsehandler.cpp
+    gateway/usbgatewayport.cpp
+    gateway/waitfordata.cpp
+    gateway/waitfordatacrc.cpp
+    gateway/waitforheader.cpp
+    gateway/waitforheadercrc.cpp
+    gateway/waitforsyncbyte.cpp
+    loader/enoceanconfreader.cpp
+    loader/enoceandevicebuilder.cpp
+    loader/enoceandeviceprocessorbuilder.cpp
+    loader/enoceangatewayargs.cpp
+    loader/enoceaninfrastructureloader.cpp
+    loader/enoceaninfrastructureoperatingloader.cpp
+    loader/enoceanoperatingdeviceprocessorbuilder.cpp
+    loader/enoceantcpgatewayargs.cpp
+    loader/enoceanusbgatewayargs.cpp
+    packet/esp3crc8.cpp
+    packet/esp3packet.cpp
+    packet/format/esp3packetformat.cpp
+    packet/format/receivedformat/eeptelegram/a504telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/a5telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/d201telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/d2telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/d500telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/d5telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/eeptelegramformat.cpp
+    packet/format/receivedformat/eeptelegram/f601telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/f602telegramformat.cpp
+    packet/format/receivedformat/eeptelegram/f6telegramformat.cpp
+    packet/format/receivedformat/esp3receivedpacketformat.cpp
+    packet/format/receivedformat/response/commoncommandresponse/commoncommandresponseformat.cpp
+    packet/format/receivedformat/response/commoncommandresponse/readidbaseresponseformat.cpp
+    packet/format/receivedformat/response/eepcommandresponseformat.cpp
+    packet/format/receivedformat/response/responseformat.cpp
+    packet/format/sentformat/commoncommand/commoncommandformat.cpp
+    packet/format/sentformat/commoncommand/readidbaseformat.cpp
+    packet/format/sentformat/eepcommandformat/D2/d201cmd1format.cpp
+    packet/format/sentformat/eepcommandformat/D2/d201cmd3format.cpp
+    packet/format/sentformat/eepcommandformat/D2/d201cmd6format.cpp
+    packet/format/sentformat/eepcommandformat/D2/d201cmd8format.cpp
+    packet/format/sentformat/eepcommandformat/D2/d201cmd9format.cpp
+    packet/format/sentformat/eepcommandformat/D2/d201commandformat.cpp
+    packet/format/sentformat/eepcommandformat/D2/d2commandformat.cpp
+    packet/format/sentformat/eepcommandformat/eepcommandformat.cpp
+    packet/format/sentformat/esp3sentpacketformat.cpp
+)
+
+# Bundle implementation Headers
+set(HEADERS
+    area/enoceandevicearea.h
+    area/enoceanoperatingdevicearea.h
+    area/enoceansetupdevicearea.h
+    commandprocessor/D2/d201commandprocessor.h
+    commandprocessor/D2/d201measurementenergyquery.h
+    commandprocessor/D2/d201measurementpowerquery.h
+    commandprocessor/D2/d201pilotwiremodequery.h
+    commandprocessor/D2/d201setoutput.h
+    commandprocessor/D2/d201setpilotwiremode.h
+    commandprocessor/D2/d201statusquery.h
+    commandprocessor/D2/d2commandprocessor.h
+    commandprocessor/enoceancommandprocessor.h
+    device/a50401eep.h
+    device/a504eep.h
+    device/a5eep.h
+    device/d2010ceep.h
+    device/d2010eeep.h
+    device/d20112eep.h
+    device/d201eep.h
+    device/d2eep.h
+    device/d50001eep.h
+    device/d500eep.h
+    device/d5eep.h
+    device/enoceanequipmentprofile.h
+    device/f60101eep.h
+    device/f601eep.h
+    device/f60201eep.h
+    device/f602eep.h
+    device/f6eep.h
+    enoceaninfrastructure.h
+    enoceaninfrastructure_forward.h
+    enoceaninfrastructurelogchannel.h
+    gateway/enoceangateway.h
+    gateway/enoceangatewaymode.h
+    gateway/enoceanoperatinggateway.h
+    gateway/esp3packetreceiver.h
+    gateway/esp3packetserialreceiver.h
+    gateway/esp3packettransmitter.h
+    gateway/esp3serialreceiverstate.h
+    gateway/gatewayport.h
+    gateway/responsehandler.h
+    gateway/usbgatewayport.h
+    gateway/waitfordata.h
+    gateway/waitfordatacrc.h
+    gateway/waitforheader.h
+    gateway/waitforheadercrc.h
+    gateway/waitforsyncbyte.h
+    loader/enoceanconfreader.h
+    loader/enoceandevicebuilder.h
+    loader/enoceandeviceprocessorbuilder.h
+    loader/enoceangatewayargs.h
+    loader/enoceaninfrastructureloader.h
+    loader/enoceaninfrastructureoperatingloader.h
+    loader/enoceanoperatingdeviceprocessorbuilder.h
+    loader/enoceantcpgatewayargs.h
+    loader/enoceanusbgatewayargs.h
+    packet/esp3crc8.h
+    packet/esp3packet.h
+    packet/format/esp3packetformat.h
+    packet/format/receivedformat/eeptelegram/a504telegramformat.h
+    packet/format/receivedformat/eeptelegram/a5telegramformat.h
+    packet/format/receivedformat/eeptelegram/d201telegramformat.h
+    packet/format/receivedformat/eeptelegram/d2telegramformat.h
+    packet/format/receivedformat/eeptelegram/d500telegramformat.h
+    packet/format/receivedformat/eeptelegram/d5telegramformat.h
+    packet/format/receivedformat/eeptelegram/eeptelegramformat.h
+    packet/format/receivedformat/eeptelegram/f601telegramformat.h
+    packet/format/receivedformat/eeptelegram/f602telegramformat.h
+    packet/format/receivedformat/eeptelegram/f6telegramformat.h
+    packet/format/receivedformat/esp3receivedpacketformat.h
+    packet/format/receivedformat/response/commoncommandresponse/commoncommandresponseformat.h
+    packet/format/receivedformat/response/commoncommandresponse/readidbaseresponseformat.h
+    packet/format/receivedformat/response/eepcommandresponseformat.h
+    packet/format/receivedformat/response/responseformat.h
+    packet/format/sentformat/commoncommand/commoncommandformat.h
+    packet/format/sentformat/commoncommand/readidbaseformat.h
+    packet/format/sentformat/eepcommandformat/D2/d201cmd1format.h
+    packet/format/sentformat/eepcommandformat/D2/d201cmd3format.h
+    packet/format/sentformat/eepcommandformat/D2/d201cmd6format.h
+    packet/format/sentformat/eepcommandformat/D2/d201cmd8format.h
+    packet/format/sentformat/eepcommandformat/D2/d201cmd9format.h
+    packet/format/sentformat/eepcommandformat/D2/d201commandformat.h
+    packet/format/sentformat/eepcommandformat/D2/d2commandformat.h
+    packet/format/sentformat/eepcommandformat/eepcommandformat.h
+    packet/format/sentformat/esp3sentpacketformat.h
+)
+
+qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS})
+
+target_include_directories(${BUNDLE_IMPL_NAME}
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(${BUNDLE_IMPL_NAME} PUBLIC
+    Qt6::Core
+    Qt6::Xml
+    Qt6::SerialPort
+    plugframe-core-qt6
+    ${OL_LIB_NAME}
+    ${OL_BACKEND_LIB_NAME}
+)
+
+target_compile_definitions(${BUNDLE_IMPL_NAME}
+    PRIVATE
+    $<$<CONFIG:Release>:QT_NO_DEBUG_OUTPUT>
+)
+
+

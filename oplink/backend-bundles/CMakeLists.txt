@@ -1,0 +1,7 @@
+add_subdirectory(observablemodelregister)
+add_subdirectory(observablemodelloader)
+add_subdirectory(enoceaninfrastructure)
+add_subdirectory(engine)
+add_subdirectory(console)
+add_subdirectory(tcpbackend)
+add_subdirectory(heatingmanagerset)

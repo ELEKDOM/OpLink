@@ -1,0 +1,2 @@
+add_subdirectory(guiconsole)
+add_subdirectory(tcpfrontend)
