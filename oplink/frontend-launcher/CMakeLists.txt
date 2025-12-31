@@ -44,10 +44,13 @@ add_custom_target(${LAUNCHER_PROPERTIES_FILE_TARGET}
 
 # Resources:
 set(oplink-frontend_resources_resource_files
-    "img/Elekdom-Noir-Logo.png"
-    "img/ampoule-allumee.png"
-    "img/ampoule-indéterminee.png"
-    "img/ampoule-eteinte.png"
+    "img/app_icon16.png"
+    "img/app_icon32.png"
+    "img/app_icon48.png"
+    "img/app_icon128.png"
+    "img/elekdom_logo.png"
+    "img/light_on.png"
+    "img/light_off.png"
     "img/comfort.png"
     "img/comfort_1.png"
     "img/comfort_2.png"
@@ -64,7 +67,7 @@ set(oplink-frontend_resources_resource_files
 
 qt6_add_resources(${LAUNCHER_NAME}
     PREFIX
-        "/"
+       "/"
     FILES
         ${oplink-frontend_resources_resource_files}
 )

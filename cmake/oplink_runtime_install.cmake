@@ -232,10 +232,10 @@ ol_copy_conf_file(
 )
 
 # Heatingmanagerset bundle conf
-ol_copy_conf_file(
-  "${OL_PROFILE_DIR}/oplink/backend/heating_pwt_manager1.xml"
-  "${OL_BIN_DIR}/oplink_backend/bundles/heatingmanagerset/conf"
-)
+#ol_copy_conf_file(
+#  "${OL_PROFILE_DIR}/oplink/backend/heating_pwt_manager1.xml"
+#  "${OL_BIN_DIR}/oplink_backend/bundles/heatingmanagerset/conf"
+#)
 
 # Observablemodelloader bundle conf
 ol_copy_conf_file(

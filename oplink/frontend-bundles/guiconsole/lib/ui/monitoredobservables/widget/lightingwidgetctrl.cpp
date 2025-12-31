@@ -27,8 +27,8 @@ LightingWidgetCtrl::LightingWidgetCtrl(QString observableName,
                                   observableTitle,
                                   observableType,
                                   observableLocalisation},
-    m_lightOn{":/img/ampoule-allumée.png"},
-    m_lightOff{":/img/ampoule-éteinte.png"}
+    m_lightOn{":/img/light_on.png"},
+    m_lightOff{":/img/light_off.png"}
 {}
 
 LightingWidgetCtrl::~LightingWidgetCtrl()
