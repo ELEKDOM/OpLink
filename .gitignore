@@ -34,6 +34,7 @@ Makefile
 # QtCreator
 *.creator.user*
 *.creator*
+*.qtcreator
 
 # Backup files
 *~

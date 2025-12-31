@@ -1,0 +1,8 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "TcpBackend",
+    "startlevel-beging" : "12",
+    "bundle-config-file-name" : "listen_addr.ini",
+    "service-provided" : "BackendControlServiceInterface,1.0.0"
+}
