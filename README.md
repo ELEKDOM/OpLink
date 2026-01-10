@@ -5,6 +5,8 @@
 observe and control heterogeneous systems through a unified and extensible software architecture.
 
 Built on top of the [PlugFrame](https://github.com/elekdom/PlugFrame) framework, 
+PlugFrame is used as a runtime framework and service container. OpLink provides application-specific bundles, launchers and profiles on top of it.
+
 OpLink provides the foundations for:
 - **Supervision and monitoring** of distributed systems,
 - **Control and command** of equipment and services,
@@ -40,12 +42,12 @@ communication or user interaction.
 The application is divided into two main execution domains, reflecting a typical
 **supervision architecture**:
 
-- **Backend Server**:
+- **Backend Server** (built when `OL_BUILD_BACKEND=ON`):
   - Provides supervision, control and interoperability services (device communication, logging, user authentication, remote monitoring).
   - Headless by default (no GUI).
   - Bundles include `enoceaninfrastructure`, `observablemodelloader`, `users`, `logger`, etc.
 
-- **Frontend GUI Client**:
+- **Frontend GUI Client** (built when `OL_BUILD_FRONTEND=ON`):
   - Built using Qt's GUI module (QWidgets).
   - Provides user interface to monitor and interact with backend services.
   - Connects to the backend over TCP using a dedicated client-side bundle.
@@ -73,7 +75,7 @@ OpLink/
 
 ## Requirements
 
-- **Qt 6.9.3**
+- **Qt 6.x (tested with 6.9.3)**
 - **CMake ≥ 3.19**
 - C++17 compatible compiler (tested with `g++` on **Kubuntu 25.10**)
 - Recommended: [QtCreator](https://www.qt.io/product/development-tools) for development
@@ -103,8 +105,14 @@ PlugFrame/
 ├──  plugframe
 ├──  ...
 OpLink/
-├──  oplink
-├──  ...
+├──  oplink/
+├───────core-lib/            # core lib for backend and frontend
+├───────core-backend-lib/    # core lib for backend
+├───────backend-bundles/     # OpLink backend (server) bundles
+├───────backend-launcher/    # OpLink backend launcher
+├───────frontend-bundles/    # OpLink frontend (GUI client) bundles
+├───────frontend-launcher/   # OpLink frontend launcher
+
 ```
 ---
 
@@ -118,6 +126,22 @@ Alternatively, from the root of OpLink, you may use:
 cmake -S . -B build
 cmake --build build
 ```
+### Build Options
+
+OpLink provides configurable build options to enable or disable its main components.
+
+#### Available CMake options
+
+| Option | Default | Description |
+|------|---------|-------------|
+| `OL_BUILD_BACKEND`  | ON | Build the OpLink backend (server-side components) |
+| `OL_BUILD_FRONTEND` | ON | Build the OpLink frontend (GUI client application) |
+
+These options control which parts of OpLink are built.
+
+They also implicitly configure PlugFrame as follows:
+- Backend build requires PlugFrame **TEXT** components
+- Frontend build requires PlugFrame **GUI** components
 
 ### Runtime installation
 
@@ -135,6 +159,29 @@ You can override the destination using:
 cmake -S . -B build -DOL_RUNTIME_ROOT=/path/to/runtime
 cmake --build build
 ```
+### Build examples
+
+#### Full build (backend + frontend)
+```bash
+cmake -S . -B build \
+  -DOL_BUILD_BACKEND=ON \
+  -DOL_BUILD_FRONTEND=ON
+```
+#### Backend-only build (headless / server)
+```bash
+cmake -S . -B build \
+  -DOL_BUILD_BACKEND=ON \
+  -DOL_BUILD_FRONTEND=OFF
+```
+This configuration is suitable for server deployments or embedded targets such as Raspberry Pi.
+
+#### Frontend-only build (GUI client)
+```bash
+cmake -S . -B build \
+  -DOL_BUILD_BACKEND=OFF \
+  -DOL_BUILD_FRONTEND=ON
+```
+
 
 ---
 
