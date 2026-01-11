@@ -89,7 +89,7 @@ OpLink needs PlugFrame. You must **clone PlugFrame first**.
 # Clone the PlugFrame
 git clone https://github.com/elekdom/PlugFrame.git
 cd PlugFrame
-git checkout qt6_cmake
+git checkout <version_tag>
 
 # Clone OpLink inside 
 git clone https://github.com/elekdom/OpLink.git
