@@ -3,7 +3,21 @@ set (LAUNCHER_NAME
 )
 message(STATUS "LAUNCHER_NAME = " ${LAUNCHER_NAME})
 
+# Others File only for IDE
+add_custom_target(OpLink_backend_other_files
+    SOURCES
+      run-oplink-backend.sh
+      properties.ini
+)
+
 qt6_add_executable(${LAUNCHER_NAME})
+
+add_custom_command(TARGET ${LAUNCHER_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+          ${CMAKE_CURRENT_SOURCE_DIR}/run-oplink-backend.sh
+          $<TARGET_FILE_DIR:${LAUNCHER_NAME}>/run-oplink-backend.sh
+  VERBATIM
+)
 
 target_sources(${LAUNCHER_NAME}
   PRIVATE

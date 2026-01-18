@@ -5,6 +5,13 @@ message(STATUS "LAUNCHER_NAME = " ${LAUNCHER_NAME})
 
 qt6_add_executable(${LAUNCHER_NAME})
 
+add_custom_command(TARGET ${LAUNCHER_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+          ${CMAKE_CURRENT_SOURCE_DIR}/run-oplink-frontend.sh
+          $<TARGET_FILE_DIR:${LAUNCHER_NAME}>/run-oplink-frontend.sh
+  VERBATIM
+)
+
 target_sources(${LAUNCHER_NAME}
   PRIVATE
     "${PF_ROOT_DIR}/plugframe/launchers/guilauncher/main.cpp"
@@ -37,10 +44,11 @@ set_target_properties(${LAUNCHER_NAME} PROPERTIES
 )
 
 # Others File only for IDE
-string(CONCAT LAUNCHER_PROPERTIES_FILE_TARGET ${LAUNCHER_NAME} "-properties-model")
-add_custom_target(${LAUNCHER_PROPERTIES_FILE_TARGET}
+add_custom_target(OpLink_frontend_other_files
     SOURCES
+    run-oplink-frontend.sh
     "properties.ini"
+    elekdom.qss
 )
 
 # Resources:
