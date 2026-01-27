@@ -27,12 +27,8 @@ UsbGatewayPort::UsbGatewayPort(const qint32 baudRate,
                                const QString &name):
     m_lastError{QSerialPort::SerialPortError::NoError}
 {
-    m_serialPort.setBaudRate(baudRate);
-    m_serialPort.setDataBits(dataBits);
-    m_serialPort.setStopBits(stopBits);
-    m_serialPort.setParity(parity);
-    m_serialPort.setPortName(name);
-    m_serialPort.setParent(this);
+    pfDebug3(s_EnoceanLogChannel) << "->UsbGatewayPort::UsbGatewayPort: baudRate = " << baudRate <<" ,dataBits = " << dataBits
+                                  << " ,stopBits = " << stopBits << " ,parity = " << parity << " ,name = " << name;
 
     bool ret = connect(&m_serialPort, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(onErrorOccurred(QSerialPort::SerialPortError)));
     if (!ret)
@@ -46,18 +42,49 @@ UsbGatewayPort::UsbGatewayPort(const qint32 baudRate,
         pfWarning1(s_EnoceanLogChannel) << tr("--UsbGatewayPort connect signal readyRead : échec");
     }
 
+    pfDebug4(s_EnoceanLogChannel) << "appelle setPortName";
+    m_serialPort.setPortName(name);
+    pfDebug4(s_EnoceanLogChannel) << "appelle setParent";
+    m_serialPort.setParent(this);
+
     // Caution
     // For QSerialPort, open must be done in the main thread !
     // See Qt documentation
-
-    m_serialPort.open(QIODevice::ReadWrite);
-    ret = m_serialPort.isOpen();
+    pfDebug4(s_EnoceanLogChannel) << "call open";
+    ret = m_serialPort.open(QIODevice::ReadWrite);
     if (!ret)
     {
-        pfWarning1(s_EnoceanLogChannel) << tr("--UsbGatewayPort ouverture port série : échec");
+        pfWarning1(s_EnoceanLogChannel) << tr("--UsbGatewayPort appel à open : échec ");
         m_serialPort.clearError();
     }
+    else
+    {
+        ret = m_serialPort.isOpen();
+        if (!ret)
+        {
+            pfWarning1(s_EnoceanLogChannel) << tr("--UsbGatewayPort ouverture port série : échec");
+        }
+        else
+        {
+            pfDebug4(s_EnoceanLogChannel) << "call setBaudRate";
+            ret = m_serialPort.setBaudRate(baudRate);
+            pfDebug4(s_EnoceanLogChannel) << "setBaudRate returns " << ret;
 
+            pfDebug4(s_EnoceanLogChannel) << "call setDataBits";
+            ret = m_serialPort.setDataBits(dataBits);
+            pfDebug4(s_EnoceanLogChannel) << "setDataBits returns " << ret;
+
+            pfDebug4(s_EnoceanLogChannel) << "call setStopBits";
+            ret = m_serialPort.setStopBits(stopBits);
+            pfDebug4(s_EnoceanLogChannel) << "setStopBits returns " << ret;
+
+            pfDebug4(s_EnoceanLogChannel) << "call setParity";
+            ret = m_serialPort.setParity(parity);
+            pfDebug4(s_EnoceanLogChannel) << "setParity returns" << ret;
+        }
+    }
+
+    pfDebug3(s_EnoceanLogChannel) << "<-UsbGatewayPort::UsbGatewayPort";
 }
 
 UsbGatewayPort::~UsbGatewayPort()
@@ -103,6 +130,8 @@ void UsbGatewayPort::onErrorOccurred(QSerialPort::SerialPortError error)
     if (error != QSerialPort::SerialPortError::NoError && error != m_lastError)
     {
         pfWarning1(s_EnoceanLogChannel) << tr("Erreur du port série. Erreur = ") << error;
+        pfWarning1(s_EnoceanLogChannel) << tr("Message d'erreur = ") << m_serialPort.errorString();
+
         m_lastError = error;
         m_serialPort.clearError();
     }

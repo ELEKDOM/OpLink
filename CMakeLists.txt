@@ -5,6 +5,11 @@ set(OL_PROJ_VERSION "1.0.0")
 project(OpLink VERSION ${OL_PROJ_VERSION} LANGUAGES CXX)
 message(STATUS "OL_PROJ_VERSION = " ${OL_PROJ_VERSION})
 
+# Disable RPATH generation to avoid embedding build-time or host-specific paths
+# into binaries. Runtime library resolution is handled explicitly (LD_LIBRARY_PATH),
+# ensuring predictable and portable execution across environments.
+set(CMAKE_SKIP_RPATH TRUE)
+
 # OpLink Core Lib version
 set(OL_LIB_VERSION_MAJOR "1")
 string(CONCAT OL_LIB_VERSION ${OL_LIB_VERSION_MAJOR} ".0.0")

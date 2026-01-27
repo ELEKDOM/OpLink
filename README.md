@@ -143,6 +143,10 @@ They also implicitly configure PlugFrame as follows:
 - Backend build requires PlugFrame **TEXT** components
 - Frontend build requires PlugFrame **GUI** components
 
+#### Cross-Compilation
+OpLink relies on PlugFrame.
+Cross-compilation instructions are documented in PlugFrame.
+
 ### Runtime installation
 
 OpLink installs a complete runtime layout into a binary directory.
@@ -240,7 +244,7 @@ OpLink is released under the GNU General Public License v3.0 (GPLv3).
 
 ### Next milestones:
 
-- Raspberry Pi cross compilation
+- Development of heating managment
 - Windows, macOS, Android and iOS compilation
 - Unit tests and CI integration
 - GitHub wiki with technical documentation
