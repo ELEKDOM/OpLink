@@ -13,8 +13,8 @@ set(SOURCES
     network_tcp/signoutmessage.cpp
     network_tcp/statevaluemessage.cpp
     network_tcp/submitordermessage.cpp
-    observable/heatingmanager/heatingmanagerconfdocument.cpp
-    observable/virtualequipment/virtualequipmentconfdocument.cpp
+    observable/highobservable/highobservableconfdocument.cpp
+    observable/highobservable/heatingmanager/heatingmanagerconfdocument.cpp
     observable/remote/sessionconfdocument.cpp
     observable/type.cpp
     observable/values.cpp
@@ -39,14 +39,14 @@ set(HEADERS
     network_tcp/signoutmessage.h
     network_tcp/statevaluemessage.h
     network_tcp/submitordermessage.h
-    observable/heatingmanager/heatingmanagerconfdocument.h
-    observable/heatingmanager/heatingmanagerloaderhook.h
+    observable/highobservable/highobservableconfdocument.h
+    observable/highobservable/highobservableloaderhook.h
+    observable/highobservable/heatingmanager/heatingmanagerconfdocument.h
+    observable/highobservable/heatingmanager/heatingmanagerloaderhook.h
     observable/remote/sessionconfdocument.h
     observable/remote/sessionconfhook.h
     observable/type.h
     observable/values.h
-    observable/virtualequipment/virtualequipmentconfdocument.h
-    observable/virtualequipment/virtualequipmentloaderhook.h
 )
 
 qt_add_library(${OL_LIB_NAME} SHARED ${SOURCES} ${HEADERS})

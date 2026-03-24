@@ -3,19 +3,37 @@
 <!-- Configuration file template. Do not use this file directly for deployment.
 Create a directory containing all the configuration files for a given deployment ! -->
 
-<heating-manager version="" conf-id="" control="pwt" name="" model-name="heating_manager_pilotwire_thermostat" localisation=""  title="">
- 
-    <!-- pwth: pilot wire thermostat hysteresis -->
-    <!-- threshold=<int>, hysteresis threshold -->
-    <!-- max-temp=<float>, max thermostat's value -->
-    <!--algorithm=<pwth|pwth_wod> wod:windox opening detection -->
-    <!-- mode=<off|manual|scheduled>    -->
-    <pwt-control threshold="0.2" max-temp="24" window-opening-detection="yes" presence-detection="no" mode="scheduled" >
+<!-- The heating manager is a virtual device whose role is to control the temperature of a group of rooms.
+This file defined the declaration for a radiator management area of type thermostat.
+-->
+
+<heating-manager name="" localisation=""  title="" control="pwt" state="">
+<!-- <heating-manager> declares a heating manager -->
+<!-- name : observable name -->
+<!-- localisation : information for the GUI. Defines the virtual place of the manager -->
+<!-- title : information for the GUI. Defines a text to display -->
+<!-- control : pw|pwt. Declares the algorithm to apply:
+               pw for pilote wire control (built with the model "heating_manager_pilotwire")
+               pwt for thermostat with pilote wire (built with the model "heating_manager_pilotwire_thermostat") -->
+<!-- state : on|off. Defines if the manager must be started or not -->
+
+    <pwt-control threshold="0.2" max-temp="24" setpoint="scheduled" >
+    <!-- <pwt-control> tag for a "pilote wire thermostat control" -->
+    <!-- threshold : defines the sensitivity of the control algorithm -->
+    <!-- max-temp : defines the maximum value of the setpoint -->
+    <!-- setpoint : defines a fixed or scheduled setpoint. If the value is "scheduled", a scheduler must be declared.
+                    Otherwise, a numerical value defines the target to be reached. -->
         <scheduler>
+        <!-- <scheduler> scheduler declaration -->
             <daily-schedulers>
+            <!-- <daily-schedulers> daily profiles -->
                 <daily-scheduler name="">
-                    <!-- time format <hh:mm:ss> evt : any string -->
+                <!-- <daily-scheduler> daily profile declaration -->
+                <!-- name = profile name -->
                     <scheduled-event time="" evt="" />
+                    <!-- <scheduled-event> triggered event declaration -->
+                    <!-- time = triger time, format <hh:mm:ss> -->
+                    <!-- evt = value to emit, string as temp value (float) -->
                     <scheduled-event time="" evt="" />
                 </daily-scheduler>
                 <daily-scheduler name="">
@@ -25,24 +43,56 @@ Create a directory containing all the configuration files for a given deployment
                 </daily-scheduler>
             </daily-schedulers>
             <weekly-schedulers>
+            <!-- <weekly-schedulers> weekly profiles -->
                 <weekly-scheduler name="" assigned-weeks="">
+                <!-- <weekly-scheduler> weekly profile declaration -->
+                <!-- name = weekly  profile declaration -->
+                <!-- assigned-weeks = declaration of the weeks to apply this profile
+                    format : a [,interval]*
+                    interval : b | c.d
+                    1 <= a,b,c,d <= 52
+                -->
                     <daily-sequence name="" assigned-days=""/>
+                    <!-- <daily-sequence> reference to a daily profile-->
+                    <!-- name = name of a previously declared daily profile -->
+                    <!-- assigned-days = declaration of the days to apply this profile
+                        format : a [,interval]*
+                        interval : b | c.d
+                        1 <= a,b,c,d <= 7
+                    -->
                     <daily-sequence name="" assigned-days=""/>
                 </weekly-scheduler>
             </weekly-schedulers>
         </scheduler>
     </pwt-control>
-
     <rooms>
-        <room name="">
+    <!-- <rooms> rooms declaration -->
+        <room name="" window-opening-detection="yes">
+        <!-- <room> room declaration -->
+        <!-- name = room name -->
+        <!-- window-opening-detection = yes|no
+             indicates whether the algorithm should take into account window openings
+        -->
             <heaters>
+            <!-- <heaters> list of heaters to control (algorithm outputs) -->
                 <heater-ref name="" property=""/>
+                <!-- <heater-ref> heater observable to monitor -->
+                <!-- name = observable name -->
+                <!-- property = property name -->
             </heaters>
             <window-sensors>
+            <!-- <window-sensors> list of sensors to watch (algorithm inputs) -->
                 <window-sensor-ref name="" property=""/>
+                <!-- <window-sensor-ref> sensor observable to watch -->
+                <!-- name = observable name -->
+                <!-- property = property name -->
             </window-sensors>
             <temp-sensors>
+            <!-- <temp-sensors> list of sensors to watch (algorithm inputs) -->
                 <temp-sensor-ref name="" property=""/>
+                <!-- <temp-sensor-ref> sensor observable to watch -->
+                <!-- name = observable name -->
+                <!-- property = property name -->
             </temp-sensors>
         </room>
     </rooms>

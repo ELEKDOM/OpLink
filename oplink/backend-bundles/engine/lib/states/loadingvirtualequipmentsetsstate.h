@@ -34,7 +34,7 @@ protected:
     void transition() override;
 
 private:
-    void initScheduler(oplink::QspObservableBuildersContainer loadedVirtualEquipments);
+    void initVirtualEquipments(const oplink::QspObservableBuildersContainer& loadedVirtualEquipments);
 
 private:
     int m_nbVirtualEquipmentSets;

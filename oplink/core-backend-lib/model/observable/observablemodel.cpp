@@ -25,7 +25,7 @@
 #include "observable/observable/observablebuilder.h"
 #include "observable/property/propertyid.h"
 
-oplink::ObservableModel::ObservableModel(const oplink::ObservableModelName& name):
+oplink::ObservableModel::ObservableModel(const ObservableModelName& name):
     plugframe::Loggable{s_ModelLogChannel},
     m_modelName{name}
 {
@@ -39,12 +39,12 @@ oplink::ObservableModel::~ObservableModel()
 
 }
 
-void oplink::ObservableModel::addPropertyModelRef(oplink::QspObservablePropertyModel ref)
+void oplink::ObservableModel::addPropertyModelRef(QspObservablePropertyModel ref)
 {
     m_propertyModelRefs.append(ref);
 }
 
-void oplink::ObservableModel::addProcessorModelRef(oplink::QspCommandProcessorModel ref)
+void oplink::ObservableModel::addProcessorModelRef(QspCommandProcessorModel ref)
 {
     m_processorModelRefs.append(ref);
 }
@@ -53,7 +53,7 @@ oplink::QspObservableBuilder oplink::ObservableModel::buildObservable(QspObserva
 {
     pfDebug3(logChannel()) << "->ObservableModel::buildObservable, Model [" << m_modelName << "]";
 
-    oplink::QspObservableBuilder newObservable;
+    QspObservableBuilder newObservable;
 
     if (checkBuilderArgs(builderArgs))
     {
@@ -79,51 +79,67 @@ oplink::QspObservableBuilder oplink::ObservableModel::buildObservable(QspObserva
     return newObservable;
 }
 
-bool oplink::ObservableModel::buildProperties(oplink::QspObservableBuilder observableBuilder,
-                                              oplink::QspObservableBuilderArgs builderArgs)
+bool oplink::ObservableModel::buildProperties(QspObservableBuilder observableBuilder,
+                                              QspObservableBuilderArgs builderArgs)
 {
-    bool ret{createProperties(observableBuilder)};
+    bool ret{createMandatorProperties(observableBuilder)};
 
     if (ret)
     {
-        ret = setPropertyMandatoryValues(observableBuilder, builderArgs);
+        ret = createProperties(observableBuilder);
+        if (ret)
+        {
+            ret = setPropertyMandatoryValues(observableBuilder, builderArgs);
+        }
     }
 
     return ret;
 }
 
-bool oplink::ObservableModel::setPropertyMandatoryValues(oplink::QspObservableBuilder observableBuilder,
-                                                         oplink::QspObservableBuilderArgs builderArgs)
+bool oplink::ObservableModel::buildProcessors(QspObservableBuilder observableBuilder,
+                                              QspObservableBuilderArgs builderArgs)
 {
-    bool ret, ret1,ret2,ret3;
+    bool ret{true};
+    Observable& parent{observableBuilder->toObservable()};
+    QListIterator<QspCommandProcessorModel> it{m_processorModelRefs};
 
-    ret1 = observableBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_NAME, builderArgs->m_observableName);
-    ret2 = observableBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_MODEL, m_modelName);
-    ret3 = observableBuilder->setMandatoryPropertyValue(oplink::PropertyId::P_LOCALISATION,builderArgs->m_observableLocalisation);
-    ret = ret1 && ret2 && ret3;
+    while(it.hasNext() && ret)
+    {
+        QspCommandProcessorModel processorModel{it.next()};
+        CommandProcessor* ptrProcessor{processorModel->createProcessor(parent, builderArgs)};
 
+        if (ptrProcessor != nullptr)
+        {
+            observableBuilder->addProcessor(ptrProcessor);
+        }
+        else
+        {
+            ret = false;
+            pfWarning1(logChannel()) << QObject::tr("Echec de création d'un CommandProcessor. Modèle ") << processorModel->modelName();
+        }
+    }
     return ret;
 }
 
-void oplink::ObservableModel::postBuild(oplink::QspObservableBuilder observableBuilder,
-                                        oplink::QspObservableBuilderArgs builderArgs)
+void oplink::ObservableModel::postBuild(QspObservableBuilder observableBuilder,
+                                        QspObservableBuilderArgs builderArgs)
 {
     Q_UNUSED(observableBuilder)
     Q_UNUSED(builderArgs)
     // No OP!
 }
 
-bool oplink::ObservableModel::createProperties(oplink::QspObservableBuilder observableBuilder)
+bool oplink::ObservableModel::createProperties(QspObservableBuilder observableBuilder)
 {
     bool ret{true};
-    oplink::Observable& parent{observableBuilder->toObservable()};
-    QListIterator<oplink::QspObservablePropertyModel> it{m_propertyModelRefs};
+    Observable& parent{observableBuilder->toObservable()};
+    QListIterator<QspObservablePropertyModel> it{m_propertyModelRefs};
 
     while(it.hasNext() && ret)
     {
-        oplink::QspObservablePropertyModel propertyModel{it.next()};
+        QspObservablePropertyModel propertyModel{it.next()};
 
-        oplink::Property* ptrProperty{propertyModel->createProperty(parent)};
+        Property* ptrProperty{propertyModel->createProperty(parent)};
 
         if (ptrProperty != nullptr)
         { 
@@ -139,31 +155,47 @@ bool oplink::ObservableModel::createProperties(oplink::QspObservableBuilder obse
     return ret;
 }
 
-bool oplink::ObservableModel::buildProcessors(oplink::QspObservableBuilder observableBuilder,
-                                              oplink::QspObservableBuilderArgs builderArgs)
+bool oplink::ObservableModel::createMandatorProperties(QspObservableBuilder observableBuilder)
 {
     bool ret{true};
-    oplink::Observable& parent{observableBuilder->toObservable()};
-    QListIterator<oplink::QspCommandProcessorModel> it{m_processorModelRefs};
+    oplink::Property *prop;
 
-    while(it.hasNext() && ret)
-    {
-        oplink::QspCommandProcessorModel processorModel{it.next()};
-        oplink::CommandProcessor* ptrProcessor{processorModel->createProcessor(parent, builderArgs)};
+    // Name
+    //-----
+    prop = new oplink::Property{observableBuilder->toObservable(),
+                                oplink::PropertyId::P_NAME,
+                                QMetaType::QString};
+    observableBuilder->addProperty(prop);
 
-        if (ptrProcessor != nullptr)
-        {
-            observableBuilder->addProcessor(ptrProcessor);
-        }
-        else
-        {
-            ret = false;
-            pfWarning1(logChannel()) << QObject::tr("Echec de création d'un CommandProcessor. Modèle ") << processorModel->modelName();
-        }
-    }
+    // Model Name
+    //-----------
+    prop = new oplink::Property{observableBuilder->toObservable(),
+                                oplink::PropertyId::P_MODEL,
+                                QMetaType::QString};
+    observableBuilder->addProperty(prop);
+
+    // Localisation
+    //-------------
+    prop = new oplink::Property{observableBuilder->toObservable(),
+                                oplink::PropertyId::P_LOCALISATION,
+                                QMetaType::QString};
+    observableBuilder->addProperty(prop);
+
     return ret;
 }
 
+bool oplink::ObservableModel::setPropertyMandatoryValues(QspObservableBuilder observableBuilder,
+                                                         QspObservableBuilderArgs builderArgs)
+{
+    bool ret, ret1,ret2,ret3;
+
+    ret1 = observableBuilder->setMandatoryPropertyValue(PropertyId::P_NAME, builderArgs->m_observableName);
+    ret2 = observableBuilder->setMandatoryPropertyValue(PropertyId::P_MODEL, m_modelName);
+    ret3 = observableBuilder->setMandatoryPropertyValue(PropertyId::P_LOCALISATION,builderArgs->m_observableLocalisation);
+    ret = ret1 && ret2 && ret3;
+
+    return ret;
+}
 
 
 

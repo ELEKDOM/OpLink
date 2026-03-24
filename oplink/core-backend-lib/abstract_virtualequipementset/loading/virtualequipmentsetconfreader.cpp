@@ -21,11 +21,11 @@
 #include "virtualequipmentsetloaderouts.h"
 #include "virtualequipmentloader.h"
 #include "abstract_virtualequipementset/virtualequipmentset.h"
-#include "observable/observable/observable.h"
 
 oplink::VirtualEquipmentSetConfReader::VirtualEquipmentSetConfReader(plugframe::WorkerSignal *wSignal,
                                                                      const plugframe::QspWorkerArgs& args):
-    plugframe::WorkerThread{wSignal, args}
+    plugframe::WorkerThread{wSignal, args},
+    m_veSet{nullptr}
 {
 
 }
@@ -41,27 +41,39 @@ bool oplink::VirtualEquipmentSetConfReader::execWork(plugframe::QspWorkerArgs ar
     oplink::QspVirtualEquipmentSetLoaderArgs wArgs{args.dynamicCast<oplink::VirtualEquipmentSetLoaderArgs>()};
     QStringList fileList;
 
-    m_veSet = wArgs->m_veLoader->veSet();
-    fileList = m_veSet->fileList();
-    for (int i = 0; i < fileList.size() && ret; i++)
+    if (!wArgs.isNull() && !wArgs->m_veLoader.isNull() && wArgs->m_veLoader->veSet())
     {
-        wArgs->m_veLoader->load(fileList.at(i));
-        ret = !wArgs->m_veLoader->newly().isNull();
-        if (ret)
+        m_veSet = wArgs->m_veLoader->veSet();
+        fileList = m_veSet->fileList();
+        for (int i = 0; i < fileList.size() && ret; i++)
         {
-            m_veSet->getLoadedVirtualEquipments()->insert(wArgs->m_veLoader->newly()->name(),
-                                                          wArgs->m_veLoader->newly());
+            wArgs->m_veLoader->load(fileList.at(i));
+            ret = !wArgs->m_veLoader->builderArgs().isNull();
+            if (ret)
+            {
+                m_veSet->buildVirtualEquipment(wArgs->m_veLoader->builderArgs());
+            }
         }
+        m_veSet->loadingFinished();
     }
-
-    m_veSet->loadingFinished();
+    else
+    {
+        ret = false;
+    }
 
     return ret;
 }
 
 plugframe::WorkerOuts *oplink::VirtualEquipmentSetConfReader::getWorkerOuts()
 {
-    return new oplink::VirtualEquipmentSetLoaderOuts{m_veSet->getVirtualEquipmentSetName(),
-                                                     m_ret,
-                                                     m_veSet->getLoadedVirtualEquipments()};
+    plugframe::WorkerOuts *ret{nullptr};
+
+    if (m_veSet)
+    {
+        ret = new oplink::VirtualEquipmentSetLoaderOuts{m_veSet->getVirtualEquipmentSetName(),
+                                                        m_ret,
+                                                        m_veSet->getLoadedVirtualEquipments()};
+    }
+
+    return ret;
 }

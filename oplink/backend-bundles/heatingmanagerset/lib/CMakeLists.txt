@@ -1,22 +1,17 @@
 # Bundle implementation Sources
 set(SOURCES
-    heatingmanager/heatingmanager.cpp
-    heatingmanager/heatingmanagerloader.cpp
-    heatingmanager/pilotwirecontrolroom.cpp
-    heatingmanager/pilotwirethermostatcontrolroom.cpp
+    heatingmanagerset.cpp
     heatingmanagersetfactory.cpp
+    heatingmanager/heatingmanagerloader.cpp
 )
 
 # Bundle implementation Headers
 set(HEADERS
-    heatingmanager/heatingmanager.h
-    heatingmanager/heatingmanagerloader.h
-    heatingmanager/pilotwirecontrolroom.h
-    heatingmanager/pilotwirethermostatcontrolroom.h
-    heatingmanagerset.cpp heatingmanagerset.h
-    heatingmanagerset_forward.h
+    heatingmanagerset.h
     heatingmanagersetfactory.h
+    heatingmanagerset_forward.h
     heatingmanagersetlogchannel.h
+    heatingmanager/heatingmanagerloader.h
 )
 
 qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS})

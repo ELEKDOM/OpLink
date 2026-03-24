@@ -20,7 +20,6 @@
 #include "serverengine.h"
 #include "logger/pflog.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentsetloaderouts.h"
-#include "observable/observable/observablebuilder.h"
 
 LoadingVirtualEquipmentSetsState::LoadingVirtualEquipmentSetsState(ServerEngine& engine):
     ServerStartingState{engine},
@@ -66,8 +65,8 @@ void LoadingVirtualEquipmentSetsState::doProcessing(const plugframe::QspWorkerOu
 
     if (loaderOuts->m_ret)
     {
-        // Start all scheduler if needed !
-        initScheduler(loaderOuts->m_loadedVirtualEquipments);
+        // initialize the virtual equipments behavior !
+        initVirtualEquipments(loaderOuts->m_loadedVirtualEquipments);
 
         // Register all virtual equipmeents
         registerObservables(loaderOuts->m_loadedVirtualEquipments);
@@ -96,12 +95,12 @@ void LoadingVirtualEquipmentSetsState::transition()
     setStartingClientsState();
 }
 
-void LoadingVirtualEquipmentSetsState::initScheduler(oplink::QspObservableBuildersContainer loadedVirtualEquipments)
+void LoadingVirtualEquipmentSetsState::initVirtualEquipments(const oplink::QspObservableBuildersContainer &loadedVirtualEquipments)
 {
     for(oplink::ObservableBuildersContainer::ConstIt it = loadedVirtualEquipments->begin(); it != loadedVirtualEquipments->end(); it++)
     {
         oplink::QspObservableBuilder ve{*it};
 
-        ve->initScheduler();
+        ve->init();
     }
 }

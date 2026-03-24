@@ -28,10 +28,9 @@
 #include "model/processor/loadcommandprocessormodel.h"
 #include "model/processor/expectedvaluecheckcommandprocessormodel.h"
 #include "model/processor/expectedvaluenocheckcommandprocessormodel.h"
-#include "model/observable/loadmodel.h"
-#include "model/observable/actuatormodel.h"
-#include "model/observable/sensormodel.h"
-#include "event/mandatorypropertiesmodelloadingevent.h"
+#include "model/observable/lowobservable/loadmodel.h"
+#include "model/observable/lowobservable/actuatormodel.h"
+#include "model/observable/lowobservable/sensormodel.h"
 #include "event/specificpropertiesmodelloadingevent.h"
 #include "event/processorsmodelloadingevent.h"
 #include "event/observablemodelsloadingevent.h"
@@ -56,11 +55,6 @@ plugframe::BundleEmitter *ObservableModelLoaderFactory::createBundleEmitter(plug
 plugframe::BundleListener *ObservableModelLoaderFactory::createBundleListener(plugframe::Bundle &myBundle)
 {
     return new ObservableModelLoaderListener{myBundle};
-}
-
-MandatoryPropertiesModelLoadingEvent *ObservableModelLoaderFactory::createMandatoryPropertiesModelLoadingEvent(unsigned short cpt)
-{
-    return new MandatoryPropertiesModelLoadingEvent{cpt};
 }
 
 SpecificPropertiesModelLoadingEvent *ObservableModelLoaderFactory::createSpecificPropertiesModelLoadingEvent(unsigned short cpt)

@@ -16,20 +16,47 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
+#include <QRegularExpression>
 #include "propertyid.h"
 
 const oplink::PropertyName oplink::PropertyId::P_NAME {"p_name"};
 const oplink::PropertyName oplink::PropertyId::P_MODEL {"p_model"};
 const oplink::PropertyName oplink::PropertyId::P_LOCALISATION {"p_localisation"};
-const oplink::PropertyName oplink::PropertyId::P_CONF {"p_conf"};
-const oplink::PropertyName oplink::PropertyId::P_MODE {"p_mode"};
-const oplink::PropertyName oplink::PropertyId::P_ORDER{"p_order"};
+const oplink::PropertyName oplink::PropertyId::P_RUNNING {"p_running"};
+const oplink::PropertyName oplink::PropertyId::P_TRIGGER_MODE {"p_trigger_mode"};
+const oplink::PropertyName oplink::PropertyId::P_SETPOINT{"p_setpoint"};
 const oplink::PropertyName oplink::PropertyId::P_DEROGATED{"p_derogated"};
-const oplink::PropertyName oplink::PropertyId::P_DEROGATED_ORDER{"p_derogated_order"};
 const oplink::PropertyName oplink::PropertyId::P_WCLOSED{"p_wclosed"};
 const oplink::PropertyName oplink::PropertyId::P_TEMPERATURE{"p_temperature"};
+const oplink::PropertyName oplink::PropertyId::P_SCHEDULER_XML_DEF{"p_scheduler_xml_def"};
 
 QString oplink::PropertyId::groupPropertyName(const QString &groupName, const PropertyName &propertyName)
 {
-    return (groupName+ '_' + propertyName);
+    return (groupName + '{' + propertyName + '}');
+}
+
+QString oplink::PropertyId::extractGroupName(const QString &compoundName)
+{
+    QString ret;
+    QRegularExpression re("^\\w+");
+
+    QRegularExpressionMatch match = re.match(compoundName);
+    if (match.hasMatch()) {
+        ret = match.captured(0); // group name part
+    }
+
+    return ret;
+}
+
+QString oplink::PropertyId::extractPropertyName(const QString &compoundName)
+{
+    QString ret;
+    QRegularExpression re("{\\w+}$");
+
+    QRegularExpressionMatch match = re.match(compoundName);
+    if (match.hasMatch()) {
+        ret = match.captured(0); // property name part
+    }
+
+    return ret;
 }

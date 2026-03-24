@@ -36,8 +36,9 @@ oplink::QspDevice oplink::ObservableBuilder::device()
     return oplink::QspDevice(nullptr);
 }
 
-void oplink::ObservableBuilder::initScheduler()
+void oplink::ObservableBuilder::init()
 {
+
 }
 
 oplink::Observable& oplink::ObservableBuilder::toObservable()

@@ -23,7 +23,6 @@
 #include "model/modelnames.h"
 #include "observable/observablenames.h"
 #include "command/command-names.h"
-#include "event/mandatorypropertiesmodelloadingevent.h"
 #include "event/specificpropertiesmodelloadingevent.h"
 #include "event/processorsmodelloadingevent.h"
 #include "event/observablemodelsloadingevent.h"
@@ -36,7 +35,6 @@ public:
     ~ObservableModelLoaderFactory() override;
 
 public:
-    virtual MandatoryPropertiesModelLoadingEvent *createMandatoryPropertiesModelLoadingEvent(unsigned short cpt);
     virtual SpecificPropertiesModelLoadingEvent *createSpecificPropertiesModelLoadingEvent(unsigned short cpt);
     virtual ProcessorsModelLoadingEvent *createProcessorsModelLoadingEvent(unsigned short cpt);
     virtual ObservableModelsLoadingEvent *createObservableModelsLoadingEvent(unsigned short cpt);

@@ -23,13 +23,16 @@
 
 class HeatingManagerSet: public oplink::VirtualEquipmentSet
 {
-
 public:
     HeatingManagerSet();
     ~HeatingManagerSet() override;
 
 protected:
     plugframe::BundleFactory* createFactory() override;
+    ///
+    /// \brief registerModels
+    /// creates and saves heating manager models
+    void registerModels() override;
 };
 
 #endif // HEATINGMANAGERSET_H

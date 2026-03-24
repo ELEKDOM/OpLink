@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<heating-manager version="1.0" conf-id="1" control="pwt" name="hm1" model-name="heating_manager_pilotwire_thermostat" localisation="chambre 1"  title="thermostat par fil pilote">
- 
-    <!-- pwth: pilot wire thermostat hysteresis -->
-    <!-- threshold=<int>, hysteresis threshold -->
-    <!-- max-temp=<float>, max thermostat's value -->
-    <!--algorithm=<pwth|pwth_wod> wod:windox opening detection -->
-    <!-- mode=<off|manual|scheduled>    -->
-    <pwt-control threshold="0.2" max-temp="24" window-opening-detection="yes" presence-detection="no" mode="scheduled" >
+<heating-manager control="pwt" name="hm1" localisation="chambre 1"  title="thermostat par fil pilote" state="on">
+    <pwt-control threshold="0.2" max-temp="24" setpoint="scheduled">
         <scheduler>
             <daily-schedulers>
                 <daily-scheduler name="working_day">
@@ -39,7 +33,7 @@
     </pwt-control>
 
     <rooms>
-        <room name="chambre 1">
+        <room name="chambre 1" window-opening-detection="yes">
             <heaters>
                 <heater-ref name="h1" property="heating_mode"/>
             </heaters>

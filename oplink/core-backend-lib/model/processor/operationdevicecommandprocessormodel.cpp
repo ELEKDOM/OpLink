@@ -18,7 +18,7 @@
 
 #include "operationdevicecommandprocessormodel.h"
 #include "model/observable/observablebuilderargs.h"
-#include "model/observable/operationdevicebuilderargs.h"
+#include "model/observable/lowobservable/operationdevicebuilderargs.h"
 #include "observable/processor/operationdevicecommandprocessor.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "abstract_infrastructure/loading/devicebuilder.h"

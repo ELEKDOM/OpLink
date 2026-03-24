@@ -18,7 +18,9 @@
 
 #include "heatingmanagersetfactory.h"
 #include "heatingmanager/heatingmanagerloader.h"
-#include "observable/heatingmanager/heatingmanagerconfdocument.h"
+#include "observable/highobservable/heatingmanager/heatingmanagerconfdocument.h"
+#include "model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.h"
+#include "model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.h"
 
 HeatingManagerSetFactory::HeatingManagerSetFactory()
 {
@@ -30,12 +32,22 @@ HeatingManagerSetFactory::~HeatingManagerSetFactory()
 
 }
 
+oplink::ObservableModel *HeatingManagerSetFactory::createHeatingManagerPwModel()
+{
+    return new oplink::HeatingManagerPwModel{HeatingManagerLoader::heatingManagerPilotWireModelName()};
+}
+
+oplink::ObservableModel *HeatingManagerSetFactory::createHeatingManagerPwtModel()
+{
+    return new oplink::HeatingManagerPwtModel{HeatingManagerLoader::heatingManagerPilotWireThermostatModelName()};
+}
+
 oplink::VirtualEquipmentLoader *HeatingManagerSetFactory::createVirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet)
 {
     return new HeatingManagerLoader{veSet};
 }
 
-oplink::VirtualEquipmentConfDocument *HeatingManagerSetFactory::createVirtualEquipmentConfDocument(oplink::VirtualEquipmentLoaderHook &hook)
+oplink::HighObservableConfDocument *HeatingManagerSetFactory::createVirtualEquipmentConfDocument(oplink::HighObservableLoaderHook &hook)
 {
     oplink::HeatingManagerLoaderHook& loaderHook{dynamic_cast<oplink::HeatingManagerLoaderHook&>(hook)};
     return new oplink::HeatingManagerConfDocument{loaderHook};

@@ -28,6 +28,12 @@
 
 namespace oplink
 {
+/**
+ * @brief The VirtualEquipmentSetLoader class
+ * Generic loader for virtual devices (derived from HighObservable)
+ * A virtual device is defined in an XML file.
+ * The device is always built using a specific model.
+ */
 class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSetLoader : public plugframe::Worker
 {
 public:

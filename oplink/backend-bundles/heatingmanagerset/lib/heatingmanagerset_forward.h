@@ -19,7 +19,4 @@
 #ifndef HEATINGMANAGERSET_FORWARD_H
 #define HEATINGMANAGERSET_FORWARD_H
 
-class HeatingManager;
-class PilotWireControlRoom;
-
 #endif // HEATINGMANAGERSET_FORWARD_H

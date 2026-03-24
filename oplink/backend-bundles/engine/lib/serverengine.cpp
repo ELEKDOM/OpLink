@@ -149,6 +149,11 @@ void ServerEngine::registerObservables(const oplink::QspObservableBuildersContai
     }
 }
 
+oplink::ObservableServiceInterface *ServerEngine::observableServiceIt()
+{
+    return bundleContext()->getService<oplink::ObservableServiceInterface>(oplink::ObservableServiceInterface::serviceName());
+}
+
 #ifndef QT_NO_DEBUG_OUTPUT
 void ServerEngine::printRegisteredInfrastructures()
 {

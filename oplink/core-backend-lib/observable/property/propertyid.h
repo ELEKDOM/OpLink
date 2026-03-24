@@ -31,16 +31,21 @@ public:
     static const PropertyName P_MODEL;
     static const PropertyName P_LOCALISATION;
 
-    // For VirtualEquipment
-    static const PropertyName P_CONF;
-    static const PropertyName P_MODE;
-    static const PropertyName P_ORDER;
+    // for VirtualEquipment
+    static const PropertyName P_RUNNING;
+    static const PropertyName P_TRIGGER_MODE;
+    static const PropertyName P_SCHEDULER_XML_DEF;
+
+    // for HeatingManager
+    static const PropertyName P_SETPOINT;
     static const PropertyName P_DEROGATED;
-    static const PropertyName P_DEROGATED_ORDER;
     static const PropertyName P_WCLOSED;
     static const PropertyName P_TEMPERATURE;
 
+    // for compound name of a group property
     static QString groupPropertyName(const QString& groupName, const PropertyName& propertyName);
+    static QString extractGroupName(const QString& compoundName);
+    static QString extractPropertyName(const QString& compoundName);
 };
 }//namespace oplink
 #endif // PROPERTYID_H
