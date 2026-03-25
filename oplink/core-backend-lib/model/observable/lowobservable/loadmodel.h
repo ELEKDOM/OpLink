@@ -19,12 +19,13 @@
 #ifndef LOADMODEL_H
 #define LOADMODEL_H
 
-#include "model/observable/observablemodel.h"
+#include "model/observable/lowobservable/lowobservablemodel.h"
+
 #include "olcore-backend-lib_export.h"
 
 namespace oplink
 {
-class OLCORE_BACKEND_LIB_EXPORT LoadModel : public ObservableModel
+class OLCORE_BACKEND_LIB_EXPORT LoadModel : public LowObservableModel
 {
 public:
     LoadModel(const ObservableModelName& name);

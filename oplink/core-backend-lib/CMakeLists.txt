@@ -33,6 +33,7 @@ set(SOURCES
     command/command.cpp
     model/observable/observablebuilderargs.cpp
     model/observable/observablemodel.cpp
+    model/observable/lowobservable/lowobservablemodel.cpp
     model/observable/lowobservable/actuatorbuilderargs.cpp
     model/observable/lowobservable/actuatormodel.cpp
     model/observable/lowobservable/loadbuilderargs.cpp
@@ -50,12 +51,12 @@ set(SOURCES
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.cpp
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.cpp
     model/processor/commandprocessormodel.cpp
-    model/processor/expectedvaluecheckcommandprocessormodel.cpp
-    model/processor/expectedvaluenocheckcommandprocessormodel.cpp
-    model/processor/loadcommandprocessormodel.cpp
-    model/processor/lowcommandprocessormodel.cpp
-    model/processor/operationdevicecommandprocessormodel.cpp
-    model/processormodelnames.cpp
+
+    model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.cpp
+    model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.cpp
+    model/processor/lowprocessor/loadcommandprocessormodel.cpp
+    model/processor/lowprocessor/lowcommandprocessormodel.cpp
+    model/processor/lowprocessor/operationdevicecommandprocessormodel.cpp
     model/property/actuatorpropertymodel.cpp
     model/property/loadpropertymodel.cpp
     model/property/observablepropertymodel.cpp
@@ -142,6 +143,7 @@ set(HEADERS
     model/modelnames.h
     model/observable/observablebuilderargs.h
     model/observable/observablemodel.h
+    model/observable/lowobservable/lowobservablemodel.h
     model/observable/lowobservable/actuatorbuilderargs.h
     model/observable/lowobservable/actuatormodel.h
     model/observable/lowobservable/loadbuilderargs.h
@@ -159,12 +161,12 @@ set(HEADERS
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.h
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.h
     model/processor/commandprocessormodel.h
-    model/processor/expectedvaluecheckcommandprocessormodel.h
-    model/processor/expectedvaluenocheckcommandprocessormodel.h
-    model/processor/loadcommandprocessormodel.h
-    model/processor/lowcommandprocessormodel.h
-    model/processor/operationdevicecommandprocessormodel.h
-    model/processormodelnames.h
+
+    model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.h
+    model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.h
+    model/processor/lowprocessor/loadcommandprocessormodel.h
+    model/processor/lowprocessor/lowcommandprocessormodel.h
+    model/processor/lowprocessor/operationdevicecommandprocessormodel.h
     model/property/actuatorpropertymodel.h
     model/property/loadpropertymodel.h
     model/property/observablepropertymodel.h

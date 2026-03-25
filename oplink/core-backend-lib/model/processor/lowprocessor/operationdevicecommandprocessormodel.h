@@ -19,7 +19,7 @@
 #ifndef OPERATIONDEVICECOMMANDPROCESSORMODEL_H
 #define OPERATIONDEVICECOMMANDPROCESSORMODEL_H
 
-#include "lowcommandprocessormodel.h"
+#include "model/processor/lowprocessor/lowcommandprocessormodel.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "olcore-backend-lib_export.h"
 

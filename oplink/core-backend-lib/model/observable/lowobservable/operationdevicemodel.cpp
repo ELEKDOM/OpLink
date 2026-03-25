@@ -26,7 +26,7 @@
 #include "abstract_infrastructure/loading/devicebuilder.h"
 
 oplink::OperationDeviceModel::OperationDeviceModel(const ObservableModelName &name) :
-    ObservableModel{name}
+    LowObservableModel{name}
 {
 
 }

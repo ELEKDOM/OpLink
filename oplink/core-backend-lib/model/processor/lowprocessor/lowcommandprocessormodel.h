@@ -16,9 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "processormodelnames.h"
+#ifndef LOWCOMMANDPROCESSORMODEL_H
+#define LOWCOMMANDPROCESSORMODEL_H
 
-const oplink::ProcessorModelName oplink::ProcessorModelNames::SYNCHRONIZE_OPERATION_DEVICE {"synchronize_operation_device"};
-const oplink::ProcessorModelName oplink::ProcessorModelNames::SYNCHRONIZE_LOAD {"synchronize_load"};
-const oplink::ProcessorModelName oplink::ProcessorModelNames::SET_ACTUATOR {"set_actuator"};
-const oplink::ProcessorModelName oplink::ProcessorModelNames::SET_LOAD {"set_load"};
+#include "olcore-backend-lib_export.h"
+#include "model/processor/commandprocessormodel.h"
+
+namespace oplink
+{
+class OLCORE_BACKEND_LIB_EXPORT LowCommandProcessorModel : public CommandProcessorModel
+{
+public:
+    LowCommandProcessorModel(const ProcessorModelName& modelName,
+                             const CommandName& commandName);
+    ~LowCommandProcessorModel() override;
+};
+}//namespace oplink
+#endif // LOWCOMMANDPROCESSORMODEL_H

@@ -22,7 +22,7 @@
 #include "observable/observable/lowobservable/load.h"
 
 oplink::LoadModel::LoadModel(const oplink::ObservableModelName &name) :
-    oplink::ObservableModel{name}
+    LowObservableModel{name}
 {
 
 }

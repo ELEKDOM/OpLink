@@ -20,12 +20,13 @@
 #define OPERATIONDEVICEMODEL_H
 
 #include "model/modelnames.h"
-#include "model/observable/observablemodel.h"
+#include "model/observable/lowobservable/lowobservablemodel.h"
+
 #include "olcore-backend-lib_export.h"
 
 namespace oplink
 {
-class OLCORE_BACKEND_LIB_EXPORT OperationDeviceModel : public ObservableModel
+class OLCORE_BACKEND_LIB_EXPORT OperationDeviceModel : public LowObservableModel
 {
 public:
     OperationDeviceModel(const ObservableModelName& name);

@@ -16,20 +16,26 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef LOWCOMMANDPROCESSORMODEL_H
-#define LOWCOMMANDPROCESSORMODEL_H
+#ifndef EXPECTEDVALUECHECKCOMMANDPROCESSORMODEL_H
+#define EXPECTEDVALUECHECKCOMMANDPROCESSORMODEL_H
 
+#include "model/processor/lowprocessor/operationdevicecommandprocessormodel.h"
 #include "olcore-backend-lib_export.h"
-#include "commandprocessormodel.h"
+#include "olcore-backend-lib_forward.h"
 
 namespace oplink
 {
-class OLCORE_BACKEND_LIB_EXPORT LowCommandProcessorModel : public CommandProcessorModel
+class OLCORE_BACKEND_LIB_EXPORT ExpectedValueCheckCommandProcessorModel : public OperationDeviceCommandProcessorModel
 {
 public:
-    LowCommandProcessorModel(const ProcessorModelName& modelName,
-                             const CommandName& commandName);
-    ~LowCommandProcessorModel() override;
+    ExpectedValueCheckCommandProcessorModel(const ProcessorModelName& modelName,
+                                            const CommandName& commandName);
+    ~ExpectedValueCheckCommandProcessorModel() override;
+
+protected:
+    OperationDeviceCommandProcessor *createInstance(const Observable& parent,
+                                                    QspDeviceCommandProcessor deviceProcessor) override;
+
 };
 }//namespace oplink
-#endif // LOWCOMMANDPROCESSORMODEL_H
+#endif // EXPECTEDVALUECHECKCOMMANDPROCESSORMODEL_H
