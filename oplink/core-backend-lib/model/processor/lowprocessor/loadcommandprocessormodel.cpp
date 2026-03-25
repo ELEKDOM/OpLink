@@ -18,7 +18,7 @@
 
 #include "loadcommandprocessormodel.h"
 #include "model/observable/observablebuilderargs.h"
-#include "observable/processor/loadcommandprocessor.h"
+#include "observable/processor/lowprocessor/loadcommandprocessor.h"
 
 oplink::LoadCommandProcessorModel::LoadCommandProcessorModel(const oplink::ProcessorModelName& modelName,
                                                              const oplink::CommandName& commandName):

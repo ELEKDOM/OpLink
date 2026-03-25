@@ -18,7 +18,7 @@
 
 #include "expectedvaluenocheckcommandprocessormodel.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
-#include "observable/processor/expectedvaluenocheckprocessor.h"
+#include "observable/processor/lowprocessor/expectedvaluenocheckprocessor.h"
 
 oplink::ExpectedValueNoCheckCommandProcessorModel::ExpectedValueNoCheckCommandProcessorModel(const oplink::ProcessorModelName& modelName,
                                                                                              const oplink::CommandName& commandName):

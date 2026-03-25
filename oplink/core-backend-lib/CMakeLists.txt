@@ -51,7 +51,6 @@ set(SOURCES
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.cpp
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.cpp
     model/processor/commandprocessormodel.cpp
-
     model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.cpp
     model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.cpp
     model/processor/lowprocessor/loadcommandprocessormodel.cpp
@@ -82,12 +81,12 @@ set(SOURCES
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.cpp
     observable/processor/commandprocessor.cpp
-    observable/processor/expectedvaluecheckprocessor.cpp
-    observable/processor/expectedvaluenocheckprocessor.cpp
-    observable/processor/loadcommandprocessor.cpp
-    observable/processor/lowcommandprocessor.cpp
-    observable/processor/operationdevicecommandprocessor.cpp
     observable/processor/processorclassnames.cpp
+    observable/processor/lowprocessor/expectedvaluecheckprocessor.cpp
+    observable/processor/lowprocessor/expectedvaluenocheckprocessor.cpp
+    observable/processor/lowprocessor/loadcommandprocessor.cpp
+    observable/processor/lowprocessor/lowcommandprocessor.cpp
+    observable/processor/lowprocessor/operationdevicecommandprocessor.cpp
     observable/property/loadproperty.cpp
     observable/property/lowproperty.cpp
     observable/property/operationdeviceproperty.cpp
@@ -161,7 +160,6 @@ set(HEADERS
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.h
     model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.h
     model/processor/commandprocessormodel.h
-
     model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.h
     model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.h
     model/processor/lowprocessor/loadcommandprocessormodel.h
@@ -194,12 +192,12 @@ set(HEADERS
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.h
     observable/processor/commandprocessor.h
-    observable/processor/expectedvaluecheckprocessor.h
-    observable/processor/expectedvaluenocheckprocessor.h
-    observable/processor/loadcommandprocessor.h
-    observable/processor/lowcommandprocessor.h
-    observable/processor/operationdevicecommandprocessor.h
     observable/processor/processorclassnames.h
+    observable/processor/lowprocessor/expectedvaluecheckprocessor.h
+    observable/processor/lowprocessor/expectedvaluenocheckprocessor.h
+    observable/processor/lowprocessor/loadcommandprocessor.h
+    observable/processor/lowprocessor/lowcommandprocessor.h
+    observable/processor/lowprocessor/operationdevicecommandprocessor.h
     observable/property/loadproperty.h
     observable/property/lowproperty.h
     observable/property/operationdeviceproperty.h

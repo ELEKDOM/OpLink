@@ -19,7 +19,7 @@
 
 #include "expectedvaluecheckcommandprocessormodel.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
-#include "observable/processor/expectedvaluecheckprocessor.h"
+#include "observable/processor/lowprocessor/expectedvaluecheckprocessor.h"
 
 oplink::ExpectedValueCheckCommandProcessorModel::ExpectedValueCheckCommandProcessorModel(const oplink::ProcessorModelName& modelName,
                                                                                          const oplink::CommandName& commandName):

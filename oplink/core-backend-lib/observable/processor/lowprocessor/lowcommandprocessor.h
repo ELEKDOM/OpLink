@@ -19,7 +19,7 @@
 #ifndef LOWCOMMANDPROCESSOR_H
 #define LOWCOMMANDPROCESSOR_H
 
-#include "commandprocessor.h"
+#include "observable/processor/commandprocessor.h"
 #include "olcore-backend-lib_export.h"
 
 namespace oplink
