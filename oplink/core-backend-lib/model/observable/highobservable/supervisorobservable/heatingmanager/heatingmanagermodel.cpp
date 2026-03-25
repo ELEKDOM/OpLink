@@ -249,7 +249,6 @@ bool oplink::HeatingManagerModel::addSetpointProperty(const QspObservableBuilder
 
     ret = addProperty(observableBuilder,
                       PropertyId::P_SETPOINT,
-                      QMetaType::QString,
                       setpointVal,
                       true);
     return ret;
@@ -281,7 +280,6 @@ bool oplink::HeatingManagerModel::addDerogatedProperty(const QspObservableBuilde
 
     ret = addProperty(observableBuilder,
                       PropertyId::P_DEROGATED,
-                      QMetaType::Bool,
                       value,
                       true);
     return ret;
@@ -299,21 +297,21 @@ bool oplink::HeatingManagerModel::addRoomProperties(const QspObservableBuilder &
         for (auto i = 0; i < hManagerArgs->m_rooms.size(); i++)
         {
             gpName = PropertyId::groupPropertyName(hManagerArgs->m_rooms[i]->m_name, PropertyId::P_SETPOINT);
-            ret = addProperty(observableBuilder,gpName,QMetaType::QString);
+            ret = addProperty(observableBuilder,gpName);
             if (!ret)
             {
                 throw(gpName);
             }
 
             gpName = PropertyId::groupPropertyName(hManagerArgs->m_rooms[i]->m_name, PropertyId::P_WCLOSED);
-            ret = addProperty(observableBuilder,gpName,QMetaType::Bool);
+            ret = addProperty(observableBuilder,gpName);
             if (!ret)
             {
                 throw(gpName);
             }
 
             gpName = PropertyId::groupPropertyName(hManagerArgs->m_rooms[i]->m_name, PropertyId::P_TEMPERATURE);
-            ret = addProperty(observableBuilder,gpName,QMetaType::Double);
+            ret = addProperty(observableBuilder,gpName);
             if (!ret)
             {
                 throw(gpName);

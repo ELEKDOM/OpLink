@@ -2,36 +2,36 @@
 
 <!-- Example for HomeAutomation ! -->
 
-<models version='1.0'>
+<models>
     <properties>
-        <property modelName='model_p_state_onoff' propertyId='state' propertyClass='load_property_class' propertyType='bool'/>
-        <property modelName='model_p_heating_mode' propertyId='heating_mode' propertyClass='load_property_class' propertyType='uchar'/>
-        <property modelName='model_p_heating_meas_val' propertyId='heating_m_value' propertyClass='load_property_class' propertyType='uint'/>
-        <property modelName='model_p_heating_unit_val' propertyId='heating_u_value' propertyClass='load_property_class' propertyType='string'/>
-        <property modelName='model_p_rocker1' propertyId='rocker1' propertyClass='sensor_property_class' propertyType='bool'/>
-        <property modelName='model_p_rocker2' propertyId='rocker2' propertyClass='sensor_property_class' propertyType='bool'/>
-        <property modelName='model_p_temperature' propertyId='temperature' propertyClass='sensor_property_class' propertyType='double'/>
-        <property modelName='model_p_humidity' propertyId='humidity' propertyClass='sensor_property_class' propertyType='double'/>
-        <property modelName='model_p_state_openclosed' propertyId='closed' propertyClass='sensor_property_class' propertyType='bool'/>
-        <property modelName='model_p_binary_output1' propertyId='output1' propertyClass='actuator_property_class' propertyType='bool'/>
-        <property modelName='model_p_binary_output2' propertyId='output2' propertyClass='actuator_property_class' propertyType='bool'/>
-        <property modelName='model_p_pw_mode' propertyId='pw_mode' propertyClass='actuator_property_class' propertyType='uchar'/>
-        <property modelName='model_p_meas_val' propertyId='m_value' propertyClass='actuator_property_class' propertyType='uint'/>
-        <property modelName='model_p_unit_val' propertyId='u_value' propertyClass='actuator_property_class' propertyType='string'/>
+        <property modelName='model_p_state_onoff' propertyId='state' propertyClass='load_property'/>
+        <property modelName='model_p_heating_mode' propertyId='heating_mode' propertyClass='load_property'/>
+        <property modelName='model_p_heating_meas_val' propertyId='heating_m_value' propertyClass='load_property'/>
+        <property modelName='model_p_heating_unit_val' propertyId='heating_u_value' propertyClass='load_property'/>
+        <property modelName='model_p_rocker1' propertyId='rocker1' propertyClass='sensor_property'/>
+        <property modelName='model_p_rocker2' propertyId='rocker2' propertyClass='sensor_property'/>
+        <property modelName='model_p_temperature' propertyId='temperature' propertyClass='sensor_property'/>
+        <property modelName='model_p_humidity' propertyId='humidity' propertyClass='sensor_property'/>
+        <property modelName='model_p_state_openclosed' propertyId='closed' propertyClass='sensor_property'/>
+        <property modelName='model_p_binary_output1' propertyId='output1' propertyClass='actuator_property'/>
+        <property modelName='model_p_binary_output2' propertyId='output2' propertyClass='actuator_property'/>
+        <property modelName='model_p_pw_mode' propertyId='pw_mode' propertyClass='actuator_property'/>
+        <property modelName='model_p_meas_val' propertyId='m_value' propertyClass='actuator_property'/>
+        <property modelName='model_p_unit_val' propertyId='u_value' propertyClass='actuator_property'/>
     </properties>
     <processors>
-        <processor modelName='synchronize_actuator' commandName='synchronize' processorClass='expected_value_no_check_command_processor_class' />
-        <processor modelName='set_actuator' commandName='set' processorClass='expected_value_no_check_command_processor_class' />
-        <processor modelName='energy_actuator' commandName='energy' processorClass='expected_value_no_check_command_processor_class' />
-        <processor modelName='power_actuator' commandName='power' processorClass='expected_value_no_check_command_processor_class' />
-        <processor modelName='synchronize_load' commandName='synchronize' processorClass='load_command_processor_class' />
-        <processor modelName='set_load' commandName='set' processorClass='load_command_processor_class' />
-        <processor modelName='energy_load' commandName='energy' processorClass='load_command_processor_class' />
-        <processor modelName='power_load' commandName='power' processorClass='load_command_processor_class' />
+        <processor modelName='synchronize_actuator' commandName='synchronize' processorClass='actuator_command_processor' />
+        <processor modelName='set_actuator' commandName='set' processorClass='actuator_command_processor' />
+        <processor modelName='energy_actuator' commandName='energy' processorClass='actuator_command_processor' />
+        <processor modelName='power_actuator' commandName='power' processorClass='actuator_command_processor' />
+        <processor modelName='synchronize_load' commandName='synchronize' processorClass='load_command_processor' />
+        <processor modelName='set_load' commandName='set' processorClass='load_command_processor' />
+        <processor modelName='energy_load' commandName='energy' processorClass='load_command_processor' />
+        <processor modelName='power_load' commandName='power' processorClass='load_command_processor' />
     </processors>
     <observables>
 
-        <observable modelName='rocker_switch_2_buttons' observableClass='sensor_class'>
+        <observable modelName='rocker_switch_2_buttons' observableClass='sensor'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_rocker1'/>
                 <propertyModelRef modelName='model_p_rocker2'/>
@@ -40,7 +40,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='temperature_humidity_sensor' observableClass='sensor_class'>
+        <observable modelName='temperature_humidity_sensor' observableClass='sensor'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_temperature'/>
                 <propertyModelRef modelName='model_p_humidity'/>
@@ -49,7 +49,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='window_sensor' observableClass='sensor_class'>
+        <observable modelName='window_sensor' observableClass='sensor'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_state_openclosed'/>
             </propertyModelRefs>
@@ -57,7 +57,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='actuator_2_outputs_binary' observableClass='actuator_class'>
+        <observable modelName='actuator_2_outputs_binary' observableClass='actuator'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_binary_output1'/>
                 <propertyModelRef modelName='model_p_binary_output2'/>
@@ -68,7 +68,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='pw_actuator' observableClass='actuator_class'>
+        <observable modelName='pw_actuator' observableClass='actuator'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_pw_mode'/>
             </propertyModelRefs>
@@ -78,7 +78,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='pw_actuator_measurement' observableClass='actuator_class'>
+        <observable modelName='pw_actuator_measurement' observableClass='actuator'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_pw_mode'/>
                 <propertyModelRef modelName='model_p_meas_val'/>
@@ -92,7 +92,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='onoff_smart_plug_measurement' observableClass='actuator_class'>
+        <observable modelName='onoff_smart_plug_measurement' observableClass='actuator'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_binary_output1'/>
                 <propertyModelRef modelName='model_p_meas_val'/>
@@ -106,7 +106,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='onoff_lighting' observableClass='load_class'>
+        <observable modelName='onoff_lighting' observableClass='load'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_state_onoff'/>
             </propertyModelRefs>
@@ -116,7 +116,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='pw_electric_heating' observableClass='load_class'>
+        <observable modelName='pw_electric_heating' observableClass='load'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_heating_mode'/>
             </propertyModelRefs>
@@ -126,7 +126,7 @@
             </processorModelRefs>
         </observable>
 
-        <observable modelName='pw_electric_heating_measurement' observableClass='load_class'>
+        <observable modelName='pw_electric_heating_measurement' observableClass='load'>
             <propertyModelRefs>
                 <propertyModelRef modelName='model_p_heating_mode'/>
                 <propertyModelRef modelName='model_p_heating_meas_val'/>

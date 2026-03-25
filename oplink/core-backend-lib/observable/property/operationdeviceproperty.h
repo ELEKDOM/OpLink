@@ -31,8 +31,7 @@ class OLCORE_BACKEND_LIB_EXPORT OperationDeviceProperty : public LowProperty
 {
 public:
     OperationDeviceProperty(Observable& observable,
-                            const PropertyName& propertyName,
-                            QMetaType::Type valueType);
+                            const PropertyName& propertyName);
     ~OperationDeviceProperty() override;
 
 public:

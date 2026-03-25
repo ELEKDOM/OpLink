@@ -163,22 +163,19 @@ bool oplink::ObservableModel::createMandatorProperties(QspObservableBuilder obse
     // Name
     //-----
     prop = new oplink::Property{observableBuilder->toObservable(),
-                                oplink::PropertyId::P_NAME,
-                                QMetaType::QString};
+                                oplink::PropertyId::P_NAME};
     observableBuilder->addProperty(prop);
 
     // Model Name
     //-----------
     prop = new oplink::Property{observableBuilder->toObservable(),
-                                oplink::PropertyId::P_MODEL,
-                                QMetaType::QString};
+                                oplink::PropertyId::P_MODEL};
     observableBuilder->addProperty(prop);
 
     // Localisation
     //-------------
     prop = new oplink::Property{observableBuilder->toObservable(),
-                                oplink::PropertyId::P_LOCALISATION,
-                                QMetaType::QString};
+                                oplink::PropertyId::P_LOCALISATION};
     observableBuilder->addProperty(prop);
 
     return ret;

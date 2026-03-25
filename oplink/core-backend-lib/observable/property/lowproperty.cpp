@@ -19,11 +19,9 @@
 #include "lowproperty.h"
 
 oplink::LowProperty::LowProperty(oplink::Observable& observable,
-                                 const oplink::PropertyName& propertyName,
-                                 QMetaType::Type valueType):
+                                 const oplink::PropertyName& propertyName):
     oplink::Property{observable,
-                     propertyName,
-                     valueType}
+                     propertyName}
 {
 
 }

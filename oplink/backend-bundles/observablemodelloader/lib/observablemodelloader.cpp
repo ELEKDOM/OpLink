@@ -48,8 +48,7 @@ oplink::ModelRegisterServiceInterface *ObservableModelLoader::modelRegisterServi
 bool ObservableModelLoader::nextPropertyModelDeclaration(quint16 idx,
                                                          oplink::PropertyModelName &modelName,
                                                          oplink::PropertyName &propertyName,
-                                                         oplink::PropertyType &propertyClassName,
-                                                         QMetaType::Type &valueType)
+                                                         oplink::PropertyType &propertyClassName)
 {
     bool ret{false};
 
@@ -63,33 +62,6 @@ bool ObservableModelLoader::nextPropertyModelDeclaration(quint16 idx,
         modelName = modelElem.attribute(QStringLiteral("modelName"));
         propertyName = modelElem.attribute(QStringLiteral("propertyId"));
         propertyClassName = modelElem.attribute(QStringLiteral("propertyClass"));
-        ptype = modelElem.attribute(QStringLiteral("propertyType"));
-
-        if (QStringLiteral("bool") == ptype)
-        {
-            valueType = QMetaType::Bool;
-        }
-        else if (QStringLiteral("uchar") == ptype)
-        {
-            valueType = QMetaType::UInt;
-        }
-        else if (QStringLiteral("uint") == ptype)
-        {
-            valueType = QMetaType::UInt;
-        }
-        else if (QStringLiteral("double") == ptype)
-        {
-            valueType = QMetaType::Double;
-        }
-        else if (QStringLiteral("string") == ptype)
-        {
-            valueType = QMetaType::QString;
-        }
-        else
-        {
-            ret = false;
-            pfErr(logChannel()) << QObject::tr("%1 type inconnu pour le modèle %2").arg(ptype, modelName);
-        }
     }
 
     return ret;
@@ -172,7 +144,7 @@ void ObservableModelLoader::startModelsLoading()
 {
     pfDebug3(logChannel()) << "->ObservableModelLoader::startModelsLoading";
 
-    if (loadModelDeclarations())
+    if (loadModelDeclarations()) // load the xml file
     {
         QspObservableModelLoaderEmitter loaderEmitter{getEmitter().dynamicCast<ObservableModelLoaderEmitter>()};
         loaderEmitter->startLoadingEventLoop();

@@ -28,8 +28,7 @@ class OLCORE_BACKEND_LIB_EXPORT LoadPropertyModel : public ObservablePropertyMod
 {
 public:
     LoadPropertyModel(const PropertyModelName& modelName,
-                      const PropertyName& propertyName,
-                      QMetaType::Type valueType);
+                      const PropertyName& propertyName);
     ~LoadPropertyModel() override;
 
 protected:

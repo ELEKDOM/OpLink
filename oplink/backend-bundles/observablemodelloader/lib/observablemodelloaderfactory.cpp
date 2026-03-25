@@ -74,57 +74,52 @@ ObservableModelsLoadingEvent *ObservableModelLoaderFactory::createObservableMode
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createObservablePropertyModel(const oplink::PropertyModelName& modelName,
                                                                                              const oplink::PropertyName &propertyId,
-                                                                                             const oplink::PropertyType &propertyType,
-                                                                                             QMetaType::Type valueType)
+                                                                                             const oplink::PropertyType &propertyType)
 {
     oplink::ObservablePropertyModel *ret{nullptr};
 
     if(oplink::PropertyClassNames::PROPERTY_CLASS == propertyType)
     {
-        ret = createPropertyModel(modelName, propertyId, valueType);
+        ret = createPropertyModel(modelName, propertyId);
     }
     else if(oplink::PropertyClassNames::LOAD_PROPERTY_CLASS == propertyType)
     {
-        ret = createLoadPropertyModel(modelName, propertyId, valueType);
+        ret = createLoadPropertyModel(modelName, propertyId);
     }
     else if(oplink::PropertyClassNames::ACTUATOR_PROPERTY_CLASS == propertyType)
     {
-        ret = createActuatorPropertyModel(modelName, propertyId, valueType);
+        ret = createActuatorPropertyModel(modelName, propertyId);
     }
     else if(oplink::PropertyClassNames::SENSOR_PROPERTY_CLASS == propertyType)
     {
-        ret = createSensorPropertyModel(modelName, propertyId, valueType);
+        ret = createSensorPropertyModel(modelName, propertyId);
     }
 
     return ret;
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                   const oplink::PropertyName &propertyId,
-                                                                                   QMetaType::Type valueType)
+                                                                                   const oplink::PropertyName &propertyId)
 {
-    return new oplink::ObservablePropertyModel{modelName, propertyId, valueType};
+    return new oplink::ObservablePropertyModel{modelName, propertyId};
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createLoadPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                       const oplink::PropertyName &propertyId,
-                                                                                       QMetaType::Type valueType)
+                                                                                       const oplink::PropertyName &propertyId)
 {
-    return new oplink::LoadPropertyModel{modelName, propertyId, valueType};
+    return new oplink::LoadPropertyModel{modelName, propertyId};
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createActuatorPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                           const oplink::PropertyName &propertyId,
-                                                                                           QMetaType::Type valueType)
+                                                                                           const oplink::PropertyName &propertyId)
 {
-    return new oplink::ActuatorPropertyModel{modelName, propertyId, valueType};
+    return new oplink::ActuatorPropertyModel{modelName, propertyId};
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createSensorPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                         const oplink::PropertyName &propertyId,
-                                                                                         QMetaType::Type valueType)
+                                                                                         const oplink::PropertyName &propertyId)
 {
-    return new oplink::SensorPropertyModel{modelName, propertyId, valueType};
+    return new oplink::SensorPropertyModel{modelName, propertyId};
 }
 
 oplink::CommandProcessorModel *ObservableModelLoaderFactory::createCommandProcessorModel(const oplink::ProcessorModelName& modelName,

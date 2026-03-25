@@ -43,8 +43,7 @@ protected:
     void observableModelsEventLoop(quint16 cpt);
     bool buildRegisterPropertyModel(const oplink::PropertyModelName& modelName,
                                     const oplink::PropertyName& propertyId,
-                                    const oplink::PropertyType& propertyType,
-                                    QMetaType::Type valueType);
+                                    const oplink::PropertyType& propertyType);
     bool buildRegisterProcessorModel(const oplink::ProcessorModelName& modelName,
                                      const oplink::CommandName& cmdName,
                                      const oplink::ProcessorType& processorType);

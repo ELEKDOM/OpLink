@@ -13,31 +13,23 @@ This file is loaded when the "ObservableModelLoader" bundle starts.
 For each model definition, a model is created and registered with the "ObservableModelRegister" bundle.
 -->
 
-<models version=''>
+<models>
 <!-- <models> declares the set of model -->
-<!-- version : version of the xml synthax. Below is the definitions for version '1.0' -->
 
     <properties>
     <!-- <properties> declares the set of property model -->
 
-        <property modelName='' propertyId='' propertyClass='' propertyType=''/>
+        <property modelName='' propertyId='' propertyClass=''/>
         <!-- <property> declares a property model -->
         <!-- modelName : name of the model. Must be unique -->
-        <!-- propertyId : name of the property. Must be unique -->
+        <!-- propertyId : name (identifier) of the property. Must be unique -->
         <!-- propertyClass : type of the property to instantiate; possible values :
-                             property_class
-                             load_property_class
-                             actuator_property_class
-                             sensor_property_class
+                             property
+                             load_property
+                             actuator_property
+                             sensor_property
         -->
-        <!-- propertyType : defines the type of the property value; possible value :
-                            bool for QMetaType::Bool
-                            uchar for QMetaType::UInt
-                            uint for QMetaType::UInt
-                            double for QMetaType::Double
-                            string for QMetaType::QString
-        -->
-        <property modelName='' propertyId='' propertyClass='' propertyType=''/>
+        <property modelName='' propertyId='' propertyClass=''/>
     </properties>
     <processors>
     <!-- <processors> declares the set of command processor model -->
@@ -47,9 +39,8 @@ For each model definition, a model is created and registered with the "Observabl
         <!-- modelName : name of the model. Must be unique -->
         <!-- commandName : name of the command that will trigger the processing -->
         <!-- processorClass : type of the processor to instantiate; possible values :
-                              load_command_processor_class
-                              expected_value_no_check_command_processor_class
-                              expected_value_check_command_processor_class
+                              load_command_processor
+                              actuator_command_processor
         -->
         <processor modelName='' commandName='' processorClass='' />
     </processors>

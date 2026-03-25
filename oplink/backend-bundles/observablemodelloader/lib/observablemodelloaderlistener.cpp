@@ -68,19 +68,17 @@ void ObservableModelLoaderListener::onSpecificPropertiesModelLoadingEvent(Specif
         oplink::PropertyModelName modelName;
         oplink::PropertyName propertyName;
         oplink::PropertyType propertyClassName;
-        QMetaType::Type valueType;
 
         modelIdx = event->cpt() - 1;
         hasNext = bundle.nextPropertyModelDeclaration(modelIdx,
                                                       modelName,
                                                       propertyName,
-                                                      propertyClassName,
-                                                      valueType);
+                                                      propertyClassName);
         if (hasNext)
         {
-            if (!buildRegisterPropertyModel(modelName,propertyName,propertyClassName,valueType))
+            if (!buildRegisterPropertyModel(modelName,propertyName,propertyClassName))
             {
-                pfWarning1(getLogBundleName()) << tr("Erreur à l'enregistrement du modèle de propriété : %1 %2 %3 %4").arg(modelName, propertyName, propertyClassName).arg(valueType);
+                pfWarning1(getLogBundleName()) << tr("Erreur à l'enregistrement du modèle de propriété : %1 %2 %3").arg(modelName, propertyName, propertyClassName);
             }
             specificPropertiesModelEventLoop(modelIdx + 2);
         }
@@ -220,11 +218,10 @@ void ObservableModelLoaderListener::observableModelsEventLoop(quint16 cpt)
 
 bool ObservableModelLoaderListener::buildRegisterPropertyModel(const oplink::PropertyModelName& modelName,
                                                                const oplink::PropertyName &propertyId,
-                                                               const oplink::PropertyType &propertyType,
-                                                               QMetaType::Type valueType)
+                                                               const oplink::PropertyType &propertyType)
 {
     // Builds property model
-    oplink::QspObservablePropertyModel propertyModel{loaderFactory().createObservablePropertyModel(modelName, propertyId, propertyType, valueType)};
+    oplink::QspObservablePropertyModel propertyModel{loaderFactory().createObservablePropertyModel(modelName, propertyId, propertyType)};
 
     // Registers model
     return modelRegisterService()->addPropertyModel(propertyModel);

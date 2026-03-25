@@ -16,9 +16,8 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-
 #include "processorclassnames.h"
 
-const oplink::ProcessorType oplink::ProcessorClassNames::EXPECTED_VALUE_CHECK_COMMAND_PROCESSOR_CLASS{"expected_value_check_command_processor_class"};
-const oplink::ProcessorType oplink::ProcessorClassNames::EXPECTED_VALUE_NO_CHECK_COMMAND_PROCESSOR_CLASS{"expected_value_no_check_command_processor_class"};
-const oplink::ProcessorType oplink::ProcessorClassNames::LOAD_COMMAND_PROCESSOR_CLASS{"load_command_processor_class"};
+const oplink::ProcessorType oplink::ProcessorClassNames::EXPECTED_VALUE_CHECK_COMMAND_PROCESSOR_CLASS{"actuator_command_processor_check"};
+const oplink::ProcessorType oplink::ProcessorClassNames::EXPECTED_VALUE_NO_CHECK_COMMAND_PROCESSOR_CLASS{"actuator_command_processor"};
+const oplink::ProcessorType oplink::ProcessorClassNames::LOAD_COMMAND_PROCESSOR_CLASS{"load_command_processor"};

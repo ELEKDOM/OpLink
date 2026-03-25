@@ -14,14 +14,13 @@ oplink::HighObservableModel::~HighObservableModel()
 
 bool oplink::HighObservableModel::addProperty(const QspObservableBuilder &observableBuilder,
                                               const PropertyName &propertyName,
-                                              QMetaType::Type valueType,
                                               const QVariant& value,
                                               bool persistentProperty)
 {
     Property *newProperty;
     bool ret{false};
 
-    newProperty = new Property{observableBuilder->toObservable(), propertyName, valueType};
+    newProperty = new Property{observableBuilder->toObservable(), propertyName};
     ret = newProperty != nullptr;
     if (ret)
     {
@@ -45,12 +44,13 @@ bool oplink::HighObservableModel::addProperty(const QspObservableBuilder &observ
     return ret;
 }
 
-bool oplink::HighObservableModel::addProperty(const QspObservableBuilder &observableBuilder, const PropertyName &propertyName, QMetaType::Type valueType)
+bool oplink::HighObservableModel::addProperty(const QspObservableBuilder &observableBuilder,
+                                              const PropertyName &propertyName)
 {
     Property *newProperty;
     bool ret{false};
 
-    newProperty = new Property{observableBuilder->toObservable(), propertyName, valueType};
+    newProperty = new Property{observableBuilder->toObservable(), propertyName};
     ret = newProperty != nullptr;
     if (ret)
     {
@@ -66,7 +66,6 @@ bool oplink::HighObservableModel::addRunningProperty(const QspObservableBuilder 
 
     ret = addProperty(observableBuilder,
                       PropertyId::P_RUNNING,
-                      QMetaType::Bool,
                       value,
                       true);
     return ret;
@@ -78,7 +77,6 @@ bool oplink::HighObservableModel::addTriggerModeProperty(const QspObservableBuil
 
     ret = addProperty(observableBuilder,
                       PropertyId::P_TRIGGER_MODE,
-                      QMetaType::QString,
                       value,
                       true);
     return ret;
@@ -90,7 +88,6 @@ bool oplink::HighObservableModel::addSchedulerXmlDefinitionProperty(const QspObs
 
     ret = addProperty(observableBuilder,
                       PropertyId::P_SCHEDULER_XML_DEF,
-                      QMetaType::QString,
                       value,
                       true);
     return ret;

@@ -32,8 +32,7 @@ class OLCORE_BACKEND_LIB_EXPORT Property : public plugframe::Loggable
 {
 public:
     Property(Observable& observable,
-             const PropertyName& propertyName,
-             QMetaType::Type valueType);
+             const PropertyName& propertyName);
 
     ~Property() override;
 
@@ -49,7 +48,6 @@ private:
     Observable&     m_observable;
     PropertyName    m_name;
     QVariant        m_value;
-    QMetaType::Type m_valueType;
 };
 using QspProperty = QSharedPointer<Property>;
 }//namespace oplink

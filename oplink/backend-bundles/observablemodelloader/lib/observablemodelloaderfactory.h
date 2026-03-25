@@ -40,20 +40,15 @@ public:
     virtual ObservableModelsLoadingEvent *createObservableModelsLoadingEvent(unsigned short cpt);
     virtual oplink::ObservablePropertyModel *createObservablePropertyModel(const oplink::PropertyModelName& modelName,
                                                                            const oplink::PropertyName& propertyId,
-                                                                           const oplink::PropertyType& propertyType,
-                                                                           QMetaType::Type valueType);
+                                                                           const oplink::PropertyType& propertyType);
     virtual oplink::ObservablePropertyModel *createPropertyModel(const oplink::PropertyModelName& modelName,
-                                                                 const oplink::PropertyName& propertyId,
-                                                                 QMetaType::Type valueType);
+                                                                 const oplink::PropertyName& propertyId);
     virtual oplink::ObservablePropertyModel *createLoadPropertyModel(const oplink::PropertyModelName& modelName,
-                                                                     const oplink::PropertyName& propertyId,
-                                                                     QMetaType::Type valueType);
+                                                                     const oplink::PropertyName& propertyId);
     virtual oplink::ObservablePropertyModel *createActuatorPropertyModel(const oplink::PropertyModelName& modelName,
-                                                                         const oplink::PropertyName& propertyId,
-                                                                         QMetaType::Type valueType);
+                                                                         const oplink::PropertyName& propertyId);
     virtual oplink::ObservablePropertyModel *createSensorPropertyModel(const oplink::PropertyModelName& modelName,
-                                                                       const oplink::PropertyName& propertyId,
-                                                                       QMetaType::Type valueType);
+                                                                       const oplink::PropertyName& propertyId);
     virtual oplink::CommandProcessorModel *createCommandProcessorModel(const oplink::ProcessorModelName& modelName,
                                                                        const oplink::CommandName& commandName,
                                                                        const oplink::ProcessorType& proccessorType);

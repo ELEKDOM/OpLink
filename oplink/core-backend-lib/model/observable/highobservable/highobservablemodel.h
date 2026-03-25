@@ -14,12 +14,10 @@ public:
 protected:
     bool addProperty(const QspObservableBuilder& observableBuilder,
                      const PropertyName& propertyName,
-                     QMetaType::Type valueType,
                      const QVariant& value,
                      bool persistentProperty = false); // This flag indicates that the property value must be saved to be restored at next application restarted.
     bool addProperty(const QspObservableBuilder& observableBuilder,
-                     const PropertyName& propertyName,
-                     QMetaType::Type valueType);
+                     const PropertyName& propertyName);
     bool addRunningProperty(const QspObservableBuilder& observableBuilder,bool value);
 
     bool addTriggerModeProperty(const QspObservableBuilder& observableBuilder,const QString& value);
