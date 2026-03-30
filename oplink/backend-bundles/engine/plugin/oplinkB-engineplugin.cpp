@@ -57,7 +57,9 @@ bool EnginePlugin::subscribe(oplink::ObservableName observableName,
 bool EnginePlugin::unsubscribe(oplink::ObservableName observableName,
                                oplink::ObservableSubscriber *subscriber)
 {
-    return m_observableServiceImpl->unsubscribe(observableName, subscriber);
+    bool ret;
+    ret = m_observableServiceImpl->unsubscribe(observableName, subscriber);
+    return ret;
 }
 
 bool EnginePlugin::propertyValue(oplink::ObservableName observableName,

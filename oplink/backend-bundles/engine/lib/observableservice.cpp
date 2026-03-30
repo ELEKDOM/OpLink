@@ -37,8 +37,7 @@ ObservableService::~ObservableService()
 }
 
 bool ObservableService::submitOrder(oplink::StrOrder command)
-{
-    QMutexLocker          lock(&m_mtx);
+{ 
     bool                  ret{false};
     oplink::QspCommand    cmd{new oplink::Command{command}};
     oplink::QspObservable observable{lookupObservable(cmd->observable())};
@@ -47,6 +46,10 @@ bool ObservableService::submitOrder(oplink::StrOrder command)
     {
         ret = true;
         observable->process(cmd);
+    }
+    else
+    {
+        pfWarning1(implementation()->logChannel()) << QObject::tr("Adressage d'une commande impossible car [%1] n'est pas un nom d'observable enregistré!").arg(cmd->observable());
     }
 
     return ret;

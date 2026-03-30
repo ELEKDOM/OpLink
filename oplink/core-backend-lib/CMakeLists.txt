@@ -80,6 +80,9 @@ set(SOURCES
     observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagercmdprocessor.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagersetprocessor.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagerroomprocessor.cpp
     observable/processor/commandprocessor.cpp
     observable/processor/processorclassnames.cpp
     observable/processor/lowprocessor/expectedvaluecheckprocessor.cpp
@@ -87,6 +90,7 @@ set(SOURCES
     observable/processor/lowprocessor/loadcommandprocessor.cpp
     observable/processor/lowprocessor/lowcommandprocessor.cpp
     observable/processor/lowprocessor/operationdevicecommandprocessor.cpp
+    observable/processor/highprocessor/highcommandprocessor.cpp
     observable/property/loadproperty.cpp
     observable/property/lowproperty.cpp
     observable/property/operationdeviceproperty.cpp
@@ -191,6 +195,9 @@ set(HEADERS
     observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagercmdprocessor.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagersetprocessor.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagerroomprocessor.h
     observable/processor/commandprocessor.h
     observable/processor/processorclassnames.h
     observable/processor/lowprocessor/expectedvaluecheckprocessor.h
@@ -198,6 +205,7 @@ set(HEADERS
     observable/processor/lowprocessor/loadcommandprocessor.h
     observable/processor/lowprocessor/lowcommandprocessor.h
     observable/processor/lowprocessor/operationdevicecommandprocessor.h
+    observable/processor/highprocessor/highcommandprocessor.h
     observable/property/loadproperty.h
     observable/property/lowproperty.h
     observable/property/operationdeviceproperty.h

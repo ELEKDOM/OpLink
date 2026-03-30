@@ -19,16 +19,16 @@
 #include <QRegularExpression>
 #include "propertyid.h"
 
-const oplink::PropertyName oplink::PropertyId::P_NAME {"p_name"};
-const oplink::PropertyName oplink::PropertyId::P_MODEL {"p_model"};
-const oplink::PropertyName oplink::PropertyId::P_LOCALISATION {"p_localisation"};
-const oplink::PropertyName oplink::PropertyId::P_RUNNING {"p_running"};
-const oplink::PropertyName oplink::PropertyId::P_TRIGGER_MODE {"p_trigger_mode"};
-const oplink::PropertyName oplink::PropertyId::P_SETPOINT{"p_setpoint"};
-const oplink::PropertyName oplink::PropertyId::P_DEROGATED{"p_derogated"};
-const oplink::PropertyName oplink::PropertyId::P_WCLOSED{"p_wclosed"};
-const oplink::PropertyName oplink::PropertyId::P_TEMPERATURE{"p_temperature"};
-const oplink::PropertyName oplink::PropertyId::P_SCHEDULER_XML_DEF{"p_scheduler_xml_def"};
+const oplink::PropertyName oplink::PropertyId::P_NAME {"name"};
+const oplink::PropertyName oplink::PropertyId::P_MODEL {"model"};
+const oplink::PropertyName oplink::PropertyId::P_LOCALISATION {"localisation"};
+const oplink::PropertyName oplink::PropertyId::P_RUNNING {"run"};
+const oplink::PropertyName oplink::PropertyId::P_TRIGGER_MODE {"tmode"};
+const oplink::PropertyName oplink::PropertyId::P_SETPOINT{"setpoint"};
+const oplink::PropertyName oplink::PropertyId::P_DEROGATED{"derogated"};
+const oplink::PropertyName oplink::PropertyId::P_WCLOSED{"wclosed"};
+const oplink::PropertyName oplink::PropertyId::P_TEMPERATURE{"temperature"};
+const oplink::PropertyName oplink::PropertyId::P_SCHEDULER_XML_DEF{"planning"};
 
 QString oplink::PropertyId::groupPropertyName(const QString &groupName, const PropertyName &propertyName)
 {
@@ -38,7 +38,7 @@ QString oplink::PropertyId::groupPropertyName(const QString &groupName, const Pr
 QString oplink::PropertyId::extractGroupName(const QString &compoundName)
 {
     QString ret;
-    QRegularExpression re("^\\w+");
+    QRegularExpression re("^\\w+\\s*\\w*");
 
     QRegularExpressionMatch match = re.match(compoundName);
     if (match.hasMatch()) {
@@ -51,11 +51,11 @@ QString oplink::PropertyId::extractGroupName(const QString &compoundName)
 QString oplink::PropertyId::extractPropertyName(const QString &compoundName)
 {
     QString ret;
-    QRegularExpression re("{\\w+}$");
+    QRegularExpression re("{(\\w+)}$");
 
     QRegularExpressionMatch match = re.match(compoundName);
     if (match.hasMatch()) {
-        ret = match.captured(0); // property name part
+        ret = match.captured(1); // property name part
     }
 
     return ret;

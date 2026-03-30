@@ -28,7 +28,7 @@ namespace oplink
 class OLCORE_BACKEND_LIB_EXPORT OperationDeviceCommandProcessor : public LowCommandProcessor
 {
 public:
-    OperationDeviceCommandProcessor(const Observable& observable,
+    OperationDeviceCommandProcessor(Observable& observable,
                                     const CommandName& cmdName,
                                     const QspDeviceCommandProcessor& deviceProcessor);
     ~OperationDeviceCommandProcessor() override;

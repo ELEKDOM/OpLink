@@ -58,6 +58,88 @@ bool oplink::HeatingManager::windowSensorState(const QString &roomName, bool all
     return ret;
 }
 
+bool oplink::HeatingManager::isActivated()
+{
+    return isOn();
+}
+
+void oplink::HeatingManager::setOn()
+{
+    if (!isOn())
+    {
+        QVariant state{true};
+
+        // Starts monitoring rooms
+        startRoomsMonitor();
+
+        // Change property val
+        runningProperty(state);
+    }
+}
+
+void oplink::HeatingManager::setOff()
+{
+    if (isOn())
+    {
+        QVariant state{false};
+
+        // Stop monitoring rooms
+        stopRoomsMonitor();
+
+        // Change property val
+        runningProperty(state);
+    }
+}
+
+void oplink::HeatingManager::setSetpoint(const QString &setpoint)
+{
+    setpointProperty(setpoint);
+    setpointForRooms(setpoint);
+    checkForDerogatedState();
+}
+
+void oplink::HeatingManager::setRoomSetpoint(const QString &roomName, const QString &setpoint)
+{
+    setpointForRoom(setpoint,roomName);
+    checkForDerogatedState();
+}
+
+void oplink::HeatingManager::setOnDemand()
+{
+    if (isPlannedMode())
+    {
+        QVariant state{CommandArgs::TRIGGER_MODE_ONDEMAND};
+
+        // Stop scheduler
+        stopScheduler();
+
+        // Change property val
+        triggerModeProperty(state);
+    }
+}
+
+void oplink::HeatingManager::setPlanned()
+{
+    if (isOnDemandMode())
+    {
+        QVariant state{CommandArgs::TRIGGER_MODE_PLANNED};
+
+        // Start scheduler
+        startPlanning();
+
+        // Change property val
+        triggerModeProperty(state);
+
+        // Set order to all rooms
+        setpointForRooms(setpointProperty());
+    }
+}
+
+void oplink::HeatingManager::setSchedulerXmlDef(const QString& xmlDef)
+{
+    // to do later ...
+}
+
 void oplink::HeatingManager::init()
 {
     // start room controls ?
@@ -78,7 +160,28 @@ void oplink::HeatingManager::onSchedulerEvt(QString evt)
     }
 }
 
-void oplink::HeatingManager::startRoomsMonitor()
+void oplink::HeatingManager::onDailySequencerIndex(int idx)
+{
+    pfDebug4(logChannel()) << " onDailySequencerIndex : " << idx;
+
+    // ...
+}
+
+void oplink::HeatingManager::onWeeklySequencer(QString name)
+{
+    pfDebug4(logChannel()) << " onWeeklySequencer : " << name;
+
+    // ...
+}
+
+void oplink::HeatingManager::onDailySequencer(QString name)
+{
+    pfDebug4(logChannel()) << " onDailySequencer : " << name;
+
+    // ...
+}
+
+void oplink::HeatingManager::startPlanning()
 {
     QString currentEvt;
 
@@ -94,9 +197,16 @@ void oplink::HeatingManager::startRoomsMonitor()
         }
         setpointProperty(currentEvt);
     }
+}
+
+void oplink::HeatingManager::startRoomsMonitor()
+{
+    startPlanning();
 
     // start all room monitors
     subscribeToMonitoredObservables();
+
+    // set order to all rooms
     setpointForRooms(setpointProperty());
 }
 
@@ -191,6 +301,17 @@ void oplink::HeatingManager::processScheduledSetpoint(const QString &setpoint)
     setpointForRooms(setpoint);
 }
 
+void oplink::HeatingManager::setpointForRoom(const QString &setpoint, const QString &roomName)
+{
+    PilotWireControlRoom *ptrControlRoomAlgo{dynamic_cast<PilotWireControlRoom*>(group(roomName)->algorithm())};
+
+    roomSetpointProperty(roomName, setpoint);  // holds room setpoint as property
+    if (ptrControlRoomAlgo)
+    {
+        ptrControlRoomAlgo->orderForHeaters(setpoint); // controls the room's radiators
+    }
+}
+
 void oplink::HeatingManager::setpointForRooms(const QString &setpoint)
 {
     const HashGroup& rooms{groups()};
@@ -199,12 +320,16 @@ void oplink::HeatingManager::setpointForRooms(const QString &setpoint)
     for (HashGroup::const_iterator i = rooms.constBegin(); i != rooms.constEnd(); i++)
     {
         QString roomName{i.key() };
-        PilotWireControlRoom *ptrControlRoomAlgo{dynamic_cast<PilotWireControlRoom*>((i.value())->algorithm())};
 
-        roomSetpointProperty(roomName, setpoint);  // holds room setpoint as property
-        if (ptrControlRoomAlgo)
-        {
-            ptrControlRoomAlgo->orderForHeaters(setpoint); // controls the room's radiators
-        }
+        setpointForRoom(setpoint,roomName);
+    }
+}
+
+void oplink::HeatingManager::checkForDerogatedState()
+{
+    // Check for derogated state !
+    if (isPlannedMode())
+    {
+        derogatedProperty(true);
     }
 }

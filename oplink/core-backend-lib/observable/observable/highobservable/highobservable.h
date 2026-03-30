@@ -38,6 +38,10 @@ public:
 
 public:
     virtual void onSchedulerEvt(QString evt) = 0;
+    virtual void onDailySequencerIndex(int idx);
+    virtual void onWeeklySequencer(QString name);
+    virtual void onDailySequencer(QString name);
+    bool hasPlannedMode();
 
 protected:
     ///
@@ -47,20 +51,39 @@ protected:
     /// out : currently evt
     ///
     void startScheduler(QString& currentEvt);
+
     ///
     /// \brief stopScheduler
     ///
     void stopScheduler();
+
     ///
     /// \brief isOn
     /// \return true if the observable has no running state. The running state value if the observable has a running state.
     ///
     bool isOn();
+
     ///
     /// \brief isPlannedMode
     /// \return true if the observable have a trigger mode set to "planned"
     ///
     bool isPlannedMode();
+
+    bool isOnDemandMode();
+
+    ///
+    /// \brief runningProperty
+    /// \param state
+    ///
+    void runningProperty(const QVariant& state);
+
+    ///
+    /// \brief triggerModeProperty
+    /// \param mode
+    ///
+    void triggerModeProperty(const QVariant& mode);
+
+
 
 private:
     SchedulerHook m_schedulerSoc;

@@ -29,6 +29,8 @@ private:
     PilotWireControlRoom *createControlRoom(const QspObservableBuilder& observableBuilder,
                                             const QspObservableBuilderArgs& builderArgs,
                                             int roomIdx);
+    CommandProcessor *createSetProcessor(Observable& parent);
+    CommandProcessor *createRoomProcessor(Observable& parent);
 };
 }//namespace oplink
 #endif // HEATINGMANAGERMODEL_H

@@ -50,6 +50,8 @@ private slots:
     void onSendRequest(QspEsp3SentPacketFormat packet2sendFormat);
 
 private:
+    void enqueue(QspEsp3SentPacketFormat& packet2sendFormat);
+    QspEsp3SentPacketFormat dequeue();
     void startWatchDog();
     void stopWatchDog();
     void sendHead();

@@ -18,7 +18,7 @@
 
 #include "lowcommandprocessor.h"
 
-oplink::LowCommandProcessor::LowCommandProcessor(const oplink::Observable& observable,
+oplink::LowCommandProcessor::LowCommandProcessor(oplink::Observable& observable,
                                                  const oplink::CommandName& cmdName):
     CommandProcessor{observable, cmdName}
 {

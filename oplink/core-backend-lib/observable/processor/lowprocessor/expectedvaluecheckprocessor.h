@@ -27,7 +27,7 @@ namespace oplink
 class ExpectedValueCheckProcessor : public OperationDeviceCommandProcessor
 {
 public:
-    ExpectedValueCheckProcessor(const Observable& observable,
+    ExpectedValueCheckProcessor(Observable& observable,
                                 const CommandName& cmdName,
                                 const QspDeviceCommandProcessor& deviceProcessor);
     ~ExpectedValueCheckProcessor() override;

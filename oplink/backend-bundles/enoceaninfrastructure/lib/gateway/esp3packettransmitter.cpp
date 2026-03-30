@@ -77,13 +77,13 @@ void Esp3PacketTransmitter::onResponseProcessed(bool resendPacket)
 {
     pfDebug3(s_EnoceanLogChannel) << "->Esp3PacketTransmitter::onResponseProcessed " << resendPacket;
 
+    pfDebug6(s_EnoceanLogChannel) << "Esp3PacketTransmitter::onResponseProcessed ";
     QMutexLocker lock(&m_mutex);
 
     stopWatchDog();
     if(!resendPacket)
     {
-        QspEsp3SentPacketFormat lastSend{m_sendingRequestQueue.dequeue()};
-        pfDebug5(s_EnoceanLogChannel) << "dequeue " << lastSend->logPacket();
+        QspEsp3SentPacketFormat lastSend{dequeue()};
     }  
     sendHead();
 
@@ -97,8 +97,7 @@ void Esp3PacketTransmitter::onTimeOut()
     stopWatchDog();
     pfWarning6(s_EnoceanLogChannel) << tr("PacketTransmitter timeout !");
 
-    QspEsp3SentPacketFormat  pFormat{m_sendingRequestQueue.dequeue()};
-    pfDebug5(s_EnoceanLogChannel) << "dequeued packet " << pFormat->logPacket();
+    QspEsp3SentPacketFormat  pFormat{dequeue()};
 
     sendHead();
 }
@@ -107,6 +106,8 @@ void Esp3PacketTransmitter::onSendRequest(QspEsp3SentPacketFormat packet2sendFor
 {
     pfDebug3(s_EnoceanLogChannel) << "->Esp3PacketTransmitter::onSendRequest ";
 
+    pfDebug5(s_EnoceanLogChannel) << "Esp3PacketTransmitter::onSendRequest " << packet2sendFormat->logPacket();
+
     QMutexLocker lock(&m_mutex);
 
     if (m_sendingRequestQueue.isEmpty())
@@ -114,10 +115,23 @@ void Esp3PacketTransmitter::onSendRequest(QspEsp3SentPacketFormat packet2sendFor
         emitPacket(packet2sendFormat->getPacket());
     }
 
-    pfDebug5(s_EnoceanLogChannel) << "enqueue " << packet2sendFormat->logPacket();
-    m_sendingRequestQueue.enqueue(packet2sendFormat);
+    enqueue(packet2sendFormat);
 
     pfDebug3(s_EnoceanLogChannel) << "<-Esp3PacketTransmitter::onSendRequest ";
+}
+
+void Esp3PacketTransmitter::enqueue(QspEsp3SentPacketFormat &packet2sendFormat)
+{
+    pfDebug8(s_EnoceanLogChannel) << "enqueue " << packet2sendFormat->logPacket();
+    m_sendingRequestQueue.enqueue(packet2sendFormat);
+}
+
+QspEsp3SentPacketFormat Esp3PacketTransmitter::dequeue()
+{
+    QspEsp3SentPacketFormat lastSend{m_sendingRequestQueue.dequeue()};
+    pfDebug8(s_EnoceanLogChannel) << "dequeue " << lastSend->logPacket();
+
+    return lastSend;
 }
 
 void Esp3PacketTransmitter::startWatchDog()
@@ -133,6 +147,8 @@ void Esp3PacketTransmitter::stopWatchDog()
 void Esp3PacketTransmitter::sendHead()
 {
     pfDebug3(s_EnoceanLogChannel) << "->Esp3PacketTransmitter::sendHead";
+
+    pfDebug5(s_EnoceanLogChannel) << "Esp3PacketTransmitter::sendHead";
 
     if (!m_sendingRequestQueue.isEmpty())
     {

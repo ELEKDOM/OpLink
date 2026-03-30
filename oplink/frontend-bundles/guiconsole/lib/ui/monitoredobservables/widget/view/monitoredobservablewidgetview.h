@@ -50,8 +50,8 @@ public:
     static QString power() {return QStringLiteral("power");}
     static QString energy() {return QStringLiteral("energy");}
     static QString comfort() {return QStringLiteral("comfort");}
-    static QString comfort1() {return QStringLiteral("comfort_1");}
-    static QString comfort2() {return QStringLiteral("comfort_2");}
+    static QString comfort1() {return QStringLiteral("comfort1");}
+    static QString comfort2() {return QStringLiteral("comfort2");}
     static QString eco() {return QStringLiteral("eco");}
     static QString nofrost() {return QStringLiteral("nofrost");}
 };

@@ -38,6 +38,9 @@ void oplink::SchedulerHook::setScheduler(const plugframe::QspScheduler& schedul)
 {
     m_scheduler = schedul;
     connect(m_scheduler.data(), SIGNAL(trigger(QString)), SLOT(onSchedulerEvt(QString)));
+    connect(m_scheduler.data(), SIGNAL(dailySequencerIndex(int)), SLOT(onDailySequencerIndex(int)));
+    connect(m_scheduler.data(), SIGNAL(dailySequencer(QString)), SLOT(onDailySequencer(QString)));
+    connect(m_scheduler.data(), SIGNAL(weeklySequencer(QString)), SLOT(onWeeklySequencer(QString)));
 }
 
 void oplink::SchedulerHook::startScheduler(QString& currentEvt)
@@ -60,4 +63,19 @@ void oplink::SchedulerHook::stopScheduler()
 void oplink::SchedulerHook::onSchedulerEvt(QString evt)
 {
     m_myVe.onSchedulerEvt(evt);
+}
+
+void oplink::SchedulerHook::onDailySequencerIndex(int idx)
+{
+    m_myVe.onDailySequencerIndex(idx);
+}
+
+void oplink::SchedulerHook::onWeeklySequencer(QString name)
+{
+    m_myVe.onWeeklySequencer(name);
+}
+
+void oplink::SchedulerHook::onDailySequencer(QString name)
+{
+    m_myVe.onDailySequencer(name);
 }

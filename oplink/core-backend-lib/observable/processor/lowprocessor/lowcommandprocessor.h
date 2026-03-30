@@ -27,7 +27,7 @@ namespace oplink
 class OLCORE_BACKEND_LIB_EXPORT LowCommandProcessor : public CommandProcessor
 {
 public:
-    LowCommandProcessor(const Observable& observable,
+    LowCommandProcessor(Observable& observable,
                         const CommandName& cmdName);
     virtual ~LowCommandProcessor();
 };

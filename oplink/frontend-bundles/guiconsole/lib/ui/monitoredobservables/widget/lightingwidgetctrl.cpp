@@ -71,7 +71,7 @@ void LightingWidgetCtrl::onButtonCmdClicked(QString cmdName)
 {
     if (cmdName == ButtonName::on() || cmdName == ButtonName::off())
     {
-        QString cmdFormat{QString("set %1 %2 %3").arg(observableName(), stateName(), cmdName)};
+        QString cmdFormat{QString("set;%1;%2;%3").arg(observableName(), stateName(), cmdName)};
 
         emit execCmd(cmdFormat);
     }

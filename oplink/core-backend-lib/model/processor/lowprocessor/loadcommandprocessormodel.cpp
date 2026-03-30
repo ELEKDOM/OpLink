@@ -32,7 +32,7 @@ oplink::LoadCommandProcessorModel::~LoadCommandProcessorModel()
 
 }
 
-oplink::CommandProcessor *oplink::LoadCommandProcessorModel::createProcessor(const oplink::Observable& parent,
+oplink::CommandProcessor *oplink::LoadCommandProcessorModel::createProcessor(oplink::Observable& parent,
                                                                              oplink::QspObservableBuilderArgs builderArgs)
 {
     Q_UNUSED(builderArgs)

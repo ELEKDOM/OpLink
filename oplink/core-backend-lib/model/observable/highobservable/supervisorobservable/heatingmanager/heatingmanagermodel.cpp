@@ -3,6 +3,8 @@
 #include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.h"
 #include "observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.h"
 #include "observable/observable/highobservable/supervisorobservable/monitor/statetowatch.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagersetprocessor.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagerroomprocessor.h"
 #include "observable/property/propertyid.h"
 #include "observable/values.h"
 #include "logger/pflog.h"
@@ -122,8 +124,21 @@ bool oplink::HeatingManagerModel::buildProperties(QspObservableBuilder observabl
 bool oplink::HeatingManagerModel::buildProcessors(QspObservableBuilder observableBuilder, QspObservableBuilderArgs builderArgs)
 {
     bool ret{true};
+    CommandProcessor *newProcessor;
 
-    //...
+    // Create and add 'set' processor
+    newProcessor = createSetProcessor(observableBuilder->toObservable());
+    if (newProcessor)
+    {
+        observableBuilder->addProcessor(newProcessor);
+    }
+
+    // Create and add 'room' processor
+    newProcessor = createRoomProcessor(observableBuilder->toObservable());
+    if (newProcessor)
+    {
+        observableBuilder->addProcessor(newProcessor);
+    }
 
     return ret;
 }
@@ -348,4 +363,12 @@ oplink::PilotWireControlRoom *oplink::HeatingManagerModel::createControlRoom(con
     return ret;
 }
 
+oplink::CommandProcessor *oplink::HeatingManagerModel::createRoomProcessor(Observable &parent)
+{
+    return new HeatingManagerRoomProcessor{parent};
+}
 
+oplink::CommandProcessor *oplink::HeatingManagerModel::createSetProcessor(Observable &parent)
+{
+    return new HeatingManagerSetProcessor{parent};
+}

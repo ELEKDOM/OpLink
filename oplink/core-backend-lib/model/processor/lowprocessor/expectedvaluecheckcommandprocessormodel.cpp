@@ -33,7 +33,7 @@ oplink::ExpectedValueCheckCommandProcessorModel::~ExpectedValueCheckCommandProce
 
 }
 
-oplink::OperationDeviceCommandProcessor *oplink::ExpectedValueCheckCommandProcessorModel::createInstance(const oplink::Observable &parent,
+oplink::OperationDeviceCommandProcessor *oplink::ExpectedValueCheckCommandProcessorModel::createInstance(oplink::Observable &parent,
                                                                                                          oplink::QspDeviceCommandProcessor deviceProcessor)
 {
     return new oplink::ExpectedValueCheckProcessor{parent, commandName(), deviceProcessor};

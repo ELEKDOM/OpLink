@@ -27,7 +27,7 @@ namespace oplink
 class OLCORE_BACKEND_LIB_EXPORT ExpectedValueNoCheckProcessor : public OperationDeviceCommandProcessor
 {
 public:
-    ExpectedValueNoCheckProcessor(const Observable& observable,
+    ExpectedValueNoCheckProcessor(Observable& observable,
                                   const CommandName& cmdName,
                                   const QspDeviceCommandProcessor& deviceProcessor);
     ~ExpectedValueNoCheckProcessor() override;

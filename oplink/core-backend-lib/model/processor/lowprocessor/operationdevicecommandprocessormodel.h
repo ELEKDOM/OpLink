@@ -33,9 +33,9 @@ public:
     ~OperationDeviceCommandProcessorModel() override;
 
 protected:
-    CommandProcessor *createProcessor(const Observable& parent,
+    CommandProcessor *createProcessor(Observable& parent,
                                       QspObservableBuilderArgs builderArgs)  override;
-    virtual OperationDeviceCommandProcessor *createInstance(const Observable& parent,
+    virtual OperationDeviceCommandProcessor *createInstance(Observable& parent,
                                                             QspDeviceCommandProcessor deviceProcessor) = 0;
 };
 }//namespace oplink

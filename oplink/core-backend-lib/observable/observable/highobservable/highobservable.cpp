@@ -31,6 +31,31 @@ oplink::HighObservable::~HighObservable()
 
 }
 
+void oplink::HighObservable::onDailySequencerIndex(int idx)
+{
+    Q_UNUSED(idx)
+}
+
+void oplink::HighObservable::onWeeklySequencer(QString name)
+{
+    Q_UNUSED(name)
+}
+
+void oplink::HighObservable::onDailySequencer(QString name)
+{
+    Q_UNUSED(name)
+}
+
+bool oplink::HighObservable::hasPlannedMode()
+{
+    bool ret;
+    QspProperty triggerModeProperty{property(PropertyId::P_TRIGGER_MODE)};
+
+    ret = !triggerModeProperty.isNull();
+
+    return ret;
+}
+
 void oplink::HighObservable::startScheduler(QString& currentEvt)
 {
     m_schedulerSoc.startScheduler(currentEvt);
@@ -66,3 +91,38 @@ bool oplink::HighObservable::isPlannedMode()
 
     return ret;
 }
+
+bool oplink::HighObservable::isOnDemandMode()
+{
+    bool ret{false};
+    QspProperty triggerModeProperty{property(PropertyId::P_TRIGGER_MODE)};
+
+    if (!triggerModeProperty.isNull())
+    {
+        ret = triggerModeProperty->value().toString() == Values::TRIGGER_MODE_ONDEMAND;
+    }
+
+    return ret;
+}
+
+void oplink::HighObservable::runningProperty(const QVariant& state)
+{
+    QspProperty runningProperty{property(PropertyId::P_RUNNING)};
+
+    if (!runningProperty.isNull())
+    {
+        runningProperty->changeValue(state);
+    }
+}
+
+void oplink::HighObservable::triggerModeProperty(const QVariant &mode)
+{
+    QspProperty triggerModeProperty{property(PropertyId::P_TRIGGER_MODE)};
+
+    if (!triggerModeProperty.isNull())
+    {
+        triggerModeProperty->changeValue(mode);
+    }
+}
+
+

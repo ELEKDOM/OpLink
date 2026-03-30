@@ -133,6 +133,10 @@ void oplink::PilotWireControlRoom::onStateChangeFromHeaters(const oplink::Observ
             pfInfo2(manager().logChannel()) << tr("%1 pièce %2, fenêtre(s) ouverte(s), %3 commandé à OFF").arg(manager().name(),group()->groupName(),observableName);
             pwmHeater(observableName,propertyName,CommandArgs::OFF);
         }
+        else
+        {
+            pfInfo2(manager().logChannel()) << tr("%1 pièce %2, fenêtre(s) ouverte(s), %3 déjà à OFF").arg(manager().name(),group()->groupName(),observableName);
+        }
     }
     else if (lastRegulationOrder() != val)
     {
@@ -141,6 +145,10 @@ void oplink::PilotWireControlRoom::onStateChangeFromHeaters(const oplink::Observ
 
         pfInfo2(manager().logChannel()) << tr("%1 pièce %2, fenêtre(s) fermée(s), %3 restauré à %4").arg(manager().name(),group()->groupName(),observableName,lastOrd);
         pwmHeater(observableName,propertyName,lastOrd);
+    }
+    else
+    {
+        pfInfo2(manager().logChannel()) << tr("%1 pièce %2, rien à changer pour %3").arg(manager().name(), group()->groupName(),observableName);
     }
 }
 
@@ -192,8 +200,10 @@ void oplink::PilotWireControlRoom::onStateChangeFromUnknownCategory(const oplink
 
 void oplink::PilotWireControlRoom::pwmHeater(const QString &oname,const QString &pname,const QString &pwm)
 {
-    QString format("%1 %2 %3 %4");
+    QString format("%1;%2;%3;%4");
     oplink::StrOrder order(format.arg(oplink::CommandNames::SET,oname,pname,pwm));
+
+    pfDebug4(manager().logChannel()) << manager().name() << " submit order >  " << order;
 
     observableService()->submitOrder(order);
 }

@@ -35,6 +35,7 @@ set(HEADERS
     olfconsole.h
     olfconsole_forward.h
     olfconsolefactory.h
+    olfconsolelogchannel.h
     ui/monitoredobservables/pageview/pageviewlistlayout.h
     ui/monitoredobservables/pageview/viewlistlayout.h
     ui/monitoredobservables/pageviewbuilder/monitoredobservablebuilder.h

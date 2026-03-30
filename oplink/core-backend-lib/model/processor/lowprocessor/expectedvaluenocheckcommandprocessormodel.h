@@ -32,7 +32,7 @@ public:
     ~ExpectedValueNoCheckCommandProcessorModel() override;
 
 protected:
-    OperationDeviceCommandProcessor *createInstance(const Observable& parent,
+    OperationDeviceCommandProcessor *createInstance(Observable& parent,
                                                     QspDeviceCommandProcessor deviceProcessor) override;
 };
 }//namespace oplink

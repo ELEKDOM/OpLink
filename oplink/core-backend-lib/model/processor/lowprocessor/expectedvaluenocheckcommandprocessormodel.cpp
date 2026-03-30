@@ -32,7 +32,7 @@ oplink::ExpectedValueNoCheckCommandProcessorModel::~ExpectedValueNoCheckCommandP
 
 }
 
-oplink::OperationDeviceCommandProcessor *oplink::ExpectedValueNoCheckCommandProcessorModel::createInstance(const oplink::Observable &parent,
+oplink::OperationDeviceCommandProcessor *oplink::ExpectedValueNoCheckCommandProcessorModel::createInstance(oplink::Observable &parent,
                                                                                                            oplink::QspDeviceCommandProcessor deviceProcessor)
 {
     return new oplink::ExpectedValueNoCheckProcessor{parent, commandName(), deviceProcessor};

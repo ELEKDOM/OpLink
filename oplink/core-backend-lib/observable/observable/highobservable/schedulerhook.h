@@ -45,6 +45,9 @@ public:
 
 private slots:
     void onSchedulerEvt(QString evt);
+    void onDailySequencerIndex(int idx);
+    void onWeeklySequencer(QString name);
+    void onDailySequencer(QString name);
 
 private:
     HighObservable&  m_myVe;

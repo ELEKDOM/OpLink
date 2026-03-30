@@ -35,6 +35,9 @@ public:
     static const oplink::CommandName SET;
     static const oplink::CommandName ENERGY;
     static const oplink::CommandName POWER;
+
+    // Heating Manager specific
+    static const oplink::CommandName ROOM;
 };
 
 class OLCORE_LIB_EXPORT CommandArgs
@@ -47,6 +50,10 @@ public:
     static const oplink::CommandArg COMFORT_2;
     static const oplink::CommandArg ECO;
     static const oplink::CommandArg NOFROST;
+
+    // Heating Manager specific
+    static const oplink::CommandArg TRIGGER_MODE_ONDEMAND;
+    static const oplink::CommandArg TRIGGER_MODE_PLANNED;
 };
 }//namespace oplink
 #endif // CORELIBCOMMANDNAMES_H

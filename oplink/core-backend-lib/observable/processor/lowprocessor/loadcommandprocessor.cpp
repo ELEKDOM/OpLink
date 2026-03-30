@@ -23,7 +23,7 @@
 #include "observable/property/loadproperty.h"
 #include "observable/observable/observable.h"
 
-oplink::LoadCommandProcessor::LoadCommandProcessor(const oplink::Observable& observable,
+oplink::LoadCommandProcessor::LoadCommandProcessor(oplink::Observable& observable,
                                                    const oplink::CommandName& cmdName):
     LowCommandProcessor{observable, cmdName}
 {

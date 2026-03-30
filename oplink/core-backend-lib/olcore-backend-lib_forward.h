@@ -30,6 +30,8 @@ namespace oplink
     //
     class SupervisorObservable;
     //
+    class HeatingManager;
+    //
     class Property;
     //
     class CommandProcessor;

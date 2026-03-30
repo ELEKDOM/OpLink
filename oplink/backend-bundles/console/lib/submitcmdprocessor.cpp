@@ -42,7 +42,7 @@ bool SubmitCmdProcessor::exec(const RawCmd &cmd)
     QTextStream      stream(stdin);
     oplink::StrOrder order;
 
-    console().print(QObject::tr("Format d'une commande : order observable_name [property_name value]\n"));
+    console().print(QObject::tr("Format d'une commande : order;observable_name;[property_name;value]\n"));
     console().print(QObject::tr("<Entrée> pour quitter ce mode\n"));
     do
     {

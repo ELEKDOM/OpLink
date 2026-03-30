@@ -89,14 +89,28 @@ public:
     HeatingManager(QString defaultSetpoint,const plugframe::QspScheduler& scheduler);
     ~HeatingManager() override;
 
-public:
+public: // for algorithm
     bool windowSensorState(const QString& roomName, bool allClosed);
+
+public: // for processor
+    bool isActivated();
+    void setOn();
+    void setOff();
+    void setSetpoint(const QString& setpoint);
+    void setRoomSetpoint(const QString& roomName, const QString& setpoint);
+    void setOnDemand();
+    void setPlanned();
+    void setSchedulerXmlDef(const QString& xmlDef);
 
 protected:
     void init() override;
     void onSchedulerEvt(QString evt) override;
+    void onDailySequencerIndex(int idx) override;
+    void onWeeklySequencer(QString name) override;
+    void onDailySequencer(QString name) override;
 
 private:
+    void startPlanning();
     void startRoomsMonitor();
     void stopRoomsMonitor();
     const QString setpointProperty();
@@ -106,7 +120,9 @@ private:
     const QString roomSetpointProperty(const QString& roomName);
     void roomSetpointProperty(const QString& roomName,const QString& order);
     void processScheduledSetpoint(const QString& setpoint);
+    void setpointForRoom(const QString& setpoint,const QString& roomName);
     void setpointForRooms(const QString& setpoint);
+    void checkForDerogatedState();
 
 private:
     QString m_defaultSetpoint;

@@ -32,7 +32,7 @@ public:
     ~LoadCommandProcessorModel() override;
 
 public:
-    CommandProcessor *createProcessor(const Observable& parent,
+    CommandProcessor *createProcessor(Observable& parent,
                                       QspObservableBuilderArgs builderArgs) override;
 };
 }//namespace oplink

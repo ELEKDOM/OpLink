@@ -27,8 +27,8 @@ Heating6mWidgetView::Heating6mWidgetView(QWidget *parent):
     ui->setupUi(this);
 
     ui->pwmCmd->addItem("comfort", ButtonName::comfort());
-    ui->pwmCmd->addItem("comfort -1", ButtonName::comfort1());
-    ui->pwmCmd->addItem("comfort -2", ButtonName::comfort2());
+    ui->pwmCmd->addItem("comfort - 1", ButtonName::comfort1());
+    ui->pwmCmd->addItem("comfort - 2", ButtonName::comfort2());
     ui->pwmCmd->addItem("eco", ButtonName::eco());
     ui->pwmCmd->addItem("no frost", ButtonName::nofrost());
     ui->pwmCmd->addItem("stop", ButtonName::off());

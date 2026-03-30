@@ -44,6 +44,7 @@ protected:
     void subscribeToMonitoredObservables();
     void unsubscribeToMonitoredObservables();
     const HashGroup& groups() {return m_monitoredObservableGroups;}
+    QspGroupToWatch group(const QString& groupName) {return m_monitoredObservableGroups.value(groupName);}
 
 private:
     HashGroup m_monitoredObservableGroups;

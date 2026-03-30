@@ -35,7 +35,7 @@ oplink::OperationDeviceCommandProcessorModel::~OperationDeviceCommandProcessorMo
 
 }
 
-oplink::CommandProcessor *oplink::OperationDeviceCommandProcessorModel::createProcessor(const oplink::Observable &parent,
+oplink::CommandProcessor *oplink::OperationDeviceCommandProcessorModel::createProcessor(oplink::Observable &parent,
                                                                                         oplink::QspObservableBuilderArgs builderArgs)
 {
     OperationDeviceCommandProcessor *ret;

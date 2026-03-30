@@ -27,7 +27,7 @@ namespace oplink
 class OLCORE_BACKEND_LIB_EXPORT LoadCommandProcessor : public LowCommandProcessor
 {
 public:
-    LoadCommandProcessor(const Observable& observable,
+    LoadCommandProcessor(Observable& observable,
                          const CommandName& cmdName);
     ~LoadCommandProcessor() override;
 

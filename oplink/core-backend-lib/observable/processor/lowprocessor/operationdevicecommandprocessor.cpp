@@ -21,7 +21,7 @@
 #include "operationdevicecommandprocessor.h"
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 
-oplink::OperationDeviceCommandProcessor::OperationDeviceCommandProcessor(const oplink::Observable& observable,
+oplink::OperationDeviceCommandProcessor::OperationDeviceCommandProcessor(oplink::Observable& observable,
                                                                          const oplink::CommandName& cmdName,
                                                                          const oplink::QspDeviceCommandProcessor& deviceProcessor):
     LowCommandProcessor{observable, cmdName},

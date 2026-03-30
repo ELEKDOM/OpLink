@@ -20,7 +20,7 @@
 #include "abstract_infrastructure/device/devicecommandprocessor.h"
 #include "command/command.h"
 
-oplink::ExpectedValueCheckProcessor::ExpectedValueCheckProcessor(const oplink::Observable& observable,
+oplink::ExpectedValueCheckProcessor::ExpectedValueCheckProcessor(oplink::Observable& observable,
                                                                  const oplink::CommandName& cmdName,
                                                                  const oplink::QspDeviceCommandProcessor& deviceProcessor):
      OperationDeviceCommandProcessor{observable, cmdName, deviceProcessor}

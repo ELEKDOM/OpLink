@@ -84,13 +84,13 @@ void SmartPlugWidgetCtrl::onButtonCmdClicked(QString cmdName)
 {
     if (ButtonName::on() == cmdName || ButtonName::off() == cmdName)
     {
-        QString cmdFormat{QString("set %1 %2 %3").arg(observableName(), output1Name(), cmdName)};
+        QString cmdFormat{QString("set;%1;%2;%3").arg(observableName(), output1Name(), cmdName)};
 
         emit execCmd(cmdFormat);
     }
     else
     {
-        QString cmdFormat{QString("%1 %2").arg(cmdName, observableName())};
+        QString cmdFormat{QString("%1;%2").arg(cmdName, observableName())};
 
         emit execCmd(cmdFormat);
     }

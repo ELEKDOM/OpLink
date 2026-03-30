@@ -18,6 +18,8 @@
 
 #include "heating6mwidgetctrl.h"
 #include "ui/monitoredobservables/widget/view/heating6mwidgetview.h"
+#include "logger/pflog.h"
+#include "olfconsolelogchannel.h"
 
 Heating6mWidgetCtrl::Heating6mWidgetCtrl(QString observableName,
                                          QString observableTitle,
@@ -103,16 +105,20 @@ void Heating6mWidgetCtrl::_updateStateValue(const QString &propertyName, const Q
 
 void Heating6mWidgetCtrl::onButtonCmdClicked(QString cmdName)
 {
+    pfDebug4(s_OplinkGuiConsoleLogChannel) << "Heating6mWidgetCtrl::onButtonCmdClicked cmdName = " << cmdName;
+
     if (ButtonName::power() == cmdName || ButtonName::energy() == cmdName)
     {
-        QString cmdFormat{QString("%1 %2 %3").arg(cmdName, observableName(), heatingMeasName())};
+        QString cmdFormat{QString("%1;%2;%3").arg(cmdName, observableName(), heatingMeasName())};
 
+        pfDebug4(s_OplinkGuiConsoleLogChannel) << "Heating6mWidgetCtrl::onButtonCmdClicked emit " << cmdFormat;
         emit execCmd(cmdFormat);
     }
     else
     {
-        QString cmdFormat{QString("set %1 %2 %3").arg(observableName(), heatingModeName(), cmdName)};
+        QString cmdFormat{QString("set;%1;%2;%3").arg(observableName(), heatingModeName(), cmdName)};
 
+        pfDebug4(s_OplinkGuiConsoleLogChannel) << "Heating6mWidgetCtrl::onButtonCmdClicked emit " << cmdFormat;
         emit execCmd(cmdFormat);
     }
 }
