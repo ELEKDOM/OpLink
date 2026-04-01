@@ -29,5 +29,6 @@ string(CONCAT BUNDLE_CONF_MODEL ${BUNDLE_NAME} "-conf-model")
 add_custom_target(${BUNDLE_CONF_MODEL}
     SOURCES
     "conf/guiconsole.ini"
+    "conf/xxx_remote.xml"
 )
 

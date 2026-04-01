@@ -17,8 +17,8 @@
 //
 
 #include "pageviewbylocalisationbuilder.h"
-#include "monitoredobservablebuilder.h"
 #include "ui/olfmonitoredobservablescontroller.h"
+#include "ui/monitoredobservables/monitoredobservableloader.h"
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
 PageViewByLocalisationBuilder::PageViewByLocalisationBuilder()

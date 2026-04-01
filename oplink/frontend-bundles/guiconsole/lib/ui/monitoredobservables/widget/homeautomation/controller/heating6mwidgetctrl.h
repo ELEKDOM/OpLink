@@ -20,7 +20,7 @@
 #define HEATING6MWIDGETCTRL_H
 
 #include <QPixmap>
-#include "monitoredobservablewidgetctrl.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
 class Heating6mWidgetCtrl : public MonitoredObservableWidgetCtrl
 {

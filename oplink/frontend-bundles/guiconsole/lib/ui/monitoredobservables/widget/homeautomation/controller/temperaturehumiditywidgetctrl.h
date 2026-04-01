@@ -16,33 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef WINDOWSENSORWIDGETCTRL_H
-#define WINDOWSENSORWIDGETCTRL_H
 
-#include <QPixmap>
-#include "monitoredobservablewidgetctrl.h"
+#ifndef TEMPERATUREHUMIDITYWIDGETCTRL_H
+#define TEMPERATUREHUMIDITYWIDGETCTRL_H
 
-class WindowSensorWidgetCtrl : public MonitoredObservableWidgetCtrl
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
+
+class TemperatureHumidityWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
-    static QString closedName() {return QStringLiteral("closed");}
+    static QString temperatureName() {return QStringLiteral("temperature");}
+    static QString humidityName() {return QStringLiteral("humidity");}
 
 public:
-    WindowSensorWidgetCtrl(QString observableName,
-                           QString observableTitle,
-                           QString observableType,
-                           QString observableLocalisation);
-    ~WindowSensorWidgetCtrl() override;
+    TemperatureHumidityWidgetCtrl(QString observableName,
+                                  QString observableTitle,
+                                  QString observableType,
+                                  QString observableLocalisation);
+    ~TemperatureHumidityWidgetCtrl() override;
 
 protected:
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;
     void onButtonCmdClicked(QString cmdName) override;
-
-private:
-    QPixmap m_open;
-    QPixmap m_closed;
 };
 
-#endif // WINDOWSENSORWIDGETCTRL_H
+#endif // TEMPERATUREHUMIDITYWIDGETCTRL_H

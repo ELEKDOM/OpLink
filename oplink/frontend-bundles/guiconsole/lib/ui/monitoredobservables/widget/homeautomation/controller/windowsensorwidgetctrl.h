@@ -16,23 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef LIGHTINGWIDGETCTRL_H
-#define LIGHTINGWIDGETCTRL_H
+#ifndef WINDOWSENSORWIDGETCTRL_H
+#define WINDOWSENSORWIDGETCTRL_H
 
 #include <QPixmap>
-#include "monitoredobservablewidgetctrl.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
-class LightingWidgetCtrl : public MonitoredObservableWidgetCtrl
+class WindowSensorWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
-    static QString stateName() {return QStringLiteral("state");}
+    static QString closedName() {return QStringLiteral("closed");}
 
 public:
-    LightingWidgetCtrl(QString observableName,
-                       QString observableTitle,
-                       QString observableType,
-                       QString observableLocalisation);
-    ~LightingWidgetCtrl() override;
+    WindowSensorWidgetCtrl(QString observableName,
+                           QString observableTitle,
+                           QString observableType,
+                           QString observableLocalisation);
+    ~WindowSensorWidgetCtrl() override;
 
 protected:
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
@@ -41,8 +41,8 @@ protected:
     void onButtonCmdClicked(QString cmdName) override;
 
 private:
-    QPixmap m_lightOn;
-    QPixmap m_lightOff;
+    QPixmap m_open;
+    QPixmap m_closed;
 };
 
-#endif // LIGHTINGWIDGETCTRL_H
+#endif // WINDOWSENSORWIDGETCTRL_H

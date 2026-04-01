@@ -16,28 +16,16 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "windowsensorwidgetview.h"
-#include "ui_windowsensorwidgetview.h"
+#ifndef WIDGETLISTVIEW_H
+#define WIDGETLISTVIEW_H
 
-WindowSensorWidgetView::WindowSensorWidgetView(QWidget *parent):
-    WidgetListView{parent},
-    ui(new Ui::windowSensorWidgetView)
-{
-    ui->setupUi(this);
-}
+#include "monitoredobservablewidgetview.h"
 
-WindowSensorWidgetView::~WindowSensorWidgetView()
+class MonitoredObservableWidgetListView : public MonitoredObservableWidgetView
 {
-    delete ui;
-}
+public:
+    explicit MonitoredObservableWidgetListView(QWidget *parent = nullptr);
+    ~MonitoredObservableWidgetListView() override;
+};
 
-void WindowSensorWidgetView::setTitle(const QString &title)
-{
-    ui->sensorName->setText(title);
-}
-
-void WindowSensorWidgetView::setImg(const QPixmap &img, const QString &propertyName)
-{
-    Q_UNUSED(propertyName)
-    ui->state->setPixmap(img);
-}
+#endif // WIDGETLISTVIEW_H

@@ -20,7 +20,7 @@
 #include "ui_lightingwidgetview.h"
 
 LightingWidgetView::LightingWidgetView(QWidget *parent):
-    WidgetListView{parent},
+    MonitoredObservableWidgetListView{parent},
     ui(new Ui::lightingWidgetView)
 {
     ui->setupUi(this);

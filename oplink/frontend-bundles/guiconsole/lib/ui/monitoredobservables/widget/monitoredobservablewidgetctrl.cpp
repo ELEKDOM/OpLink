@@ -17,7 +17,7 @@
 //
 
 #include "monitoredobservablewidgetctrl.h"
-#include "ui/monitoredobservables/widget/view/monitoredobservablewidgetview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetview.h"
 
 MonitoredObservableWidgetCtrl::MonitoredObservableWidgetCtrl(QString observableName,
                                                              QString observableTitle,

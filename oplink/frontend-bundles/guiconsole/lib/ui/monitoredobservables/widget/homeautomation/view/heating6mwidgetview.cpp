@@ -20,7 +20,7 @@
 #include "ui_heating6mwidgetview.h"
 
 Heating6mWidgetView::Heating6mWidgetView(QWidget *parent):
-    WidgetListView{parent},
+    MonitoredObservableWidgetListView{parent},
     ui(new Ui::heating6mWidgetView),
     m_pwmIdx{-1}
 {

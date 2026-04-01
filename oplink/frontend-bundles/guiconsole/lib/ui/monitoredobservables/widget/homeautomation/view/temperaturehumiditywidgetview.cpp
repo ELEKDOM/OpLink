@@ -20,7 +20,7 @@
 #include "ui_temperaturehumiditywidgetview.h"
 
 TemperatureHumidityWidgetView::TemperatureHumidityWidgetView(QWidget *parent):
-    WidgetListView{parent},
+    MonitoredObservableWidgetListView{parent},
     ui(new Ui::temperatureHumidityWidgetView)
 {
     ui->setupUi(this);

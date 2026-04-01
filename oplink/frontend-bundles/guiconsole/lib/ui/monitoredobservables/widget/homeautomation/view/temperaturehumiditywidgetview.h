@@ -16,16 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef WIDGETLISTVIEW_H
-#define WIDGETLISTVIEW_H
+#ifndef TEMPERATUREHUMIDITYWIDGETVIEW_H
+#define TEMPERATUREHUMIDITYWIDGETVIEW_H
 
-#include "monitoredobservablewidgetview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
-class WidgetListView : public MonitoredObservableWidgetView
+namespace Ui {
+class temperatureHumidityWidgetView;
+}
+
+class TemperatureHumidityWidgetView : public MonitoredObservableWidgetListView
 {
+    Q_OBJECT
+
 public:
-    explicit WidgetListView(QWidget *parent = nullptr);
-    ~WidgetListView() override;
+    TemperatureHumidityWidgetView(QWidget *parent = nullptr);
+    ~TemperatureHumidityWidgetView() override;
+
+protected:
+    void setTitle(const QString& title) override;
+    void setVal(quint8 idx, double val) override;
+
+private:
+    Ui::temperatureHumidityWidgetView *ui;
 };
 
-#endif // WIDGETLISTVIEW_H
+#endif // TEMPERATUREHUMIDITYWIDGETVIEW_H

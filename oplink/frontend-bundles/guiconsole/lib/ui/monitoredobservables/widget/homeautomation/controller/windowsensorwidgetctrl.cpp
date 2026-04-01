@@ -17,7 +17,7 @@
 //
 
 #include "windowsensorwidgetctrl.h"
-#include "ui/monitoredobservables/widget/view/windowsensorwidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetview.h"
 
 WindowSensorWidgetCtrl::WindowSensorWidgetCtrl(QString observableName,
                                                QString observableTitle,

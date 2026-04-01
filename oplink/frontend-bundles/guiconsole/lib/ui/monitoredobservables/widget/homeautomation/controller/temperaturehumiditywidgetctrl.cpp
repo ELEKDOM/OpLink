@@ -17,7 +17,7 @@
 //
 
 #include "temperaturehumiditywidgetctrl.h"
-#include "ui/monitoredobservables/widget/view/temperaturehumiditywidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetview.h"
 
 TemperatureHumidityWidgetCtrl::TemperatureHumidityWidgetCtrl(QString observableName,
                                                              QString observableTitle,

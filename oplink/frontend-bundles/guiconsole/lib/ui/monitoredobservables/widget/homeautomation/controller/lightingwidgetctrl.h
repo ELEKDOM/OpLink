@@ -16,25 +16,23 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef SMARTPLUGWIDGETCTRL_H
-#define SMARTPLUGWIDGETCTRL_H
+#ifndef LIGHTINGWIDGETCTRL_H
+#define LIGHTINGWIDGETCTRL_H
 
 #include <QPixmap>
-#include "monitoredobservablewidgetctrl.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
-class SmartPlugWidgetCtrl : public MonitoredObservableWidgetCtrl
+class LightingWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
-    static QString output1Name() {return QStringLiteral("output1");}
-    static QString measName() {return QStringLiteral("m_value");}
-    static QString unitName() {return QStringLiteral("u_value");}
+    static QString stateName() {return QStringLiteral("state");}
 
 public:
-    SmartPlugWidgetCtrl(QString observableName,
-                        QString observableTitle,
-                        QString observableType,
-                        QString observableLocalisation);
-    ~SmartPlugWidgetCtrl() override;
+    LightingWidgetCtrl(QString observableName,
+                       QString observableTitle,
+                       QString observableType,
+                       QString observableLocalisation);
+    ~LightingWidgetCtrl() override;
 
 protected:
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
@@ -43,8 +41,8 @@ protected:
     void onButtonCmdClicked(QString cmdName) override;
 
 private:
-    QPixmap m_plugOn;
-    QPixmap m_plugOff;
+    QPixmap m_lightOn;
+    QPixmap m_lightOff;
 };
 
-#endif // SMARTPLUGWIDGETCTRL_H
+#endif // LIGHTINGWIDGETCTRL_H

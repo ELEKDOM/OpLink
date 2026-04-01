@@ -1,0 +1,22 @@
+#ifndef MONITOREDOBSERVABLEWIDGETBUILDER_H
+#define MONITOREDOBSERVABLEWIDGETBUILDER_H
+
+#include <QString>
+#include <QSharedPointer>
+#include "olfconsole_forward.h"
+
+class MonitoredObservableWidgetBuilder
+{
+public:
+    MonitoredObservableWidgetBuilder();
+    virtual ~MonitoredObservableWidgetBuilder();
+
+public:
+    virtual MonitoredObservableWidgetCtrl *createWidget(QString observableName,
+                                                        QString observableTitle,
+                                                        QString observableType,
+                                                        QString observableLocalisation) = 0;
+    virtual QString getFamilyName(const QString& observableType) = 0;
+};
+using QspMonitoredObservableWidgetBuilder = QSharedPointer<MonitoredObservableWidgetBuilder>;
+#endif // MONITOREDOBSERVABLEWIDGETBUILDER_H

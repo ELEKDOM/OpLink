@@ -27,7 +27,7 @@ PageViewLayoutBuilder::~PageViewLayoutBuilder()
 
 }
 
-void PageViewLayoutBuilder::setBuilder(MonitoredObservableBuilder *builder)
+void PageViewLayoutBuilder::setBuilder(MonitoredObservableLoader *builder)
 {
     m_builder = builder;
 }

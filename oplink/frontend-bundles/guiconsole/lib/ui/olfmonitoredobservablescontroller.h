@@ -24,7 +24,7 @@
 #include "observable/remote/sessionconfdocument.h"
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 #include "ui/monitoredobservables/pageviewbuilder/pageviewlayoutbuilder.h"
-#include "ui/monitoredobservables/pageviewbuilder/monitoredobservablebuilder.h"
+#include "ui/monitoredobservables/monitoredobservableloader.h"
 #include "olfconsolecontroller.h"
 #include "olfconsole_forward.h"
 
@@ -65,11 +65,11 @@ public:
     void addMonitoredObservablesView(OlfMonitoredObservablesView *pageView);
 
 protected:
-    virtual MonitoredObservableBuilder *buildWidgetBuilder();
-    virtual MonitoredObservableBuilder *createMonitoredObservableBuilder(PageViewLayoutBuilder *viewsBuilder);
+    virtual MonitoredObservableLoader *buildWidgetBuilder();
+    virtual MonitoredObservableLoader *createMonitoredObservableBuilder(PageViewLayoutBuilder *viewsBuilder);
     virtual PageViewLayoutBuilder *createLayoutByTypeBuilder();
     virtual PageViewLayoutBuilder *createLayoutByLocalisationBuilder();
-    virtual oplink::SessionConfDocument *createProfileConfBrowser(MonitoredObservableBuilder& hook);
+    virtual oplink::SessionConfDocument *createProfileConfBrowser(MonitoredObservableLoader& hook);
 
 private:
     bool profileFileExists(const QString& profile);

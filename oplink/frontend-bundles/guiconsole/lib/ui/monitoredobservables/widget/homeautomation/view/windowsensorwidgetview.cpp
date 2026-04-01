@@ -16,34 +16,28 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef LIGHTINGWIDGETVIEW_H
-#define LIGHTINGWIDGETVIEW_H
+#include "windowsensorwidgetview.h"
+#include "ui_windowsensorwidgetview.h"
 
-#include "widgetlistview.h"
-
-namespace Ui {
-class lightingWidgetView;
+WindowSensorWidgetView::WindowSensorWidgetView(QWidget *parent):
+    MonitoredObservableWidgetListView{parent},
+    ui(new Ui::windowSensorWidgetView)
+{
+    ui->setupUi(this);
 }
 
-class LightingWidgetView : public WidgetListView
+WindowSensorWidgetView::~WindowSensorWidgetView()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    explicit LightingWidgetView(QWidget *parent = nullptr);
-    ~LightingWidgetView() override;
+void WindowSensorWidgetView::setTitle(const QString &title)
+{
+    ui->sensorName->setText(title);
+}
 
-protected:
-    void setTitle(const QString& title) override;
-    void setImg(const QPixmap& img, const QString& propertyName) override;
-    void enableCmdButton(bool enable, const QString& cmdName) override;
-
-private slots:
-    void onOnCmd();
-    void onOffCmd();
-
-private:
-    Ui::lightingWidgetView *ui;
-};
-
-#endif // LIGHTINGWIDGETVIEW_H
+void WindowSensorWidgetView::setImg(const QPixmap &img, const QString &propertyName)
+{
+    Q_UNUSED(propertyName)
+    ui->state->setPixmap(img);
+}

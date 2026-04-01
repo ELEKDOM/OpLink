@@ -16,29 +16,34 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef WINDOWSENSORWIDGETVIEW_H
-#define WINDOWSENSORWIDGETVIEW_H
+#ifndef LIGHTINGWIDGETVIEW_H
+#define LIGHTINGWIDGETVIEW_H
 
-#include "widgetlistview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
 namespace Ui {
-class windowSensorWidgetView;
+class lightingWidgetView;
 }
 
-class WindowSensorWidgetView : public WidgetListView
+class LightingWidgetView : public MonitoredObservableWidgetListView
 {
     Q_OBJECT
 
 public:
-    WindowSensorWidgetView(QWidget *parent = nullptr);
-    ~WindowSensorWidgetView() override;
+    explicit LightingWidgetView(QWidget *parent = nullptr);
+    ~LightingWidgetView() override;
 
 protected:
     void setTitle(const QString& title) override;
     void setImg(const QPixmap& img, const QString& propertyName) override;
+    void enableCmdButton(bool enable, const QString& cmdName) override;
+
+private slots:
+    void onOnCmd();
+    void onOffCmd();
 
 private:
-    Ui::windowSensorWidgetView *ui;
+    Ui::lightingWidgetView *ui;
 };
 
-#endif // WINDOWSENSORWIDGETVIEW_H
+#endif // LIGHTINGWIDGETVIEW_H

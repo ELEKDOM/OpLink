@@ -16,22 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef SMARTPLUGWIDGETVIEW_H
-#define SMARTPLUGWIDGETVIEW_H
+#ifndef HEATING6MWIDGETVIEW_H
+#define HEATING6MWIDGETVIEW_H
 
-#include "widgetlistview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
 namespace Ui {
-    class smartPlugWidgetView;
+class heating6mWidgetView;
 }
 
-class SmartPlugWidgetView : public WidgetListView
+class Heating6mWidgetView : public MonitoredObservableWidgetListView
 {
     Q_OBJECT
 
 public:
-    explicit SmartPlugWidgetView(QWidget *parent = nullptr);
-    ~SmartPlugWidgetView() override;
+    explicit Heating6mWidgetView(QWidget *parent = nullptr);
+    ~Heating6mWidgetView() override;
 
 protected:
     void setTitle(const QString& title) override;
@@ -41,13 +41,13 @@ protected:
     void enableCmdButton(bool enable, const QString& cmdName) override;
 
 private slots:
-    void onOnCmd();
-    void onOffCmd();
+    void onItemPwmCmd(int index);
     void onPowerCmd();
     void onEnergyCmd();
 
 private:
-    Ui::smartPlugWidgetView *ui;
+    Ui::heating6mWidgetView *ui;
+    int     m_pwmIdx;
 };
 
-#endif // SMARTPLUGWIDGETVIEW_H
+#endif // HEATING6MWIDGETVIEW_H

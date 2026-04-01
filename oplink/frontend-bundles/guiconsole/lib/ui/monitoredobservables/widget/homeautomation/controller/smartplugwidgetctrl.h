@@ -16,30 +16,35 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
+#ifndef SMARTPLUGWIDGETCTRL_H
+#define SMARTPLUGWIDGETCTRL_H
 
-#ifndef TEMPERATUREHUMIDITYWIDGETCTRL_H
-#define TEMPERATUREHUMIDITYWIDGETCTRL_H
+#include <QPixmap>
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
-#include "monitoredobservablewidgetctrl.h"
-
-class TemperatureHumidityWidgetCtrl : public MonitoredObservableWidgetCtrl
+class SmartPlugWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
-    static QString temperatureName() {return QStringLiteral("temperature");}
-    static QString humidityName() {return QStringLiteral("humidity");}
+    static QString output1Name() {return QStringLiteral("output1");}
+    static QString measName() {return QStringLiteral("m_value");}
+    static QString unitName() {return QStringLiteral("u_value");}
 
 public:
-    TemperatureHumidityWidgetCtrl(QString observableName,
-                                  QString observableTitle,
-                                  QString observableType,
-                                  QString observableLocalisation);
-    ~TemperatureHumidityWidgetCtrl() override;
+    SmartPlugWidgetCtrl(QString observableName,
+                        QString observableTitle,
+                        QString observableType,
+                        QString observableLocalisation);
+    ~SmartPlugWidgetCtrl() override;
 
 protected:
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;
     void onButtonCmdClicked(QString cmdName) override;
+
+private:
+    QPixmap m_plugOn;
+    QPixmap m_plugOff;
 };
 
-#endif // TEMPERATUREHUMIDITYWIDGETCTRL_H
+#endif // SMARTPLUGWIDGETCTRL_H

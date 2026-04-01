@@ -20,7 +20,7 @@
 #include "ui_smartplugwidgetview.h"
 
 SmartPlugWidgetView::SmartPlugWidgetView(QWidget *parent):
-    WidgetListView{parent},
+    MonitoredObservableWidgetListView{parent},
     ui(new Ui::smartPlugWidgetView)
 {
     ui->setupUi(this);

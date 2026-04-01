@@ -16,13 +16,13 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "widgetlistview.h"
+#include "monitoredobservablewidgetlistview.h"
 
-WidgetListView::WidgetListView(QWidget *parent):
+MonitoredObservableWidgetListView::MonitoredObservableWidgetListView(QWidget *parent):
     MonitoredObservableWidgetView{parent}
 {}
 
-WidgetListView::~WidgetListView()
+MonitoredObservableWidgetListView::~MonitoredObservableWidgetListView()
 {
 
 }

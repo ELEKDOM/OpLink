@@ -16,29 +16,38 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef TEMPERATUREHUMIDITYWIDGETVIEW_H
-#define TEMPERATUREHUMIDITYWIDGETVIEW_H
+#ifndef SMARTPLUGWIDGETVIEW_H
+#define SMARTPLUGWIDGETVIEW_H
 
-#include "widgetlistview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
 namespace Ui {
-class temperatureHumidityWidgetView;
+    class smartPlugWidgetView;
 }
 
-class TemperatureHumidityWidgetView : public WidgetListView
+class SmartPlugWidgetView : public MonitoredObservableWidgetListView
 {
     Q_OBJECT
 
 public:
-    TemperatureHumidityWidgetView(QWidget *parent = nullptr);
-    ~TemperatureHumidityWidgetView() override;
+    explicit SmartPlugWidgetView(QWidget *parent = nullptr);
+    ~SmartPlugWidgetView() override;
 
 protected:
     void setTitle(const QString& title) override;
-    void setVal(quint8 idx, double val) override;
+    void setImg(const QPixmap& img, const QString& propertyName) override;
+    void setMeasVal(quint32 val) override;
+    void setMeasUnit(const QString& unit) override;
+    void enableCmdButton(bool enable, const QString& cmdName) override;
+
+private slots:
+    void onOnCmd();
+    void onOffCmd();
+    void onPowerCmd();
+    void onEnergyCmd();
 
 private:
-    Ui::temperatureHumidityWidgetView *ui;
+    Ui::smartPlugWidgetView *ui;
 };
 
-#endif // TEMPERATUREHUMIDITYWIDGETVIEW_H
+#endif // SMARTPLUGWIDGETVIEW_H

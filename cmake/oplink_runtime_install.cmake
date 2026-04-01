@@ -275,7 +275,7 @@ if (OL_BUILD_BACKEND)
     "${OL_BACKEND_BUNDLES_DIR}/users/conf"
   )
   ol_copy_conf_file(
-    "${OL_PROFILE_DIR}/oplink/backend/user_remote_monitoring.xml"
+    "${OL_PROFILE_DIR}/oplink/backend/user_remote.xml"
     "${OL_BACKEND_BUNDLES_DIR}/users/conf"
   )
 

@@ -1,0 +1,58 @@
+﻿<!-- Configuration file template. Do not use this file directly for deployment.
+Create a directory containing all the configuration files for a given deployment !-->
+
+<!-- This file lists the observables to be displayed for monitoring on the frontend side.!-->
+<!-- A file of this type must be defined per user profile. !-->
+<!-- These files are saved on the backend and retrieved upon login on the frontend. !-->
+<!-- The file is only downloaded to the frontend if it doesn't exist or its config-id has changed. !-->
+<!-- naming rule : <profile>_remote.xml !-->
+
+<?xml version='1.0' encoding='UTF-8'?>
+<remotemonitoring version='1.0' conf-id=''>
+<!-- version : not use !-->
+<!-- conf-id : defines the configuration update. When the local value is lower,
+               the file is downloaded again !-->
+    <monitoredobservables>
+
+        <monitoredObservable name='' title='' model-name='' localisation=''>
+        <!-- model-name : Identifies the type of observable to be represented. !-->
+        <!-- For each recognized type, there is a corresponding specific widget. !-->
+        <!-- Values :
+             onoff_lighting
+             pw_electric_heating
+             pw_electric_heating_measurement
+             onoff_smart_plug
+             onoff_smart_plug_measurement
+             temperature_humidity_sensor
+             window_sensor
+             heating_manager_pilotwire
+             heating_manager_pilotwire_thermostat
+        !-->
+            <monitoredproperties>
+                <monitoredproperty name=''/>
+            </monitoredproperties>
+        </monitoredObservable>
+
+        <monitoredObservable name='' title='' model-name='' localisation=''>
+            <monitoredproperties>
+                <monitoredproperty name=''/>
+                <monitoredproperty name=''/>
+                <monitoredproperty name=''/>
+            </monitoredproperties>
+        </monitoredObservable>
+
+        <monitoredObservable name='' title='' model-name='' localisation=''>
+            <monitoredproperties>
+                <monitoredproperty name=''/>
+                <monitoredproperty name=''/>
+            </monitoredproperties>
+        </monitoredObservable>
+
+        <monitoredObservable name='' title="" model-name='' localisation=''>
+            <monitoredproperties>
+                <monitoredproperty name=''/>
+            </monitoredproperties>
+        </monitoredObservable>
+
+    </monitoredobservables>
+</remotemonitoring>

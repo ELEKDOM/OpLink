@@ -36,7 +36,7 @@ public:
     ~ViewListLayout() override;
 
 public:
-    void addWidget(WidgetListView* widget);
+    void addWidget(MonitoredObservableWidgetListView* widget);
     void pushUpWidgets();
 
 private slots:

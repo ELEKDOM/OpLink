@@ -17,7 +17,7 @@
 //
 
 #include "smartplugwidgetctrl.h"
-#include "ui/monitoredobservables/widget/view/smartplugwidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetview.h"
 
 SmartPlugWidgetCtrl::SmartPlugWidgetCtrl(QString observableName,
                                          QString observableTitle,
