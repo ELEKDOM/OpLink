@@ -16,43 +16,42 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef OBSERVABLESTATESGROUP_H
-#define OBSERVABLESTATESGROUP_H
+#ifndef REMOTEMONITOREDOBSERVABLEGROUP_H
+#define REMOTEMONITOREDOBSERVABLEGROUP_H
 
 #include <QObject>
 #include <QHash>
 #include <QVariant>
 #include "service-int/observableserviceinterface.h"
 #include "observable/observablenames.h"
-#include "observable/remote/observablestates.h"
+#include "observable/remote/remoteMonitoredobservable.h"
 
 namespace oplink
 {
-class ObservableStatesGroup : public QObject
+class RemoteMonitoredObservableGroup : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ObservableStatesGroup(ObservableServiceInterface *oService,
-                                   QObject *parent = nullptr);
-    ~ObservableStatesGroup() override;
+    explicit RemoteMonitoredObservableGroup(ObservableServiceInterface *oService,
+                                            QObject *parent = nullptr);
+    ~RemoteMonitoredObservableGroup() override;
 
+public:
+    void addRemoteMonitoredObservable(const QString& observableName,
+                                      QspRemoteMonitoredObservable remoteMonitored);
 public slots:
     virtual void onStateChange(oplink::ObservableName observableName,
                                oplink::PropertyName propertyName,
                                QVariant propertyValue) = 0;
-
 protected:
     void orderToObservable(const QString &order);
-    void addMonitoredObservable(const QString& observableName,
-                                const QStringList& propertyNames,
-                                QspObservableStates remoteMonitored);
     void subscribe();
     void unsubscribe();
 
 private:
-    ObservableServiceInterface               *m_observableService;
-    QHash<ObservableName,QspObservableStates> m_monitoredObservables;
+    ObservableServiceInterface                        *m_observableService;
+    QHash<ObservableName,QspRemoteMonitoredObservable> m_remoteMonitoredObservables;
 };
 }//namespace oplink
-#endif // OBSERVABLESTATESGROUP_H
+#endif // REMOTEMONITOREDOBSERVABLEGROUP_H

@@ -22,6 +22,10 @@
 #include <QPixmap>
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
+///
+/// \brief The WindowSensorWidgetCtrl class
+/// widget associated with the "window_sensor" model defined on the backend
+///
 class WindowSensorWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
@@ -35,6 +39,7 @@ public:
     ~WindowSensorWidgetCtrl() override;
 
 protected:
+    void createStates() override;
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;

@@ -49,9 +49,10 @@ bool EnginePlugin::submitOrder(oplink::StrOrder command)
 }
 
 bool EnginePlugin::subscribe(oplink::ObservableName observableName,
-                             oplink::ObservableSubscriber *subscriber)
+                             oplink::ObservableSubscriber *subscriber,
+                             bool reportInitialValues)
 {
-    return m_observableServiceImpl->subscribe(observableName, subscriber);
+    return m_observableServiceImpl->subscribe(observableName, subscriber,reportInitialValues);
 }
 
 bool EnginePlugin::unsubscribe(oplink::ObservableName observableName,

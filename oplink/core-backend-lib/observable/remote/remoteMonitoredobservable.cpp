@@ -16,25 +16,24 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef SESSIONCONFHOOK_H
-#define SESSIONCONFHOOK_H
+#include "remoteMonitoredobservable.h"
 
-#include "xmldom/xmlbrowserhook.h"
-#include "olcore-lib_export.h"
-
-namespace oplink
+oplink::RemoteMonitoredObservable::RemoteMonitoredObservable(QObject *parent):
+    ObservableSubscriber{parent}
 {
-class OLCORE_LIB_EXPORT SessionConfHook : public plugframe::XmlBrowserHook
-{
-public:
-    ~SessionConfHook() override {}
 
-public:
-    virtual void beginObservableDeclaration(QString observableName,
-                                            QString observableTitle,
-                                            QString observableType,
-                                            QString observableLocalisation) = 0;
-    virtual void endObservableDeclaration() = 0;
-};
-}//namespace oplink
-#endif // SESSIONCONFHOOK_H
+}
+
+oplink::RemoteMonitoredObservable::~RemoteMonitoredObservable()
+{
+
+}
+
+void oplink::RemoteMonitoredObservable::onStateChange(oplink::ObservableName observableName,
+                                             oplink::PropertyName propertyName,
+                                             QVariant propertyValue)
+{
+
+    emit stateChange(observableName,propertyName,propertyValue);
+}
+

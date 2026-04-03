@@ -42,6 +42,13 @@ Heating6mWidgetCtrl::~Heating6mWidgetCtrl()
 
 }
 
+void Heating6mWidgetCtrl::createStates()
+{
+    addState(heatingModeName());
+    addState(heatingMeasName());
+    addState(heatingUnitName());
+}
+
 MonitoredObservableWidgetView *Heating6mWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)

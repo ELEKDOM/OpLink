@@ -53,17 +53,16 @@ protected:
                                     QString observableType,
                                     QString observableLocalisation) override;
     void endObservableDeclaration() override;
-    void propertyDeclaration(QString propertyName) override;
 
 protected:
     virtual void loadBuilders();
     void addWidgetBuilder(MonitoredObservableWidgetBuilder *newlyBuilder);
 
 private:
-    virtual MonitoredObservableWidgetCtrl *createWidget(QString observableName,
-                                                        QString observableTitle,
-                                                        QString observableType,
-                                                        QString observableLocalisation);
+    virtual MonitoredObservableWidgetCtrl *buildWidget(QString observableName,
+                                                       QString observableTitle,
+                                                       QString observableType,
+                                                       QString observableLocalisation);
 private:
     OlfMonitoredObservablesController&         m_controller;
     QspPageViewLayoutBuilder                   m_viewsBuilder;

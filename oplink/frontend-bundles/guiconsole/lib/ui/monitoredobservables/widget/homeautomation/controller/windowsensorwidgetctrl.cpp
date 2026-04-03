@@ -36,6 +36,11 @@ WindowSensorWidgetCtrl::~WindowSensorWidgetCtrl()
 
 }
 
+void WindowSensorWidgetCtrl::createStates()
+{
+    addState(closedName());
+}
+
 MonitoredObservableWidgetView *WindowSensorWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)

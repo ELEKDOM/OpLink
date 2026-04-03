@@ -34,6 +34,12 @@ TemperatureHumidityWidgetCtrl::~TemperatureHumidityWidgetCtrl()
 
 }
 
+void TemperatureHumidityWidgetCtrl::createStates()
+{
+    addState(temperatureName());
+    addState(humidityName());
+}
+
 MonitoredObservableWidgetView *TemperatureHumidityWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)

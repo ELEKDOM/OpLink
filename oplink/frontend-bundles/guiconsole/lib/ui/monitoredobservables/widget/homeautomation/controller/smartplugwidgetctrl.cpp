@@ -36,6 +36,13 @@ SmartPlugWidgetCtrl::~SmartPlugWidgetCtrl()
 
 }
 
+void SmartPlugWidgetCtrl::createStates()
+{
+    addState(output1Name());
+    addState(measName());
+    addState(unitName());
+}
+
 MonitoredObservableWidgetView *SmartPlugWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)

@@ -12,11 +12,17 @@ public:
     virtual ~MonitoredObservableWidgetBuilder();
 
 public:
+    virtual MonitoredObservableWidgetCtrl *buildWidget(QString observableName,
+                                                       QString observableTitle,
+                                                       QString observableType,
+                                                       QString observableLocalisation);
+    virtual QString getFamilyName(const QString& observableType) = 0;
+
+protected:
     virtual MonitoredObservableWidgetCtrl *createWidget(QString observableName,
                                                         QString observableTitle,
                                                         QString observableType,
                                                         QString observableLocalisation) = 0;
-    virtual QString getFamilyName(const QString& observableType) = 0;
 };
 using QspMonitoredObservableWidgetBuilder = QSharedPointer<MonitoredObservableWidgetBuilder>;
 #endif // MONITOREDOBSERVABLEWIDGETBUILDER_H

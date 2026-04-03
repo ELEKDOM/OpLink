@@ -36,6 +36,11 @@ LightingWidgetCtrl::~LightingWidgetCtrl()
 
 }
 
+void LightingWidgetCtrl::createStates()
+{
+    addState(stateName());
+}
+
 MonitoredObservableWidgetView *LightingWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)

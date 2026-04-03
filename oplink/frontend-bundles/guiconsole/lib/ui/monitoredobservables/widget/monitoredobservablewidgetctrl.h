@@ -40,22 +40,22 @@ public:
     virtual ~MonitoredObservableWidgetCtrl();
 
 public:
-    void addState(const QString &propertyName);
+    virtual void createStates() = 0;
     const QString& observableType() {return m_observableType;}
     const QString& observableLocalisation() {return m_observableLocalisation;}
     MonitoredObservableWidgetView *createView(quint8 layoutViewType);
     void updateStateValue(const QString &propertyName,
                           const QVariant &value);
+    const QString& name() {return m_observableName;}
+
 public slots:
     virtual void onButtonCmdClicked(QString cmdName) = 0;
 
 signals:
     void execCmd(QString cmd);
 
-public:
-    const QString& name() {return m_observableName;}
-
 protected:
+    void addState(const QString &propertyName);
     virtual MonitoredObservableWidgetView *_createView(quint8 layoutViewType) = 0;
     virtual void _updateStateValue(const QString &propertyName,
                                    const QVariant &value) = 0;

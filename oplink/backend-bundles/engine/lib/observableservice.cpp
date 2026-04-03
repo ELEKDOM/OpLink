@@ -56,7 +56,8 @@ bool ObservableService::submitOrder(oplink::StrOrder command)
 }
 
 bool ObservableService::subscribe(oplink::ObservableName observableName,
-                                  oplink::ObservableSubscriber *subscriber)
+                                  oplink::ObservableSubscriber *subscriber,
+                                  bool reportInitialValues)
 {
     QMutexLocker          lock(&m_mtx);
     bool                  ret{false};
@@ -64,7 +65,7 @@ bool ObservableService::subscribe(oplink::ObservableName observableName,
 
     if (!observable.isNull())
     {
-        ret = observable->subscribe(subscriber);
+        ret = observable->subscribe(subscriber,reportInitialValues);
     }
 
     return ret;

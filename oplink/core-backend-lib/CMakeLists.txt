@@ -97,8 +97,8 @@ set(SOURCES
     observable/property/property.cpp
     observable/property/propertyclassnames.cpp
     observable/property/propertyid.cpp
-    observable/remote/observablestates.cpp
-    observable/remote/observablestatesgroup.cpp
+    observable/remote/remoteMonitoredobservable.cpp
+    observable/remote/remotemonitoredobservablegroup.cpp
     observable/remote/sessionconfloader.cpp
     observable/remote/subscribesession.cpp
 )
@@ -212,8 +212,8 @@ set(HEADERS
     observable/property/property.h
     observable/property/propertyclassnames.h
     observable/property/propertyid.h
-    observable/remote/observablestates.h
-    observable/remote/observablestatesgroup.h
+    observable/remote/remoteMonitoredobservable.h
+    observable/remote/remotemonitoredobservablegroup.h
     observable/remote/sessionconfloader.h
     observable/remote/subscribesession.h
     service-int/infrastructurecontrolserviceinterface.h

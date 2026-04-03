@@ -21,7 +21,7 @@
 
 #include <QStringList>
 #include "observable/remote/sessionconfhook.h"
-#include "observable/remote/observablestates.h"
+#include "observable/remote/remoteMonitoredobservable.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 
@@ -41,13 +41,11 @@ protected:
                                     QString observableType,
                                     QString observableLocalisation) override;
     void endObservableDeclaration() override;
-    void propertyDeclaration(QString propertyName) override;
 
 private:
-    SubscribeSession&   m_session;
-    QspObservableStates m_curRemoteMonitoredDeclaration;
-    QString             m_curObservableName;
-    QStringList         m_curPropertyNames;
+    SubscribeSession&            m_session;
+    QspRemoteMonitoredObservable m_curRemoteMonitoredDeclaration;
+    QString                      m_curObservableName;
 };
 }//namespace oplink
 #endif // SESSIONCONFLOADER_H

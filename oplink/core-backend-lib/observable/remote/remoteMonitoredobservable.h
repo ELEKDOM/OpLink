@@ -16,41 +16,33 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef OBSERVABLESTATES_H
-#define OBSERVABLESTATES_H
+#ifndef REMOTEMONITOREDOBSERVABLE_H
+#define REMOTEMONITOREDOBSERVABLE_H
 
 #include <QSharedPointer>
 #include <QHash>
 #include "observable/observable/observablesubscriber.h"
-#include "observable/property/property.h"
 #include "observable/observablenames.h"
 
 namespace oplink
 {
-class ObservableStates : public ObservableSubscriber
+class RemoteMonitoredObservable : public ObservableSubscriber
 {
     Q_OBJECT
 
 public:
-    explicit ObservableStates(QObject *parent = nullptr);
-    ~ObservableStates() override;
-
-public:
-    void addMonitoredProperty(QspProperty property);
-    void reportValidStates(const ObservableName& observableName);
+    explicit RemoteMonitoredObservable(QObject *parent = nullptr);
+    ~RemoteMonitoredObservable() override;
 
 signals:
     void stateChange(oplink::ObservableName observableName,
                      oplink::PropertyName propertyName,
                      QVariant propertyValue);
-
 protected:
     void onStateChange(ObservableName observableName,
                        PropertyName propertyName,
                        QVariant propertyValue) override;
-private:
-    QHash<PropertyName,QspProperty> m_monitoredStates;
 };
-using QspObservableStates = QSharedPointer<ObservableStates>;
+using QspRemoteMonitoredObservable = QSharedPointer<RemoteMonitoredObservable>;
 }//namespace oplink
-#endif // OBSERVABLESTATES_H
+#endif // REMOTEMONITOREDOBSERVABLE_H

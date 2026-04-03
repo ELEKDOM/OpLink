@@ -38,7 +38,8 @@ public:
 public: // service interface definition = 0
     virtual bool submitOrder(oplink::StrOrder command) = 0;
     virtual bool subscribe(oplink::ObservableName observableName,
-                           oplink::ObservableSubscriber *subscriber) = 0;
+                           oplink::ObservableSubscriber *subscriber,
+                           bool reportInitialValues = false) = 0;
     virtual bool unsubscribe(oplink::ObservableName observableName,
                              oplink::ObservableSubscriber *subscriber) = 0;
     virtual bool propertyValue(oplink::ObservableName observableName,

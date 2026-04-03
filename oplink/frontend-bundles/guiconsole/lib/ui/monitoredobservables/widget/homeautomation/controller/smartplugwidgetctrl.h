@@ -22,6 +22,11 @@
 #include <QPixmap>
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
+///
+/// \brief The SmartPlugWidgetCtrl class
+/// widget associated with the "onoff_smart_plug_measurement" model defined on the backend
+///
+
 class SmartPlugWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
@@ -37,6 +42,7 @@ public:
     ~SmartPlugWidgetCtrl() override;
 
 protected:
+    void createStates() override;
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;

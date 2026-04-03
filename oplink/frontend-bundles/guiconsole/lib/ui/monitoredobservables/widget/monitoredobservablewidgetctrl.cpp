@@ -46,15 +46,15 @@ MonitoredObservableWidgetView *MonitoredObservableWidgetCtrl::createView(quint8 
     return m_view;
 }
 
-void MonitoredObservableWidgetCtrl::addState(const QString &propertyName)
-{
-    m_monitoredStates.insert(propertyName, true);
-}
-
 void MonitoredObservableWidgetCtrl::updateStateValue(const QString &propertyName, const QVariant &value)
 {
     if (m_monitoredStates.contains(propertyName))
     {
         _updateStateValue(propertyName,value);
     }
+}
+
+void MonitoredObservableWidgetCtrl::addState(const QString &propertyName)
+{
+    m_monitoredStates.insert(propertyName, true);
 }

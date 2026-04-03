@@ -1,6 +1,7 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 
-<!-- Example for HomeAutomation ! -->
+<!-- Models for HomeAutomation !-->
+<!-- To deploy as observable_models.xml !-->
 
 <models>
     <properties>

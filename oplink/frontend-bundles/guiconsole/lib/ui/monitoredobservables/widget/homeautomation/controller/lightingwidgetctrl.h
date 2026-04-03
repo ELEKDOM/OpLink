@@ -22,6 +22,10 @@
 #include <QPixmap>
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
+///
+/// \brief The LightingWidgetCtrl class
+/// widget associated with the "onoff_lighting" model defined on the backend
+///
 class LightingWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
@@ -35,6 +39,7 @@ public:
     ~LightingWidgetCtrl() override;
 
 protected:
+    void createStates() override;
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;

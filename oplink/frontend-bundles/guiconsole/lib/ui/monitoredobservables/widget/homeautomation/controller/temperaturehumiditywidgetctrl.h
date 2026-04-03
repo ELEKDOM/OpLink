@@ -22,6 +22,10 @@
 
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
+///
+/// \brief The TemperatureHumidityWidgetCtrl class
+/// widget associated with the "temperature_humidity_sensor" model defined on the backend
+///
 class TemperatureHumidityWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
@@ -36,6 +40,7 @@ public:
     ~TemperatureHumidityWidgetCtrl() override;
 
 protected:
+    void createStates() override;
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;

@@ -63,13 +63,13 @@ void MonitoredObservableLoader::beginObservableDeclaration(QString observableNam
                                                            QString observableType,
                                                            QString observableLocalisation)
 {
-    m_creatingWidget.reset(createWidget(observableName,
+    m_creatingWidget.reset(buildWidget(observableName,
                                         observableTitle,
                                         observableType,
                                         observableLocalisation));
     if (m_creatingWidget.isNull())
     {
-        pfErr(s_OplinkGuiConsoleLogChannel) << QObject::tr("Widget non créé! : %1,%2,%3,%4").arg(observableName,observableTitle,observableType,observableLocalisation);
+        pfWarning1(s_OplinkGuiConsoleLogChannel) << QObject::tr("Type d'observable %1 non reconnu. Widget non créé pour l'observable %2 !").arg(observableType,observableName);
     }
 }
 
@@ -79,14 +79,6 @@ void MonitoredObservableLoader::endObservableDeclaration()
     {
         m_viewsBuilder->assignWidgetView(m_controller,m_creatingWidget);
         m_controller.addMonitoredObservable(m_creatingWidget);
-    }
-}
-
-void MonitoredObservableLoader::propertyDeclaration(QString propertyName)
-{
-    if(!m_creatingWidget.isNull())
-    {
-        m_creatingWidget->addState(propertyName);
     }
 }
 
@@ -103,19 +95,19 @@ void MonitoredObservableLoader::addWidgetBuilder(MonitoredObservableWidgetBuilde
     m_widgetBuilders.append(ptrBuilder);
 }
 
-MonitoredObservableWidgetCtrl *MonitoredObservableLoader::createWidget(QString observableName,
-                                                                        QString observableTitle,
-                                                                        QString observableType,
-                                                                        QString observableLocalisation)
+MonitoredObservableWidgetCtrl *MonitoredObservableLoader::buildWidget(QString observableName,
+                                                                      QString observableTitle,
+                                                                      QString observableType,
+                                                                      QString observableLocalisation)
 {
     MonitoredObservableWidgetCtrl *ret{nullptr};
 
     for (auto i = 0; i < m_widgetBuilders.size() && ret == nullptr; i++)
     {
-        ret = m_widgetBuilders[i]->createWidget(observableName,
-                                                observableTitle,
-                                                observableType,
-                                                observableLocalisation);
+        ret = m_widgetBuilders[i]->buildWidget(observableName,
+                                               observableTitle,
+                                               observableType,
+                                               observableLocalisation);
     }
 
     return ret;

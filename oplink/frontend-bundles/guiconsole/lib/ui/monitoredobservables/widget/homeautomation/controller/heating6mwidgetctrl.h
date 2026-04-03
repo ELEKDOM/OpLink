@@ -22,6 +22,10 @@
 #include <QPixmap>
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
+///
+/// \brief The Heating6mWidgetCtrl class
+/// widget associated with the "pw_electric_heating_measurement" model defined on the backend
+///
 class Heating6mWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
 protected:
@@ -37,6 +41,7 @@ public:
     ~Heating6mWidgetCtrl() override;
 
 protected:
+    void createStates() override;
     MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;
