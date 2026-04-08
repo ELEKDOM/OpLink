@@ -16,34 +16,38 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef LIGHTINGWIDGETVIEW_H
-#define LIGHTINGWIDGETVIEW_H
+#ifndef SMARTPLUGWIDGETLISTVIEW_H
+#define SMARTPLUGWIDGETLISTVIEW_H
 
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
 namespace Ui {
-class lightingWidgetView;
+    class smartPlugWidgetListView;
 }
 
-class LightingWidgetView : public MonitoredObservableWidgetListView
+class SmartPlugWidgetListView : public MonitoredObservableWidgetListView
 {
     Q_OBJECT
 
 public:
-    explicit LightingWidgetView(QWidget *parent = nullptr);
-    ~LightingWidgetView() override;
+    explicit SmartPlugWidgetListView(QWidget *parent = nullptr);
+    ~SmartPlugWidgetListView() override;
 
 protected:
     void setTitle(const QString& title) override;
     void setImg(const QPixmap& img, const QString& propertyName) override;
+    void setMeasVal(quint32 val) override;
+    void setMeasUnit(const QString& unit) override;
     void enableCmdButton(bool enable, const QString& cmdName) override;
 
 private slots:
     void onOnCmd();
     void onOffCmd();
+    void onPowerCmd();
+    void onEnergyCmd();
 
 private:
-    Ui::lightingWidgetView *ui;
+    Ui::smartPlugWidgetListView *ui;
 };
 
-#endif // LIGHTINGWIDGETVIEW_H
+#endif // SMARTPLUGWIDGETLISTVIEW_H

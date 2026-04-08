@@ -17,7 +17,7 @@
 //
 
 #include "smartplugwidgetctrl.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.h"
 
 SmartPlugWidgetCtrl::SmartPlugWidgetCtrl(QString observableName,
                                          QString observableTitle,
@@ -46,7 +46,7 @@ void SmartPlugWidgetCtrl::createStates()
 MonitoredObservableWidgetView *SmartPlugWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)
-    return new SmartPlugWidgetView;
+    return new SmartPlugWidgetListView;
 }
 
 void SmartPlugWidgetCtrl::_updateStateValue(const QString &propertyName, const QVariant &value)

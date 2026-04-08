@@ -20,6 +20,7 @@
 #include "ui/olfmonitoredobservablescontroller.h"
 #include "ui/monitoredobservables/pageviewbuilder/pageviewlayoutbuilder.h"
 #include "ui/monitoredobservables/widget/homeautomation/homeautomationwidgetbuilder.h"
+#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h"
 #include "olfconsolelogchannel.h"
 #include "logger/pflog.h"
 
@@ -64,12 +65,12 @@ void MonitoredObservableLoader::beginObservableDeclaration(QString observableNam
                                                            QString observableLocalisation)
 {
     m_creatingWidget.reset(buildWidget(observableName,
-                                        observableTitle,
-                                        observableType,
-                                        observableLocalisation));
+                                       observableTitle,
+                                       observableType,
+                                       observableLocalisation));
     if (m_creatingWidget.isNull())
     {
-        pfWarning1(s_OplinkGuiConsoleLogChannel) << QObject::tr("Type d'observable %1 non reconnu. Widget non créé pour l'observable %2 !").arg(observableType,observableName);
+        pfWarning1(s_OplinkGuiConsoleLogChannel) << QObject::tr("Widget non créé pour l'observable %1 de type %2 !").arg(observableName,observableType);
     }
 }
 
@@ -84,8 +85,14 @@ void MonitoredObservableLoader::endObservableDeclaration()
 
 void MonitoredObservableLoader::loadBuilders()
 {
-    // by default, only one builder for home automation widgets
+    // builds default home automation widgets builder
+    //-----------------------------------------------
+
+    // builder for home automation base widgets
     addWidgetBuilder(new HomeAutomationWidgetBuilder);
+
+    // builder for home automation heating manager widgets
+    addWidgetBuilder(new HeatingManagerWidgetBuilder);
 }
 
 void MonitoredObservableLoader::addWidgetBuilder(MonitoredObservableWidgetBuilder *newlyBuilder)

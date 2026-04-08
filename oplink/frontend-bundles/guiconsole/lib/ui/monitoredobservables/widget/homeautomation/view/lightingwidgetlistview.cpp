@@ -16,12 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "lightingwidgetview.h"
-#include "ui_lightingwidgetview.h"
+#include "lightingwidgetlistview.h"
+#include "ui_lightingwidgetlistview.h"
 
-LightingWidgetView::LightingWidgetView(QWidget *parent):
+LightingWidgetListView::LightingWidgetListView(QWidget *parent):
     MonitoredObservableWidgetListView{parent},
-    ui(new Ui::lightingWidgetView)
+    ui(new Ui::lightingWidgetListView)
 {
     ui->setupUi(this);
 
@@ -29,23 +29,23 @@ LightingWidgetView::LightingWidgetView(QWidget *parent):
     connect(ui->offCmd, SIGNAL(pressed()), SLOT(onOffCmd()));
 }
 
-LightingWidgetView::~LightingWidgetView()
+LightingWidgetListView::~LightingWidgetListView()
 {
     delete ui;
 }
 
-void LightingWidgetView::setTitle(const QString &title)
+void LightingWidgetListView::setTitle(const QString &title)
 {
     ui->lightName->setText(title);
 }
 
-void LightingWidgetView::setImg(const QPixmap &img, const QString &propertyName)
+void LightingWidgetListView::setImg(const QPixmap &img, const QString &propertyName)
 {
     Q_UNUSED(propertyName)
     ui->state->setPixmap(img);
 }
 
-void LightingWidgetView::enableCmdButton(bool enable, const QString &cmdName)
+void LightingWidgetListView::enableCmdButton(bool enable, const QString &cmdName)
 {
 
     if (cmdName == ButtonName::on())
@@ -58,12 +58,12 @@ void LightingWidgetView::enableCmdButton(bool enable, const QString &cmdName)
     }
 }
 
-void LightingWidgetView::onOnCmd()
+void LightingWidgetListView::onOnCmd()
 {
     emit cmdButtonClicked(ButtonName::on());
 }
 
-void LightingWidgetView::onOffCmd()
+void LightingWidgetListView::onOffCmd()
 {
     emit cmdButtonClicked(ButtonName::off());
 }

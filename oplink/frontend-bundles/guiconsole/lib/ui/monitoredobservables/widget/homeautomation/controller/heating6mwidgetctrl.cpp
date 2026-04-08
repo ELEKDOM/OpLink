@@ -17,7 +17,7 @@
 //
 
 #include "heating6mwidgetctrl.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetlistview.h"
 #include "logger/pflog.h"
 #include "olfconsolelogchannel.h"
 
@@ -52,7 +52,7 @@ void Heating6mWidgetCtrl::createStates()
 MonitoredObservableWidgetView *Heating6mWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)
-    return new Heating6mWidgetView;
+    return new Heating6mWidgetListView;
 }
 
 void Heating6mWidgetCtrl::_updateStateValue(const QString &propertyName, const QVariant &value)

@@ -17,7 +17,7 @@
 //
 
 #include "windowsensorwidgetctrl.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.h"
 
 WindowSensorWidgetCtrl::WindowSensorWidgetCtrl(QString observableName,
                                                QString observableTitle,
@@ -44,7 +44,7 @@ void WindowSensorWidgetCtrl::createStates()
 MonitoredObservableWidgetView *WindowSensorWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)
-    return new WindowSensorWidgetView;
+    return new WindowSensorWidgetListView;
 }
 
 void WindowSensorWidgetCtrl::_updateStateValue(const QString &propertyName, const QVariant &value)

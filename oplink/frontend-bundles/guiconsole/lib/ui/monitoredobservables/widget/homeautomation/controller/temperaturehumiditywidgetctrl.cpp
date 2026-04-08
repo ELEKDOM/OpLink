@@ -17,7 +17,7 @@
 //
 
 #include "temperaturehumiditywidgetctrl.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.h"
 
 TemperatureHumidityWidgetCtrl::TemperatureHumidityWidgetCtrl(QString observableName,
                                                              QString observableTitle,
@@ -43,7 +43,7 @@ void TemperatureHumidityWidgetCtrl::createStates()
 MonitoredObservableWidgetView *TemperatureHumidityWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)
-    return new TemperatureHumidityWidgetView;
+    return new TemperatureHumidityWidgetListView;
 }
 
 void TemperatureHumidityWidgetCtrl::_updateStateValue(const QString &propertyName, const QVariant &value)

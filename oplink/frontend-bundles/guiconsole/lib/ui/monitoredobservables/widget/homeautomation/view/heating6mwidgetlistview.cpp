@@ -16,12 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "heating6mwidgetview.h"
-#include "ui_heating6mwidgetview.h"
+#include "heating6mwidgetlistview.h"
+#include "ui_heating6mwidgetlistview.h"
 
-Heating6mWidgetView::Heating6mWidgetView(QWidget *parent):
+Heating6mWidgetListView::Heating6mWidgetListView(QWidget *parent):
     MonitoredObservableWidgetListView{parent},
-    ui(new Ui::heating6mWidgetView),
+    ui(new Ui::heating6mWidgetListView),
     m_pwmIdx{-1}
 {
     ui->setupUi(this);
@@ -38,23 +38,23 @@ Heating6mWidgetView::Heating6mWidgetView(QWidget *parent):
     connect(ui->energyCmd, SIGNAL(pressed()), SLOT(onEnergyCmd()));
 }
 
-Heating6mWidgetView::~Heating6mWidgetView()
+Heating6mWidgetListView::~Heating6mWidgetListView()
 {
     delete ui;
 }
 
-void Heating6mWidgetView::setTitle(const QString &title)
+void Heating6mWidgetListView::setTitle(const QString &title)
 {
     ui->heatingName->setText(title);
 }
 
-void Heating6mWidgetView::setImg(const QPixmap &img, const QString &propertyName)
+void Heating6mWidgetListView::setImg(const QPixmap &img, const QString &propertyName)
 {
     Q_UNUSED(propertyName)
     ui->state->setPixmap(img);
 }
 
-void Heating6mWidgetView::setMeasVal(quint32 val)
+void Heating6mWidgetListView::setMeasVal(quint32 val)
 {
     QString str;
 
@@ -62,12 +62,12 @@ void Heating6mWidgetView::setMeasVal(quint32 val)
     ui->v_meas->setText(str);
 }
 
-void Heating6mWidgetView::setMeasUnit(const QString &unit)
+void Heating6mWidgetListView::setMeasUnit(const QString &unit)
 {
     ui->u_meas->setText(unit);
 }
 
-void Heating6mWidgetView::enableCmdButton(bool enable, const QString &cmdName)
+void Heating6mWidgetListView::enableCmdButton(bool enable, const QString &cmdName)
 {
     if (!enable)
     {
@@ -78,7 +78,7 @@ void Heating6mWidgetView::enableCmdButton(bool enable, const QString &cmdName)
     }
 }
 
-void Heating6mWidgetView::onItemPwmCmd(int index)
+void Heating6mWidgetListView::onItemPwmCmd(int index)
 {
     if (index != m_pwmIdx)
     {
@@ -88,12 +88,12 @@ void Heating6mWidgetView::onItemPwmCmd(int index)
     }
 }
 
-void Heating6mWidgetView::onPowerCmd()
+void Heating6mWidgetListView::onPowerCmd()
 {
     emit cmdButtonClicked(ButtonName::power());
 }
 
-void Heating6mWidgetView::onEnergyCmd()
+void Heating6mWidgetListView::onEnergyCmd()
 {
     emit cmdButtonClicked(ButtonName::energy());
 }

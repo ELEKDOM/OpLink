@@ -25,11 +25,11 @@ set(SOURCES
     ui/monitoredobservables/widget/homeautomation/controller/smartplugwidgetctrl.cpp
     ui/monitoredobservables/widget/homeautomation/controller/temperaturehumiditywidgetctrl.cpp
     ui/monitoredobservables/widget/homeautomation/controller/windowsensorwidgetctrl.cpp
-    ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetview.cpp
-    ui/monitoredobservables/widget/homeautomation/view/lightingwidgetview.cpp
-    ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetview.cpp
-    ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetview.cpp
-    ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetview.cpp
+    ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/view/lightingwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.cpp
 )
 
 # Bundle implementation Headers
@@ -61,11 +61,11 @@ set(HEADERS
     ui/monitoredobservables/widget/homeautomation/controller/smartplugwidgetctrl.h
     ui/monitoredobservables/widget/homeautomation/controller/temperaturehumiditywidgetctrl.h
     ui/monitoredobservables/widget/homeautomation/controller/windowsensorwidgetctrl.h
-    ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetview.h
-    ui/monitoredobservables/widget/homeautomation/view/lightingwidgetview.h
-    ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetview.h
-    ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetview.h
-    ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetview.h
+    ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/view/lightingwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.h
 )
 
 # Bundle implementation Forms
@@ -73,14 +73,15 @@ set(FORMS
     ui/loginview.ui
     ui/monitoredobservables/pageview/pageviewlistlayout.ui
     ui/monitoredobservables/pageview/viewlistlayout.ui
-    ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetview.ui
-    ui/monitoredobservables/widget/homeautomation/view/lightingwidgetview.ui
-    ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetview.ui
-    ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetview.ui
-    ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetview.ui
+    ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/view/lightingwidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.ui
 )
 
-qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS})
+qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS}
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.cpp)
 
 target_include_directories(${BUNDLE_IMPL_NAME}
     PUBLIC

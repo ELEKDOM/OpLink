@@ -16,29 +16,28 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef TEMPERATUREHUMIDITYWIDGETVIEW_H
-#define TEMPERATUREHUMIDITYWIDGETVIEW_H
+#include "windowsensorwidgetlistview.h"
+#include "ui_windowsensorwidgetlistview.h"
 
-#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
-
-namespace Ui {
-class temperatureHumidityWidgetView;
+WindowSensorWidgetListView::WindowSensorWidgetListView(QWidget *parent):
+    MonitoredObservableWidgetListView{parent},
+    ui(new Ui::windowSensorWidgetListView)
+{
+    ui->setupUi(this);
 }
 
-class TemperatureHumidityWidgetView : public MonitoredObservableWidgetListView
+WindowSensorWidgetListView::~WindowSensorWidgetListView()
 {
-    Q_OBJECT
+    delete ui;
+}
 
-public:
-    TemperatureHumidityWidgetView(QWidget *parent = nullptr);
-    ~TemperatureHumidityWidgetView() override;
+void WindowSensorWidgetListView::setTitle(const QString &title)
+{
+    ui->sensorName->setText(title);
+}
 
-protected:
-    void setTitle(const QString& title) override;
-    void setVal(quint8 idx, double val) override;
-
-private:
-    Ui::temperatureHumidityWidgetView *ui;
-};
-
-#endif // TEMPERATUREHUMIDITYWIDGETVIEW_H
+void WindowSensorWidgetListView::setImg(const QPixmap &img, const QString &propertyName)
+{
+    Q_UNUSED(propertyName)
+    ui->state->setPixmap(img);
+}

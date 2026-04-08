@@ -17,7 +17,7 @@
 //
 
 #include "lightingwidgetctrl.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/lightingwidgetview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/lightingwidgetlistview.h"
 
 LightingWidgetCtrl::LightingWidgetCtrl(QString observableName,
                                        QString observableTitle,
@@ -44,7 +44,7 @@ void LightingWidgetCtrl::createStates()
 MonitoredObservableWidgetView *LightingWidgetCtrl::_createView(quint8 layoutViewType)
 {
     Q_UNUSED(layoutViewType)
-    return new LightingWidgetView;
+    return new LightingWidgetListView;
 }
 
 void LightingWidgetCtrl::_updateStateValue(const QString &propertyName, const QVariant &value)

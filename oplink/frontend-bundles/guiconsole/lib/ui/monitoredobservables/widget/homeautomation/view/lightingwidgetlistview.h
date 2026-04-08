@@ -16,38 +16,34 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef HEATING6MWIDGETVIEW_H
-#define HEATING6MWIDGETVIEW_H
+#ifndef LIGHTINGWIDGETLISTVIEW_H
+#define LIGHTINGWIDGETLISTVIEW_H
 
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
 namespace Ui {
-class heating6mWidgetView;
+class lightingWidgetListView;
 }
 
-class Heating6mWidgetView : public MonitoredObservableWidgetListView
+class LightingWidgetListView : public MonitoredObservableWidgetListView
 {
     Q_OBJECT
 
 public:
-    explicit Heating6mWidgetView(QWidget *parent = nullptr);
-    ~Heating6mWidgetView() override;
+    explicit LightingWidgetListView(QWidget *parent = nullptr);
+    ~LightingWidgetListView() override;
 
 protected:
     void setTitle(const QString& title) override;
     void setImg(const QPixmap& img, const QString& propertyName) override;
-    void setMeasVal(quint32 val) override;
-    void setMeasUnit(const QString& unit) override;
     void enableCmdButton(bool enable, const QString& cmdName) override;
 
 private slots:
-    void onItemPwmCmd(int index);
-    void onPowerCmd();
-    void onEnergyCmd();
+    void onOnCmd();
+    void onOffCmd();
 
 private:
-    Ui::heating6mWidgetView *ui;
-    int     m_pwmIdx;
+    Ui::lightingWidgetListView *ui;
 };
 
-#endif // HEATING6MWIDGETVIEW_H
+#endif // LIGHTINGWIDGETLISTVIEW_H

@@ -16,7 +16,7 @@ Create a directory containing all the configuration files for a given deployment
 
         <monitoredObservable name='' title='' model-name='' localisation=''>
         <!-- model-name : Identifies the type of observable to be represented. !-->
-        <!--              Model names are defined by the modelLoader bundle !-->
+        <!--              Model names are defined by the backend side !-->
         <!-- For each recognized type, there is a corresponding specific widget. !-->
         <!-- Values :
              onoff_lighting
@@ -24,8 +24,10 @@ Create a directory containing all the configuration files for a given deployment
              onoff_smart_plug_measurement
              temperature_humidity_sensor
              window_sensor
-             heating_manager_pilotwire
-             heating_manager_pilotwire_thermostat
+
+             For heating manger:
+                heating_manager_pilotwire-[m|a]-[number of rooms]
+                heating_manager_pilotwire_thermostat-[m|a]-[number of rooms]
         !-->
         </monitoredObservable>
 

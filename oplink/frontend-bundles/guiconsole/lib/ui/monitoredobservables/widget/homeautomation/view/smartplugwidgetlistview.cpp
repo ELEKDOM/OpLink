@@ -16,12 +16,12 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "smartplugwidgetview.h"
-#include "ui_smartplugwidgetview.h"
+#include "smartplugwidgetlistview.h"
+#include "ui_smartplugwidgetlistview.h"
 
-SmartPlugWidgetView::SmartPlugWidgetView(QWidget *parent):
+SmartPlugWidgetListView::SmartPlugWidgetListView(QWidget *parent):
     MonitoredObservableWidgetListView{parent},
-    ui(new Ui::smartPlugWidgetView)
+    ui(new Ui::smartPlugWidgetListView)
 {
     ui->setupUi(this);
 
@@ -31,23 +31,23 @@ SmartPlugWidgetView::SmartPlugWidgetView(QWidget *parent):
     connect(ui->energyCmd, SIGNAL(pressed()), SLOT(onEnergyCmd()));
 }
 
-SmartPlugWidgetView::~SmartPlugWidgetView()
+SmartPlugWidgetListView::~SmartPlugWidgetListView()
 {
     delete ui;
 }
 
-void SmartPlugWidgetView::setTitle(const QString &title)
+void SmartPlugWidgetListView::setTitle(const QString &title)
 {
     ui->plugName->setText(title);
 }
 
-void SmartPlugWidgetView::setImg(const QPixmap &img, const QString &propertyName)
+void SmartPlugWidgetListView::setImg(const QPixmap &img, const QString &propertyName)
 {
     Q_UNUSED(propertyName)
     ui->state->setPixmap(img);
 }
 
-void SmartPlugWidgetView::setMeasVal(quint32 val)
+void SmartPlugWidgetListView::setMeasVal(quint32 val)
 {
     QString str;
 
@@ -55,12 +55,12 @@ void SmartPlugWidgetView::setMeasVal(quint32 val)
     ui->v_meas->setText(str);
 }
 
-void SmartPlugWidgetView::setMeasUnit(const QString &unit)
+void SmartPlugWidgetListView::setMeasUnit(const QString &unit)
 {
      ui->u_meas->setText(unit);
 }
 
-void SmartPlugWidgetView::enableCmdButton(bool enable, const QString &cmdName)
+void SmartPlugWidgetListView::enableCmdButton(bool enable, const QString &cmdName)
 {
     if (ButtonName::on() == cmdName)
     {
@@ -80,22 +80,22 @@ void SmartPlugWidgetView::enableCmdButton(bool enable, const QString &cmdName)
     }
 }
 
-void SmartPlugWidgetView::onOnCmd()
+void SmartPlugWidgetListView::onOnCmd()
 {
     emit cmdButtonClicked(ButtonName::on());
 }
 
-void SmartPlugWidgetView::onOffCmd()
+void SmartPlugWidgetListView::onOffCmd()
 {
     emit cmdButtonClicked(ButtonName::off());
 }
 
-void SmartPlugWidgetView::onPowerCmd()
+void SmartPlugWidgetListView::onPowerCmd()
 {
     emit cmdButtonClicked(ButtonName::power());
 }
 
-void SmartPlugWidgetView::onEnergyCmd()
+void SmartPlugWidgetListView::onEnergyCmd()
 {
     emit cmdButtonClicked(ButtonName::energy());
 }

@@ -16,27 +16,27 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "temperaturehumiditywidgetview.h"
-#include "ui_temperaturehumiditywidgetview.h"
+#include "temperaturehumiditywidgetlistview.h"
+#include "ui_temperaturehumiditywidgetlistview.h"
 
-TemperatureHumidityWidgetView::TemperatureHumidityWidgetView(QWidget *parent):
+TemperatureHumidityWidgetListView::TemperatureHumidityWidgetListView(QWidget *parent):
     MonitoredObservableWidgetListView{parent},
-    ui(new Ui::temperatureHumidityWidgetView)
+    ui(new Ui::temperatureHumidityWidgetListView)
 {
     ui->setupUi(this);
 }
 
-TemperatureHumidityWidgetView::~TemperatureHumidityWidgetView()
+TemperatureHumidityWidgetListView::~TemperatureHumidityWidgetListView()
 {
     delete ui;
 }
 
-void TemperatureHumidityWidgetView::setTitle(const QString &title)
+void TemperatureHumidityWidgetListView::setTitle(const QString &title)
 {
      ui->sensorName->setText(title);
 }
 
-void TemperatureHumidityWidgetView::setVal(quint8 idx, double val)
+void TemperatureHumidityWidgetListView::setVal(quint8 idx, double val)
 {
     QLabel *label{nullptr};
 
