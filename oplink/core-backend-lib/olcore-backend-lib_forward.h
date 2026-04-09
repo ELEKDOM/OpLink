@@ -27,6 +27,8 @@ namespace oplink
     class ObservableSubscriber;
     //
     class HighObservable;
+    class HighObservableLoaderHook;
+    class HighObservableConfDocument;
     //
     class SupervisorObservable;
     //

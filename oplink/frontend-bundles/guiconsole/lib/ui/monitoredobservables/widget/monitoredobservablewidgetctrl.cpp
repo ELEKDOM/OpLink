@@ -41,8 +41,12 @@ MonitoredObservableWidgetCtrl::~MonitoredObservableWidgetCtrl()
 MonitoredObservableWidgetView *MonitoredObservableWidgetCtrl::createView(quint8 layoutViewType)
 {
     m_view = _createView(layoutViewType);
-    m_view->setTitle(m_observableTitle);
-    connect(m_view,SIGNAL(cmdButtonClicked(QString)),SLOT(onButtonCmdClicked(QString)));
+
+    if (m_view)
+    {
+        m_view->setTitle(m_observableTitle);
+        connect(m_view,SIGNAL(cmdButtonClicked(QString)),SLOT(onButtonCmdClicked(QString)));
+    }
     return m_view;
 }
 

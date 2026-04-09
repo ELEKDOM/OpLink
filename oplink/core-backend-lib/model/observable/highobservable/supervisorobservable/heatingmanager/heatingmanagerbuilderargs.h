@@ -21,7 +21,7 @@
 
 #include <QVector>
 #include "model/observable/highobservable/supervisorobservable/supervisorobservablebuilderargs.h"
-#include "observable/highobservable/heatingmanager/heatingmanagerloaderhook.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerloaderhook.h"
 
 namespace oplink
 {

@@ -1,6 +1,6 @@
 #include "heatingmanagersetprocessor.h"
 #include "command/command-names.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.h"
 #include "logger/pflog.h"
 

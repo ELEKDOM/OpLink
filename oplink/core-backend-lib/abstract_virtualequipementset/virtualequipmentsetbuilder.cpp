@@ -20,7 +20,7 @@
 #include "virtualequipmentsetfactory.h"
 #include "virtualequipmentset.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
-#include "observable/highobservable/highobservableconfdocument.h"
+#include "observable/observable/highobservable/highobservableconfdocument.h"
 
 oplink::VirtualEquipmentSetBuilder::VirtualEquipmentSetBuilder(plugframe::Bundle4BuilderInterface &myBundle):
     plugframe::BundleBuilder{myBundle}

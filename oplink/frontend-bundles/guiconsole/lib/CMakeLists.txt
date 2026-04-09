@@ -30,6 +30,13 @@ set(SOURCES
     ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerwidgetctrl.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwtwidgetctrl.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwtwidgetlistview.cpp
 )
 
 # Bundle implementation Headers
@@ -66,6 +73,13 @@ set(HEADERS
     ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerwidgetctrl.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwtwidgetctrl.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwtwidgetlistview.h
 )
 
 # Bundle implementation Forms
@@ -80,8 +94,7 @@ set(FORMS
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.ui
 )
 
-qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS}
-    ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.cpp)
+qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS})
 
 target_include_directories(${BUNDLE_IMPL_NAME}
     PUBLIC

@@ -17,6 +17,9 @@
 //
 
 #include "heatingmanagerwidgetbuilder.h"
+#include "observable/heatingmanagermodelnames.h"
+#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwtwidgetctrl.h"
+#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.h"
 
 HeatingManagerWidgetBuilder::HeatingManagerWidgetBuilder() {}
 
@@ -29,26 +32,44 @@ MonitoredObservableWidgetCtrl *HeatingManagerWidgetBuilder::createWidget(QString
 {
     MonitoredObservableWidgetCtrl *ret{nullptr};
 
-    if (observableType.contains(hm_pw_thermostat()))
+    if (observableType.contains(oplink::HeatingManagerModelNames::pilotWireThermostatModelName()))
     {
-        //...
+        ret = createHeatingManagerPwThermostatWidget(observableName,
+                                                     observableTitle,
+                                                     observableType,
+                                                     observableLocalisation);
     }
-    else if (observableType.contains(hm_pw()))
+    else if (observableType.contains(oplink::HeatingManagerModelNames::pilotWireModelName()))
     {
-        //...
+        ret = createHeatingManagerPwWidget(observableName,
+                                           observableTitle,
+                                           observableType,
+                                           observableLocalisation);
     }
 
     return ret;
 }
 
-MonitoredObservableWidgetCtrl *HeatingManagerWidgetBuilder::createHeatingManagerPwWidget(QString observableName, QString observableTitle, QString observableType, QString observableLocalisation)
+MonitoredObservableWidgetCtrl *HeatingManagerWidgetBuilder::createHeatingManagerPwWidget(QString observableName,
+                                                                                         QString observableTitle,
+                                                                                         QString observableType,
+                                                                                         QString observableLocalisation)
 {
-
+    return new HeatingManagerPwWidgetCtrl(observableName,
+                                          observableTitle,
+                                          observableType,
+                                          observableLocalisation);
 }
 
-MonitoredObservableWidgetCtrl *HeatingManagerWidgetBuilder::createHeatingManagerPwThermostatWidget(QString observableName, QString observableTitle, QString observableType, QString observableLocalisation)
+MonitoredObservableWidgetCtrl *HeatingManagerWidgetBuilder::createHeatingManagerPwThermostatWidget(QString observableName,
+                                                                                                   QString observableTitle,
+                                                                                                   QString observableType,
+                                                                                                   QString observableLocalisation)
 {
-
+    return new HeatingManagerPwtWidgetCtrl(observableName,
+                                          observableTitle,
+                                          observableType,
+                                          observableLocalisation);
 }
 
 QString HeatingManagerWidgetBuilder::getFamilyName(const QString &observableType)

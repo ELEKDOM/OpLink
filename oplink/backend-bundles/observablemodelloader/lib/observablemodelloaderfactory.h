@@ -22,6 +22,7 @@
 #include "factory/bundlefactory.h"
 #include "model/modelnames.h"
 #include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "command/command-names.h"
 #include "event/specificpropertiesmodelloadingevent.h"
 #include "event/processorsmodelloadingevent.h"

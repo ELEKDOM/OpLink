@@ -1,6 +1,6 @@
 #include "heatingmanagerroomprocessor.h"
 #include "command/command-names.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.h"
 #include "logger/pflog.h"
 
@@ -20,7 +20,7 @@ void oplink::HeatingManagerRoomProcessor::process(QspCommand order)
     PropertyName roomTarget{order->property()};
     QVariant val{order->value()};
     QString valStr{val.toString()};
-    QString roomName{PropertyId::extractGroupName(roomTarget)};
+    QString roomName{PropertyId::extractGroupPrefix(roomTarget)};
     QString target{PropertyId::extractPropertyName(roomTarget)};
 
     if (manager().isActivated())

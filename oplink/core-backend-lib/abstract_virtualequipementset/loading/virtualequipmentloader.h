@@ -20,11 +20,10 @@
 #define VIRTUALEQUIPMENTLOADER_H
 
 #include <QVariant>
-#include "observable/highobservable/highobservableconfdocument.h"
+#include "observable/observable/highobservable/highobservableconfdocument.h"
 #include "model/observable/highobservable/highobservablebuilderargs.h"
 #include "scheduler/schedulerbuilder.h"
 #include "olcore-backend-lib_forward.h"
-#include "olcore-lib_forward.h"
 
 namespace oplink
 {

@@ -19,12 +19,12 @@
 #ifndef HEATINGMANAGERLOADERHOOK_H
 #define HEATINGMANAGERLOADERHOOK_H
 
-#include "observable/highobservable/highobservableloaderhook.h"
+#include "observable/observable/highobservable/highobservableloaderhook.h"
 #include "scheduler/schedulerelementhook.h"
 
 namespace oplink
 {
-class OLCORE_LIB_EXPORT HeatingManagerLoaderHook : public HighObservableLoaderHook
+class OLCORE_BACKEND_LIB_EXPORT HeatingManagerLoaderHook : public HighObservableLoaderHook
 {
 public:
     enum class ControlType {PW,PWT,Unknow};

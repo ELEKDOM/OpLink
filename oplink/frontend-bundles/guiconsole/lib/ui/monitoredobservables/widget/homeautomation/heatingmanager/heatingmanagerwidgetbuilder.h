@@ -23,11 +23,6 @@
 
 class HeatingManagerWidgetBuilder : public MonitoredObservableWidgetBuilder
 {
-private:
-private:
-    static QString hm_pw() {return QStringLiteral("heating_manager_pilotwire");}
-    static QString hm_pw_thermostat() {return QStringLiteral("heating_manager_pilotwire_thermostat");}
-
 public:
     HeatingManagerWidgetBuilder();
     ~HeatingManagerWidgetBuilder() override;

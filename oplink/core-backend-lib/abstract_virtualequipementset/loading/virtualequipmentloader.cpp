@@ -18,7 +18,7 @@
 
 #include "virtualequipmentloader.h"
 #include "abstract_virtualequipementset/virtualequipmentset.h"
-#include "observable/highobservable/highobservableconfdocument.h"
+#include "observable/observable/highobservable/highobservableconfdocument.h"
 #include "logger/pflog.h"
 
 oplink::VirtualEquipmentLoader::VirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet) :

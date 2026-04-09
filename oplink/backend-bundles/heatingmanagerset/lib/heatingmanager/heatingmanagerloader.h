@@ -20,16 +20,12 @@
 #define HEATINGMANAGERLOADER_H
 
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
-#include "observable/highobservable/heatingmanager/heatingmanagerloaderhook.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerloaderhook.h"
 #include "model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerbuilderargs.h"
 
 class HeatingManagerLoader : public oplink::VirtualEquipmentLoader,
                              public oplink::HeatingManagerLoaderHook
 {
-public:
-    static QString heatingManagerPilotWireModelName() {return QStringLiteral("heating_manager_pilotwire");}
-    static QString heatingManagerPilotWireThermostatModelName() {return QStringLiteral("heating_manager_pilotwire_thermostat");}
-
 public:
     HeatingManagerLoader(oplink::VirtualEquipmentSet *veSet);
     ~HeatingManagerLoader() override;

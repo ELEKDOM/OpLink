@@ -71,6 +71,7 @@ set(SOURCES
     observable/observable/lowobservable/lowobservable.cpp
     observable/observable/lowobservable/operationdevice.cpp
     observable/observable/highobservable/highobservable.cpp
+    observable/observable/highobservable/highobservableconfdocument.cpp
     observable/observable/highobservable/schedulerhook.cpp
     observable/observable/highobservable/supervisorobservable/supervisorobservable.cpp
     observable/observable/highobservable/supervisorobservable/monitor/grouptowatch.cpp
@@ -78,6 +79,7 @@ set(SOURCES
     observable/observable/highobservable/supervisorobservable/monitor/statetowatchlist.cpp
     observable/observable/highobservable/supervisorobservable/monitor/statetowatch.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerconfdocument.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.cpp
     observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagercmdprocessor.cpp
@@ -96,7 +98,6 @@ set(SOURCES
     observable/property/operationdeviceproperty.cpp
     observable/property/property.cpp
     observable/property/propertyclassnames.cpp
-    observable/property/propertyid.cpp
     observable/remote/remoteMonitoredobservable.cpp
     observable/remote/remotemonitoredobservablegroup.cpp
     observable/remote/sessionconfloader.cpp
@@ -187,12 +188,16 @@ set(HEADERS
     observable/observable/lowobservable/operationdevice.h
     observable/observable/highobservable/highobservable.h
     observable/observable/highobservable/schedulerhook.h
+    observable/observable/highobservable/highobservableconfdocument.h
+    observable/observable/highobservable/highobservableloaderhook.h
     observable/observable/highobservable/supervisorobservable/supervisorobservable.h
     observable/observable/highobservable/supervisorobservable/monitor/grouptowatch.h
     observable/observable/highobservable/supervisorobservable/monitor/grouptowatchalgorithm.h
     observable/observable/highobservable/supervisorobservable/monitor/statetowatch.h
     observable/observable/highobservable/supervisorobservable/monitor/statetowatchlist.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerconfdocument.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerloaderhook.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.h
     observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagercmdprocessor.h
@@ -211,7 +216,6 @@ set(HEADERS
     observable/property/operationdeviceproperty.h
     observable/property/property.h
     observable/property/propertyclassnames.h
-    observable/property/propertyid.h
     observable/remote/remoteMonitoredobservable.h
     observable/remote/remotemonitoredobservablegroup.h
     observable/remote/sessionconfloader.h

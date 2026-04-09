@@ -28,7 +28,7 @@
 ///
 class Heating6mWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
-protected:
+private:
     static QString heatingModeName() {return QStringLiteral("heating_mode");}
     static QString heatingMeasName() {return QStringLiteral("heating_m_value");}
     static QString heatingUnitName() {return QStringLiteral("heating_u_value");}

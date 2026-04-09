@@ -1,33 +1,33 @@
-// Copyright (C) 2025 ELEKDOM Christophe Mars c.mars@elekdom.fr
-// 
+// Copyright (C) 2026 ELEKDOM Christophe Mars c.mars@elekdom.fr
+//
 // This file is part of OpLink.
-// 
+//
 // OpLink is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // OpLink is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef HIGHOBSERVABLELOADERHOOK_H
-#define HIGHOBSERVABLELOADERHOOK_H
+#ifndef HEATINGMANAGERPWTWIDGETLISTVIEW_H
+#define HEATINGMANAGERPWTWIDGETLISTVIEW_H
 
-#include "xmldom/xmlbrowserhook.h"
-#include "olcore-lib_export.h"
+#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h"
 
-namespace oplink
+class HeatingManagerPwtWidgetListView : public HeatingManagerWidgetListView
 {
-class OLCORE_LIB_EXPORT HighObservableLoaderHook : public plugframe::XmlBrowserHook
-{
+    Q_OBJECT
+
 public:
-    ~HighObservableLoaderHook() override {}
+    explicit HeatingManagerPwtWidgetListView(QWidget *parent = nullptr);
+    ~HeatingManagerPwtWidgetListView() override;
 };
-}//namespace oplink
-#endif // HIGHOBSERVABLELOADERHOOK_H
+
+#endif // HEATINGMANAGERPWTWIDGETLISTVIEW_H

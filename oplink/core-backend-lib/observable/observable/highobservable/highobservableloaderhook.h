@@ -16,29 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef OBSERVABLESUBSCRIBER_H
-#define OBSERVABLESUBSCRIBER_H
+#ifndef HIGHOBSERVABLELOADERHOOK_H
+#define HIGHOBSERVABLELOADERHOOK_H
 
-#include <QObject>
-#include <QVariant>
-#include "observable/observablenames.h"
-#include "observable/propertyid.h"
+#include "xmldom/xmlbrowserhook.h"
 #include "olcore-backend-lib_export.h"
 
 namespace oplink
 {
-class OLCORE_BACKEND_LIB_EXPORT ObservableSubscriber : public QObject
+class OLCORE_BACKEND_LIB_EXPORT HighObservableLoaderHook : public plugframe::XmlBrowserHook
 {
-    Q_OBJECT
-
 public:
-    explicit ObservableSubscriber(QObject *parent = nullptr);
-    ~ObservableSubscriber() override;
-
-public slots:
-    virtual void onStateChange(oplink::ObservableName observableName,
-                               oplink::PropertyName propertyName,
-                               QVariant propertyValue) = 0;
+    ~HighObservableLoaderHook() override {}
 };
 }//namespace oplink
-#endif // OBSERVABLESUBSCRIBER_H
+#endif // HIGHOBSERVABLELOADERHOOK_H

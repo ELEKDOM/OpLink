@@ -28,7 +28,7 @@
 ///
 class LightingWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
-protected:
+private:
     static QString stateName() {return QStringLiteral("state");}
 
 public:

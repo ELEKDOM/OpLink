@@ -17,7 +17,7 @@
 //
 
 #include "highobservable.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/values.h"
 
 oplink::HighObservable::HighObservable(const plugframe::QspScheduler& scheduler):

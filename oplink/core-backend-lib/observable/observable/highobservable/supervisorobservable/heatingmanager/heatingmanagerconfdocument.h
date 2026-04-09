@@ -19,12 +19,12 @@
 #ifndef HEATINGMANAGERCONFDOCUMENT_H
 #define HEATINGMANAGERCONFDOCUMENT_H
 
-#include "observable/highobservable/highobservableconfdocument.h"
-#include "observable/highobservable/heatingmanager/heatingmanagerloaderhook.h"
+#include "observable/observable/highobservable/highobservableconfdocument.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerloaderhook.h"
 
 namespace oplink
 {
-class OLCORE_LIB_EXPORT HeatingManagerConfDocument : public oplink::HighObservableConfDocument
+class OLCORE_BACKEND_LIB_EXPORT HeatingManagerConfDocument : public oplink::HighObservableConfDocument
 {
 private:
     static QString heatingManagerTag() {return QStringLiteral("heating-manager");}

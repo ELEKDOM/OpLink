@@ -17,7 +17,6 @@
 //
 
 #include "supervisorobservable.h"
-#include "observable/property/property.h"
 #include "observable/observable/highobservable/supervisorobservable/monitor/grouptowatch.h"
 
 oplink::SupervisorObservable::SupervisorObservable(const plugframe::QspScheduler& scheduler):

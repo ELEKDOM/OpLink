@@ -19,7 +19,7 @@
 #include <QVariant>
 #include "heatingmanager.h"
 #include "pilotwirecontrolroom.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/property/property.h"
 #include "observable/observable/highobservable/supervisorobservable/monitor/grouptowatch.h"
 #include "logger/pflog.h"

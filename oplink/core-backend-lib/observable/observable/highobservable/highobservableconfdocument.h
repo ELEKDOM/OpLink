@@ -21,12 +21,12 @@
 
 #include <QSharedPointer>
 #include "xmldom/xmldocument.h"
-#include "olcore-lib_forward.h"
-#include "olcore-lib_export.h"
+#include "olcore-backend-lib_export.h"
+#include "olcore-backend-lib_forward.h"
 
 namespace oplink
 {
-class OLCORE_LIB_EXPORT HighObservableConfDocument : public plugframe::XmlDocument
+class OLCORE_BACKEND_LIB_EXPORT HighObservableConfDocument : public plugframe::XmlDocument
 {
 protected:
     static QString nameAttr() {return QStringLiteral("name");}

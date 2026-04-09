@@ -30,27 +30,49 @@ const oplink::PropertyName oplink::PropertyId::P_WCLOSED{"wclosed"};
 const oplink::PropertyName oplink::PropertyId::P_TEMPERATURE{"temperature"};
 const oplink::PropertyName oplink::PropertyId::P_SCHEDULER_XML_DEF{"planning"};
 
-QString oplink::PropertyId::groupPropertyName(const QString &groupName, const PropertyName &propertyName)
+oplink::PropertyName oplink::PropertyId::groupPropertyName(quint8 groupIdx, const PropertyName &propertyName)
 {
-    return (groupName + '{' + propertyName + '}');
+    oplink::PropertyName ret {groupPrefix(groupIdx)};
+
+    ret += '{' + propertyName + '}';
+
+    return ret;
 }
 
-QString oplink::PropertyId::extractGroupName(const QString &compoundName)
+oplink::PropertyName oplink::PropertyId::groupPropertyName(const QString &groupPrefix, const PropertyName &propertyName)
+{
+    oplink::PropertyName ret {groupPrefix};
+
+    ret += '{' + propertyName + '}';
+
+    return ret;
+}
+
+QString oplink::PropertyId::extractGroupPrefix(const QString &compoundName)
 {
     QString ret;
-    QRegularExpression re("^\\w+\\s*\\w*");
+    QRegularExpression re("^room\\d+");
 
     QRegularExpressionMatch match = re.match(compoundName);
     if (match.hasMatch()) {
-        ret = match.captured(0); // group name part
+        ret = match.captured(0); // group prefix part
     }
 
     return ret;
 }
 
-QString oplink::PropertyId::extractPropertyName(const QString &compoundName)
+QString oplink::PropertyId::groupPrefix(quint8 groupIdx)
 {
-    QString ret;
+    oplink::PropertyName ret {"room"};
+
+    ret += QString::number(groupIdx);
+
+    return ret;
+}
+
+oplink::PropertyName oplink::PropertyId::extractPropertyName(const QString &compoundName)
+{
+    oplink::PropertyName ret;
     QRegularExpression re("{(\\w+)}$");
 
     QRegularExpressionMatch match = re.match(compoundName);

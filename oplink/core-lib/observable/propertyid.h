@@ -19,14 +19,17 @@
 #ifndef PROPERTYID_H
 #define PROPERTYID_H
 
-#include "olcore-backend-lib_export.h"
-#include "observable/observablenames.h"
+#include "olcore-lib_export.h"
 
 namespace oplink
 {
-class OLCORE_BACKEND_LIB_EXPORT PropertyId
+
+using PropertyName = QString;
+
+class OLCORE_LIB_EXPORT PropertyId
 {
 public:
+    // mandatory property
     static const PropertyName P_NAME;
     static const PropertyName P_MODEL;
     static const PropertyName P_LOCALISATION;
@@ -43,9 +46,11 @@ public:
     static const PropertyName P_TEMPERATURE;
 
     // for compound name of a group property
-    static QString groupPropertyName(const QString& groupName, const PropertyName& propertyName);
-    static QString extractGroupName(const QString& compoundName);
-    static QString extractPropertyName(const QString& compoundName);
+    static PropertyName groupPropertyName(quint8 groupIdx, const PropertyName& propertyName);
+    static PropertyName groupPropertyName(const QString& groupPrefix, const PropertyName& propertyName);
+    static QString extractGroupPrefix(const QString& compoundName);
+    static QString groupPrefix(quint8 groupIdx);
+    static PropertyName extractPropertyName(const QString& compoundName);
 };
 }//namespace oplink
 #endif // PROPERTYID_H

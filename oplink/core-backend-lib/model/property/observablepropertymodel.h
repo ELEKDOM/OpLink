@@ -21,7 +21,7 @@
 
 #include <QSharedPointer>
 #include "logger/loggable.h"
-#include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "model/modelnames.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"

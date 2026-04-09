@@ -20,7 +20,7 @@
 #include "observable.h"
 #include "observable/observable/observablenotifier.h"
 #include "observable/property/property.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/processor/commandprocessor.h"
 #include "command/command.h"
 #include "logger/pflog.h"

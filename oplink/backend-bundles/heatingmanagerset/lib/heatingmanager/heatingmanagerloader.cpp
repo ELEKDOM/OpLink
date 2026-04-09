@@ -18,6 +18,7 @@
 
 #include "heatingmanagerloader.h"
 #include "abstract_virtualequipementset/virtualequipmentset.h"
+#include "observable/heatingmanagermodelnames.h"
 #include "observable/observablelogchannel.h"
 
 HeatingManagerLoader::HeatingManagerLoader(oplink::VirtualEquipmentSet *veSet):
@@ -57,11 +58,11 @@ bool HeatingManagerLoader::heatingManagerDeclarationBegin(const QString& observa
     m_ctrT = controlType;
     if (ControlType::PWT == controlType)
     {
-        modelName = heatingManagerPilotWireThermostatModelName();
+        modelName = oplink::HeatingManagerModelNames::pilotWireThermostatModelName();
     }
     else if (ControlType::PW == controlType)
     {
-        modelName = heatingManagerPilotWireModelName();
+        modelName = oplink::HeatingManagerModelNames::pilotWireModelName();
     }
     m_newHeatingManagerBuilderArgs = createHeatingManagerBuilderArgs(observableName,
                                                                      modelName,

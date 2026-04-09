@@ -23,7 +23,7 @@
 #include "observable/observable/highobservable/supervisorobservable/monitor/statetowatch.h"
 #include "observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagersetprocessor.h"
 #include "observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagerroomprocessor.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/values.h"
 #include "logger/pflog.h"
 
@@ -185,7 +185,7 @@ void oplink::HeatingManagerModel::postBuild(QspObservableBuilder observableBuild
                 QString propertyName;
                 QspStateToWatch monitoredState;
 
-                monitoredRoom->groupName(hManagerArgs->m_rooms[i]->m_name);
+                monitoredRoom->groupName(PropertyId::groupPrefix(i + 1));
                 monitoredRoom->setObservableService(hManagerArgs->m_observableService);// to subcribe/unsubscribe to monitored observables !
 
                 // monitored heaters
@@ -329,21 +329,28 @@ bool oplink::HeatingManagerModel::addRoomProperties(const QspObservableBuilder &
     {
         for (auto i = 0; i < hManagerArgs->m_rooms.size(); i++)
         {
-            gpName = PropertyId::groupPropertyName(hManagerArgs->m_rooms[i]->m_name, PropertyId::P_SETPOINT);
+            gpName = PropertyId::groupPropertyName(i + 1, PropertyId::P_NAME);
+            ret = addProperty(observableBuilder,gpName,hManagerArgs->m_rooms[i]->m_name);
+            if (!ret)
+            {
+                throw(gpName);
+            }
+
+            gpName = PropertyId::groupPropertyName(i + 1, PropertyId::P_SETPOINT);
             ret = addProperty(observableBuilder,gpName);
             if (!ret)
             {
                 throw(gpName);
             }
 
-            gpName = PropertyId::groupPropertyName(hManagerArgs->m_rooms[i]->m_name, PropertyId::P_WCLOSED);
+            gpName = PropertyId::groupPropertyName(i + 1, PropertyId::P_WCLOSED);
             ret = addProperty(observableBuilder,gpName);
             if (!ret)
             {
                 throw(gpName);
             }
 
-            gpName = PropertyId::groupPropertyName(hManagerArgs->m_rooms[i]->m_name, PropertyId::P_TEMPERATURE);
+            gpName = PropertyId::groupPropertyName(i + 1, PropertyId::P_TEMPERATURE);
             ret = addProperty(observableBuilder,gpName);
             if (!ret)
             {

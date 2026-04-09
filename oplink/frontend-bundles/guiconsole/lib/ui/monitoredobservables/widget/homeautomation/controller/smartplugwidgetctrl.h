@@ -29,7 +29,7 @@
 
 class SmartPlugWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
-protected:
+private:
     static QString output1Name() {return QStringLiteral("output1");}
     static QString measName() {return QStringLiteral("m_value");}
     static QString unitName() {return QStringLiteral("u_value");}

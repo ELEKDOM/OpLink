@@ -18,7 +18,8 @@
 
 #include "heatingmanagersetfactory.h"
 #include "heatingmanager/heatingmanagerloader.h"
-#include "observable/highobservable/heatingmanager/heatingmanagerconfdocument.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerconfdocument.h"
+#include "observable/heatingmanagermodelnames.h"
 #include "model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.h"
 #include "model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.h"
 
@@ -34,12 +35,12 @@ HeatingManagerSetFactory::~HeatingManagerSetFactory()
 
 oplink::ObservableModel *HeatingManagerSetFactory::createHeatingManagerPwModel()
 {
-    return new oplink::HeatingManagerPwModel{HeatingManagerLoader::heatingManagerPilotWireModelName()};
+    return new oplink::HeatingManagerPwModel{oplink::HeatingManagerModelNames::pilotWireModelName()};
 }
 
 oplink::ObservableModel *HeatingManagerSetFactory::createHeatingManagerPwtModel()
 {
-    return new oplink::HeatingManagerPwtModel{HeatingManagerLoader::heatingManagerPilotWireThermostatModelName()};
+    return new oplink::HeatingManagerPwtModel{oplink::HeatingManagerModelNames::pilotWireThermostatModelName()};
 }
 
 oplink::VirtualEquipmentLoader *HeatingManagerSetFactory::createVirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet)

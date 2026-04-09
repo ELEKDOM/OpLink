@@ -22,7 +22,7 @@
 #include <QSharedPointer>
 #include <QVariant>
 #include "logger/loggable.h"
-#include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 

@@ -23,7 +23,7 @@
 #include "model/observable/observablebuilderargs.h"
 #include "logger/pflog.h"
 #include "observable/observable/observablebuilder.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 
 oplink::ObservableModel::ObservableModel(const ObservableModelName& name):
     plugframe::Loggable{s_ModelLogChannel},

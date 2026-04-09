@@ -17,7 +17,7 @@
 //
 
 #include "highobservablemodel.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 
 oplink::HighObservableModel::HighObservableModel(const ObservableModelName& name):
     ObservableModel{name}

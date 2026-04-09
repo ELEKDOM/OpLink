@@ -20,7 +20,7 @@
 #define DEVICECHANNELSBINDING_H
 
 #include <QVector>
-#include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "olcore-backend-lib_export.h"
 
 namespace oplink
