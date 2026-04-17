@@ -46,6 +46,7 @@ MonitoredObservableWidgetView *MonitoredObservableWidgetCtrl::createView(quint8 
     {
         m_view->setTitle(m_observableTitle);
         connect(m_view,SIGNAL(cmdButtonClicked(QString)),SLOT(onButtonCmdClicked(QString)));
+        extendedConnect();
     }
     return m_view;
 }
@@ -61,4 +62,9 @@ void MonitoredObservableWidgetCtrl::updateStateValue(const QString &propertyName
 void MonitoredObservableWidgetCtrl::addState(const QString &propertyName)
 {
     m_monitoredStates.insert(propertyName, true);
+}
+
+void MonitoredObservableWidgetCtrl::extendedConnect()
+{
+    // No more connection by default !
 }

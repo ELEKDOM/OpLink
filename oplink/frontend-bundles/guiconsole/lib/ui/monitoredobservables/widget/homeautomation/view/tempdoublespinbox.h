@@ -16,28 +16,45 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef HEATINGMANAGERPWTWIDGETLISTVIEW_H
-#define HEATINGMANAGERPWTWIDGETLISTVIEW_H
+#ifndef TEMPDOUBLESPINBOX_H
+#define TEMPDOUBLESPINBOX_H
 
-#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.h"
+#include <QWidget>
+#include <QIcon>
 
-class HeatingManagerPwtWidgetListView : public HeatingManagerWidgetListView
+namespace Ui {
+class tempDoubleSpinBox;
+}
+
+class TempDoubleSpinBox : public QWidget
 {
     Q_OBJECT
+private:
+    enum class LockerState{Locked, Unlocked};
 
 public:
-    explicit HeatingManagerPwtWidgetListView(bool withScheduler,int nbOfRooms,QWidget *parent = nullptr);
-    ~HeatingManagerPwtWidgetListView() override;
+    explicit TempDoubleSpinBox(QWidget *parent = nullptr);
+    ~TempDoubleSpinBox() override;
 
-protected:
-    void setVal(quint8 idx, double val) override;
+public:
+    void setValue(double d);
+
+signals:
+    void valueChanged(double v);
 
 private slots:
-    void onSetpointValueChanged(double d);
+    void onLockerClicked(bool checked);
 
 private:
-    TempDoubleSpinBox *m_setpointInputWidget;
+    void lockInput();
+    void unlockInput();
+    void validateInput();
+
+private:
+    Ui::tempDoubleSpinBox *ui;
+    LockerState m_lockerState;
+    QIcon   m_lockedIcon;
+    QIcon   m_unlockedIcon;
 };
 
-#endif // HEATINGMANAGERPWTWIDGETLISTVIEW_H
+#endif // TEMPDOUBLESPINBOX_H

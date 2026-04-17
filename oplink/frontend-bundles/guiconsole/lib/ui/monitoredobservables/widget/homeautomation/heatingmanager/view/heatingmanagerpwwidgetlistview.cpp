@@ -18,10 +18,10 @@
 
 #include "heatingmanagerpwwidgetlistview.h"
 
-HeatingManagerPwWidgetListView::HeatingManagerPwWidgetListView(QWidget *parent):
-    MonitoredObservableWidgetListView{parent}
+HeatingManagerPwWidgetListView::HeatingManagerPwWidgetListView(bool withScheduler, int nbOfRooms, QWidget *parent):
+    HeatingManagerWidgetListView{withScheduler,parent}
 {
-
+    //...
 }
 
 HeatingManagerPwWidgetListView::~HeatingManagerPwWidgetListView()

@@ -48,9 +48,10 @@ public:
     // for compound name of a group property
     static PropertyName groupPropertyName(quint8 groupIdx, const PropertyName& propertyName);
     static PropertyName groupPropertyName(const QString& groupPrefix, const PropertyName& propertyName);
-    static QString extractGroupPrefix(const QString& compoundName);
+    static QString extractGroupPrefix(const PropertyName& compoundName);
     static QString groupPrefix(quint8 groupIdx);
-    static PropertyName extractPropertyName(const QString& compoundName);
+    static PropertyName extractPropertyName(const PropertyName& compoundName);
+    static bool isGroupProperty(const PropertyName& compoundName,quint8& groupIdx,PropertyName& propertyName);
 };
 }//namespace oplink
 #endif // PROPERTYID_H

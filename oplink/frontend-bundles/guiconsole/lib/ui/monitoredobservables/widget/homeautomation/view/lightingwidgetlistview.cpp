@@ -48,11 +48,11 @@ void LightingWidgetListView::setImg(const QPixmap &img, const QString &propertyN
 void LightingWidgetListView::enableCmdButton(bool enable, const QString &cmdName)
 {
 
-    if (cmdName == ButtonName::on())
+    if (cmdName == ButtonCmdName::on())
     {
         ui->onCmd->setEnabled(enable);
     }
-    else if (cmdName == ButtonName::off())
+    else if (cmdName == ButtonCmdName::off())
     {
         ui->offCmd->setEnabled(enable);
     }
@@ -60,10 +60,10 @@ void LightingWidgetListView::enableCmdButton(bool enable, const QString &cmdName
 
 void LightingWidgetListView::onOnCmd()
 {
-    emit cmdButtonClicked(ButtonName::on());
+    emit cmdButtonClicked(ButtonCmdName::on());
 }
 
 void LightingWidgetListView::onOffCmd()
 {
-    emit cmdButtonClicked(ButtonName::off());
+    emit cmdButtonClicked(ButtonCmdName::off());
 }

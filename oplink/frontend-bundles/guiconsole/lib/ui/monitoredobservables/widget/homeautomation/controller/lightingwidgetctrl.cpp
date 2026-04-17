@@ -59,14 +59,14 @@ void LightingWidgetCtrl::_updateStateValue(const QString &propertyName, const QV
             if (val)
             {
                 lightingView->setImg(m_lightOn, propertyName);
-                lightingView->enableCmdButton(true, ButtonName::off());
-                lightingView->enableCmdButton(false, ButtonName::on());
+                lightingView->enableCmdButton(true, ButtonCmdName::off());
+                lightingView->enableCmdButton(false, ButtonCmdName::on());
             }
             else
             {
                 lightingView->setImg(m_lightOff, propertyName);
-                lightingView->enableCmdButton(false, ButtonName::off());
-                lightingView->enableCmdButton(true, ButtonName::on());
+                lightingView->enableCmdButton(false, ButtonCmdName::off());
+                lightingView->enableCmdButton(true, ButtonCmdName::on());
             }
         }
     }
@@ -74,7 +74,7 @@ void LightingWidgetCtrl::_updateStateValue(const QString &propertyName, const QV
 
 void LightingWidgetCtrl::onButtonCmdClicked(QString cmdName)
 {
-    if (cmdName == ButtonName::on() || cmdName == ButtonName::off())
+    if (cmdName == ButtonCmdName::on() || cmdName == ButtonCmdName::off())
     {
         QString cmdFormat{QString("set;%1;%2;%3").arg(observableName(), stateName(), cmdName)};
 

@@ -58,6 +58,28 @@ bool oplink::HeatingManager::windowSensorState(const QString &roomName, bool all
     return ret;
 }
 
+bool oplink::HeatingManager::temperatureValue(const QString &roomName, double t)
+{
+    bool ret{isOn()};
+
+    if (ret)
+    {
+        pfInfo1(logChannel()) << QObject::tr("%1 pièce %2 valeur de température : ").arg(name(),roomName) << t;
+
+        // Notify property update for the group (roomname)
+        QString pName {oplink::PropertyId::groupPropertyName(roomName,
+                                                             oplink::PropertyId::P_TEMPERATURE)};
+        oplink::QspProperty prop{property(pName)};
+
+        if (!prop.isNull())
+        {
+            prop->changeValue(t);
+        }
+    }
+
+    return ret;
+}
+
 bool oplink::HeatingManager::isActivated()
 {
     return isOn();
@@ -93,9 +115,11 @@ void oplink::HeatingManager::setOff()
 
 void oplink::HeatingManager::setSetpoint(const QString &setpoint)
 {
-    setpointProperty(setpoint);
-    setpointForRooms(setpoint);
-    checkForDerogatedState();
+    if (setpointProperty(setpoint))
+    {
+        setpointForRooms(setpoint);
+        checkForDerogatedState();
+    }
 }
 
 void oplink::HeatingManager::setRoomSetpoint(const QString &roomName, const QString &setpoint)
@@ -233,15 +257,19 @@ const QString oplink::HeatingManager::setpointProperty()
     return ret;
 }
 
-void oplink::HeatingManager::setpointProperty(const QString &setpoint)
+bool oplink::HeatingManager::setpointProperty(const QString &setpoint)
 {
+    bool ret{false};
+
     pfDebug3(logChannel()) << "->HeatingManager::managerSetpoint, setpoint = " << setpoint;
 
     oplink::QspProperty prop{property(oplink::PropertyId::P_SETPOINT)};
 
-    prop->changeValue(setpoint);
+    ret = prop->changeValue(setpoint);
 
     pfDebug3(logChannel()) << "<-HeatingManager::managerSetpoint";
+
+    return ret;
 }
 
 const bool oplink::HeatingManager::derogatedProperty()

@@ -62,14 +62,14 @@ void SmartPlugWidgetCtrl::_updateStateValue(const QString &propertyName, const Q
             if (val)
             {
                 plugView->setImg(m_plugOn, propertyName);
-                plugView->enableCmdButton(true, ButtonName::off());
-                plugView->enableCmdButton(false, ButtonName::on());
+                plugView->enableCmdButton(true, ButtonCmdName::off());
+                plugView->enableCmdButton(false, ButtonCmdName::on());
             }
             else
             {
                 plugView->setImg(m_plugOff, propertyName);
-                plugView->enableCmdButton(false, ButtonName::off());
-                plugView->enableCmdButton(true, ButtonName::on());
+                plugView->enableCmdButton(false, ButtonCmdName::off());
+                plugView->enableCmdButton(true, ButtonCmdName::on());
             }
         }
         else if (measName()  == propertyName)
@@ -89,7 +89,7 @@ void SmartPlugWidgetCtrl::_updateStateValue(const QString &propertyName, const Q
 
 void SmartPlugWidgetCtrl::onButtonCmdClicked(QString cmdName)
 {
-    if (ButtonName::on() == cmdName || ButtonName::off() == cmdName)
+    if (ButtonCmdName::on() == cmdName || ButtonCmdName::off() == cmdName)
     {
         QString cmdFormat{QString("set;%1;%2;%3").arg(observableName(), output1Name(), cmdName)};
 

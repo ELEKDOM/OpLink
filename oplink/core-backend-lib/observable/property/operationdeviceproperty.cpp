@@ -41,14 +41,20 @@ oplink::QspLowProperty oplink::OperationDeviceProperty::slave()
     return relatedProperty();
 }
 
-void oplink::OperationDeviceProperty::changeValue(const QVariant &val)
+bool oplink::OperationDeviceProperty::changeValue(const QVariant &val)
 {
-    oplink::LowProperty::changeValue(val);
-    oplink::QspLowProperty lp{slave()};
-    if (!lp.isNull())
+    bool ret{oplink::LowProperty::changeValue(val)};
+
+    if (ret)
     {
-        lp->changeValue(val);
+        oplink::QspLowProperty lp{slave()};
+        if (!lp.isNull())
+        {
+            lp->changeValue(val);
+        }
     }
+
+    return ret;
 }
 
 

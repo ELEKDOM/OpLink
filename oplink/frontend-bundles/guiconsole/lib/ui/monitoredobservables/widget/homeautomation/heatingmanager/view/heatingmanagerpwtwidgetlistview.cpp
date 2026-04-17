@@ -17,14 +17,46 @@
 //
 
 #include "heatingmanagerpwtwidgetlistview.h"
+#include "heatingroompwtwidgetlistview.h"
 
-HeatingManagerPwtWidgetListView::HeatingManagerPwtWidgetListView(QWidget *parent):
-    HeatingManagerWidgetListView{parent}
+HeatingManagerPwtWidgetListView::HeatingManagerPwtWidgetListView(bool withScheduler, int nbOfRooms, QWidget *parent):
+    HeatingManagerWidgetListView{withScheduler,parent}
 {
+    // Create the specific widget to manage the setpoint value.
+    // For a thermostat the setpoint is a temperature value !
+    m_setpointInputWidget = new TempDoubleSpinBox;
+    addSetpointInputWidget(m_setpointInputWidget);
 
+    // to manage setpoint change from ui
+    connect(m_setpointInputWidget,SIGNAL(valueChanged(double)),SLOT(onSetpointValueChanged(double)));
+
+    // Rooms area
+    for (auto i = 0;i < nbOfRooms;i++)
+    {
+        HeatingRoomWidgetListView *newRoom{new HeatingRoomPwtWidgetListView(i+1,heatingManagerWidgetContent())};
+        contentVerticalLayout()->addWidget(newRoom);
+        ui_rooms.append(newRoom);
+        connect(newRoom,SIGNAL(setpointChangedFromUi(int,QVariant)),SIGNAL(roomSetpointChangedFromUi(int,QVariant)));
+    }
+    contentVerticalLayout()->addStretch();
 }
 
 HeatingManagerPwtWidgetListView::~HeatingManagerPwtWidgetListView()
 {
 
+}
+
+void HeatingManagerPwtWidgetListView::setVal(quint8 idx, double val)
+{
+    if (idx == 0) // 0 for setpoint value !
+    {
+        m_setpointInputWidget->setValue(val);
+    }
+}
+
+void HeatingManagerPwtWidgetListView::onSetpointValueChanged(double d)
+{
+    QVariant val{d};
+
+    emit setpointChangedFromUi(val);
 }

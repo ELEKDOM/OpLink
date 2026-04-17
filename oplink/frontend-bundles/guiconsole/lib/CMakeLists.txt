@@ -30,6 +30,7 @@ set(SOURCES
     ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerwidgetctrl.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.cpp
@@ -37,6 +38,9 @@ set(SOURCES
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwwidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwtwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroomwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroompwtwidgetlistview.cpp
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroompwwidgetlistview.cpp
 )
 
 # Bundle implementation Headers
@@ -73,6 +77,7 @@ set(HEADERS
     ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerwidgetctrl.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.h
@@ -80,6 +85,9 @@ set(HEADERS
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwwidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwtwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroomwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroompwtwidgetlistview.h
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroompwwidgetlistview.h
 )
 
 # Bundle implementation Forms
@@ -92,9 +100,12 @@ set(FORMS
     ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.ui
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.ui
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroomwidgetlistview.ui
 )
 
-qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS})
+qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS}
+    ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.ui)
 
 target_include_directories(${BUNDLE_IMPL_NAME}
     PUBLIC

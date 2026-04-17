@@ -26,12 +26,12 @@ Heating6mWidgetListView::Heating6mWidgetListView(QWidget *parent):
 {
     ui->setupUi(this);
 
-    ui->pwmCmd->addItem("comfort", ButtonName::comfort());
-    ui->pwmCmd->addItem("comfort - 1", ButtonName::comfort1());
-    ui->pwmCmd->addItem("comfort - 2", ButtonName::comfort2());
-    ui->pwmCmd->addItem("eco", ButtonName::eco());
-    ui->pwmCmd->addItem("no frost", ButtonName::nofrost());
-    ui->pwmCmd->addItem("stop", ButtonName::off());
+    ui->pwmCmd->addItem(tr("confort"), ButtonCmdName::comfort());
+    ui->pwmCmd->addItem(tr("confort - 1"), ButtonCmdName::comfort1());
+    ui->pwmCmd->addItem(tr("confort - 2"), ButtonCmdName::comfort2());
+    ui->pwmCmd->addItem(tr("eco"), ButtonCmdName::eco());
+    ui->pwmCmd->addItem(tr("hors gel"), ButtonCmdName::nofrost());
+    ui->pwmCmd->addItem(tr("arrêt"), ButtonCmdName::off());
 
     connect(ui->pwmCmd, SIGNAL(activated(int)), SLOT(onItemPwmCmd(int)));
     connect(ui->powerCmd, SIGNAL(pressed()), SLOT(onPowerCmd()));
@@ -90,10 +90,10 @@ void Heating6mWidgetListView::onItemPwmCmd(int index)
 
 void Heating6mWidgetListView::onPowerCmd()
 {
-    emit cmdButtonClicked(ButtonName::power());
+    emit cmdButtonClicked(ButtonCmdName::power());
 }
 
 void Heating6mWidgetListView::onEnergyCmd()
 {
-    emit cmdButtonClicked(ButtonName::energy());
+    emit cmdButtonClicked(ButtonCmdName::energy());
 }

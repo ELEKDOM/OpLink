@@ -27,7 +27,7 @@ void oplink::HeatingManagerRoomProcessor::process(QspCommand order)
     {
         if (PropertyId::P_SETPOINT == target)
         {
-            manager().setRoomSetpoint(roomName,target);
+            manager().setRoomSetpoint(roomName,valStr);
             pfInfo3(observable().logChannel()) << QObject::tr("Gestionnaire de Chauffage : %1 consigne positionnée à %2 pour la pièce %3").arg(order->observable(),valStr,roomName);
         }
         else

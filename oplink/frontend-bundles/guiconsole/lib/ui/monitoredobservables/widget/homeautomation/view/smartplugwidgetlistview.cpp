@@ -62,19 +62,19 @@ void SmartPlugWidgetListView::setMeasUnit(const QString &unit)
 
 void SmartPlugWidgetListView::enableCmdButton(bool enable, const QString &cmdName)
 {
-    if (ButtonName::on() == cmdName)
+    if (ButtonCmdName::on() == cmdName)
     {
         ui->onCmd->setEnabled(enable);
     }
-    else if (ButtonName::off() == cmdName)
+    else if (ButtonCmdName::off() == cmdName)
     {
         ui->offCmd->setEnabled(enable);
     }
-    else if (ButtonName::power() == cmdName)
+    else if (ButtonCmdName::power() == cmdName)
     {
         ui->powerCmd->setEnabled(enable);
     }
-    else if (ButtonName::energy() == cmdName)
+    else if (ButtonCmdName::energy() == cmdName)
     {
         ui->energyCmd->setEnabled(enable);
     }
@@ -82,20 +82,20 @@ void SmartPlugWidgetListView::enableCmdButton(bool enable, const QString &cmdNam
 
 void SmartPlugWidgetListView::onOnCmd()
 {
-    emit cmdButtonClicked(ButtonName::on());
+    emit cmdButtonClicked(ButtonCmdName::on());
 }
 
 void SmartPlugWidgetListView::onOffCmd()
 {
-    emit cmdButtonClicked(ButtonName::off());
+    emit cmdButtonClicked(ButtonCmdName::off());
 }
 
 void SmartPlugWidgetListView::onPowerCmd()
 {
-    emit cmdButtonClicked(ButtonName::power());
+    emit cmdButtonClicked(ButtonCmdName::power());
 }
 
 void SmartPlugWidgetListView::onEnergyCmd()
 {
-    emit cmdButtonClicked(ButtonName::energy());
+    emit cmdButtonClicked(ButtonCmdName::energy());
 }

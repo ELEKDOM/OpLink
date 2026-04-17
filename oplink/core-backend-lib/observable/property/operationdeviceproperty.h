@@ -37,7 +37,7 @@ public:
 public:
     void slave(QspLowProperty slaveProp);
     QspLowProperty slave();
-    void changeValue(const QVariant& val) override;
+    bool changeValue(const QVariant& val) override;
 };
 using QspOperationDeviceProperty = QSharedPointer<OperationDeviceProperty>;
 }//namespace oplink

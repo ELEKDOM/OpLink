@@ -184,9 +184,11 @@ void oplink::PilotWireControlRoom::onStateChangeFromTemperatureSensors(const opl
                                                                const oplink::PropertyName& propertyName,
                                                                QVariant propertyValue)
 {
-    Q_UNUSED(observableName)
     Q_UNUSED(propertyName)
-    Q_UNUSED(propertyValue)
+    Q_UNUSED(observableName)
+    HeatingManager& heatingManager{dynamic_cast<HeatingManager&>(manager())};
+
+    heatingManager.temperatureValue(group()->groupName(),propertyValue.toDouble());
 }
 
 void oplink::PilotWireControlRoom::onStateChangeFromUnknownCategory(const oplink::ObservableName& observableName,

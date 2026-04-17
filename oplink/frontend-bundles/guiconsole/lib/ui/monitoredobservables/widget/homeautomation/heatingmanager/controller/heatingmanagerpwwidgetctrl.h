@@ -29,6 +29,9 @@ public:
                                QString observableType,
                                QString observableLocalisation);
     ~HeatingManagerPwWidgetCtrl() override;
+
+protected:
+    MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
 };
 
 #endif // HEATINGMANAGERPWWIDGETCTRL_H

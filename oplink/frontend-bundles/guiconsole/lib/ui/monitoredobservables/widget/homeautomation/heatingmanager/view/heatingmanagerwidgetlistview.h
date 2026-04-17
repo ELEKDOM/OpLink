@@ -19,15 +19,57 @@
 #ifndef HEATINGMANAGERWIDGETLISTVIEW_H
 #define HEATINGMANAGERWIDGETLISTVIEW_H
 
+#include <QVector>
+#include <QVBoxLayout>
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
+namespace Ui {
+class heatingManagerWidgetListView;
+}
+
+class HeatingRoomWidgetListView;
 class HeatingManagerWidgetListView : public MonitoredObservableWidgetListView
 {
     Q_OBJECT
 
 public:
-    HeatingManagerWidgetListView(QWidget *parent = nullptr);
+    HeatingManagerWidgetListView(bool withScheduler,QWidget *parent = nullptr);
     ~HeatingManagerWidgetListView() override;
+
+public:
+    virtual void setRoomName(quint8 roomNumber,const QString& roomName);
+    virtual void setRoomSetpoint(quint8 roomNumber,const QVariant& value);
+    virtual void setRoomImg(quint8 roomNumber,const QPixmap& img, const QString& propertyName);
+    virtual void setRoomTemperature(quint8 roomNumber,double value);
+
+protected:
+    void setTitle(const QString& title) override;
+    void enableCmdButton(bool enable, const QString& cmdName) override;
+    void setImg(const QPixmap& img, const QString& propertyName) override;
+
+protected:
+    void addSetpointInputWidget(QWidget *inputWidget);
+    QWidget *heatingManagerWidgetContent();
+    QVBoxLayout *contentVerticalLayout();
+
+private slots:
+    void onOnOffSliderValueChanged(int value);
+    void onPlannedToggled(bool checked);
+    void onOnDemandToggled(bool checked);
+
+private:
+    void enableManagerView(bool enable);
+    void enableRoomsView(bool enable);
+
+signals:
+    void setpointChangedFromUi(QVariant val);
+    void roomSetpointChangedFromUi(int roomNumber,QVariant val);
+
+protected:
+    QVector<HeatingRoomWidgetListView*> ui_rooms;
+
+private:
+    Ui::heatingManagerWidgetListView   *ui;
 };
 
 #endif // HEATINGMANAGERWIDGETLISTVIEW_H

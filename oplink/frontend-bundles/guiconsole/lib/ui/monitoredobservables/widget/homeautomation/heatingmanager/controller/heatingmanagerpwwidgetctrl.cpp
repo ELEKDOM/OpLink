@@ -18,6 +18,7 @@
 
 #include "observable/heatingmanagermodelnames.h"
 #include "heatingmanagerpwwidgetctrl.h"
+#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerpwwidgetlistview.h"
 
 HeatingManagerPwWidgetCtrl::HeatingManagerPwWidgetCtrl(QString observableName,
                                                        QString observableTitle,
@@ -34,4 +35,10 @@ HeatingManagerPwWidgetCtrl::HeatingManagerPwWidgetCtrl(QString observableName,
 HeatingManagerPwWidgetCtrl::~HeatingManagerPwWidgetCtrl()
 {
 
+}
+
+MonitoredObservableWidgetView *HeatingManagerPwWidgetCtrl::_createView(quint8 layoutViewType)
+{
+    Q_UNUSED(layoutViewType)
+    return new HeatingManagerPwWidgetListView{withScheduler(),numberOfRooms()};
 }

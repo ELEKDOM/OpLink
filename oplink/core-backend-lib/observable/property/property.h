@@ -42,7 +42,7 @@ public:
     const QVariant& value(){return m_value;}
     void value(const QVariant& val);
     bool isValidValue();
-    virtual void changeValue(const QVariant& val);
+    virtual bool changeValue(const QVariant& val);
 
 private:
     Observable&     m_observable;

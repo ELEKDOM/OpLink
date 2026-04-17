@@ -16,18 +16,20 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef HEATINGMANAGERPWWIDGETLISTVIEW_H
-#define HEATINGMANAGERPWWIDGETLISTVIEW_H
+#include "heatingroompwwidgetlistview.h"
 
-#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h"
-
-class HeatingManagerPwWidgetListView : public HeatingManagerWidgetListView
+HeatingRoomPwWidgetListView::HeatingRoomPwWidgetListView(int roomNumber, QWidget *parent) :
+    HeatingRoomWidgetListView{roomNumber,parent}
 {
-    Q_OBJECT
 
-public:
-    explicit HeatingManagerPwWidgetListView(bool withScheduler,int nbOfRooms,QWidget *parent = nullptr);
-    ~HeatingManagerPwWidgetListView() override;
-};
+}
 
-#endif // HEATINGMANAGERPWWIDGETLISTVIEW_H
+HeatingRoomPwWidgetListView::~HeatingRoomPwWidgetListView()
+{
+
+}
+
+void HeatingRoomPwWidgetListView::setpointValue(const QVariant& val)
+{
+
+}

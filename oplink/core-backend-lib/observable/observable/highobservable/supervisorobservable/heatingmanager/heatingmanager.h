@@ -91,6 +91,7 @@ public:
 
 public: // for algorithm
     bool windowSensorState(const QString& roomName, bool allClosed);
+    bool temperatureValue(const QString& roomName, double t);
 
 public: // for processor
     bool isActivated();
@@ -114,7 +115,7 @@ private:
     void startRoomsMonitor();
     void stopRoomsMonitor();
     const QString setpointProperty();
-    void setpointProperty(const QString& setpoint);
+    bool setpointProperty(const QString& setpoint);
     const bool derogatedProperty();
     void derogatedProperty(bool derog);
     const QString roomSetpointProperty(const QString& roomName);

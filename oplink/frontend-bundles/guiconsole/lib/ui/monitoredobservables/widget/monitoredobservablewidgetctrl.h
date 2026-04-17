@@ -62,6 +62,9 @@ protected:
     MonitoredObservableWidgetView *view() {return m_view;}
     const QString& observableName(){return m_observableName;}
 
+protected:
+    virtual void extendedConnect();
+
 private:
     QString                        m_observableName;
     QString                        m_observableTitle;

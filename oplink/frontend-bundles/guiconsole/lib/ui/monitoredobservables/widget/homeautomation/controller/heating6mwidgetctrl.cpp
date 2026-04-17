@@ -69,27 +69,27 @@ void Heating6mWidgetCtrl::_updateStateValue(const QString &propertyName, const Q
             switch (pwm) {
             case 0x00:
                 heatingView->setImg(m_pwmStop, "");
-                heatingView->enableCmdButton(false, ButtonName::off());
+                heatingView->enableCmdButton(false, ButtonCmdName::off());
                 break;
             case 0x01:
                 heatingView->setImg(m_pwmComfort, "");
-                heatingView->enableCmdButton(false, ButtonName::comfort());
+                heatingView->enableCmdButton(false, ButtonCmdName::comfort());
                 break;
             case 0x02:
                 heatingView->setImg(m_pwmComfort_1, "");
-                heatingView->enableCmdButton(false, ButtonName::comfort1());
+                heatingView->enableCmdButton(false, ButtonCmdName::comfort1());
                 break;
             case 0x03:
                 heatingView->setImg(m_pwmComfort_2, "");
-                heatingView->enableCmdButton(false, ButtonName::comfort2());
+                heatingView->enableCmdButton(false, ButtonCmdName::comfort2());
                 break;
             case 0x04:
                 heatingView->setImg(m_pwmeco, "");
-                heatingView->enableCmdButton(false, ButtonName::eco());
+                heatingView->enableCmdButton(false, ButtonCmdName::eco());
                 break;
             case 0x05:
                 heatingView->setImg(m_pwmNoFrost, "");
-                heatingView->enableCmdButton(false, ButtonName::nofrost());
+                heatingView->enableCmdButton(false, ButtonCmdName::nofrost());
                 break;
             default:
                 break;
@@ -114,7 +114,7 @@ void Heating6mWidgetCtrl::onButtonCmdClicked(QString cmdName)
 {
     pfDebug4(s_OplinkGuiConsoleLogChannel) << "Heating6mWidgetCtrl::onButtonCmdClicked cmdName = " << cmdName;
 
-    if (ButtonName::power() == cmdName || ButtonName::energy() == cmdName)
+    if (ButtonCmdName::power() == cmdName || ButtonCmdName::energy() == cmdName)
     {
         QString cmdFormat{QString("%1;%2;%3").arg(cmdName, observableName(), heatingMeasName())};
 

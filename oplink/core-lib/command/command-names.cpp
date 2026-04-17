@@ -17,7 +17,6 @@
 //
 
 #include "command-names.h"
-#include "observable/values.h"
 
 const oplink::CommandName oplink::CommandNames::SYNCHRONIZE{QStringLiteral("synchronize")};
 const oplink::CommandName oplink::CommandNames::SET{QStringLiteral("set")};

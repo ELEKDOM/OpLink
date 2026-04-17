@@ -75,12 +75,9 @@ void oplink::PilotWireThermostatControlRoom::onStateChangeFromTemperatureSensors
                                                                          const oplink::PropertyName& propertyName,
                                                                          QVariant propertyValue)
 {
-    Q_UNUSED(observableName)
-    Q_UNUSED(propertyName)
+    PilotWireControlRoom::onStateChangeFromTemperatureSensors(observableName,propertyName,propertyValue); // to update manager temp property !
     m_last_temp = propertyValue.toDouble();
-
     pfInfo2(manager().logChannel()) << tr("%1 pièce %2 acquisition de la température à %3°").arg(manager().name(), group()->groupName(), propertyValue.toString());
-
     regulHeaters();
 }
 

@@ -41,7 +41,7 @@ signals:
     void cmdButtonClicked(QString cmdName);
 };
 
-class ButtonName
+class ButtonCmdName
 {
 public:
 
@@ -54,6 +54,14 @@ public:
     static QString comfort2() {return QStringLiteral("comfort2");}
     static QString eco() {return QStringLiteral("eco");}
     static QString nofrost() {return QStringLiteral("nofrost");}
+
+    // for heating manager
+    static QString managerOnOff() {return QStringLiteral("manageronoff");}
+    static QString managerOn() {return QStringLiteral("manageron");}
+    static QString managerOff() {return QStringLiteral("manageroff");}
+    static QString triggerPlannedMode() {return QStringLiteral("triggerplannedmode");}
+    static QString plannedMode() {return QStringLiteral("plannedmode");}
+    static QString onDemandMode() {return QStringLiteral("ondemandmode");}
 };
 
 #endif // MONITOREDOBSERVABLEWIDGETVIEW_H

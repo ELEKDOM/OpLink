@@ -16,28 +16,22 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef HEATINGMANAGERPWTWIDGETLISTVIEW_H
-#define HEATINGMANAGERPWTWIDGETLISTVIEW_H
+#ifndef HEATINGROOMPWWIDGETLISTVIEW_H
+#define HEATINGROOMPWWIDGETLISTVIEW_H
 
-#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h"
-#include "ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.h"
+#include "heatingroomwidgetlistview.h"
 
-class HeatingManagerPwtWidgetListView : public HeatingManagerWidgetListView
+class HeatingRoomPwWidgetListView : public HeatingRoomWidgetListView
 {
-    Q_OBJECT
-
 public:
-    explicit HeatingManagerPwtWidgetListView(bool withScheduler,int nbOfRooms,QWidget *parent = nullptr);
-    ~HeatingManagerPwtWidgetListView() override;
+    explicit HeatingRoomPwWidgetListView(int roomNumber, QWidget *parent = nullptr);
+    ~HeatingRoomPwWidgetListView() override;
 
 protected:
-    void setVal(quint8 idx, double val) override;
-
-private slots:
-    void onSetpointValueChanged(double d);
+    void setpointValue(const QVariant& val) override;
 
 private:
-    TempDoubleSpinBox *m_setpointInputWidget;
+
 };
 
-#endif // HEATINGMANAGERPWTWIDGETLISTVIEW_H
+#endif // HEATINGROOMPWWIDGETLISTVIEW_H

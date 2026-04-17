@@ -76,7 +76,14 @@ QString HeatingManagerWidgetBuilder::getFamilyName(const QString &observableType
 {
     QString ret;
 
-    //...
+    if (observableType == oplink::HeatingManagerModelNames::pilotWireThermostatModelName())
+    {
+        ret = QObject::tr("Thermostats sur fil pilote");
+    }
+    else if (observableType == oplink::HeatingManagerModelNames::pilotWireModelName())
+    {
+        ret = QObject::tr("Centrales fil pilote");
+    }
 
     return ret;
 }

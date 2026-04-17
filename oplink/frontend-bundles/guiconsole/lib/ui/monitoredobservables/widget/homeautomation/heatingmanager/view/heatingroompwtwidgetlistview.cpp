@@ -16,18 +16,29 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef HEATINGMANAGERPWWIDGETLISTVIEW_H
-#define HEATINGMANAGERPWWIDGETLISTVIEW_H
+#include "heatingroompwtwidgetlistview.h"
 
-#include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h"
-
-class HeatingManagerPwWidgetListView : public HeatingManagerWidgetListView
+HeatingRoomPwtWidgetListView::HeatingRoomPwtWidgetListView(int roomNumber, QWidget *parent):
+    HeatingRoomWidgetListView{roomNumber,parent},
+    m_setpointInputWidget{new TempDoubleSpinBox}
 {
-    Q_OBJECT
+    addSetpointInputWidget(m_setpointInputWidget);
+    connect(m_setpointInputWidget,SIGNAL(valueChanged(double)),SLOT(onSetpointValueChanged(double)));
+}
 
-public:
-    explicit HeatingManagerPwWidgetListView(bool withScheduler,int nbOfRooms,QWidget *parent = nullptr);
-    ~HeatingManagerPwWidgetListView() override;
-};
+HeatingRoomPwtWidgetListView::~HeatingRoomPwtWidgetListView()
+{
 
-#endif // HEATINGMANAGERPWWIDGETLISTVIEW_H
+}
+
+void HeatingRoomPwtWidgetListView::setpointValue(const QVariant& val)
+{
+    m_setpointInputWidget->setValue(val.toDouble());
+}
+
+void HeatingRoomPwtWidgetListView::onSetpointValueChanged(double d)
+{
+    QVariant val{d};
+
+    emit setpointChangedFromUi(roomNumber(),val);
+}

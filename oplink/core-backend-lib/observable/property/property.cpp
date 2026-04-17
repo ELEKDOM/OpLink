@@ -45,11 +45,16 @@ bool oplink::Property::isValidValue()
     return ret;
 }
 
-void oplink::Property::changeValue(const QVariant &val)
+bool oplink::Property::changeValue(const QVariant &val)
 {
+    bool ret{false};
+
     if (!isValidValue() || (val != value()))
     {
         value(val);
+        ret = true;
         m_observable.notifyPropertyValueChange(*this);
     }
+
+    return ret;
 }

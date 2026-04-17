@@ -19,11 +19,13 @@
 #ifndef HEATINGMANAGERWIDGETCTRL_H
 #define HEATINGMANAGERWIDGETCTRL_H
 
-
+#include <QPixmap>
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
 
 class HeatingManagerWidgetCtrl : public MonitoredObservableWidgetCtrl
 {
+    Q_OBJECT
+
 public:
     HeatingManagerWidgetCtrl(QString observableName,
                              QString observableTitle,
@@ -32,18 +34,34 @@ public:
     ~HeatingManagerWidgetCtrl() override;
 
 protected:
+    void extendedConnect() override;
+
+protected:
     void createStates() override;
     void onButtonCmdClicked(QString cmdName) override;
-    MonitoredObservableWidgetView *_createView(quint8 layoutViewType) override;
     void _updateStateValue(const QString &propertyName,
                            const QVariant &value) override;
 
 protected:
     void extractSchedulerFlagAndNumberOfRooms(QString prefix, QString heatingManagerFullType);
+    bool withScheduler() {return m_withScheduler;}
+    int numberOfRooms() {return m_numberOfRooms;}
+
+protected:
+    virtual void updateRoomStateValue(const QString &propertyName,
+                                      const QVariant &value);
+private slots:
+    void onSetpointChangedFromUi(QVariant val);
+    void onRoomSetpointChangedFromUi(int roomNumber,QVariant val);
 
 private:
     bool m_withScheduler;
     int  m_numberOfRooms;
+    QPixmap m_derogatedImg;
+    QPixmap m_plannedImg;
+    QPixmap m_onDemandImg;
+    QPixmap m_wOpen;
+    QPixmap m_wClosed;
 };
 
 #endif // HEATINGMANAGERWIDGETCTRL_H
