@@ -287,7 +287,7 @@ if (OL_BUILD_BACKEND)
 
   # Heatingmanagerset bundle conf
   ol_copy_conf_file(
-    "${OL_PROFILE_DIR}/oplink/backend/heating_pwt_manager1.xml"
+    "${OL_PROFILE_DIR}/oplink/backend/heating_manager1.xml"
     "${OL_BACKEND_BUNDLES_DIR}/heatingmanagerset/conf"
   )
 
