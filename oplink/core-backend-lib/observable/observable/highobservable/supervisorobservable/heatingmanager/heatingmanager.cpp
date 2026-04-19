@@ -115,47 +115,59 @@ void oplink::HeatingManager::setOff()
 
 void oplink::HeatingManager::setSetpoint(const QString &setpoint)
 {
-    if (setpointProperty(setpoint))
+    if (isOn())
     {
-        setpointForRooms(setpoint);
-        checkForDerogatedState();
+        if (setpointProperty(setpoint))
+        {
+            setpointForRooms(setpoint);
+            checkForDerogatedState();
+        }
     }
 }
 
 void oplink::HeatingManager::setRoomSetpoint(const QString &roomName, const QString &setpoint)
 {
-    setpointForRoom(setpoint,roomName);
-    checkForDerogatedState();
+    if (isOn())
+    {
+        setpointForRoom(setpoint,roomName);
+        checkForDerogatedState();
+    }
 }
 
 void oplink::HeatingManager::setOnDemand()
 {
-    if (isPlannedMode())
+    if (isOn())
     {
-        QVariant state{CommandArgs::TRIGGER_MODE_ONDEMAND};
+        if (isPlannedMode())
+        {
+            QVariant state{CommandArgs::TRIGGER_MODE_ONDEMAND};
 
-        // Stop scheduler
-        stopScheduler();
+            // Stop scheduler
+            stopScheduler();
 
-        // Change property val
-        triggerModeProperty(state);
+            // Change property val
+            triggerModeProperty(state);
+        }
     }
 }
 
 void oplink::HeatingManager::setPlanned()
 {
-    if (isOnDemandMode())
+    if (isOn())
     {
-        QVariant state{CommandArgs::TRIGGER_MODE_PLANNED};
+        if (isOnDemandMode())
+        {
+            QVariant state{CommandArgs::TRIGGER_MODE_PLANNED};
 
-        // Start scheduler
-        startPlanning();
+            // Change property val
+            triggerModeProperty(state);
 
-        // Change property val
-        triggerModeProperty(state);
+            // Start scheduler
+            startPlanning();
 
-        // Set order to all rooms
-        setpointForRooms(setpointProperty());
+            // Set order to all rooms
+            setpointForRooms(setpointProperty());
+        }
     }
 }
 
