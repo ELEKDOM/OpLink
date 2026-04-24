@@ -37,6 +37,7 @@ public:
     ~HeatingManagerWidgetListView() override;
 
 public:
+    virtual void setSetpointVal(const QVariant& value) = 0;
     virtual void setRoomName(quint8 roomNumber,const QString& roomName);
     virtual void setRoomSetpoint(quint8 roomNumber,const QVariant& value);
     virtual void setRoomImg(quint8 roomNumber,const QPixmap& img, const QString& propertyName);

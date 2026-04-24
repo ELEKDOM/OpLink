@@ -17,14 +17,43 @@
 //
 
 #include "heatingmanagerpwwidgetlistview.h"
+#include "heatingroompwwidgetlistview.h"
 
 HeatingManagerPwWidgetListView::HeatingManagerPwWidgetListView(bool withScheduler, int nbOfRooms, QWidget *parent):
     HeatingManagerWidgetListView{withScheduler,parent}
 {
-    //...
+    // Create the specific widget to manage the setpoint value.
+    // For a pilot wire central is a 6 order value !
+    m_setpointInputWidget = new PilotWireComboBox(true);
+    addSetpointInputWidget(m_setpointInputWidget);
+
+    // to manage setpoint change from ui
+    connect(m_setpointInputWidget,SIGNAL(valueChanged(QString)),SLOT(onSetpointValueChanged(QString)));
+
+    // Rooms area
+    for (auto i = 0;i < nbOfRooms;i++)
+    {
+        HeatingRoomWidgetListView *newRoom{new HeatingRoomPwWidgetListView(i+1,heatingManagerWidgetContent())};
+        contentVerticalLayout()->addWidget(newRoom);
+        ui_rooms.append(newRoom);
+        connect(newRoom,SIGNAL(setpointChangedFromUi(int,QVariant)),SIGNAL(roomSetpointChangedFromUi(int,QVariant)));
+    }
+    contentVerticalLayout()->addStretch();
 }
 
 HeatingManagerPwWidgetListView::~HeatingManagerPwWidgetListView()
 {
 
+}
+
+void HeatingManagerPwWidgetListView::setSetpointVal(const QVariant &value)
+{
+    m_setpointInputWidget->setValue(value.toString());
+}
+
+void HeatingManagerPwWidgetListView::onSetpointValueChanged(QString s)
+{
+    QVariant val{s};
+
+    emit setpointChangedFromUi(val);
 }

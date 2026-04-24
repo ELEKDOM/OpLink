@@ -31,7 +31,7 @@ public:
     ~HeatingManagerPwtWidgetListView() override;
 
 protected:
-    void setVal(quint8 idx, double val) override;
+    void setSetpointVal(const QVariant& value) override;
 
 private slots:
     void onSetpointValueChanged(double d);

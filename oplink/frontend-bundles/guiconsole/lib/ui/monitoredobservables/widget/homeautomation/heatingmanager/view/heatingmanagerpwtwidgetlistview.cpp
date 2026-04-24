@@ -46,12 +46,9 @@ HeatingManagerPwtWidgetListView::~HeatingManagerPwtWidgetListView()
 
 }
 
-void HeatingManagerPwtWidgetListView::setVal(quint8 idx, double val)
+void HeatingManagerPwtWidgetListView::setSetpointVal(const QVariant &value)
 {
-    if (idx == 0) // 0 for setpoint value !
-    {
-        m_setpointInputWidget->setValue(val);
-    }
+    m_setpointInputWidget->setValue(value.toDouble());
 }
 
 void HeatingManagerPwtWidgetListView::onSetpointValueChanged(double d)

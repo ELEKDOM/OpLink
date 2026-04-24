@@ -16,28 +16,30 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "heatingroompwwidgetlistview.h"
+#ifndef PILOTWIRE4WIDGET_H
+#define PILOTWIRE4WIDGET_H
 
-HeatingRoomPwWidgetListView::HeatingRoomPwWidgetListView(int roomNumber, QWidget *parent) :
-    HeatingRoomWidgetListView{roomNumber,parent},
-    m_setpointInputWidget{new PilotWireComboBox{true}}
+#include <QComboBox>
+
+class PilotWire4Widget : public QComboBox
 {
-    addSetpointInputWidget(m_setpointInputWidget);
-    connect(m_setpointInputWidget,SIGNAL(valueChanged(QString)),SLOT(onSetpointValueChanged(QString)));
-}
+    Q_OBJECT
 
-HeatingRoomPwWidgetListView::~HeatingRoomPwWidgetListView()
-{
+public:
+    explicit PilotWire4Widget(QWidget *parent = nullptr);
+    ~PilotWire4Widget() override;
 
-}
+public:
+    void selectItem(const QString& pilotWireOrder);
 
-void HeatingRoomPwWidgetListView::setpointValue(const QVariant& val)
-{
-    m_setpointInputWidget->setValue(val.toString());
-}
+signals:
+    void pilotWireOrderSelected(QString cmdName);
 
-void HeatingRoomPwWidgetListView::onSetpointValueChanged(QString v)
-{
-    QVariant val{v};
-    emit setpointChangedFromUi(roomNumber(),val);
-}
+private slots:
+    void onItemSelected(int index);
+
+private:
+    int m_selectedIdx;
+};
+
+#endif // PILOTWIRE4WIDGET_H

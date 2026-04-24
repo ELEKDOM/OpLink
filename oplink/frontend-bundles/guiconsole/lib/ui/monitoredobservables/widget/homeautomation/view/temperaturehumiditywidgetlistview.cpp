@@ -24,6 +24,10 @@ TemperatureHumidityWidgetListView::TemperatureHumidityWidgetListView(QWidget *pa
     ui(new Ui::temperatureHumidityWidgetListView)
 {
     ui->setupUi(this);
+
+    // translation ready !
+    ui->t_label->setText(tr("Température"));
+    ui->h_label->setText(tr("Humidité"));
 }
 
 TemperatureHumidityWidgetListView::~TemperatureHumidityWidgetListView()

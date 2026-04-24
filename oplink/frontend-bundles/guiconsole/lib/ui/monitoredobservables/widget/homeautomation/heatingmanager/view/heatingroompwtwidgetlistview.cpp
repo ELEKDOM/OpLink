@@ -39,6 +39,5 @@ void HeatingRoomPwtWidgetListView::setpointValue(const QVariant& val)
 void HeatingRoomPwtWidgetListView::onSetpointValueChanged(double d)
 {
     QVariant val{d};
-
     emit setpointChangedFromUi(roomNumber(),val);
 }

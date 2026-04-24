@@ -18,12 +18,17 @@
 
 #include "lightingwidgetlistview.h"
 #include "ui_lightingwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 
 LightingWidgetListView::LightingWidgetListView(QWidget *parent):
     MonitoredObservableWidgetListView{parent},
     ui(new Ui::lightingWidgetListView)
 {
     ui->setupUi(this);
+
+    // translation ready !
+    ui->onCmd->setText(tr("allumer"));
+    ui->offCmd->setText(tr("éteindre"));
 
     connect(ui->onCmd, SIGNAL(pressed()), SLOT(onOnCmd()));
     connect(ui->offCmd, SIGNAL(pressed()), SLOT(onOffCmd()));

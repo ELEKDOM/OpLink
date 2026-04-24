@@ -18,12 +18,20 @@
 
 #include "smartplugwidgetlistview.h"
 #include "ui_smartplugwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 
 SmartPlugWidgetListView::SmartPlugWidgetListView(QWidget *parent):
     MonitoredObservableWidgetListView{parent},
     ui(new Ui::smartPlugWidgetListView)
 {
     ui->setupUi(this);
+
+    // translation ready !
+    // translation ready !
+    ui->onCmd->setText(tr("activer"));
+    ui->offCmd->setText(tr("désactiver"));
+    ui->energyCmd->setText(tr("Énergie"));
+    ui->powerCmd->setText(tr("Puissance"));
 
     connect(ui->onCmd, SIGNAL(pressed()), SLOT(onOnCmd()));
     connect(ui->offCmd, SIGNAL(pressed()), SLOT(onOffCmd()));

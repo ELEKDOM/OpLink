@@ -18,6 +18,7 @@
 
 #include "heating6mwidgetctrl.h"
 #include "ui/monitoredobservables/widget/homeautomation/view/heating6mwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 #include "logger/pflog.h"
 #include "olfconsolelogchannel.h"
 

@@ -18,6 +18,7 @@
 
 #include "lightingwidgetctrl.h"
 #include "ui/monitoredobservables/widget/homeautomation/view/lightingwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 
 LightingWidgetCtrl::LightingWidgetCtrl(QString observableName,
                                        QString observableTitle,

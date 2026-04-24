@@ -16,28 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#include "heatingroompwwidgetlistview.h"
+#ifndef PILOTWIRE6WIDGET_H
+#define PILOTWIRE6WIDGET_H
 
-HeatingRoomPwWidgetListView::HeatingRoomPwWidgetListView(int roomNumber, QWidget *parent) :
-    HeatingRoomWidgetListView{roomNumber,parent},
-    m_setpointInputWidget{new PilotWireComboBox{true}}
+#include "pilotwire4widget.h"
+
+class PilotWire6Widget : public PilotWire4Widget
 {
-    addSetpointInputWidget(m_setpointInputWidget);
-    connect(m_setpointInputWidget,SIGNAL(valueChanged(QString)),SLOT(onSetpointValueChanged(QString)));
-}
+    Q_OBJECT
 
-HeatingRoomPwWidgetListView::~HeatingRoomPwWidgetListView()
-{
+public:
+    explicit PilotWire6Widget(QWidget *parent = nullptr);
+    ~PilotWire6Widget() override;
+};
 
-}
-
-void HeatingRoomPwWidgetListView::setpointValue(const QVariant& val)
-{
-    m_setpointInputWidget->setValue(val.toString());
-}
-
-void HeatingRoomPwWidgetListView::onSetpointValueChanged(QString v)
-{
-    QVariant val{v};
-    emit setpointChangedFromUi(roomNumber(),val);
-}
+#endif // PILOTWIRE6WIDGET_H

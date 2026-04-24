@@ -20,6 +20,7 @@
 #define HEATING6MWIDGETLISTVIEW_H
 
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
+#include "pilotwire6widget.h"
 
 namespace Ui {
 class heating6mWidgetListView;
@@ -41,13 +42,14 @@ protected:
     void enableCmdButton(bool enable, const QString& cmdName) override;
 
 private slots:
-    void onItemPwmCmd(int index);
+    void onPilotWireOrderSelected(QString cmdName);
     void onPowerCmd();
     void onEnergyCmd();
 
 private:
     Ui::heating6mWidgetListView *ui;
     int                          m_pwmIdx;
+    PilotWire6Widget            *m_pilotWireWidget;
 };
 
 #endif // HEATING6MWIDGETLISTVIEW_H

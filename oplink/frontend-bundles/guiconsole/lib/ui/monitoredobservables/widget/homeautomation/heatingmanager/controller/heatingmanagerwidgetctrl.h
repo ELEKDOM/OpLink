@@ -48,6 +48,7 @@ protected:
     int numberOfRooms() {return m_numberOfRooms;}
 
 protected:
+    void updateSetpointValue(const QVariant &value);
     virtual void updateRoomStateValue(const QString &propertyName,
                                       const QVariant &value);
 private slots:

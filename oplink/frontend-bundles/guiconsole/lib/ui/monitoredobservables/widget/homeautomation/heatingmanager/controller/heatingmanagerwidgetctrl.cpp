@@ -22,6 +22,7 @@
 #include "observable/values.h"
 #include "command/command-names.h"
 #include "ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 
 HeatingManagerWidgetCtrl::HeatingManagerWidgetCtrl(QString observableName,
                                                    QString observableTitle,
@@ -138,7 +139,7 @@ void HeatingManagerWidgetCtrl::_updateStateValue(const QString &propertyName, co
         }
         else if (oplink::PropertyId::P_SETPOINT == propertyName)
         {
-            heatingManagerView->setVal(0, value.toDouble()); //idx 0 for setpoint manager value !
+            updateSetpointValue(value);
         }
         else if (oplink::PropertyId::P_TRIGGER_MODE == propertyName)
         {
@@ -185,6 +186,13 @@ void HeatingManagerWidgetCtrl::extractSchedulerFlagAndNumberOfRooms(QString pref
         m_withScheduler = flag == "a";
         m_numberOfRooms = rooms.toUInt();
     }
+}
+
+void HeatingManagerWidgetCtrl::updateSetpointValue(const QVariant &value)
+{
+    HeatingManagerWidgetListView *managerView{dynamic_cast<HeatingManagerWidgetListView*>(view())};
+
+    managerView->setSetpointVal(value);
 }
 
 void HeatingManagerWidgetCtrl::updateRoomStateValue(const QString &propertyName, const QVariant &value)

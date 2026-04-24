@@ -18,6 +18,7 @@
 
 #include "smartplugwidgetctrl.h"
 #include "ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 
 SmartPlugWidgetCtrl::SmartPlugWidgetCtrl(QString observableName,
                                          QString observableTitle,

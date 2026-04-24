@@ -18,6 +18,7 @@
 
 #include "heatingmanagerwidgetlistview.h"
 #include "ui_heatingmanagerwidgetlistview.h"
+#include "ui/monitoredobservables/widget/buttoncmdname.h"
 #include "heatingroomwidgetlistview.h"
 #include "observable/propertyid.h"
 

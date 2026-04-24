@@ -31,6 +31,8 @@ set(SOURCES
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.cpp
+    ui/monitoredobservables/widget/homeautomation/view/pilotwire4widget.cpp
+    ui/monitoredobservables/widget/homeautomation/view/pilotwire6widget.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerwidgetctrl.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.cpp
@@ -62,6 +64,7 @@ set(HEADERS
     ui/monitoredobservables/pageviewbuilder/pageviewbytypebuilder.h
     ui/monitoredobservables/pageviewbuilder/pageviewlayoutbuilder.h
     ui/monitoredobservables/pageviewbuilder/pageviewlistlayoutbuilder.h
+    ui/monitoredobservables/widget/buttoncmdname.h
     ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h
     ui/monitoredobservables/widget/monitoredobservablewidgetbuilder.h
     ui/monitoredobservables/widget/monitoredobservablewidgetview.h
@@ -78,6 +81,8 @@ set(HEADERS
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.h
+    ui/monitoredobservables/widget/homeautomation/view/pilotwire4widget.h
+    ui/monitoredobservables/widget/homeautomation/view/pilotwire6widget.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerwidgetctrl.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/controller/heatingmanagerpwwidgetctrl.h
@@ -100,12 +105,14 @@ set(FORMS
     ui/monitoredobservables/widget/homeautomation/view/smartplugwidgetlistview.ui
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.ui
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.ui
+    ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.ui
+    ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.ui
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingmanagerwidgetlistview.ui
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroomwidgetlistview.ui
 )
 
 qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS}
-    ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.ui)
+    ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.h ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.cpp)
 
 target_include_directories(${BUNDLE_IMPL_NAME}
     PUBLIC

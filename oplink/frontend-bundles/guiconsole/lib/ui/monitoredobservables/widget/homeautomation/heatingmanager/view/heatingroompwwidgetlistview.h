@@ -20,9 +20,12 @@
 #define HEATINGROOMPWWIDGETLISTVIEW_H
 
 #include "heatingroomwidgetlistview.h"
+#include "ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.h"
 
 class HeatingRoomPwWidgetListView : public HeatingRoomWidgetListView
 {
+      Q_OBJECT
+
 public:
     explicit HeatingRoomPwWidgetListView(int roomNumber, QWidget *parent = nullptr);
     ~HeatingRoomPwWidgetListView() override;
@@ -30,8 +33,11 @@ public:
 protected:
     void setpointValue(const QVariant& val) override;
 
-private:
+private slots:
+    void onSetpointValueChanged(QString v);
 
+private:
+    PilotWireComboBox *m_setpointInputWidget;
 };
 
 #endif // HEATINGROOMPWWIDGETLISTVIEW_H

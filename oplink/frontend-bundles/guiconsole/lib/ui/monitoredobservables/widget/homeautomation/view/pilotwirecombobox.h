@@ -16,17 +16,18 @@
 // along with PlugFrame. If not, see <https://www.gnu.org/licenses/>.
 //
 
-#ifndef TEMPDOUBLESPINBOX_H
-#define TEMPDOUBLESPINBOX_H
+#ifndef PILOTWIRECOMBOBOX_H
+#define PILOTWIRECOMBOBOX_H
 
 #include <QWidget>
 #include <QIcon>
+#include "pilotwire4widget.h"
 
 namespace Ui {
-class tempDoubleSpinBox;
+class pilotWireComboBox;
 }
 
-class TempDoubleSpinBox : public QWidget
+class PilotWireComboBox : public QWidget
 {
     Q_OBJECT
 
@@ -34,17 +35,18 @@ private:
     enum class LockerState{Locked, Unlocked};
 
 public:
-    explicit TempDoubleSpinBox(QWidget *parent = nullptr);
-    ~TempDoubleSpinBox() override;
+    PilotWireComboBox(bool pw6 = false, QWidget *parent = nullptr);
+    ~PilotWireComboBox() override;
 
 public:
-    void setValue(double d);
+    void setValue(QString s);
 
 signals:
-    void valueChanged(double v);
+    void valueChanged(QString v);
 
 private slots:
     void onLockerClicked(bool checked);
+    void onSelectedOrderChanged(QString ord);
 
 private:
     void lockInput();
@@ -52,10 +54,12 @@ private:
     void validateInput();
 
 private:
-    Ui::tempDoubleSpinBox *ui;
-    LockerState m_lockerState;
-    QIcon   m_lockedIcon;
-    QIcon   m_unlockedIcon;
+    Ui::pilotWireComboBox *ui;
+    PilotWire4Widget      *m_pwInput;
+    LockerState            m_lockerState;
+    QIcon                  m_lockedIcon;
+    QIcon                  m_unlockedIcon;
+    QString                m_selectedOrder;
 };
 
-#endif // TEMPDOUBLESPINBOX_H
+#endif // PILOTWIRECOMBOBOX_H

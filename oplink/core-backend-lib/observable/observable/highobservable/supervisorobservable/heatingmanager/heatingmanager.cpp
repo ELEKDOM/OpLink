@@ -167,6 +167,9 @@ void oplink::HeatingManager::setPlanned()
 
             // Set order to all rooms
             setpointForRooms(setpointProperty());
+
+            // Reset derogated state !
+            derogatedProperty(false);
         }
     }
 }
