@@ -18,6 +18,6 @@
 
 #include "observableclassnames.h"
 
-const oplink::ObservableType oplink::ObservableClassNames::ACTUATOR_CLASS {"actuator_class"};
-const oplink::ObservableType oplink::ObservableClassNames::SENSOR_CLASS {"sensor_class"};
-const oplink::ObservableType oplink::ObservableClassNames::LOAD_CLASS {"load_class"};
+const oplink::ObservableType oplink::ObservableClassNames::ACTUATOR_CLASS {"actuator"};
+const oplink::ObservableType oplink::ObservableClassNames::SENSOR_CLASS {"sensor"};
+const oplink::ObservableType oplink::ObservableClassNames::LOAD_CLASS {"load"};

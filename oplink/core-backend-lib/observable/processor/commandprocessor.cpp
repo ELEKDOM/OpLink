@@ -21,7 +21,7 @@
 #include "command/command.h"
 #include "observable/observable/observable.h"
 
-oplink::CommandProcessor::CommandProcessor(const oplink::Observable& observable,
+oplink::CommandProcessor::CommandProcessor(oplink::Observable& observable,
                                            const oplink::CommandName& cmdName):
     plugframe::Loggable{s_ObservableLogChannel},
     m_observable{observable},

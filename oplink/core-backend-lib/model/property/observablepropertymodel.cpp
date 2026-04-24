@@ -22,14 +22,12 @@
 #include "observable/property/property.h"
 
 oplink::ObservablePropertyModel::ObservablePropertyModel(const oplink::PropertyModelName &modelName,
-                                                         const oplink::PropertyName &propertyName,
-                                                         QMetaType::Type valueType):
+                                                         const oplink::PropertyName &propertyName):
     plugframe::Loggable{s_ModelLogChannel},
     m_modelName{modelName},
-    m_propertyName{propertyName},
-    m_valueType{valueType}
+    m_propertyName{propertyName}
 {
-    pfDebug1(logChannel()) << "->ObservablePropertyModel::ObservablePropertyModel, " << modelName << ", " << propertyName << ", " << valueType;
+    pfDebug1(logChannel()) << "->ObservablePropertyModel::ObservablePropertyModel, " << modelName << ", " << propertyName;
 
     pfDebug1(logChannel()) << "<-ObservablePropertyModel::ObservablePropertyModel";
 }
@@ -41,5 +39,5 @@ oplink::ObservablePropertyModel::~ObservablePropertyModel()
 
 oplink::Property *oplink::ObservablePropertyModel::createProperty(oplink::Observable& observable)
 {
-    return new oplink::Property{observable, propertyName(), valueType()};
+    return new oplink::Property{observable, propertyName()};
 }

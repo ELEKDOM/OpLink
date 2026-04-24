@@ -72,6 +72,11 @@ set(oplink-frontend_resources_resource_files
     "img/stop.png"
     "img/window_closed.png"
     "img/window_open.png"
+    "img/hm_derogated.png"
+    "img/hm_ondemand.png"
+    "img/hm_planned.png"
+    "img/hm_lock.png"
+    "img/hm_unlock.png"
 )
 
 qt6_add_resources(${LAUNCHER_NAME}

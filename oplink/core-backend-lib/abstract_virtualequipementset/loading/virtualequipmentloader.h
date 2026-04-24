@@ -20,51 +20,37 @@
 #define VIRTUALEQUIPMENTLOADER_H
 
 #include <QVariant>
-#include "observable/observable/observable.h"
-#include "observable/virtualequipment/virtualequipmentconfdocument.h"
+#include "observable/observable/highobservable/highobservableconfdocument.h"
+#include "model/observable/highobservable/highobservablebuilderargs.h"
+#include "scheduler/schedulerbuilder.h"
 #include "olcore-backend-lib_forward.h"
-#include "olcore-lib_forward.h"
 
 namespace oplink
 {
-class VirtualEquipmentLoader
+class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentLoader
 {
 public:
     VirtualEquipmentLoader(VirtualEquipmentSet *veSet);
     virtual ~VirtualEquipmentLoader();
 
 public:
-    virtual VirtualEquipmentLoaderHook& loaderHook() = 0;
+    virtual HighObservableLoaderHook& loaderHook() = 0;
     void load(QString fileName);
-    void confDocument(VirtualEquipmentConfDocument *confDoc);
+    void confDocument(HighObservableConfDocument *confDoc);
     VirtualEquipmentSet *veSet() {return m_veSet;}
-    QspObservable newly();
+    QspHighObservableBuilderArgs builderArgs();
 
 protected:
-    void newly(Observable *newve);
-    bool buildMandatoryProperties(const QString& observableName,
-                                  const QString& modelName,
-                                  const QString& localisation,
-                                  int confId);
-    void modeValue(const QString& val);
-
-
-
-
-
-    virtual StateToWatch *createStateToWatch(const ObservableName& observableName,
-                                             const PropertyName& propertyName);
-
-    void addProperty(const PropertyName& propertyName, QMetaType::Type valueType);
-    void addGroupProperty(const QString& groupName,
-                          const PropertyName& propertyName,
-                          QMetaType::Type valueType);
-
+    void builderArgs(HighObservableBuilderArgs *newBuilderArgs);
+    virtual oplink::PropertyRefBuilderArgs *createPropertyRef(const QString& observableName,
+                                                              const QString& propertyNameName);
+protected:
+    plugframe::QspSchedulerBuilder  m_schedulerBuilder;
 
 private:
+    QspHighObservableBuilderArgs    m_builderArgs;
     VirtualEquipmentSet            *m_veSet;
     QspVirtualEquipmentConfDocument m_confDoc;
-    QspObservable                   m_newlyVirtualEquipment;
 };
 using QspVirtualEquipmentLoader = QSharedPointer<VirtualEquipmentLoader>;
 }//namespace oplink

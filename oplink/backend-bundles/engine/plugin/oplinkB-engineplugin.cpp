@@ -49,15 +49,18 @@ bool EnginePlugin::submitOrder(oplink::StrOrder command)
 }
 
 bool EnginePlugin::subscribe(oplink::ObservableName observableName,
-                             oplink::ObservableSubscriber *subscriber)
+                             oplink::ObservableSubscriber *subscriber,
+                             bool reportInitialValues)
 {
-    return m_observableServiceImpl->subscribe(observableName, subscriber);
+    return m_observableServiceImpl->subscribe(observableName, subscriber,reportInitialValues);
 }
 
 bool EnginePlugin::unsubscribe(oplink::ObservableName observableName,
                                oplink::ObservableSubscriber *subscriber)
 {
-    return m_observableServiceImpl->unsubscribe(observableName, subscriber);
+    bool ret;
+    ret = m_observableServiceImpl->unsubscribe(observableName, subscriber);
+    return ret;
 }
 
 bool EnginePlugin::propertyValue(oplink::ObservableName observableName,

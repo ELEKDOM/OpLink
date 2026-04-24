@@ -88,6 +88,7 @@ void EnoceanGatewayMode::visit(ReadIdBaseResponseFormat &response)
     if (response.baseId(baseId))
     {
         m_usb300BaseId = baseId;
+        pfInfo1(s_EnoceanLogChannel) << tr("Identifiant enocean de la clé USB : ") << Qt::hex << baseId;
     }
     else
     {

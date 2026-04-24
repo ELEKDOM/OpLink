@@ -31,61 +31,75 @@ set(SOURCES
     abstract_virtualequipementset/virtualequipmentsetbuilder.cpp
     abstract_virtualequipementset/virtualequipmentsetfactory.cpp
     command/command.cpp
-    model/observable/actuatorbuilderargs.cpp
-    model/observable/actuatormodel.cpp
-    model/observable/loadbuilderargs.cpp
-    model/observable/loadmodel.cpp
     model/observable/observablebuilderargs.cpp
     model/observable/observablemodel.cpp
-    model/observable/operationdevicebuilderargs.cpp
-    model/observable/operationdevicemodel.cpp
-    model/observable/sensorbuilderargs.cpp
-    model/observable/sensormodel.cpp
+    model/observable/lowobservable/lowobservablemodel.cpp
+    model/observable/lowobservable/actuatorbuilderargs.cpp
+    model/observable/lowobservable/actuatormodel.cpp
+    model/observable/lowobservable/loadbuilderargs.cpp
+    model/observable/lowobservable/loadmodel.cpp
+    model/observable/lowobservable/operationdevicebuilderargs.cpp
+    model/observable/lowobservable/operationdevicemodel.cpp
+    model/observable/lowobservable/sensorbuilderargs.cpp
+    model/observable/lowobservable/sensormodel.cpp
+    model/observable/highobservable/highobservablebuilderargs.cpp
+    model/observable/highobservable/highobservablemodel.cpp
+    model/observable/highobservable/supervisorobservable/supervisorobservablemodel.cpp
+    model/observable/highobservable/supervisorobservable/supervisorobservablebuilderargs.cpp
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerbuilderargs.cpp
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagermodel.cpp
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.cpp
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.cpp
     model/processor/commandprocessormodel.cpp
-    model/processor/expectedvaluecheckcommandprocessormodel.cpp
-    model/processor/expectedvaluenocheckcommandprocessormodel.cpp
-    model/processor/loadcommandprocessormodel.cpp
-    model/processor/lowcommandprocessormodel.cpp
-    model/processor/operationdevicecommandprocessormodel.cpp
-    model/processormodelnames.cpp
+    model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.cpp
+    model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.cpp
+    model/processor/lowprocessor/loadcommandprocessormodel.cpp
+    model/processor/lowprocessor/lowcommandprocessormodel.cpp
+    model/processor/lowprocessor/operationdevicecommandprocessormodel.cpp
     model/property/actuatorpropertymodel.cpp
     model/property/loadpropertymodel.cpp
     model/property/observablepropertymodel.cpp
     model/property/operationdevicepropertymodel.cpp
-    model/property/propertymodelnames.cpp
     model/property/sensorpropertymodel.cpp
-    observable/highobservable/highobservable.cpp
-    observable/highobservable/monitor/grouptowatch.cpp
-    observable/highobservable/monitor/grouptowatchalgorithm.cpp
-    observable/highobservable/monitor/statetowatchlist.cpp
-    observable/highobservable/monitor/statetowatch.cpp
-    observable/highobservable/schedulableobservable.cpp
-    observable/highobservable/schedulerhook.cpp
-    observable/highobservable/supervisorobservable.cpp
-    observable/lowobservable/load.cpp
-    observable/lowobservable/lowobservable.cpp
-    observable/lowobservable/operationdevice.cpp
     observable/observable/observable.cpp
     observable/observable/observablebuilder.cpp
     observable/observable/observablebuilderscontainer.cpp
     observable/observable/observableclassnames.cpp
     observable/observable/observablenotifier.cpp
     observable/observable/observablesubscriber.cpp
+    observable/observable/lowobservable/load.cpp
+    observable/observable/lowobservable/lowobservable.cpp
+    observable/observable/lowobservable/operationdevice.cpp
+    observable/observable/highobservable/highobservable.cpp
+    observable/observable/highobservable/highobservableconfdocument.cpp
+    observable/observable/highobservable/schedulerhook.cpp
+    observable/observable/highobservable/supervisorobservable/supervisorobservable.cpp
+    observable/observable/highobservable/supervisorobservable/monitor/grouptowatch.cpp
+    observable/observable/highobservable/supervisorobservable/monitor/grouptowatchalgorithm.cpp
+    observable/observable/highobservable/supervisorobservable/monitor/statetowatchlist.cpp
+    observable/observable/highobservable/supervisorobservable/monitor/statetowatch.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerconfdocument.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagercmdprocessor.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagersetprocessor.cpp
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagerroomprocessor.cpp
     observable/processor/commandprocessor.cpp
-    observable/processor/expectedvaluecheckprocessor.cpp
-    observable/processor/expectedvaluenocheckprocessor.cpp
-    observable/processor/loadcommandprocessor.cpp
-    observable/processor/lowcommandprocessor.cpp
-    observable/processor/operationdevicecommandprocessor.cpp
     observable/processor/processorclassnames.cpp
+    observable/processor/lowprocessor/expectedvaluecheckprocessor.cpp
+    observable/processor/lowprocessor/expectedvaluenocheckprocessor.cpp
+    observable/processor/lowprocessor/loadcommandprocessor.cpp
+    observable/processor/lowprocessor/lowcommandprocessor.cpp
+    observable/processor/lowprocessor/operationdevicecommandprocessor.cpp
+    observable/processor/highprocessor/highcommandprocessor.cpp
     observable/property/loadproperty.cpp
     observable/property/lowproperty.cpp
     observable/property/operationdeviceproperty.cpp
     observable/property/property.cpp
     observable/property/propertyclassnames.cpp
-    observable/property/propertyid.cpp
-    observable/remote/observablestates.cpp
-    observable/remote/observablestatesgroup.cpp
+    observable/remote/remoteMonitoredobservable.cpp
+    observable/remote/remotemonitoredobservablegroup.cpp
     observable/remote/sessionconfloader.cpp
     observable/remote/subscribesession.cpp
 )
@@ -131,63 +145,79 @@ set(HEADERS
     command/command.h
     model/modellogchannel.h
     model/modelnames.h
-    model/observable/actuatorbuilderargs.h
-    model/observable/actuatormodel.h
-    model/observable/loadbuilderargs.h
-    model/observable/loadmodel.h
     model/observable/observablebuilderargs.h
     model/observable/observablemodel.h
-    model/observable/operationdevicebuilderargs.h
-    model/observable/operationdevicemodel.h
-    model/observable/sensorbuilderargs.h
-    model/observable/sensormodel.h
+    model/observable/lowobservable/lowobservablemodel.h
+    model/observable/lowobservable/actuatorbuilderargs.h
+    model/observable/lowobservable/actuatormodel.h
+    model/observable/lowobservable/loadbuilderargs.h
+    model/observable/lowobservable/loadmodel.h
+    model/observable/lowobservable/operationdevicebuilderargs.h
+    model/observable/lowobservable/operationdevicemodel.h
+    model/observable/lowobservable/sensorbuilderargs.h
+    model/observable/lowobservable/sensormodel.h
+    model/observable/highobservable/highobservablebuilderargs.h
+    model/observable/highobservable/highobservablemodel.h
+    model/observable/highobservable/supervisorobservable/supervisorobservablemodel.h
+    model/observable/highobservable/supervisorobservable/supervisorobservablebuilderargs.h
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerbuilderargs.h
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagermodel.h
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwmodel.h
+    model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerpwtmodel.h
     model/processor/commandprocessormodel.h
-    model/processor/expectedvaluecheckcommandprocessormodel.h
-    model/processor/expectedvaluenocheckcommandprocessormodel.h
-    model/processor/loadcommandprocessormodel.h
-    model/processor/lowcommandprocessormodel.h
-    model/processor/operationdevicecommandprocessormodel.h
-    model/processormodelnames.h
+    model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.h
+    model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.h
+    model/processor/lowprocessor/loadcommandprocessormodel.h
+    model/processor/lowprocessor/lowcommandprocessormodel.h
+    model/processor/lowprocessor/operationdevicecommandprocessormodel.h
     model/property/actuatorpropertymodel.h
     model/property/loadpropertymodel.h
     model/property/observablepropertymodel.h
     model/property/operationdevicepropertymodel.h
-    model/property/propertymodelnames.h
     model/property/sensorpropertymodel.h
-    observable/highobservable/highobservable.h
-    observable/highobservable/monitor/grouptowatch.h
-    observable/highobservable/monitor/grouptowatchalgorithm.h
-    observable/highobservable/monitor/statetowatch.h
-    observable/highobservable/monitor/statetowatchlist.h
-    observable/highobservable/schedulableobservable.h
-    observable/highobservable/schedulerhook.h
-    observable/highobservable/supervisorobservable.h
-    observable/lowobservable/load.h
-    observable/lowobservable/lowobservable.h
-    observable/lowobservable/operationdevice.h
+    observable/observablelogchannel.h
+    observable/observablenames.h
     observable/observable/observable.h
     observable/observable/observablebuilder.h
     observable/observable/observablebuilderscontainer.h
     observable/observable/observableclassnames.h
     observable/observable/observablenotifier.h
     observable/observable/observablesubscriber.h
-    observable/observablelogchannel.h
-    observable/observablenames.h
+    observable/observable/lowobservable/load.h
+    observable/observable/lowobservable/lowobservable.h
+    observable/observable/lowobservable/operationdevice.h
+    observable/observable/highobservable/highobservable.h
+    observable/observable/highobservable/schedulerhook.h
+    observable/observable/highobservable/highobservableconfdocument.h
+    observable/observable/highobservable/highobservableloaderhook.h
+    observable/observable/highobservable/supervisorobservable/supervisorobservable.h
+    observable/observable/highobservable/supervisorobservable/monitor/grouptowatch.h
+    observable/observable/highobservable/supervisorobservable/monitor/grouptowatchalgorithm.h
+    observable/observable/highobservable/supervisorobservable/monitor/statetowatch.h
+    observable/observable/highobservable/supervisorobservable/monitor/statetowatchlist.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanager.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerconfdocument.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerloaderhook.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirecontrolroom.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/pilotwirethermostatcontrolroom.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagercmdprocessor.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagersetprocessor.h
+    observable/observable/highobservable/supervisorobservable/heatingmanager/processor/heatingmanagerroomprocessor.h
     observable/processor/commandprocessor.h
-    observable/processor/expectedvaluecheckprocessor.h
-    observable/processor/expectedvaluenocheckprocessor.h
-    observable/processor/loadcommandprocessor.h
-    observable/processor/lowcommandprocessor.h
-    observable/processor/operationdevicecommandprocessor.h
     observable/processor/processorclassnames.h
+    observable/processor/lowprocessor/expectedvaluecheckprocessor.h
+    observable/processor/lowprocessor/expectedvaluenocheckprocessor.h
+    observable/processor/lowprocessor/loadcommandprocessor.h
+    observable/processor/lowprocessor/lowcommandprocessor.h
+    observable/processor/lowprocessor/operationdevicecommandprocessor.h
+    observable/processor/highprocessor/highcommandprocessor.h
     observable/property/loadproperty.h
     observable/property/lowproperty.h
     observable/property/operationdeviceproperty.h
     observable/property/property.h
     observable/property/propertyclassnames.h
-    observable/property/propertyid.h
-    observable/remote/observablestates.h
-    observable/remote/observablestatesgroup.h
+    observable/remote/remoteMonitoredobservable.h
+    observable/remote/remotemonitoredobservablegroup.h
     observable/remote/sessionconfloader.h
     observable/remote/subscribesession.h
     service-int/infrastructurecontrolserviceinterface.h

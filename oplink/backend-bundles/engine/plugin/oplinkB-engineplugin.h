@@ -44,7 +44,8 @@ protected:
 protected:
     bool submitOrder(oplink::StrOrder command) override;
     bool subscribe(oplink::ObservableName observableName,
-                   oplink::ObservableSubscriber *subscriber) override;
+                   oplink::ObservableSubscriber *subscriber,
+                   bool reportInitialValues = false) override;
     bool unsubscribe(oplink::ObservableName observableName,
                      oplink::ObservableSubscriber *subscriber) override;
     bool propertyValue(oplink::ObservableName observableName,

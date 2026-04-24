@@ -19,16 +19,13 @@
 #ifndef HEATINGMANAGERLOADER_H
 #define HEATINGMANAGERLOADER_H
 
-#include "scheduler/schedulerbuilder.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
-#include "observable/highobservable/monitor/grouptowatch.h"
-#include "observable/heatingmanager/heatingmanagerloaderhook.h"
-#include "heatingmanagerset_forward.h"
+#include "observable/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerloaderhook.h"
+#include "model/observable/highobservable/supervisorobservable/heatingmanager/heatingmanagerbuilderargs.h"
 
 class HeatingManagerLoader : public oplink::VirtualEquipmentLoader,
                              public oplink::HeatingManagerLoaderHook
 {
-
 public:
     HeatingManagerLoader(oplink::VirtualEquipmentSet *veSet);
     ~HeatingManagerLoader() override;
@@ -37,23 +34,21 @@ protected:// Hook
     void browseBegin() override;
     void browseEnd() override;
     bool heatingManagerDeclarationBegin(const QString& observableName,
-                                        const QString& modelName,
                                         const QString& title,
                                         const QString& localisation,
                                         HeatingManagerLoaderHook::ControlType controlType,
-                                        int confId) override;
+                                        bool activated) override;
     bool heatingManagerDeclarationEnd() override;
-    bool controlDeclarationBegin(const QString& mode,
-                                 bool windowOpeningDetection,
-                                 bool presenceDetection,
+    bool controlDeclarationBegin(const QString& setPointValue,
                                  double threshold,
                                  double maxTemp) override;
     bool controlDeclarationEnd() override;
-    plugframe::SchedulerElementHook& schedulerDeclarationBegin() override;
+    plugframe::SchedulerElementHook& schedulerDeclarationBegin(const QString& xmlText) override;
     bool schedulerDeclarationEnd() override;
     bool roomsDeclarationBegin() override;
     bool roomsDeclarationEnd() override;
-    bool roomDeclarationBegin(const QString& roomName) override;
+    bool roomDeclarationBegin(const QString& roomName,
+                              bool windowOpeningDetection) override;
     bool roomDeclarationEnd() override;
     bool heatersDeclarationBegin() override;
     bool heatersDeclarationEnd() override;
@@ -67,22 +62,18 @@ protected:// Hook
                                          const QString& temperatureSensorPropertyName) override;
 
 protected: // Loader
-    oplink::VirtualEquipmentLoaderHook& loaderHook() override;
+    oplink::HighObservableLoaderHook& loaderHook() override;
 
 protected:
-    virtual HeatingManager *createHeatingManager();
-    virtual PilotWireControlRoom *createControlRoom();
-
+    virtual oplink::HeatingManagerBuilderArgs *createHeatingManagerBuilderArgs(const QString& observableName,
+                                                                               const QString& modelName,
+                                                                               const QString& localisation,
+                                                                               bool activated,
+                                                                               HeatingManagerLoaderHook::ControlType controlType);
 private:
-    void buildRoomProperties(const QString& roomName,
-                             oplink::QspMonitoredObservableGroup roomGroup);
-private:
-    HeatingManager                     *m_newHeatingManager;
-    plugframe::QspSchedulerBuilder      m_schedulerBuilder;
-    oplink::QspMonitoredObservableGroup m_monitoredRoom;
-    ControlType                         m_ctrT;
-    bool                                m_wo_detection ,m_p_detection;
-    double                              m_max_temp, m_threshold;
+    oplink::HeatingManagerBuilderArgs *m_newHeatingManagerBuilderArgs;
+    ControlType                        m_ctrT;
+    oplink::QspHeatedRoomBuilderArgs   m_curRoomDeclaration;
 };
 
 #endif // HEATINGMANAGERLOADER_H

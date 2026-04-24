@@ -29,10 +29,10 @@ class OlfMonitoredObservablesView;
 class OlfMonitoredObservablesController;
 class MonitoredObservableWidgetView;
 class MonitoredObservableWidgetCtrl;
-class MonitoredObservableBuilder;
+class MonitoredObservableLoader;
 class PageViewLayoutBuilder;
 class ViewListLayout;
-class WidgetListView;
+class MonitoredObservableWidgetListView;
 class OlfLoginController;
 
 #endif // OLFCONSOLE_FORWARD_H

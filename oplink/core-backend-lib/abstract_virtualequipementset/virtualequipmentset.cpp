@@ -18,13 +18,13 @@
 
 #include <QDir>
 #include "virtualequipmentset.h"
-#include "virtualequipmentsetfactory.h"
 #include "worker/workerwatcher.h"
 #include "bundle/bundlecontext.h"
 #include "service-int/virtualequipmentsetserviceinterface.h"
+#include "service-int/observablebuilderserviceinterface.h"
+#include "service-int/observableserviceinterface.h"
 #include "observable/observable/observablebuilderscontainer.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentsetloader.h"
-#include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
 
 oplink::VirtualEquipmentSet::VirtualEquipmentSet(QString logBundleName):
     plugframe::BundleImplementation{logBundleName},
@@ -66,21 +66,44 @@ QStringList oplink::VirtualEquipmentSet::fileList()
     return ret;
 }
 
+void oplink::VirtualEquipmentSet::buildVirtualEquipment(QspHighObservableBuilderArgs builderArgs)
+{
+    // Once the heating manager description XML file has been loaded, the Observables construction service
+    // must be invoked to create the HeatingManager.
+    oplink::ObservableBuilderServiceInterface *builderService{bundleContext()->getService<ObservableBuilderServiceInterface>(ObservableBuilderServiceInterface::serviceName())};
+    oplink::QspObservableBuilder newHeatingManager;
+
+    builderArgs->m_observableService = bundleContext()->getService<ObservableServiceInterface>(oplink::ObservableServiceInterface::serviceName());
+
+    if (builderService && builderArgs->m_observableService)
+    {
+        newHeatingManager = builderService->buildObservable(builderArgs);
+    }
+
+    // Store the new Observable to transmit it at the end of the loading process.
+    if (!newHeatingManager.isNull())
+    {
+        m_loadedVirtualEquipments->insert(builderArgs->m_observableName,newHeatingManager);
+    }
+}
+
 oplink::QspObservableBuildersContainer oplink::VirtualEquipmentSet::getLoadedVirtualEquipments()
 {
     return m_loadedVirtualEquipments;
 }
 
-oplink::ObservableServiceInterface *oplink::VirtualEquipmentSet::observableService()
-{
-    oplink::ObservableServiceInterface *obsService;
-    obsService = bundleContext()->getService<oplink::ObservableServiceInterface>(oplink::ObservableServiceInterface::serviceName());
-    return obsService;
-}
-
+///
+/// \brief oplink::VirtualEquipmentSet::startLoading
+/// launches a background task to load all the XML files describing the virtual equipment to be loaded.
+/// \param workerWatcher, the item to report at the end of the task
+/// \return true if the task is launched
+///
 bool oplink::VirtualEquipmentSet::startLoading(plugframe::WorkerWatcher *workerWatcher)
 {
     bool ret{false};
+
+    // First register models for building the specific HighObservable (VirtualEquipment)
+    registerModels();
 
     // Set Connection for work finished signal
     workerWatcher->connectWorker(m_virtualEquipmentSetLoader.get());
@@ -88,6 +111,11 @@ bool oplink::VirtualEquipmentSet::startLoading(plugframe::WorkerWatcher *workerW
     // Load all ve in background
     ret = m_virtualEquipmentSetLoader->startLoading();
     return ret;
+}
+
+oplink::ModelRegisterServiceInterface *oplink::VirtualEquipmentSet::modelRegisterService()
+{
+    return bundleContext()->getService<oplink::ModelRegisterServiceInterface>(oplink::ModelRegisterServiceInterface::serviceName());
 }
 
 plugframe::ServiceInterface *oplink::VirtualEquipmentSet::qtServiceInterface(const QString &sName)

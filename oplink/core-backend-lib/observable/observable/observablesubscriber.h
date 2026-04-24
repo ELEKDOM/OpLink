@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QVariant>
 #include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "olcore-backend-lib_export.h"
 
 namespace oplink

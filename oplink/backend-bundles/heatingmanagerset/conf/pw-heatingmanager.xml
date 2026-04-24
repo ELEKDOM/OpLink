@@ -3,28 +3,30 @@
 <!-- Configuration file template. Do not use this file directly for deployment.
 Create a directory containing all the configuration files for a given deployment ! -->
 
-<heating-manager version="" conf-id="" control="pw" name="" model-name="heating_manager_pilotwire" localisation=""  title="">
- 
-    <!-- pw: pilot wire -->
-    <!--algorithm=<pw|pw_wod>, wod:windox opening detection -->
-    <!-- mode=<off|manual|scheduled>    -->
-    <pw-control window-opening-detection="yes" presence-detection="no" mode="scheduled" >
+<!-- The heating manager is a virtual device whose role is to control the temperature of a group of rooms.
+This file defined the declaration for a radiator management area of type pilotwire.
+-->
+<heating-manager name="" localisation="" title="" control="pw" state="">
+    <pw-control setpoint="scheduled" >
+    <!-- <pw-control> tag for a "pilote wire control" -->
+    <!-- setpoint : defines a fixed or scheduled setpoint. If the value is "scheduled", a scheduler must be declared.
+                    Otherwise, a pilotwire order defines the target to be reached. -->
+
         <scheduler>
             <daily-schedulers>
                 <daily-scheduler name="">
-                    <!-- time format <hh:mm:ss> evt : any string -->
-                    <scheduled-event time="05:30" evt="comfort" />
-                    <scheduled-event time="08:30" evt="eco" />
-
+                    <scheduled-event time="" evt="" />
+                    <!-- evt = value to emit, string as pilot wire order:
+                        on, off, comfort, comfort_1, comfort_2, eco, nofrost
+                    -->
+                    <scheduled-event time="" evt="" />
                 </daily-scheduler>
                 <daily-scheduler name="">
-                    <scheduled-event time="06:45" evt="comfort" />
-                    <scheduled-event time="09:00" evt="eco" />
+                    <scheduled-event time="" evt="" />
+                    <scheduled-event time="" evt="" />
                 </daily-scheduler>
             </daily-schedulers>
             <weekly-schedulers>
-                <!-- assigned-weeks and assigned-days are defined by range -->
-                <!-- range = <int>|<int>.<int>*[,<int>|<int>.<int>] -->
                 <weekly-scheduler name="" assigned-weeks="">
                     <daily-sequence name="" assigned-days=""/>
                     <daily-sequence name="" assigned-days=""/>
@@ -32,9 +34,8 @@ Create a directory containing all the configuration files for a given deployment
             </weekly-schedulers>
         </scheduler>
     </pw-control>
-
     <rooms>
-        <room name="">
+        <room name="" window-opening-detection="yes">
             <heaters>
                 <heater-ref name="" property=""/>
             </heaters>
@@ -46,5 +47,4 @@ Create a directory containing all the configuration files for a given deployment
             </temp-sensors>
         </room>
     </rooms>
-
 </heating-manager>

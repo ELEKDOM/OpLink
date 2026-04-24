@@ -20,17 +20,16 @@
 #define VIRTUALEQUIPMENTSET_H
 
 #include "bundle/bundleimplementation.h"
-#include "service-int/observableserviceinterface.h"
-#include "observable/observable/observablebuilderscontainer.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentsetloader.h"
+#include "service-int/modelregisterserviceinterface.h"
+#include "observable/observable/observablebuilderscontainer.h"
 #include "olcore-backend-lib_export.h"
-//#include "olcore-backend-lib_forward.h"
 #include "pfcore-lib_forward.h"
 
 namespace oplink
 {
 class OLCORE_BACKEND_LIB_EXPORT VirtualEquipmentSet : public plugframe::BundleImplementation
-{
+{   
 public:
     VirtualEquipmentSet(QString logBundleName);
     ~VirtualEquipmentSet() override;
@@ -39,14 +38,16 @@ public:
     void setVirtualEquipmentSetLoader(VirtualEquipmentSetLoader *virtualEquipmentSetLoader);
     const QString& getVirtualEquipmentSetName();
     QStringList fileList();
+    void buildVirtualEquipment(QspHighObservableBuilderArgs builderArgs);
     QspObservableBuildersContainer getLoadedVirtualEquipments();
     void loadingFinished() {m_loadingFinished = true;}
     bool isLoadingFinished() {return m_loadingFinished;}
-    ObservableServiceInterface* observableService();
     bool startLoading(plugframe::WorkerWatcher *workerWatcher);
 
 protected:
+    ModelRegisterServiceInterface *modelRegisterService();
     plugframe::ServiceInterface *qtServiceInterface(const QString& sName) override;
+    virtual void registerModels() = 0;
 
 private:
     QspVirtualEquipmentSetLoader   m_virtualEquipmentSetLoader;

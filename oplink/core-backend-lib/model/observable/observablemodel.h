@@ -38,24 +38,26 @@ public:
 
 public:
     const ObservableModelName& modelName() {return m_modelName;}
-    void addPropertyModelRef(oplink::QspObservablePropertyModel ref);
-    void addProcessorModelRef(oplink::QspCommandProcessorModel ref);
-    oplink::QspObservableBuilder buildObservable(QspObservableBuilderArgs builderArgs);
+    void addPropertyModelRef(QspObservablePropertyModel ref);
+    void addProcessorModelRef(QspCommandProcessorModel ref);
+    QspObservableBuilder buildObservable(QspObservableBuilderArgs builderArgs);
 
 protected:
     virtual bool checkBuilderArgs(QspObservableBuilderArgs builderArgs) = 0;
-    virtual oplink::ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) = 0;
-    virtual bool buildProperties(oplink::QspObservableBuilder observableBuilder,
+    virtual ObservableBuilder *createInstance(QspObservableBuilderArgs builderArgs) = 0;
+    virtual bool buildProperties(QspObservableBuilder observableBuilder,
                                  QspObservableBuilderArgs builderArgs);
-    virtual bool setPropertyMandatoryValues(oplink::QspObservableBuilder observableBuilder,
-                                            QspObservableBuilderArgs builderArgs);
-    virtual void postBuild(oplink::QspObservableBuilder observableBuilder,
+    virtual bool buildProcessors(QspObservableBuilder observableBuilder,
+                                 QspObservableBuilderArgs builderArgs);
+    virtual void postBuild(QspObservableBuilder observableBuilder,
                            QspObservableBuilderArgs builderArgs);
 
 private:
-    bool createProperties(oplink::QspObservableBuilder observableBuilder);
-    bool buildProcessors(oplink::QspObservableBuilder observableBuilder,
-                         QspObservableBuilderArgs builderArgs);
+    bool createProperties(QspObservableBuilder observableBuilder);
+    bool createMandatorProperties(QspObservableBuilder observableBuilder);
+    bool setPropertyMandatoryValues(QspObservableBuilder observableBuilder,
+                                    QspObservableBuilderArgs builderArgs);
+
 
 private:
     const ObservableModelName         m_modelName;

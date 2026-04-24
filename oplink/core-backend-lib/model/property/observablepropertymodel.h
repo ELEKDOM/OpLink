@@ -20,9 +20,8 @@
 #define OBSERVABLEPROPERTYMODEL_H
 
 #include <QSharedPointer>
-#include <QVariant>
 #include "logger/loggable.h"
-#include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "model/modelnames.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
@@ -33,8 +32,7 @@ class OLCORE_BACKEND_LIB_EXPORT ObservablePropertyModel : public plugframe::Logg
 {
 public:
     ObservablePropertyModel(const PropertyModelName& modelName,
-                            const PropertyName& propertyName,
-                            QMetaType::Type valueType);
+                            const PropertyName& propertyName);
     ~ObservablePropertyModel() override;
 
 public:
@@ -43,12 +41,10 @@ public:
 
 protected:
     const PropertyName& propertyName(){return m_propertyName;}
-    QMetaType::Type valueType(){return m_valueType;}
 
 private:
     const PropertyModelName m_modelName;
     const PropertyName      m_propertyName;
-    QMetaType::Type         m_valueType;
 };
 using QspObservablePropertyModel = QSharedPointer<ObservablePropertyModel>;
 }//namespace oplink

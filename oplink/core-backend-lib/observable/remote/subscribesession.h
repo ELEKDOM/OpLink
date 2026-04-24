@@ -22,7 +22,7 @@
 #include <QString>
 #include <QStringList>
 #include <QSharedPointer>
-#include "observable/remote/observablestatesgroup.h"
+#include "observable/remote/remotemonitoredobservablegroup.h"
 #include "observable/remote/sessionconfdocument.h"
 #include "observable/remote/sessionconfloader.h"
 #include "olcore-backend-lib_export.h"
@@ -30,7 +30,7 @@
 
 namespace oplink
 {
-class OLCORE_BACKEND_LIB_EXPORT SubscribeSession : public ObservableStatesGroup
+class OLCORE_BACKEND_LIB_EXPORT SubscribeSession : public RemoteMonitoredObservableGroup
 {
     Q_OBJECT
 
@@ -47,9 +47,6 @@ public:
     void close();
     QString confContent();
     void submitOrder(const QString &order);
-    void addRemoteMonitoredObservable(const QString& observableName,
-                                      const QStringList& propertyNames,
-                                      QspObservableStates remoteMonitored);
     void enableMonitoring();
 
 signals:

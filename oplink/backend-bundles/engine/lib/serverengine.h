@@ -50,6 +50,7 @@ public: // for states
     void finished();
     void startCurrentState();
     void registerObservables(const oplink::QspObservableBuildersContainer& loadedObservables);
+    oplink::ObservableServiceInterface *observableServiceIt();
 
 #ifndef QT_NO_DEBUG_OUTPUT
     void printRegisteredInfrastructures();

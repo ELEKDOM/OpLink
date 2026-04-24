@@ -51,6 +51,8 @@ bool oplink::InfrastructureConfReader::execWork(plugframe::QspWorkerArgs args)
     read(argsLoader->m_configFile, err);
     ret = err == LoadingError::NoError;
 
+    sleep(1); // Caution !! This delay (1ns) is to ensure that the USB key identifier
+              //            is retrieved before the thread ends !!
     return ret;
 }
 

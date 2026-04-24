@@ -35,9 +35,9 @@ public:
     virtual ~ObservableBuilderArgs();
 
 public:
-    const ObservableName&      m_observableName;
-    const ObservableModelName& m_observableModelName;
-    const LocalisationName&    m_observableLocalisation;
+    ObservableName      m_observableName;
+    ObservableModelName m_observableModelName;
+    LocalisationName    m_observableLocalisation;
 };
 using QspObservableBuilderArgs = QSharedPointer<ObservableBuilderArgs>;
 }//namespace oplink

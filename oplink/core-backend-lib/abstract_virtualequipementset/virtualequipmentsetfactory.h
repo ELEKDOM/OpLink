@@ -35,7 +35,7 @@ public:
 public:
     virtual VirtualEquipmentSetLoader* createVirtualEquipmentSetLoader(VirtualEquipmentLoader *veLoader);
     virtual VirtualEquipmentLoader* createVirtualEquipmentLoader(VirtualEquipmentSet *veSet) = 0;
-    virtual VirtualEquipmentConfDocument *createVirtualEquipmentConfDocument(VirtualEquipmentLoaderHook& hook) = 0;
+    virtual HighObservableConfDocument *createVirtualEquipmentConfDocument(HighObservableLoaderHook& hook) = 0;
 
 protected:
     virtual VirtualEquipmentSetService *createVirtualEquipmentSetService(plugframe::BundleImplementation *implementation);

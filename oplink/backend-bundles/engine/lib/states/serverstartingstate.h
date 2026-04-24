@@ -23,6 +23,7 @@
 #include "service-int/backendcontrolserviceinterface.h"
 #include "service-int/infrastructurecontrolserviceinterface.h"
 #include "service-int/virtualequipmentsetserviceinterface.h"
+#include "service-int/observableserviceinterface.h"
 #include "observable/observable/observablebuilderscontainer.h"
 #include "serverengine_forward.h"
 
@@ -65,6 +66,7 @@ protected:
     void setLoadingVirtualEquipmentSetsState();
     void setStartingClientsState();
     void finished();
+    oplink::ObservableServiceInterface *observableServiceIt();
 
 protected:
     void doTransition();

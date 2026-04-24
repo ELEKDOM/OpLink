@@ -35,22 +35,15 @@ public:
 
 protected:
     void onEvent(plugframe::QspEvent ev) override;
-    virtual void onMandatoryPropertiesModelLoadingEvent(MandatoryPropertiesModelLoadingEvent *event);
     virtual void onSpecificPropertiesModelLoadingEvent(SpecificPropertiesModelLoadingEvent *event);
     virtual void onProcessorsModelLoadingEvent(ProcessorsModelLoadingEvent *event);
     virtual void onObservableModelsLoadingEvent(ObservableModelsLoadingEvent *event);
-    void mandatoryPropertiesModelLoadingLoop1();
-    void mandatoryPropertiesModelLoadingLoop2();
-    virtual void mandatoryPropertiesModelLoadingLoop3();
-    virtual void mandatoryPropertiesModelLoadingLoop4();
-    void mandatoryPropertiesModelEventLoop(quint16 cpt);
     void specificPropertiesModelEventLoop(quint16 cpt);
     void processorModelEventLoop(quint16 cpt);
     void observableModelsEventLoop(quint16 cpt);
     bool buildRegisterPropertyModel(const oplink::PropertyModelName& modelName,
                                     const oplink::PropertyName& propertyId,
-                                    const oplink::PropertyType& propertyType,
-                                    QMetaType::Type valueType);
+                                    const oplink::PropertyType& propertyType);
     bool buildRegisterProcessorModel(const oplink::ProcessorModelName& modelName,
                                      const oplink::CommandName& cmdName,
                                      const oplink::ProcessorType& processorType);
@@ -58,7 +51,6 @@ protected:
     QspObservableModelLoaderEmitter loaderEmitter();
     ObservableModelLoaderFactory& loaderFactory();
     oplink::ModelRegisterServiceInterface *modelRegisterService();
-    virtual void setMandatoryProperties(oplink::QspObservableModel &observableModel);
 
 private:
     ObservableModelLoader &getObservableModelLoaderBundle();

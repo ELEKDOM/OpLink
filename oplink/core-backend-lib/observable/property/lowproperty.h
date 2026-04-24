@@ -28,8 +28,7 @@ class OLCORE_BACKEND_LIB_EXPORT LowProperty : public Property
 {
 public:
     LowProperty(Observable& observable,
-                const PropertyName& propertyName,
-                QMetaType::Type valueType);
+                const PropertyName& propertyName);
     ~LowProperty() override;
 
 protected:

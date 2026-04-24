@@ -1,6 +1,6 @@
 # Bundle implementation Sources
 set(SOURCES
-    event/mandatorypropertiesmodelloadingevent.cpp
+
     event/observablemodelsloadingevent.cpp
     event/processorsmodelloadingevent.cpp
     event/specificpropertiesmodelloadingevent.cpp
@@ -12,7 +12,7 @@ set(SOURCES
 
 # Bundle implementation Headers
 set(HEADERS
-    event/mandatorypropertiesmodelloadingevent.h
+
     event/observablemodelsloadingevent.h
     event/processorsmodelloadingevent.h
     event/specificpropertiesmodelloadingevent.h

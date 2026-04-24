@@ -22,5 +22,8 @@
 
 class ObservableModelLoaderFactory;
 class ObservableModelLoader;
+class SpecificPropertiesModelLoadingEvent;
+class ProcessorsModelLoadingEvent;
+class ObservableModelsLoadingEvent;
 
 #endif // OBSERVABLEMODELLOADER_FORWARD_H

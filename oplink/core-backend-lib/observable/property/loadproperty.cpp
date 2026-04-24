@@ -19,11 +19,9 @@
 #include "loadproperty.h"
 
 oplink::LoadProperty::LoadProperty(oplink::Observable& observable,
-                                   const oplink::PropertyName& propertyName,
-                                   QMetaType::Type valueType):
+                                   const oplink::PropertyName& propertyName):
     oplink::LowProperty{observable,
-                        propertyName,
-                        valueType}
+                        propertyName}
 {
 
 }

@@ -26,9 +26,9 @@
 #include "worker/workerwatcher.h"
 #include "bundle/bundlecontext.h"
 #include "logger/pflog.h"
-#include "model/observable/loadbuilderargs.h"
-#include "model/observable/actuatorbuilderargs.h"
-#include "model/observable/sensorbuilderargs.h"
+#include "model/observable/lowobservable/loadbuilderargs.h"
+#include "model/observable/lowobservable/actuatorbuilderargs.h"
+#include "model/observable/lowobservable/sensorbuilderargs.h"
 #include "service-int/observablebuilderserviceinterface.h"
 
 oplink::Infrastructure::Infrastructure(QString logBundleName, QString infrastructureName):

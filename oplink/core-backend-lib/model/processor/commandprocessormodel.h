@@ -38,7 +38,7 @@ public:
 
 public:
     const ProcessorModelName& modelName() {return m_modelName;}
-    virtual CommandProcessor *createProcessor(const Observable& parent,
+    virtual CommandProcessor *createProcessor(Observable& parent,
                                               QspObservableBuilderArgs builderArgs) = 0;
 protected:
     const CommandName& commandName() {return m_commandName;}

@@ -35,7 +35,6 @@ public:
                                             QString observableType,
                                             QString observableLocalisation) = 0;
     virtual void endObservableDeclaration() = 0;
-    virtual void propertyDeclaration(QString propertyName) = 0;
 };
 }//namespace oplink
 #endif // SESSIONCONFHOOK_H

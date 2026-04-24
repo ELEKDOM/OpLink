@@ -26,7 +26,6 @@ namespace oplink
     using ObservableName = QString;
     using ObservableType = QString;
     using LocalisationName = QString;
-    using PropertyName = QString;
     using PropertyType = QString;
     using ProcessorType = QString;
 }//namespace oplink

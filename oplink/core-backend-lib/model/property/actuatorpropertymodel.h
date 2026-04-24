@@ -28,8 +28,7 @@ class OLCORE_BACKEND_LIB_EXPORT ActuatorPropertyModel : public OperationDevicePr
 {
 public:
     ActuatorPropertyModel(const PropertyModelName& modelName,
-                          const PropertyName& propertyName,
-                          QMetaType::Type valueType);
+                          const PropertyName& propertyName);
     ~ActuatorPropertyModel() override;
 
 protected:

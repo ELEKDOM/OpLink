@@ -22,7 +22,7 @@
 #include "olfconsole.h"
 #include "observable/remote/sessionconfdocument.h"
 #include "gui/guipageview.h"
-#include "ui/monitoredobservables/pageviewbuilder/monitoredobservablebuilder.h"
+#include "ui/monitoredobservables/monitoredobservableloader.h"
 #include "ui/monitoredobservables/pageviewbuilder/pageviewbylocalisationbuilder.h"
 #include "ui/monitoredobservables/pageviewbuilder/pageviewbytypebuilder.h"
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
@@ -176,7 +176,7 @@ void OlfMonitoredObservablesController::addMonitoredObservablesView(OlfMonitored
     addView(pageView);
 }
 
-MonitoredObservableBuilder *OlfMonitoredObservablesController::buildWidgetBuilder()
+MonitoredObservableLoader *OlfMonitoredObservablesController::buildWidgetBuilder()
 {
     PageViewLayoutBuilder *layoutBuilder{nullptr};
 
@@ -192,9 +192,9 @@ MonitoredObservableBuilder *OlfMonitoredObservablesController::buildWidgetBuilde
     return createMonitoredObservableBuilder(layoutBuilder);
 }
 
-MonitoredObservableBuilder *OlfMonitoredObservablesController::createMonitoredObservableBuilder(PageViewLayoutBuilder *viewsBuilder)
+MonitoredObservableLoader *OlfMonitoredObservablesController::createMonitoredObservableBuilder(PageViewLayoutBuilder *viewsBuilder)
 {
-    return new MonitoredObservableBuilder(*this,viewsBuilder);
+    return new MonitoredObservableLoader(*this,viewsBuilder);
 }
 
 PageViewLayoutBuilder *OlfMonitoredObservablesController::createLayoutByTypeBuilder()
@@ -207,7 +207,7 @@ PageViewLayoutBuilder *OlfMonitoredObservablesController::createLayoutByLocalisa
     return new PageViewByLocalisationBuilder;
 }
 
-oplink::SessionConfDocument *OlfMonitoredObservablesController::createProfileConfBrowser(MonitoredObservableBuilder& hook)
+oplink::SessionConfDocument *OlfMonitoredObservablesController::createProfileConfBrowser(MonitoredObservableLoader& hook)
 {
     return new oplink::SessionConfDocument(hook);
 }

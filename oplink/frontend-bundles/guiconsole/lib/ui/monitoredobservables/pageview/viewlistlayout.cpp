@@ -18,7 +18,7 @@
 
 #include "viewlistlayout.h"
 #include "ui_viewlistlayout.h"
-#include "ui/monitoredobservables/widget/view/widgetlistview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 
 ViewListLayout::ViewListLayout(const QString title, QWidget *parent):
     QWidget(parent)
@@ -39,7 +39,7 @@ ViewListLayout::~ViewListLayout()
 
 }
 
-void ViewListLayout::addWidget(WidgetListView *widget)
+void ViewListLayout::addWidget(MonitoredObservableWidgetListView *widget)
 {
     ui->verticalLayout_3->addWidget(widget);
 }

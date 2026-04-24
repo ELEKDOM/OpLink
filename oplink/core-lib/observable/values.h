@@ -26,6 +26,7 @@ namespace oplink
 class OLCORE_LIB_EXPORT Values
 {
 public:
+// For Observable
     static bool STATE_ON;
     static bool STATE_OFF;
     static quint8 PW_MODE_STOP;
@@ -39,6 +40,17 @@ public:
     static QString ENERGY_KWh;
     static QString POWER_W;
     static QString POWER_KW;
+
+// For HighObservable
+    static QString TRIGGER_MODE_ONDEMAND;
+    static QString TRIGGER_MODE_PLANNED;
+
+// For HeatingManager
+
+// Tools
+    static QString convertPWM2str(quint8 pwm);
+    static quint8 convertStr2pwm(const QString& str);
+
 };
 }//namespace oplink
 #endif // VALUES_H
