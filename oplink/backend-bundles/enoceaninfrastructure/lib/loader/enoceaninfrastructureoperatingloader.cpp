@@ -43,6 +43,7 @@ oplink::Area *EnoceanInfrastructureOperatingLoader::createArea(const QString &ar
 {
     oplink::Area *area{new EnoceanOperatingDeviceArea(logChannel(),areaName)};
 
+    // move area to the main thread
     area->moveToThread(QCoreApplication::instance()->thread());
 
     return area;

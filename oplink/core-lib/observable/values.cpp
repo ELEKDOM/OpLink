@@ -19,6 +19,7 @@
 #include <QString>
 #include <QStringLiteral>
 #include "values.h"
+#include "command/command-names.h"
 
 bool oplink::Values::STATE_ON = true;
 bool oplink::Values::STATE_OFF = false;
@@ -34,3 +35,69 @@ QString oplink::Values::ENERGY_KWh = QStringLiteral("KWh");
 QString oplink::Values::POWER_W = QStringLiteral("W");
 QString oplink::Values::POWER_KW = QStringLiteral("KW");
 
+QString oplink::Values::TRIGGER_MODE_ONDEMAND = QStringLiteral("ondemand");
+QString oplink::Values::TRIGGER_MODE_PLANNED = QStringLiteral("planned");
+
+QString oplink::Values::convertPWM2str(quint8 pwm)
+{
+    QString ret;
+
+    if (PW_MODE_COMFORT == pwm)
+    {
+        ret = CommandArgs::COMFORT;
+    }
+    else if(PW_MODE_COMFORT_1 == pwm)
+    {
+        ret = CommandArgs::COMFORT_1;
+    }
+    else if(PW_MODE_COMFORT_2 == pwm)
+    {
+        ret = CommandArgs::COMFORT_2;
+    }
+    else if(PW_MODE_ECO == pwm)
+    {
+        ret = CommandArgs::ECO;
+    }
+    else if(PW_MODE_ANTI_FREEZE == pwm)
+    {
+        ret = CommandArgs::NOFROST;
+    }
+    else
+    {
+        ret = CommandArgs::OFF;
+    }
+
+    return ret;
+}
+
+quint8 oplink::Values::convertStr2pwm(const QString &str)
+{
+    quint8 ret;
+
+    if (CommandArgs::COMFORT == str)
+    {
+        ret = PW_MODE_COMFORT;
+    }
+    else if(CommandArgs::COMFORT_1 == str)
+    {
+        ret = PW_MODE_COMFORT_1;
+    }
+    else if(CommandArgs::COMFORT_2 == str)
+    {
+        ret = PW_MODE_COMFORT_2;
+    }
+    else if(CommandArgs::ECO == str)
+    {
+        ret = PW_MODE_ECO;
+    }
+    else if(CommandArgs::NOFROST == str)
+    {
+        ret = PW_MODE_ANTI_FREEZE;
+    }
+    else
+    {
+        ret = PW_MODE_STOP;
+    }
+
+    return ret;
+}

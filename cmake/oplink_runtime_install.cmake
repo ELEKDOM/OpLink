@@ -275,7 +275,7 @@ if (OL_BUILD_BACKEND)
     "${OL_BACKEND_BUNDLES_DIR}/users/conf"
   )
   ol_copy_conf_file(
-    "${OL_PROFILE_DIR}/oplink/backend/user_remote_monitoring.xml"
+    "${OL_PROFILE_DIR}/oplink/backend/user_remote.xml"
     "${OL_BACKEND_BUNDLES_DIR}/users/conf"
   )
 
@@ -286,10 +286,10 @@ if (OL_BUILD_BACKEND)
   )
 
   # Heatingmanagerset bundle conf
-  #ol_copy_conf_file(
-  #  "${OL_PROFILE_DIR}/oplink/backend/heating_pwt_manager1.xml"
-  #  "${OL_BACKEND_BUNDLES_DIR}/heatingmanagerset/conf"
-  #)
+  ol_copy_conf_file(
+    "${OL_PROFILE_DIR}/oplink/backend/heating_manager1.xml"
+    "${OL_BACKEND_BUNDLES_DIR}/heatingmanagerset/conf"
+  )
 
   # Observablemodelloader bundle conf
   ol_copy_conf_file(

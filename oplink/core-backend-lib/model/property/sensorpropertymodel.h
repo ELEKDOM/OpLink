@@ -28,8 +28,7 @@ class OLCORE_BACKEND_LIB_EXPORT SensorPropertyModel : public OperationDeviceProp
 {
 public:
     SensorPropertyModel(const PropertyModelName& modelName,
-                        const PropertyName& propertyName,
-                        QMetaType::Type valueType);
+                        const PropertyName& propertyName);
     ~SensorPropertyModel() override;
 
 protected:

@@ -20,7 +20,7 @@
 #include "ui/olfmonitoredobservablescontroller.h"
 #include "ui/monitoredobservables/pageview/pageviewlistlayout.h"
 #include "ui/monitoredobservables/widget/monitoredobservablewidgetctrl.h"
-#include "ui/monitoredobservables/widget/view/widgetlistview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetlistview.h"
 #include "ui/monitoredobservables/pageview/viewlistlayout.h"
 
 PageViewListLayoutBuilder::PageViewListLayoutBuilder() {}
@@ -55,7 +55,7 @@ void PageViewListLayoutBuilder::assignWidgetView(OlfMonitoredObservablesControll
 
     // Add a new widgetview into the list
     MonitoredObservableWidgetView *wv{widgetCtrl->createView(getLayoutType())};
-    WidgetListView *widgetView{dynamic_cast<WidgetListView*>(wv)};
+    MonitoredObservableWidgetListView *widgetView{dynamic_cast<MonitoredObservableWidgetListView*>(wv)};
 
     if (widgetView)
     {

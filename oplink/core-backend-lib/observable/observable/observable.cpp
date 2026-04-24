@@ -20,7 +20,7 @@
 #include "observable.h"
 #include "observable/observable/observablenotifier.h"
 #include "observable/property/property.h"
-#include "observable/property/propertyid.h"
+#include "observable/propertyid.h"
 #include "observable/processor/commandprocessor.h"
 #include "command/command.h"
 #include "logger/pflog.h"
@@ -77,9 +77,16 @@ void oplink::Observable::process(oplink::QspCommand order)
     }
 }
 
-bool oplink::Observable::subscribe(oplink::ObservableSubscriber *subscriber)
+bool oplink::Observable::subscribe(oplink::ObservableSubscriber *subscriber,bool reportInitialValues)
 {
-    return m_notifier->subscribe(subscriber);
+    bool ret{m_notifier->subscribe(subscriber)};
+
+    if (reportInitialValues)
+    {
+        notifyInitialValues();
+    }
+
+    return ret;
 }
 
 bool oplink::Observable::unsubscribe(oplink::ObservableSubscriber *subscriber)
@@ -139,4 +146,32 @@ bool oplink::Observable::propertyValue(oplink::PropertyName propId,QVariant prop
     }
 
     return ret;
+}
+
+void oplink::Observable::notifyInitialValues()
+{
+    QHash<oplink::PropertyName,oplink::QspProperty>::Iterator it{m_properties.begin()};
+    oplink::QspProperty curProperty;
+    QString propertyName;
+
+    while (it != m_properties.end())
+    {
+        curProperty = it.value();
+        propertyName = it.key();
+
+        if (oplink::PropertyId::P_NAME != propertyName &&
+            oplink::PropertyId::P_MODEL != propertyName &&
+            oplink::PropertyId::P_LOCALISATION!= propertyName)
+        {
+            if(curProperty->isValidValue())
+            {
+                QVariant val{curProperty->value()};
+
+                // reports state
+                m_notifier->notifyPropertyValueChange(name(),propertyName,val);
+            }
+        }
+        //next
+        ++it;
+    }
 }

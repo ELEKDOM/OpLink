@@ -17,7 +17,7 @@
 //
 
 #include "monitoredobservablewidgetctrl.h"
-#include "ui/monitoredobservables/widget/view/monitoredobservablewidgetview.h"
+#include "ui/monitoredobservables/widget/monitoredobservablewidgetview.h"
 
 MonitoredObservableWidgetCtrl::MonitoredObservableWidgetCtrl(QString observableName,
                                                              QString observableTitle,
@@ -41,14 +41,14 @@ MonitoredObservableWidgetCtrl::~MonitoredObservableWidgetCtrl()
 MonitoredObservableWidgetView *MonitoredObservableWidgetCtrl::createView(quint8 layoutViewType)
 {
     m_view = _createView(layoutViewType);
-    m_view->setTitle(m_observableTitle);
-    connect(m_view,SIGNAL(cmdButtonClicked(QString)),SLOT(onButtonCmdClicked(QString)));
-    return m_view;
-}
 
-void MonitoredObservableWidgetCtrl::addState(const QString &propertyName)
-{
-    m_monitoredStates.insert(propertyName, true);
+    if (m_view)
+    {
+        m_view->setTitle(m_observableTitle);
+        connect(m_view,SIGNAL(cmdButtonClicked(QString)),SLOT(onButtonCmdClicked(QString)));
+        extendedConnect();
+    }
+    return m_view;
 }
 
 void MonitoredObservableWidgetCtrl::updateStateValue(const QString &propertyName, const QVariant &value)
@@ -57,4 +57,14 @@ void MonitoredObservableWidgetCtrl::updateStateValue(const QString &propertyName
     {
         _updateStateValue(propertyName,value);
     }
+}
+
+void MonitoredObservableWidgetCtrl::addState(const QString &propertyName)
+{
+    m_monitoredStates.insert(propertyName, true);
+}
+
+void MonitoredObservableWidgetCtrl::extendedConnect()
+{
+    // No more connection by default !
 }

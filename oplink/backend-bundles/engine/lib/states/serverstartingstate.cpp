@@ -111,6 +111,11 @@ void ServerStartingState::finished()
     m_engine.finished();
 }
 
+oplink::ObservableServiceInterface *ServerStartingState::observableServiceIt()
+{
+    return m_engine.observableServiceIt();
+}
+
 void ServerStartingState::doTransition()
 {
     transition();

@@ -20,9 +20,8 @@
 #include "observable/property/operationdeviceproperty.h"
 
 oplink::SensorPropertyModel::SensorPropertyModel(const oplink::PropertyModelName& modelName,
-                                                 const oplink::PropertyName& propertyName,
-                                                 QMetaType::Type valueType):
-    oplink::OperationDevicePropertyModel{modelName,propertyName,valueType}
+                                                 const oplink::PropertyName& propertyName):
+    oplink::OperationDevicePropertyModel{modelName,propertyName}
 {
 
 }
@@ -34,5 +33,5 @@ oplink::SensorPropertyModel::~SensorPropertyModel()
 
 oplink::Property *oplink::SensorPropertyModel::createProperty(oplink::Observable& observable)
 {
-    return new oplink::OperationDeviceProperty{observable,propertyName(),valueType()};
+    return new oplink::OperationDeviceProperty{observable,propertyName()};
 }

@@ -28,8 +28,7 @@ class OLCORE_BACKEND_LIB_EXPORT OperationDevicePropertyModel: public ObservableP
 {
 public:
     OperationDevicePropertyModel(const PropertyModelName& modelName,
-                                 const PropertyName& propertyName,
-                                 QMetaType::Type valueType);
+                                 const PropertyName& propertyName);
     ~OperationDevicePropertyModel() override;
 };
 }//namespace oplink

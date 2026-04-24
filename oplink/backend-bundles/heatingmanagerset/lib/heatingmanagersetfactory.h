@@ -27,9 +27,13 @@ public:
     HeatingManagerSetFactory();
     virtual ~HeatingManagerSetFactory();
 
+public:
+    virtual oplink::ObservableModel *createHeatingManagerPwModel();
+    virtual oplink::ObservableModel *createHeatingManagerPwtModel();
+
 protected:
     oplink::VirtualEquipmentLoader *createVirtualEquipmentLoader(oplink::VirtualEquipmentSet *veSet) override;
-    oplink::VirtualEquipmentConfDocument *createVirtualEquipmentConfDocument(oplink::VirtualEquipmentLoaderHook& hook) override;
+    oplink::HighObservableConfDocument *createVirtualEquipmentConfDocument(oplink::HighObservableLoaderHook& hook) override;
 };
 
 #endif // HEATINGMANAGERSETFACTORY_H

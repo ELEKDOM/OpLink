@@ -23,7 +23,7 @@ oplink::SubscribeSession::SubscribeSession(quint32 sessionId,
                                            const QString &filename,
                                            oplink::ObservableServiceInterface *oService,
                                            QObject *parent):
-    oplink::ObservableStatesGroup{oService,parent},
+    oplink::RemoteMonitoredObservableGroup{oService,parent},
     m_sessionId{sessionId},
     xmlFileName{filename},
     m_domDoc{m_confLoader},
@@ -65,13 +65,6 @@ QString oplink::SubscribeSession::confContent()
 void oplink::SubscribeSession::submitOrder(const QString &order)
 {
     orderToObservable(order);
-}
-
-void oplink::SubscribeSession::addRemoteMonitoredObservable(const QString& observableName,
-                                                            const QStringList& propertyNames,
-                                                            oplink::QspObservableStates  remoteMonitored)
-{
-    addMonitoredObservable(observableName,propertyNames,remoteMonitored);
 }
 
 void oplink::SubscribeSession::enableMonitoring()

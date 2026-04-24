@@ -32,13 +32,13 @@ public:
 public:
     virtual void assignWidgetView(OlfMonitoredObservablesController& controller,
                                   QspMonitoredObservableWidgetCtrl& widgetCtrl) = 0;
-    void setBuilder(MonitoredObservableBuilder *builder);
+    void setBuilder(MonitoredObservableLoader *builder);
 
 protected:
-    MonitoredObservableBuilder *builder() {return m_builder;}
+    MonitoredObservableLoader *builder() {return m_builder;}
 
 private:
-    MonitoredObservableBuilder *m_builder;
+    MonitoredObservableLoader *m_builder;
 };
 using QspPageViewLayoutBuilder = QSharedPointer<PageViewLayoutBuilder>;
 #endif // PAGEVIEWLAYOUTBUILDER_H

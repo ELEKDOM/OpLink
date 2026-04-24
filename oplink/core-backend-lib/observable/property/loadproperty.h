@@ -30,8 +30,7 @@ class OLCORE_BACKEND_LIB_EXPORT LoadProperty : public oplink::LowProperty
 {
 public:
     LoadProperty(Observable& observable,
-                    const PropertyName& propertyName,
-                    QMetaType::Type valueType);
+                    const PropertyName& propertyName);
     ~LoadProperty() override;
 
 public:

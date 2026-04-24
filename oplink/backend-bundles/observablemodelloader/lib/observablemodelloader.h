@@ -41,8 +41,7 @@ public:
     bool nextPropertyModelDeclaration(quint16 idx,
                                       oplink::PropertyModelName& modelName,
                                       oplink::PropertyName& propertyName,
-                                      oplink::PropertyType& propertyClassName,
-                                      QMetaType::Type& valueType);
+                                      oplink::PropertyType& propertyClassName);
     bool nextProcessorModelDeclaration(quint16 idx,
                                        oplink::ProcessorModelName& modelName,
                                        oplink::CommandName& commandName,

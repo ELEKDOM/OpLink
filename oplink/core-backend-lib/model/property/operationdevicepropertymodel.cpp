@@ -19,9 +19,8 @@
 #include "operationdevicepropertymodel.h"
 
 oplink::OperationDevicePropertyModel::OperationDevicePropertyModel(const oplink::PropertyModelName& modelName,
-                                                                   const oplink::PropertyName& propertyName,
-                                                                   QMetaType::Type valueType):
-     oplink::ObservablePropertyModel{modelName, propertyName, valueType}
+                                                                   const oplink::PropertyName& propertyName):
+     oplink::ObservablePropertyModel{modelName, propertyName}
 {
 
 }

@@ -1,0 +1,82 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- Configuration file template. Do not use this file directly for deployment.
+Create a directory containing all the configuration files for a given deployment ! -->
+
+<!-- All observables created in OpLink are build with models defined in that file.
+Three categories of models are defined:
+- Property models
+- Command processing models
+- Observable models
+
+This file is loaded when the "ObservableModelLoader" bundle starts.
+For each model definition, a model is created and registered with the "ObservableModelRegister" bundle.
+-->
+
+<models>
+<!-- <models> declares the set of model -->
+
+    <properties>
+    <!-- <properties> declares the set of property model -->
+
+        <property modelName='' propertyId='' propertyClass=''/>
+        <!-- <property> declares a property model -->
+        <!-- modelName : name of the model. Must be unique -->
+        <!-- propertyId : name (identifier) of the property. Must be unique -->
+        <!-- propertyClass : type of the property to instantiate; possible values :
+                             property
+                             load_property
+                             actuator_property
+                             sensor_property
+        -->
+        <property modelName='' propertyId='' propertyClass=''/>
+    </properties>
+    <processors>
+    <!-- <processors> declares the set of command processor model -->
+
+        <processor modelName='' commandName='' processorClass='' />
+        <!-- <processor> declares a processor model -->
+        <!-- modelName : name of the model. Must be unique -->
+        <!-- commandName : name of the command that will trigger the processing -->
+        <!-- processorClass : type of the processor to instantiate; possible values :
+                              load_command_processor
+                              actuator_command_processor
+        -->
+        <processor modelName='' commandName='' processorClass='' />
+    </processors>
+    <observables>
+    <!-- <observables> declares the set of observable model -->
+
+        <observable modelName='' observableClass=''>
+        <!-- <observable> declares an observable model -->
+        <!-- modelName : name of the model. Must be unique -->
+        <!-- observableClass : type of the observable to instantiate; possible values :
+                               actuator_class
+                               sensor_class
+                               load_class
+        -->
+
+            <propertyModelRefs>
+            <!-- <propertyModelRefs> declare the properties of the observable -->
+
+                <propertyModelRef modelName=''/>
+                <!-- <propertyModelRef> references the property model for the observable -->
+                <propertyModelRef modelName=''/>
+            </propertyModelRefs>
+            <processorModelRefs>
+            <!-- <propertyModelRefs> declare the processors of an observable that accepts commands -->
+
+                <processorModelRef modelName=''/>
+                <!-- <processorModelRef> references the processor model for the observable -->
+            </processorModelRefs>
+        </observable>
+        <observable modelName='' observableClass=''>
+            <propertyModelRefs>
+                <propertyModelRef modelName=''/>
+                <propertyModelRef modelName=''/>
+            </propertyModelRefs>
+            <processorModelRefs>
+            </processorModelRefs>
+        </observable>
+    </observables>
+</models>

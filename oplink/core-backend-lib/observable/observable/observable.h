@@ -48,7 +48,7 @@ public:
     LocalisationName localisation();
     QspProperty property(PropertyName propId) const override;
     void process(QspCommand order);
-    bool subscribe(ObservableSubscriber *subscriber);
+    bool subscribe(ObservableSubscriber *subscriber,bool reportInitialValues);
     bool unsubscribe(ObservableSubscriber *subscriber);
     void notifyPropertyValueChange(Property& prop);
 
@@ -58,6 +58,9 @@ protected: // GacObservableBuilder
     bool setMandatoryPropertyValue(PropertyName propId, QVariant propValue) override;
     void setDevice(QspDevice device) override;
     bool propertyValue(PropertyName propId, QVariant propValue);
+
+private:
+    void notifyInitialValues();
 
 private:
     ObservableName                          m_name;

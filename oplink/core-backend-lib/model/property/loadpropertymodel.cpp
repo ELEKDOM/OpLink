@@ -20,9 +20,8 @@
 #include "observable/property/loadproperty.h"
 
 oplink::LoadPropertyModel::LoadPropertyModel(const oplink::PropertyModelName& modelName,
-                                             const oplink::PropertyName&      propertyName,
-                                             QMetaType::Type             valueType):
-    oplink::ObservablePropertyModel{modelName,propertyName,valueType}
+                                             const oplink::PropertyName&      propertyName):
+    oplink::ObservablePropertyModel{modelName,propertyName}
 {
 
 }
@@ -34,5 +33,5 @@ oplink::LoadPropertyModel::~LoadPropertyModel()
 
 oplink::Property *oplink::LoadPropertyModel::createProperty(oplink::Observable& observable)
 {
-    return new oplink::LoadProperty{observable,propertyName(),valueType()};
+    return new oplink::LoadProperty{observable,propertyName()};
 }

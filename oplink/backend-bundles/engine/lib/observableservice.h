@@ -37,7 +37,8 @@ public:
 public:
     bool submitOrder(oplink::StrOrder command);
     bool subscribe(oplink::ObservableName observableName,
-                   oplink::ObservableSubscriber *subscriber);
+                   oplink::ObservableSubscriber *subscriber,
+                   bool reportInitialValues);
     bool unsubscribe(oplink::ObservableName observableName,
                      oplink::ObservableSubscriber *subscriber);
     bool propertyValue(oplink::ObservableName observableName,

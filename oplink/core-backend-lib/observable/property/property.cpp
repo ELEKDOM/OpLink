@@ -21,12 +21,10 @@
 #include "observable/observable/observable.h"
 
 oplink::Property::Property(oplink::Observable &observable,
-                           const oplink::PropertyName &propertyName,
-                           QMetaType::Type valueType) :
+                           const oplink::PropertyName &propertyName) :
     plugframe::Loggable{s_ObservableLogChannel},
     m_observable{observable},
-    m_name{propertyName},
-    m_valueType{valueType}
+    m_name{propertyName}
 {
 }
 
@@ -47,11 +45,16 @@ bool oplink::Property::isValidValue()
     return ret;
 }
 
-void oplink::Property::changeValue(const QVariant &val)
+bool oplink::Property::changeValue(const QVariant &val)
 {
+    bool ret{false};
+
     if (!isValidValue() || (val != value()))
     {
         value(val);
+        ret = true;
         m_observable.notifyPropertyValueChange(*this);
     }
+
+    return ret;
 }

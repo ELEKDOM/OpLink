@@ -18,7 +18,7 @@
 
 #include "sessionconfloader.h"
 #include "subscribesession.h"
-#include "observable/remote/observablestates.h"
+#include "observable/remote/remoteMonitoredobservable.h"
 
 oplink::SessionConfLoader::SessionConfLoader(oplink::SubscribeSession &session):
     m_session{session}
@@ -49,18 +49,12 @@ void oplink::SessionConfLoader::beginObservableDeclaration(QString observableNam
     Q_UNUSED(observableTitle)
     Q_UNUSED(observableType)
     Q_UNUSED(observableLocalisation)
-    m_curRemoteMonitoredDeclaration.reset(new oplink::ObservableStates);
+    m_curRemoteMonitoredDeclaration.reset(new oplink::RemoteMonitoredObservable);
     m_curObservableName = observableName;
 }
 
 void oplink::SessionConfLoader::endObservableDeclaration()
 {
     m_session.addRemoteMonitoredObservable(m_curObservableName,
-                                           m_curPropertyNames,
                                            m_curRemoteMonitoredDeclaration);
-}
-
-void oplink::SessionConfLoader::propertyDeclaration(QString propertyName)
-{
-    m_curPropertyNames << propertyName;
 }

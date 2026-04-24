@@ -25,13 +25,12 @@
 #include "model/property/loadpropertymodel.h"
 #include "model/property/actuatorpropertymodel.h"
 #include "model/property/sensorpropertymodel.h"
-#include "model/processor/loadcommandprocessormodel.h"
-#include "model/processor/expectedvaluecheckcommandprocessormodel.h"
-#include "model/processor/expectedvaluenocheckcommandprocessormodel.h"
-#include "model/observable/loadmodel.h"
-#include "model/observable/actuatormodel.h"
-#include "model/observable/sensormodel.h"
-#include "event/mandatorypropertiesmodelloadingevent.h"
+#include "model/processor/lowprocessor/loadcommandprocessormodel.h"
+#include "model/processor/lowprocessor/expectedvaluecheckcommandprocessormodel.h"
+#include "model/processor/lowprocessor/expectedvaluenocheckcommandprocessormodel.h"
+#include "model/observable/lowobservable/loadmodel.h"
+#include "model/observable/lowobservable/actuatormodel.h"
+#include "model/observable/lowobservable/sensormodel.h"
 #include "event/specificpropertiesmodelloadingevent.h"
 #include "event/processorsmodelloadingevent.h"
 #include "event/observablemodelsloadingevent.h"
@@ -58,11 +57,6 @@ plugframe::BundleListener *ObservableModelLoaderFactory::createBundleListener(pl
     return new ObservableModelLoaderListener{myBundle};
 }
 
-MandatoryPropertiesModelLoadingEvent *ObservableModelLoaderFactory::createMandatoryPropertiesModelLoadingEvent(unsigned short cpt)
-{
-    return new MandatoryPropertiesModelLoadingEvent{cpt};
-}
-
 SpecificPropertiesModelLoadingEvent *ObservableModelLoaderFactory::createSpecificPropertiesModelLoadingEvent(unsigned short cpt)
 {
     return new SpecificPropertiesModelLoadingEvent{cpt};
@@ -80,57 +74,52 @@ ObservableModelsLoadingEvent *ObservableModelLoaderFactory::createObservableMode
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createObservablePropertyModel(const oplink::PropertyModelName& modelName,
                                                                                              const oplink::PropertyName &propertyId,
-                                                                                             const oplink::PropertyType &propertyType,
-                                                                                             QMetaType::Type valueType)
+                                                                                             const oplink::PropertyType &propertyType)
 {
     oplink::ObservablePropertyModel *ret{nullptr};
 
     if(oplink::PropertyClassNames::PROPERTY_CLASS == propertyType)
     {
-        ret = createPropertyModel(modelName, propertyId, valueType);
+        ret = createPropertyModel(modelName, propertyId);
     }
     else if(oplink::PropertyClassNames::LOAD_PROPERTY_CLASS == propertyType)
     {
-        ret = createLoadPropertyModel(modelName, propertyId, valueType);
+        ret = createLoadPropertyModel(modelName, propertyId);
     }
     else if(oplink::PropertyClassNames::ACTUATOR_PROPERTY_CLASS == propertyType)
     {
-        ret = createActuatorPropertyModel(modelName, propertyId, valueType);
+        ret = createActuatorPropertyModel(modelName, propertyId);
     }
     else if(oplink::PropertyClassNames::SENSOR_PROPERTY_CLASS == propertyType)
     {
-        ret = createSensorPropertyModel(modelName, propertyId, valueType);
+        ret = createSensorPropertyModel(modelName, propertyId);
     }
 
     return ret;
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                   const oplink::PropertyName &propertyId,
-                                                                                   QMetaType::Type valueType)
+                                                                                   const oplink::PropertyName &propertyId)
 {
-    return new oplink::ObservablePropertyModel{modelName, propertyId, valueType};
+    return new oplink::ObservablePropertyModel{modelName, propertyId};
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createLoadPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                       const oplink::PropertyName &propertyId,
-                                                                                       QMetaType::Type valueType)
+                                                                                       const oplink::PropertyName &propertyId)
 {
-    return new oplink::LoadPropertyModel{modelName, propertyId, valueType};
+    return new oplink::LoadPropertyModel{modelName, propertyId};
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createActuatorPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                           const oplink::PropertyName &propertyId,
-                                                                                           QMetaType::Type valueType)
+                                                                                           const oplink::PropertyName &propertyId)
 {
-    return new oplink::ActuatorPropertyModel{modelName, propertyId, valueType};
+    return new oplink::ActuatorPropertyModel{modelName, propertyId};
 }
 
 oplink::ObservablePropertyModel *ObservableModelLoaderFactory::createSensorPropertyModel(const oplink::PropertyModelName &modelName,
-                                                                                         const oplink::PropertyName &propertyId,
-                                                                                         QMetaType::Type valueType)
+                                                                                         const oplink::PropertyName &propertyId)
 {
-    return new oplink::SensorPropertyModel{modelName, propertyId, valueType};
+    return new oplink::SensorPropertyModel{modelName, propertyId};
 }
 
 oplink::CommandProcessorModel *ObservableModelLoaderFactory::createCommandProcessorModel(const oplink::ProcessorModelName& modelName,

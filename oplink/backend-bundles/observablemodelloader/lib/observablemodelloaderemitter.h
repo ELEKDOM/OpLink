@@ -30,7 +30,6 @@ public:
 
 public:
     void startLoadingEventLoop();
-    void mandatoryPropertiesModelEventLoop(unsigned short cpt);
     void specificPropertiesModelEventLoop(unsigned short cpt);
     void processorModelEventLoop(unsigned short cpt);
     void observableModelsEventLoop(unsigned short cpt);

@@ -102,6 +102,11 @@ void EnoceanGateway::sendEepCommand(QspEepCommandFormat commandFormat)
 {
     quint32 baseId{m_mode->usb300BaseId()};
 
+    if (!baseId)
+    {
+        pfWarning1(logChannel()) << tr("La passerelle EnOcean envoie un message avec un id d'émetteur à 0 !");
+    }
+
     commandFormat->insertSenderId(baseId);
     m_packetTransmitter->sendPaquetRequest(commandFormat);
 }
@@ -186,6 +191,7 @@ void EnoceanGateway::initializeUsb300BaseId()
 
 void EnoceanGateway::onSendPacket(QspEsp3Packet packet)
 {
+    pfDebug5(logChannel()) << "USB Gateway send " << packet->logPacket();
     m_port->write(packet->dataFrame());
 }
 

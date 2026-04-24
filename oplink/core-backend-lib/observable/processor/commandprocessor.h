@@ -31,12 +31,12 @@ namespace oplink
 class OLCORE_BACKEND_LIB_EXPORT CommandProcessor : public plugframe::Loggable
 {
 public:
-    CommandProcessor(const Observable& observable,
+    CommandProcessor(Observable& observable,
                      const CommandName& cmdName);
     ~CommandProcessor() override;
 
 public:
-    const Observable& observable() {return m_observable;}
+    Observable& observable() {return m_observable;}
     CommandName cmdName() {return m_cmdName;}
 
 public:
@@ -47,8 +47,8 @@ protected:
     virtual void process(QspCommand order) = 0;
 
 private:
-    const Observable& m_observable;
-    CommandName       m_cmdName;
+    Observable& m_observable;
+    CommandName m_cmdName;
 };
 using QspCommandProcessor = QSharedPointer<CommandProcessor>;
 }//namespace oplink

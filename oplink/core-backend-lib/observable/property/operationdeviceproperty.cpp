@@ -19,11 +19,9 @@
 #include "operationdeviceproperty.h"
 
 oplink::OperationDeviceProperty::OperationDeviceProperty(oplink::Observable& observable,
-                                                         const oplink::PropertyName& propertyName,
-                                                         QMetaType::Type valueType):
+                                                         const oplink::PropertyName& propertyName):
     oplink::LowProperty{observable,
-                        propertyName,
-                        valueType}
+                        propertyName}
 {
 
 }
@@ -43,14 +41,20 @@ oplink::QspLowProperty oplink::OperationDeviceProperty::slave()
     return relatedProperty();
 }
 
-void oplink::OperationDeviceProperty::changeValue(const QVariant &val)
+bool oplink::OperationDeviceProperty::changeValue(const QVariant &val)
 {
-    oplink::LowProperty::changeValue(val);
-    oplink::QspLowProperty lp{slave()};
-    if (!lp.isNull())
+    bool ret{oplink::LowProperty::changeValue(val)};
+
+    if (ret)
     {
-        lp->changeValue(val);
+        oplink::QspLowProperty lp{slave()};
+        if (!lp.isNull())
+        {
+            lp->changeValue(val);
+        }
     }
+
+    return ret;
 }
 
 

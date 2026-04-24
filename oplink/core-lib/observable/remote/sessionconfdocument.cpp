@@ -53,18 +53,6 @@ bool oplink::SessionConfDocument::_browse()
         QString                obsLocalisation{monitoredObservableElem.attribute(QStringLiteral("localisation"))};
 
         loader.beginObservableDeclaration(obsName, obsTitle, obsType, obsLocalisation);
-
-        QDomNodeList           monitoredPropertyNodes{monitoredObservableElem.elementsByTagName(QStringLiteral("monitoredproperty"))};
-        int m{monitoredPropertyNodes.length()};
-        for (int j = 0; j < m; j++)
-        {
-            QDomNode             pNode{monitoredPropertyNodes.at(j)};
-            QDomElement          pElem{pNode.toElement()};
-            QString              proName{pElem.attribute(QStringLiteral("name"))};
-
-            loader.propertyDeclaration(proName);
-        }
-
         loader.endObservableDeclaration();
     }
 

@@ -34,3 +34,17 @@ plugframe::BundleFactory *HeatingManagerSet::createFactory()
 {
     return new HeatingManagerSetFactory;
 }
+
+void HeatingManagerSet::registerModels()
+{
+    HeatingManagerSetFactory& hManagerFactory{dynamic_cast<HeatingManagerSetFactory&>(getFactory())};
+    oplink::QspObservableModel observableModel;
+
+    // create and register pw heating manager model
+    observableModel.reset(hManagerFactory.createHeatingManagerPwModel());
+    modelRegisterService()->addObservableModel(observableModel);
+
+    // create and register pwt heating manager model
+    observableModel.reset(hManagerFactory.createHeatingManagerPwtModel());
+    modelRegisterService()->addObservableModel(observableModel);
+}

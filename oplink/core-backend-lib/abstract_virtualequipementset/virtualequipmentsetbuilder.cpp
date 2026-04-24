@@ -20,7 +20,7 @@
 #include "virtualequipmentsetfactory.h"
 #include "virtualequipmentset.h"
 #include "abstract_virtualequipementset/loading/virtualequipmentloader.h"
-#include "observable/virtualequipment/virtualequipmentconfdocument.h"
+#include "observable/observable/highobservable/highobservableconfdocument.h"
 
 oplink::VirtualEquipmentSetBuilder::VirtualEquipmentSetBuilder(plugframe::Bundle4BuilderInterface &myBundle):
     plugframe::BundleBuilder{myBundle}
@@ -38,7 +38,7 @@ void oplink::VirtualEquipmentSetBuilder::specificBuild()
     oplink::VirtualEquipmentSetFactory&  veSetFactory{dynamic_cast<oplink::VirtualEquipmentSetFactory&>(getFactory())};
     oplink::VirtualEquipmentSet *veSet{dynamic_cast<oplink::VirtualEquipmentSet*>(getImplementation())};
     oplink::VirtualEquipmentLoader *equipmentLoader;
-    oplink::VirtualEquipmentConfDocument *confDocument;
+    oplink::HighObservableConfDocument *confDocument;
 
     equipmentLoader = veSetFactory.createVirtualEquipmentLoader(veSet);
     veSet->setVirtualEquipmentSetLoader(veSetFactory.createVirtualEquipmentSetLoader(equipmentLoader));

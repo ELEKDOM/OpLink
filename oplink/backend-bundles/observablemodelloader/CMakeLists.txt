@@ -28,7 +28,7 @@ add_custom_target(${BUNDLE_META_FILE_TARGET}
 string(CONCAT BUNDLE_CONF_MODEL ${BUNDLE_NAME} "-conf-model")
 add_custom_target(${BUNDLE_CONF_MODEL}
     SOURCES
-    "conf/observable-models.xml"
-    "conf/observable-models_homeautomation_example.xml"
+    "conf/observable_models.xml"
+    "conf/homeautomation_observable_models.xml"
 )
 

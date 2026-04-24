@@ -21,9 +21,6 @@
 
 namespace oplink
 {
-    class VirtualEquipmentLoaderHook;
-    class VirtualEquipmentConfDocument;
-    //
     class SessionStartedMessage;
     class DownloadConfigMessage;
     class DownloadConfigReplyMessage;

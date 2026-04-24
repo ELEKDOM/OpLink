@@ -58,6 +58,7 @@ oplink::AreaGateway *EnoceanInfrastructureLoader::createGateway(oplink::GatewayA
 
    gateway = createGateway(gatewayMode);
    enoceanGatewayArgs.accept(*gateway);
+   //move gateway to the main thread
    gateway->moveToThread(QCoreApplication::instance()->thread());
 
    return gateway;

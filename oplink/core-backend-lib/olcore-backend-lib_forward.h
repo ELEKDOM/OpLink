@@ -26,9 +26,13 @@ namespace oplink
     class Observable;
     class ObservableSubscriber;
     //
-    class SchedulableObservable;
+    class HighObservable;
+    class HighObservableLoaderHook;
+    class HighObservableConfDocument;
     //
     class SupervisorObservable;
+    //
+    class HeatingManager;
     //
     class Property;
     //
@@ -48,10 +52,12 @@ namespace oplink
     class StateToWatch;
     class GroupToWatch;
     //
+    class PilotWireControlRoom;
+    //
+    class VirtualEquipmentLoader;
     class VirtualEquipmentSetLoader;
     class VirtualEquipmentSet;
     class VirtualEquipmentSetService;
-    class VirtualEquipmentLoader;
     //
     class LoadBuilderArgs;
     class ActuatorBuilderArgs;

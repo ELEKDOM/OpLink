@@ -22,7 +22,7 @@
 #include <QSharedPointer>
 #include <QVariant>
 #include "logger/loggable.h"
-#include "observable/observablenames.h"
+#include "observable/propertyid.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
 
@@ -32,8 +32,7 @@ class OLCORE_BACKEND_LIB_EXPORT Property : public plugframe::Loggable
 {
 public:
     Property(Observable& observable,
-             const PropertyName& propertyName,
-             QMetaType::Type valueType);
+             const PropertyName& propertyName);
 
     ~Property() override;
 
@@ -43,13 +42,12 @@ public:
     const QVariant& value(){return m_value;}
     void value(const QVariant& val);
     bool isValidValue();
-    virtual void changeValue(const QVariant& val);
+    virtual bool changeValue(const QVariant& val);
 
 private:
     Observable&     m_observable;
     PropertyName    m_name;
     QVariant        m_value;
-    QMetaType::Type m_valueType;
 };
 using QspProperty = QSharedPointer<Property>;
 }//namespace oplink

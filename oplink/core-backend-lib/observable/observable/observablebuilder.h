@@ -29,6 +29,7 @@
 
 namespace oplink
 {
+class ObservableServiceInterface;
 ///
 /// \brief The ObservableBuilder class.
 ///        Defining the construction interface of an observable.
@@ -44,10 +45,10 @@ public:
     virtual bool setMandatoryPropertyValue(PropertyName propId, QVariant propValue) = 0;
     virtual void setDevice(QspDevice device) = 0;
     virtual QspProperty property(PropertyName propId) const = 0;
+    virtual QspDevice device(); // Only Sensor and Actuator have device !
+    virtual void init(); // Only for virtual equipement
 
 public:
-    virtual QspDevice device(); // Only Sensor and Actuator have device !
-    virtual void initScheduler(); // Only VirtualEquipment have scheduler !
     Observable& toObservable();
 };
 using QspObservableBuilder = QSharedPointer<ObservableBuilder>;

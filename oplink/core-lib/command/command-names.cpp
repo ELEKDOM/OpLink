@@ -22,11 +22,14 @@ const oplink::CommandName oplink::CommandNames::SYNCHRONIZE{QStringLiteral("sync
 const oplink::CommandName oplink::CommandNames::SET{QStringLiteral("set")};
 const oplink::CommandName oplink::CommandNames::ENERGY{QStringLiteral("energy")};
 const oplink::CommandName oplink::CommandNames::POWER{QStringLiteral("power")};
+const oplink::CommandName oplink::CommandNames::ROOM{QStringLiteral("room")};
 
 const oplink::CommandArg oplink::CommandArgs::ON{QStringLiteral("on")};
 const oplink::CommandArg oplink::CommandArgs::OFF{QStringLiteral("off")};
 const oplink::CommandArg oplink::CommandArgs::COMFORT{QStringLiteral("comfort")};
-const oplink::CommandArg oplink::CommandArgs::COMFORT_1{QStringLiteral("comfort_1")};
-const oplink::CommandArg oplink::CommandArgs::COMFORT_2{QStringLiteral("comfort_2")};
+const oplink::CommandArg oplink::CommandArgs::COMFORT_1{QStringLiteral("comfort1")};
+const oplink::CommandArg oplink::CommandArgs::COMFORT_2{QStringLiteral("comfort2")};
 const oplink::CommandArg oplink::CommandArgs::ECO{QStringLiteral("eco")};
 const oplink::CommandArg oplink::CommandArgs::NOFROST{QStringLiteral("nofrost")};
+const oplink::CommandArg oplink::CommandArgs::TRIGGER_MODE_ONDEMAND{QStringLiteral("ondemand")};
+const oplink::CommandArg oplink::CommandArgs::TRIGGER_MODE_PLANNED{QStringLiteral("planned")};

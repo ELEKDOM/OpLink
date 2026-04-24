@@ -13,12 +13,10 @@ set(SOURCES
     network_tcp/signoutmessage.cpp
     network_tcp/statevaluemessage.cpp
     network_tcp/submitordermessage.cpp
-    observable/heatingmanager/heatingmanagerconfdocument.cpp
-    observable/virtualequipment/virtualequipmentconfdocument.cpp
     observable/remote/sessionconfdocument.cpp
     observable/type.cpp
     observable/values.cpp
-
+    observable/propertyid.cpp
 )
 
 # OpLink Core Lib Headers
@@ -39,17 +37,15 @@ set(HEADERS
     network_tcp/signoutmessage.h
     network_tcp/statevaluemessage.h
     network_tcp/submitordermessage.h
-    observable/heatingmanager/heatingmanagerconfdocument.h
-    observable/heatingmanager/heatingmanagerloaderhook.h
     observable/remote/sessionconfdocument.h
     observable/remote/sessionconfhook.h
     observable/type.h
     observable/values.h
-    observable/virtualequipment/virtualequipmentconfdocument.h
-    observable/virtualequipment/virtualequipmentloaderhook.h
+    observable/propertyid.h
 )
 
-qt_add_library(${OL_LIB_NAME} SHARED ${SOURCES} ${HEADERS})
+qt_add_library(${OL_LIB_NAME} SHARED ${SOURCES} ${HEADERS}
+    observable/heatingmanagermodelnames.h)
 
 set_target_properties(${OL_LIB_NAME}
                       PROPERTIES

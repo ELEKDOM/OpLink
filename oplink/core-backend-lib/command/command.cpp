@@ -26,7 +26,8 @@ const int oplink::Command::TARGET_VALUE_IDX = 3;
 oplink::Command::Command(StrOrder cmdStr)
 {
     oplink::StrOrder order{cmdStr.toLower()};
-    m_args = order.split(' ');
+    m_args = order.split(';');
+
 }
 
 oplink::Command::~Command()

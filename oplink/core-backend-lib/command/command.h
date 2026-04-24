@@ -25,6 +25,7 @@
 #include "olcore-backend-lib_export.h"
 #include "command/command-names.h"
 #include "observable/observablenames.h"
+#include "observable/propertyid.h"
 
 namespace oplink
 {

@@ -18,7 +18,7 @@
 
 #include "propertyclassnames.h"
 
-const oplink::PropertyType oplink::PropertyClassNames::PROPERTY_CLASS {"property_class"};
-const oplink::PropertyType oplink::PropertyClassNames::LOAD_PROPERTY_CLASS{"load_property_class"};
-const oplink::PropertyType oplink::PropertyClassNames::ACTUATOR_PROPERTY_CLASS{"actuator_property_class"};
-const oplink::PropertyType oplink::PropertyClassNames::SENSOR_PROPERTY_CLASS{"sensor_property_class"};
+const oplink::PropertyType oplink::PropertyClassNames::PROPERTY_CLASS {"property"};
+const oplink::PropertyType oplink::PropertyClassNames::LOAD_PROPERTY_CLASS{"load_property"};
+const oplink::PropertyType oplink::PropertyClassNames::ACTUATOR_PROPERTY_CLASS{"actuator_property"};
+const oplink::PropertyType oplink::PropertyClassNames::SENSOR_PROPERTY_CLASS{"sensor_property"};

@@ -72,6 +72,7 @@ void EnoceanDeviceArea::setGateway(oplink::AreaGateway *gateway)
     }
 
     // Recover baseId;
+    pfInfo4(s_EnoceanLogChannel) << tr("--EnoceanDeviceArea demande d'indentifiant enocean à la clé USB");
     emit initializeUsb300BaseId();
 }
 
