@@ -31,6 +31,7 @@ set(SOURCES
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.cpp
     ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.cpp
+    ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.cpp
     ui/monitoredobservables/widget/homeautomation/view/pilotwire4widget.cpp
     ui/monitoredobservables/widget/homeautomation/view/pilotwire6widget.cpp
     ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.cpp
@@ -81,6 +82,7 @@ set(HEADERS
     ui/monitoredobservables/widget/homeautomation/view/temperaturehumiditywidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/windowsensorwidgetlistview.h
     ui/monitoredobservables/widget/homeautomation/view/tempdoublespinbox.h
+    ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.h
     ui/monitoredobservables/widget/homeautomation/view/pilotwire4widget.h
     ui/monitoredobservables/widget/homeautomation/view/pilotwire6widget.h
     ui/monitoredobservables/widget/homeautomation/heatingmanager/heatingmanagerwidgetbuilder.h
@@ -111,8 +113,7 @@ set(FORMS
     ui/monitoredobservables/widget/homeautomation/heatingmanager/view/heatingroomwidgetlistview.ui
 )
 
-qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS}
-    ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.h ui/monitoredobservables/widget/homeautomation/view/pilotwirecombobox.cpp)
+qt_add_library(${BUNDLE_IMPL_NAME} STATIC ${SOURCES} ${HEADERS}  ${FORMS})
 
 target_include_directories(${BUNDLE_IMPL_NAME}
     PUBLIC

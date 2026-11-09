@@ -1,0 +1,8 @@
+{
+    "bundle-manifest-version" : "0.0.0",
+    "bundle-version" : "1.0.0",
+    "bundle-name" : "ObservablePublisher",
+    "startlevel-beging" : "7",
+    "service-required" : "BackendServerNotifierRegisterServiceInterface,1.0.0",
+    "service-required2" : "ObservableServiceInterface,1.0.0"
+}

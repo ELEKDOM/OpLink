@@ -22,7 +22,6 @@
 #include "factory/bundlefactory.h"
 #include "olcore-backend-lib_export.h"
 #include "olcore-backend-lib_forward.h"
-#include "olcore-lib_forward.h"
 
 namespace oplink
 {

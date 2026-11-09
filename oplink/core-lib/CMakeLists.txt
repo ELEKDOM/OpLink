@@ -1,18 +1,6 @@
 # OpLink Core Lib Sources
 set(SOURCES
     command/command-names.cpp
-    frontendtypes.cpp
-    network_tcp/downloadconfigmessage.cpp
-    network_tcp/downloadconfigreplymessage.cpp
-    network_tcp/message.cpp
-    network_tcp/readymessage.cpp
-    network_tcp/sessionmessage.cpp
-    network_tcp/sessionstartedmessage.cpp
-    network_tcp/signinmessage.cpp
-    network_tcp/signinreplymessage.cpp
-    network_tcp/signoutmessage.cpp
-    network_tcp/statevaluemessage.cpp
-    network_tcp/submitordermessage.cpp
     observable/remote/sessionconfdocument.cpp
     observable/type.cpp
     observable/values.cpp
@@ -22,30 +10,18 @@ set(SOURCES
 # OpLink Core Lib Headers
 set(HEADERS
     olcore-lib_export.h
-    olcore-lib_forward.h
     command/command-names.h
-    frontendtypes.h
-    network_tcp/downloadconfigmessage.h
-    network_tcp/downloadconfigreplymessage.h
-    network_tcp/message.h
-    network_tcp/messagetype.h
-    network_tcp/readymessage.h
-    network_tcp/sessionmessage.h
-    network_tcp/sessionstartedmessage.h
-    network_tcp/signinmessage.h
-    network_tcp/signinreplymessage.h
-    network_tcp/signoutmessage.h
-    network_tcp/statevaluemessage.h
-    network_tcp/submitordermessage.h
+    network/channel/messagetype.h
+    network/channel/codectype.h
     observable/remote/sessionconfdocument.h
     observable/remote/sessionconfhook.h
     observable/type.h
     observable/values.h
     observable/propertyid.h
+    observable/heatingmanagermodelnames.h
 )
 
-qt_add_library(${OL_LIB_NAME} SHARED ${SOURCES} ${HEADERS}
-    observable/heatingmanagermodelnames.h)
+qt_add_library(${OL_LIB_NAME} SHARED ${SOURCES} ${HEADERS})
 
 set_target_properties(${OL_LIB_NAME}
                       PROPERTIES

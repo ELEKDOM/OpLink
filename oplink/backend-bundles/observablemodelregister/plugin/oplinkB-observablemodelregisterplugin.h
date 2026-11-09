@@ -30,7 +30,7 @@ class ObservableModelRegisterPlugin : public plugframe::Plugin,
                                       public oplink::ObservableBuilderServiceInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "elekdom.oplink.observablemodelregister.plugin" FILE "../oplinkB-observablemodelregisterbundle.json")
+    Q_PLUGIN_METADATA(IID "oplink.observablemodelregister.plugin" FILE "../oplinkB-observablemodelregisterbundle.json")
     Q_INTERFACES(plugframe::BundleInterface
                  oplink::ModelRegisterServiceInterface
                  oplink::ObservableBuilderServiceInterface)

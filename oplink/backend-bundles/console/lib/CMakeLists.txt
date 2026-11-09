@@ -32,8 +32,8 @@ target_link_libraries(${BUNDLE_IMPL_NAME} PUBLIC
     Qt6::Core
     plugframe-core-qt6
     console-impl-qt6
-    ${OL_LIB_NAME}
-    ${OL_BACKEND_LIB_NAME}
+    oplink-core-qt6
+    oplink-core-backend-qt6
 )
 
 target_compile_definitions(${BUNDLE_IMPL_NAME}
